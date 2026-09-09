@@ -1,8 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
-export default function OperatorSourcingClient() {
+function OperatorSourcingContent() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
   const sourcingQueue = [
     {
       id: "src-1",
@@ -35,8 +40,15 @@ export default function OperatorSourcingClient() {
           </Link>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-neutral-900/60 border border-neutral-800 rounded-2xl p-6 backdrop-blur-xl">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase text-amber-400">DISPATCH DISPATCHING</span>
-              <h1 className="text-2xl font-light text-white mt-1">Incoming Sourcing Requests</h1>
+              <div className="flex items-center gap-3 mb-1">
+                <span className="text-[10px] font-mono font-bold uppercase text-amber-400">DISPATCH DISPATCHING</span>
+                {token && (
+                  <span className="text-[10px] font-mono bg-green-500/10 text-green-400 border border-green-500/20 px-2 py-0.5 rounded font-bold">
+                    TOKENIZED SINGLE-USE ACCESS VERIFIED
+                  </span>
+                )}
+              </div>
+              <h1 className="text-2xl font-light text-white">Incoming Sourcing Requests</h1>
             </div>
             <span className="text-xs font-mono text-neutral-400 bg-neutral-900 px-3 py-1 rounded border border-neutral-800">
               Isolated Operator Dispatch Queue
@@ -75,5 +87,13 @@ export default function OperatorSourcingClient() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OperatorSourcingClient() {
+  return (
+    <Suspense fallback={<div className="p-8 text-xs font-mono text-neutral-400">Loading Dispatch Access...</div>}>
+      <OperatorSourcingContent />
+    </Suspense>
   );
 }
