@@ -1,61 +1,73 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 import { FlightSearchForm } from "./FlightSearchForm";
 import { DataStatusBadge } from "../shared/DataStatusBadge";
+import { AviationImage } from "../AviationImage";
 import { PRIMARY_CTA } from "../../constants/navigation";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[85vh] hero-atmosphere pt-12 pb-20 border-b border-[var(--color-border)] overflow-hidden flex flex-col justify-center">
-      {/* Background SVG Route Geometry & Vectors */}
-      <div className="absolute inset-0 pointer-events-none opacity-40" aria-hidden="true">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <line x1="0" y1="20%" x2="100%" y2="20%" stroke="#292c2f" strokeWidth="0.5" />
-          <line x1="0" y1="80%" x2="100%" y2="80%" stroke="#292c2f" strokeWidth="0.5" />
-          <line x1="25%" y1="0" x2="25%" y2="100%" stroke="#292c2f" strokeWidth="0.5" strokeDasharray="4 4" />
-          <line x1="75%" y1="0" x2="75%" y2="100%" stroke="#292c2f" strokeWidth="0.5" strokeDasharray="4 4" />
+    <section className="relative w-full min-h-[90vh] bg-neutral-950 pt-8 pb-20 border-b border-neutral-800 overflow-hidden flex flex-col justify-center">
+      {/* Background Visual Aviation Panel */}
+      <div className="absolute inset-0 z-0">
+        <AviationImage
+          src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
+          alt="Executive Jet Airborne Above Clouds"
+          fill
+          priority
+          className="object-cover opacity-35 filter brightness-90 contrast-110"
+          fallbackTitle="AIR Fleet Airborne"
+          fallbackCode="HERO // AIRBORNE"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/30" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-60" />
+      </div>
 
-          {/* Dynamic route line from Bucharest to Bran vector representation */}
-          <path
-            d="M 150 480 Q 450 150 850 320 T 1350 180"
-            fill="none"
-            stroke="#5a8fa8"
-            strokeWidth="1.5"
-            strokeDasharray="6 6"
-            className="route-dash-animation opacity-70"
-          />
+      {/* Aerospace Telemetry Top Ribbon */}
+      <div className="relative z-10 w-full border-b border-white/10 bg-black/40 backdrop-blur-md py-2.5 mb-8">
+        <Container size="wide">
+          <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono text-neutral-400">
+            <div className="flex items-center gap-4">
+              <span className="flex items-center gap-1.5 text-amber-400 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                BUCHAREST / LRBS
+              </span>
+              <span className="hidden sm:inline text-neutral-600">|</span>
+              <span className="hidden sm:inline">POSITION: 47°27&apos;N 26°06&apos;E</span>
+              <span className="hidden md:inline text-neutral-600">|</span>
+              <span className="hidden md:inline text-neutral-300">DISPATCH: ACTIVE</span>
+            </div>
 
-          {/* Coordinate markers */}
-          <circle cx="150" cy="480" r="4" fill="#5a8fa8" />
-          <text x="162" y="485" fill="#a7a9ac" fontSize="10" fontFamily="monospace">
-            BBU // BUCHAREST
-          </text>
-
-          <circle cx="850" cy="320" r="4" fill="#5a8fa8" />
-          <text x="862" y="325" fill="#a7a9ac" fontSize="10" fontFamily="monospace">
-            BRAN // HELIPAD
-          </text>
-        </svg>
+            <div className="flex items-center gap-4">
+              <span className="text-amber-300/80">ILLUSTRATIVE TELEMETRY: ALT 41,000 FT • CRZ 460 KT</span>
+              <DataStatusBadge status="VERIFIED" showDot={false} />
+            </div>
+          </div>
+        </Container>
       </div>
 
       <Container size="wide" className="relative z-10">
         <div className="flex flex-col gap-10 max-w-5xl mx-auto">
           {/* Top Tag & Status */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-data text-[var(--color-accent)] tracking-widest uppercase border border-[var(--color-accent-muted)] px-3 py-1 bg-[color-mix(in_srgb,var(--color-accent)_10%,transparent)]">
-              AVIATION ACCESS & DISCOVERY
+            <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3 py-1 bg-amber-500/10 rounded-sm">
+              THE DIGITAL WORLD OF AVIATION
             </span>
-            <DataStatusBadge status="INDICATIVE" />
+            <span className="text-xs font-mono text-neutral-400 border border-neutral-800 px-3 py-1 bg-neutral-900/60 rounded-sm">
+              EASA & ICAO PROVENANCE
+            </span>
           </div>
 
           {/* Main Hero Headlines */}
           <div className="flex flex-col gap-4">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-[var(--color-text-primary)] leading-[0.95]">
-              GO BY AIR<span className="text-[var(--color-accent)]">.</span>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-[0.9] font-sans">
+              GO BY AIR<span className="text-amber-400">.</span>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-[var(--color-text-secondary)] font-light leading-relaxed max-w-3xl">
+            <p className="text-xl sm:text-2xl md:text-3xl text-neutral-300 font-light leading-relaxed max-w-3xl font-sans">
               Tell us where you&apos;re going.<br className="hidden sm:inline" />
               We&apos;ll find the right way to fly.
             </p>
@@ -64,19 +76,24 @@ export function Hero() {
           {/* Secondary Statement & Action Buttons */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <Link href={PRIMARY_CTA.href}>
-              <Button size="lg" variant="primary">
-                {PRIMARY_CTA.label}
+              <Button size="lg" variant="primary" className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono">
+                {PRIMARY_CTA.label} →
               </Button>
             </Link>
-            <Link href="#decision-engine">
-              <Button size="lg" variant="outline">
-                EXPLORE DECISION ENGINE
+            <Link href="/destinations">
+              <Button size="lg" variant="outline" className="border-neutral-700 hover:border-amber-400 font-mono text-xs">
+                EXPLORE DESTINATIONS ↗
+              </Button>
+            </Link>
+            <Link href="/aircraft">
+              <Button size="lg" variant="outline" className="border-neutral-800 hover:border-neutral-600 font-mono text-xs text-neutral-400">
+                AIRCRAFT FLEET SPECS
               </Button>
             </Link>
           </div>
 
           {/* Hero Flight Search Component Integration */}
-          <div className="pt-6">
+          <div className="pt-4">
             <FlightSearchForm />
           </div>
         </div>
@@ -84,3 +101,5 @@ export function Hero() {
     </section>
   );
 }
+
+export default Hero;
