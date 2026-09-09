@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { AviationImage } from "@/components/AviationImage";
 
 export const metadata: Metadata = {
   title: "Aviation Careers & Professional Pathways | AIR Intelligence",
@@ -76,8 +76,8 @@ export default function AviationCareersPage() {
             <div key={i} className="bg-neutral-900/40 border border-neutral-800 rounded-2xl overflow-hidden backdrop-blur-xl flex flex-col justify-between group hover:border-amber-500/50 transition">
               <div>
                 <div className="relative h-48 w-full overflow-hidden bg-neutral-900">
-                  <Image src={c.img} alt={c.title} fill className="object-cover group-hover:scale-105 transition duration-500" />
-                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold">
+                  <AviationImage src={c.img} alt={c.title} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={c.title} fallbackCode={`CAREER // ${c.role}`} />
+                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
                     {c.role}
                   </div>
                 </div>

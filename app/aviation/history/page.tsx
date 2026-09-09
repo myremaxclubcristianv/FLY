@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { AviationImage } from "@/components/AviationImage";
 
 export const metadata: Metadata = {
   title: "Aviation History & Romanian Flight Heritage | AIR",
@@ -70,8 +70,8 @@ export default function AviationHistoryPage() {
           {HISTORICAL_TIMELINE.map((item, i) => (
             <div key={i} className="bg-neutral-900/40 border border-neutral-800 rounded-2xl overflow-hidden grid md:grid-cols-3 gap-8 items-center p-6 sm:p-8 backdrop-blur-xl">
               <div className="relative h-56 w-full rounded-xl overflow-hidden bg-neutral-900">
-                <Image src={item.img} alt={item.title} fill className="object-cover" />
-                <div className="absolute top-3 left-3 bg-neutral-950/90 backdrop-blur px-3 py-1 rounded text-base font-mono text-amber-400 font-bold">
+                <AviationImage src={item.img} alt={item.title} fill className="object-cover" fallbackTitle={item.title} fallbackCode={`HERITAGE // ${item.year}`} />
+                <div className="absolute top-3 left-3 bg-neutral-950/90 backdrop-blur px-3 py-1 rounded text-base font-mono text-amber-400 font-bold z-10">
                   {item.year}
                 </div>
               </div>

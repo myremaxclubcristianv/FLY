@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import { UnifiedAviationRepository } from "@/lib/repositories/unified-aviation-repo";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { AviationImage } from "@/components/AviationImage";
 
 export const metadata: Metadata = {
   title: "Aviation Visual Explainers & Concepts | AIR",
@@ -34,7 +34,7 @@ export default async function AviationExplainersPage() {
           {explainers.map((exp) => (
             <div key={exp.id} className="bg-neutral-900/40 border border-neutral-800 rounded-2xl overflow-hidden grid md:grid-cols-2 gap-8 items-center p-6 sm:p-8 backdrop-blur-xl">
               <div className="relative h-64 sm:h-80 w-full rounded-xl overflow-hidden bg-neutral-900">
-                <Image src={exp.image} alt={exp.title} fill className="object-cover" />
+                <AviationImage src={exp.image} alt={exp.title} fill className="object-cover" fallbackTitle={exp.title} fallbackCode={`EXPLAINER // ${exp.category}`} />
               </div>
 
               <div className="space-y-6">

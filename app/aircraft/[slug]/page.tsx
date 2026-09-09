@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { aircraftService } from "../../../lib/services/aircraft-service";
 import { Container } from "../../../components/layout/Container";
@@ -8,6 +7,8 @@ import { SectionHeader } from "../../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Card } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
+import { AviationImage } from "../../../components/AviationImage";
+
 
 export async function generateMetadata({
   params,
@@ -95,9 +96,9 @@ export default async function AircraftDetailPage({
 
           {/* Editorial Visual Showcase */}
           <div className="relative h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900">
-            <Image src={photos.hero} alt={`${aircraft.manufacturer} ${aircraft.model}`} fill className="object-cover" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 font-mono text-xs text-neutral-300">
+            <AviationImage src={photos.hero} alt={`${aircraft.manufacturer} ${aircraft.model}`} fill className="object-cover" priority fallbackTitle={`${aircraft.manufacturer} ${aircraft.model}`} fallbackCode={`DOSSIER // ${aircraft.model}`} />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent pointer-events-none" />
+            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 font-mono text-xs text-neutral-300 z-10">
               <div>
                 <span className="text-[10px] text-amber-400 font-bold uppercase block">MODEL PROVENANCE</span>
                 <span className="text-white font-bold">{aircraft.manufacturer} Official Specs</span>
@@ -131,14 +132,14 @@ export default async function AircraftDetailPage({
           {/* Visual Gallery Grid */}
           <div className="grid md:grid-cols-2 gap-6">
             <div className="relative h-64 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
-              <Image src={photos.interior} alt="Cabin interior" fill className="object-cover" />
-              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400">
+              <AviationImage src={photos.interior} alt="Cabin interior" fill className="object-cover" fallbackTitle="Executive Cabin" fallbackCode="CABIN // INTERIOR" />
+              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 z-10">
                 EXECUTIVE CABIN CONFIGURATION
               </div>
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
-              <Image src={photos.cockpit} alt="Cockpit avionics" fill className="object-cover" />
-              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400">
+              <AviationImage src={photos.cockpit} alt="Cockpit avionics" fill className="object-cover" fallbackTitle="Digital Flight Deck" fallbackCode="COCKPIT // AVIONICS" />
+              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 z-10">
                 DIGITAL FLIGHT DECK AVIONICS
               </div>
             </div>

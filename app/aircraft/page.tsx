@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "../../components/layout/Container";
 import { SectionHeader } from "../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../components/shared/DataStatusBadge";
@@ -8,6 +7,8 @@ import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { AircraftMatcher } from "../../components/aircraft/AircraftMatcher";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
+import { AviationImage } from "../../components/AviationImage";
+
 
 export const metadata = {
   title: "Aircraft Explorer & Category Intelligence | AIR",
@@ -82,8 +83,8 @@ export default async function AircraftPage() {
               {categories.map((cat) => (
                 <Card key={cat.name} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-500/50 transition">
                   <div className="relative h-44 w-full bg-neutral-900 overflow-hidden">
-                    <Image src={cat.img} alt={cat.name} fill className="object-cover group-hover:scale-105 transition duration-500" />
-                    <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold">
+                    <AviationImage src={cat.img} alt={cat.name} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={cat.name} fallbackCode={`CAT // ${cat.name}`} />
+                    <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
                       {cat.name}
                     </div>
                   </div>
@@ -130,8 +131,8 @@ export default async function AircraftPage() {
                 return (
                   <Card key={ac.id} variant="default" className="flex flex-col justify-between overflow-hidden group hover:border-amber-500/50 transition">
                     <div className="relative h-48 w-full bg-neutral-900 overflow-hidden">
-                      <Image src={img} alt={`${ac.manufacturer} ${ac.model}`} fill className="object-cover group-hover:scale-105 transition duration-500" />
-                      <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold">
+                      <AviationImage src={img} alt={`${ac.manufacturer} ${ac.model}`} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={`${ac.manufacturer} ${ac.model}`} fallbackCode={`FLEET // ${ac.model}`} />
+                      <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
                         {ac.category.replace(/_/g, " ")}
                       </div>
                     </div>

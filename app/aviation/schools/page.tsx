@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import { UnifiedAviationRepository } from "@/lib/repositories/unified-aviation-repo";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { AviationImage } from "@/components/AviationImage";
 
 export const metadata: Metadata = {
   title: "Flight Schools & Approved Training Organizations (ATOs) | AIR",
@@ -35,8 +35,8 @@ export default async function FlightSchoolsPage() {
             <div key={s.id} className="bg-neutral-900/40 border border-neutral-800 rounded-2xl overflow-hidden backdrop-blur-xl flex flex-col justify-between">
               <div>
                 <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                  <Image src={s.image} alt={s.name} fill className="object-cover" />
-                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold">
+                  <AviationImage src={s.image} alt={s.name} fill className="object-cover" fallbackTitle={s.name} fallbackCode={`ATO // ${s.accreditation}`} />
+                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
                     {s.city}, {s.country}
                   </div>
                 </div>

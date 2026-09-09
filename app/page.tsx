@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Container } from "../components/layout/Container";
 import { Hero } from "../components/home/Hero";
 import { DecisionEngine } from "../components/home/DecisionEngine";
@@ -10,6 +9,8 @@ import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { UnifiedAviationRepository } from "../lib/repositories/unified-aviation-repo";
 import { JsonLd, createOrganizationJsonLd } from "../components/shared/JsonLd";
+import { AviationImage } from "../components/AviationImage";
+
 
 export const metadata = {
   title: "AIR — The Digital World of Aviation | Access & Intelligence Platform",
@@ -72,7 +73,7 @@ export default async function HomePage() {
                   href={`/${c.slug}`}
                   className="group relative h-64 rounded-xl overflow-hidden border border-neutral-800 hover:border-amber-500/50 transition flex flex-col justify-end p-4 bg-neutral-900"
                 >
-                  <Image src={c.image} alt={c.city} fill className="object-cover group-hover:scale-105 transition duration-500 opacity-60 group-hover:opacity-80" />
+                  <AviationImage src={c.image} alt={c.city} fill className="object-cover group-hover:scale-105 transition duration-500 opacity-60 group-hover:opacity-80" fallbackTitle={c.city} fallbackCode={`CITY // ${c.country}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent" />
                   <div className="relative z-10 space-y-1">
                     <span className="text-[10px] font-mono text-amber-400 font-bold uppercase">{c.country}</span>

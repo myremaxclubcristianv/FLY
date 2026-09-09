@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import { UnifiedAviationRepository } from "@/lib/repositories/unified-aviation-repo";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { AviationImage } from "@/components/AviationImage";
 
 export const metadata: Metadata = {
   title: "Aircraft For Sale & Marketplace Intelligence | AIR",
@@ -40,13 +40,15 @@ export default async function AircraftForSalePage() {
             >
               <div>
                 <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                  <Image
+                  <AviationImage
                     src={item.image}
                     alt={item.title}
                     fill
                     className="object-cover group-hover:scale-105 transition duration-500"
+                    fallbackTitle={item.title}
+                    fallbackCode={`MARKET // ${item.externalSource}`}
                   />
-                  <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold">
+                  <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
                     SOURCE: {item.externalSource}
                   </div>
                 </div>
