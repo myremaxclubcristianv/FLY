@@ -74,12 +74,13 @@ function OperatorSourcingContent() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col items-end gap-2">
+                <span className="text-[10px] font-mono text-neutral-500">AOC VERIFIED: RO.AOC.024</span>
                 <button
-                  onClick={() => alert(`Quote response form logged for mission ${req.missionRef}`)}
-                  className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-semibold px-4 py-2 rounded-lg text-xs transition"
+                  onClick={() => alert(`OPERATOR BINDING QUOTE SUBMITTED:\n• Mission: ${req.missionRef}\n• Aircraft Assigned: Embraer Phenom 300E (Tail: YR-TYA)\n• AOC Legal Entity: Toyo Aviation SRL\n• Quote Amount: €8,800 EUR\n• Status: OPERATOR QUOTE CONFIRMED`)}
+                  className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-semibold px-4 py-2 rounded-lg text-xs transition font-mono"
                 >
-                  Submit Operator Quote →
+                  Submit Binding AOC Quote →
                 </button>
               </div>
             </div>

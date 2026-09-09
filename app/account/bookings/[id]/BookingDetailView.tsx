@@ -106,7 +106,7 @@ export default function BookingDetailView({ bookingReference }: { bookingReferen
           </div>
 
           <div className="bg-neutral-900/40 border border-neutral-800 rounded-2xl p-6 space-y-4">
-            <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider font-mono">Financials & Cancellation Terms</h3>
+            <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider font-mono">Financials & Terms</h3>
             <div className="space-y-3 text-xs">
               <div className="flex justify-between py-2 border-b border-neutral-800">
                 <span className="text-neutral-400">Total Charter Amount</span>
@@ -119,6 +119,41 @@ export default function BookingDetailView({ bookingReference }: { bookingReferen
               <div className="flex justify-between py-2">
                 <span className="text-neutral-400">Cancellation Terms</span>
                 <span className="text-neutral-300 text-right">{mockBooking.cancellationPolicy}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Phase 8 Operational Status & Data Minimization Manifest */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="bg-neutral-900/40 border border-neutral-800 rounded-2xl p-6 space-y-3">
+            <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider font-mono">Passenger Manifest & Privacy</h3>
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between py-1 border-b border-neutral-800">
+                <span className="text-neutral-400">Passenger Count</span>
+                <span className="text-white font-mono font-bold">{mockBooking.passengers} Pax</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-neutral-800">
+                <span className="text-neutral-400">Manifest Status</span>
+                <span className="text-green-400 font-mono font-bold">VERIFIED</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span className="text-neutral-400">Data Minimization Policy</span>
+                <span className="text-neutral-400 text-right font-mono">Passport numbers & scans NOT stored</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-neutral-900/40 border border-neutral-800 rounded-2xl p-6 space-y-3">
+            <h3 className="text-sm font-semibold text-amber-400 uppercase tracking-wider font-mono">Customs & Border Clearance</h3>
+            <div className="space-y-2 text-xs">
+              <div className="flex justify-between py-1 border-b border-neutral-800">
+                <span className="text-neutral-400">Customs Clearance Status</span>
+                <span className="text-amber-400 font-mono font-bold">PENDING / NOT AVAILABLE</span>
+              </div>
+              <div className="flex justify-between py-1">
+                <span className="text-neutral-400">Authority Note</span>
+                <span className="text-neutral-400 text-right">AIR does not claim government customs clearance authority.</span>
               </div>
             </div>
           </div>
