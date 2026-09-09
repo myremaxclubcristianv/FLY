@@ -5,46 +5,77 @@ export interface NavItem {
   available: boolean;
 }
 
-export const WORLDS: NavItem[] = [
+export const MAIN_NAV_ITEMS: NavItem[] = [
   {
-    label: "FLY",
-    href: "#fly",
-    description: "Private jets, helicopters, turboprops and charter.",
-    available: false,
+    label: "PLAN FLIGHT",
+    href: "/plan",
+    description: "Mission planner and decision engine.",
+    available: true,
   },
   {
-    label: "EXPERIENCES",
-    href: "#experiences",
-    description: "Scenic flights, first flights and aviation experiences.",
-    available: false,
-  },
-  {
-    label: "BUSINESS",
-    href: "#business",
-    description: "Executive travel, corporate charter and mobility.",
-    available: false,
+    label: "MARKETPLACE",
+    href: "/aircraft-for-sale",
+    description: "Executive aircraft for sale & listings.",
+    available: true,
   },
   {
     label: "AIRCRAFT",
-    href: "#aircraft",
-    description: "Explore, compare and understand aircraft.",
-    available: false,
+    href: "/aircraft",
+    description: "Jets, turboprops, helicopters & specs.",
+    available: true,
   },
   {
-    label: "AVIATION",
-    href: "#aviation",
-    description: "Airports, operators, FBO, MRO and services.",
-    available: false,
+    label: "AIRPORTS",
+    href: "/aviation/airports",
+    description: "Certified business aviation hubs & FBOs.",
+    available: true,
+  },
+  {
+    label: "BĂNEASA",
+    href: "/baneasa",
+    description: "Bucharest executive airport hub.",
+    available: true,
+  },
+  {
+    label: "LEARN",
+    href: "/aviation/learn",
+    description: "Pilot training & aviation knowledge hub.",
+    available: true,
+  },
+  {
+    label: "SCHOOLS",
+    href: "/aviation/schools",
+    description: "Directory of EASA flight academies.",
+    available: true,
+  },
+  {
+    label: "TECHNOLOGY",
+    href: "/aviation/technology",
+    description: "eVTOL, SAF & future flight innovation.",
+    available: true,
+  },
+  {
+    label: "RULES",
+    href: "/aviation/rules",
+    description: "EASA, AOC & airport slot regulations.",
+    available: true,
+  },
+  {
+    label: "DIRECTORY",
+    href: "/directory",
+    description: "Global aviation ecosystem directory.",
+    available: true,
   },
   {
     label: "JOURNAL",
-    href: "#journal",
-    description: "Guides, routes, aircraft explainers and intelligence.",
-    available: false,
+    href: "/journal",
+    description: "Articles, photo essays & intelligence.",
+    available: true,
   },
 ];
 
-export const FOOTER_LINKS = WORLDS;
+export const WORLDS: NavItem[] = MAIN_NAV_ITEMS;
+export const FOOTER_LINKS = MAIN_NAV_ITEMS;
 
 export const PRIORITIES = [
   { value: "FASTEST", label: "Fastest" },

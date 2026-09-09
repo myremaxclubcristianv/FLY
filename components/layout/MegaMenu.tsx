@@ -29,34 +29,32 @@ const MEGA_MENU_DATA: MegaMenuSection[] = [
       {
         heading: "AIRCRAFT TYPES",
         items: [
-          { label: "Very Light Jets", href: "/aircraft" },
-          { label: "Light Jets", href: "/aircraft" },
-          { label: "Super Midsize & Large Cabin", href: "/aircraft" },
-          { label: "Turboprops & Helicopters", href: "/aircraft" },
+          { label: "Explore Aircraft Fleet", href: "/aircraft" },
+          { label: "Compare Models", href: "/aircraft/compare", badge: "COMPARE" },
+          { label: "Aircraft Ownership", href: "/aircraft/ownership" },
+          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "MARKET" },
         ],
       },
     ],
   },
   {
-    title: "AIRCRAFT",
-    triggerHref: "/aircraft",
+    title: "MARKET",
+    triggerHref: "/aircraft-for-sale",
     columns: [
       {
-        heading: "FLEET INTELLIGENCE",
+        heading: "AIRCRAFT MARKETPLACE",
         items: [
-          { label: "Explore Fleet Models", href: "/aircraft" },
-          { label: "Compare Aircraft Models", href: "/aircraft/compare", badge: "NEW" },
-          { label: "Ownership Matrix", href: "/aircraft/ownership" },
+          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "AVBUYER" },
+          { label: "Jets & Turboprops", href: "/aircraft-for-sale" },
+          { label: "Executive Helicopters", href: "/aircraft-for-sale" },
         ],
       },
       {
-        heading: "CATEGORIES",
+        heading: "FINANCE & OWNERSHIP",
         items: [
-          { label: "Embraer Phenom 300E", href: "/aircraft/phenom-300" },
-          { label: "Bombardier Challenger 350", href: "/aircraft/challenger-350" },
-          { label: "Gulfstream G650ER", href: "/aircraft/gulfstream-g650er" },
-          { label: "Pilatus PC-12 NGX", href: "/aircraft/pilatus-pc-12" },
-          { label: "Leonardo AW139 VIP", href: "/aircraft/leonardo-aw139" },
+          { label: "Aircraft Ownership Matrix", href: "/aircraft/ownership" },
+          { label: "Aviation Finance", href: "/aviation/finance" },
+          { label: "Aviation Insurance", href: "/aviation/insurance" },
         ],
       },
     ],
@@ -66,20 +64,45 @@ const MEGA_MENU_DATA: MegaMenuSection[] = [
     triggerHref: "/aviation",
     columns: [
       {
-        heading: "DIRECTORY",
+        heading: "DIRECTORY & HUBS",
         items: [
-          { label: "Aviation Companies Directory", href: "/aviation" },
-          { label: "AOC Air Operators", href: "/aviation" },
-          { label: "FBO & Ground Handling", href: "/aviation" },
-          { label: "Flight Schools & ATO", href: "/aviation" },
+          { label: "Airports & FBO Hubs", href: "/aviation/airports", badge: "FBO" },
+          { label: "Aviation Companies", href: "/aviation" },
+          { label: "EASA Flight Schools", href: "/aviation/schools", badge: "ATO" },
+          { label: "Global Aviation Directory", href: "/directory" },
         ],
       },
       {
-        heading: "FINANCE & SERVICES",
+        heading: "INTELLIGENCE & RULES",
         items: [
-          { label: "Aviation Maintenance (MRO)", href: "/aviation" },
-          { label: "Aviation Finance", href: "/aviation/finance" },
-          { label: "Aviation Insurance", href: "/aviation/insurance" },
+          { label: "Aviation Rules & AOC", href: "/aviation/rules" },
+          { label: "Aviation Visual Explainers", href: "/aviation/explainers" },
+          { label: "Aviation Technology Journal", href: "/aviation/technology", badge: "eVTOL" },
+          { label: "Aviation Business", href: "/business" },
+        ],
+      },
+    ],
+  },
+  {
+    title: "LEARN",
+    triggerHref: "/aviation/learn",
+    columns: [
+      {
+        heading: "KNOWLEDGE CENTER",
+        items: [
+          { label: "Aviation Knowledge Hub", href: "/aviation/learn" },
+          { label: "How to Become a Pilot", href: "/aviation/learn/pilot-guide", badge: "EASA" },
+          { label: "Flight Schools Directory", href: "/aviation/schools" },
+          { label: "Aviation Rules & Regulations", href: "/aviation/rules" },
+        ],
+      },
+      {
+        heading: "VISUAL EXPLAINERS",
+        items: [
+          { label: "What is an AOC?", href: "/aviation/explainers" },
+          { label: "What is an FBO?", href: "/aviation/explainers" },
+          { label: "PPR & Slot Coordination", href: "/aviation/explainers" },
+          { label: "What is an Empty Leg?", href: "/aviation/explainers" },
         ],
       },
     ],
@@ -92,15 +115,13 @@ const MEGA_MENU_DATA: MegaMenuSection[] = [
         heading: "EDITORIAL GUIDES",
         items: [
           { label: "All Journal Articles", href: "/journal" },
-          { label: "How Private Charter Works", href: "/journal/how-private-charter-works" },
-          { label: "Jet vs. Turboprop", href: "/journal/jet-vs-turboprop" },
-          { label: "What is an FBO?", href: "/journal/what-is-an-fbo" },
+          { label: "Editorial Photo Essays", href: "/journal/photo-essays", badge: "PHOTO" },
+          { label: "Băneasa vs. Otopeni Report", href: "/journal/baneasa-vs-otopeni-comparative-report" },
         ],
       },
       {
-        heading: "ANALYSIS & DISCOVERY",
+        heading: "AERIAL DISCOVERY",
         items: [
-          { label: "Băneasa vs. Otopeni Report", href: "/journal/baneasa-vs-otopeni-comparative-report" },
           { label: "Romania From Above", href: "/romania-from-above" },
           { label: "Helicopter Transfers", href: "/journal/helicopter-transfers-and-landing-access" },
         ],
@@ -182,13 +203,6 @@ export function MegaMenu() {
         className="text-xs font-data tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors py-2"
       >
         DESTINATIONS
-      </Link>
-
-      <Link
-        href="/romania-from-above"
-        className="text-xs font-data tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors py-2"
-      >
-        ROMANIA FROM ABOVE
       </Link>
     </div>
   );

@@ -366,9 +366,105 @@ export interface QuoteRequest {
   notes?: string;
 }
 
+export interface AircraftForSale {
+  id: string;
+  slug: string;
+  title: string;
+  manufacturer: string;
+  model: string;
+  year: number;
+  category: AircraftCategory;
+  passengerCapacity: number;
+  rangeNm: number;
+  totalHours: number;
+  priceFormatted: string;
+  location: string;
+  sellerName: string;
+  externalSource: "AVBUYER" | "GLOBALAIR" | "CONTROLLER" | "CURATED";
+  externalUrl: string;
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  lastCheckedAt: string;
+  image: string;
+}
+
+export interface FlightSchool {
+  id: string;
+  slug: string;
+  name: string;
+  legalName: string;
+  city: string;
+  country: string;
+  accreditation: string;
+  easaCertified: boolean;
+  coursesOffered: string[];
+  fleetSummary: string;
+  simulatorsAvailable: string[];
+  website: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  source?: DataSource;
+  lastVerifiedAt?: string;
+  image: string;
+}
+
+export interface AviationExplainer {
+  id: string;
+  slug: string;
+  title: string;
+  category: "REGULATORY" | "OPERATIONS" | "COMMERCIAL" | "PILOT" | "BUSINESS";
+  shortDefinition: string;
+  detailedExplanation: string[];
+  keyTakeaways: string[];
+  realWorldExample: string;
+  glossaryTerms: Array<{ term: string; definition: string }>;
+  authoritativeSource: string;
+  image: string;
+}
+
+export interface AviationTechArticle {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  category: "EVTOL" | "SAF" | "ELECTRIC_PROPULSION" | "AVIONICS" | "AAM" | "AI_IN_AVIATION";
+  readTimeMinutes: number;
+  publicationDate: string;
+  excerpt: string;
+  sections: Array<{ heading: string; paragraphs: string[] }>;
+  image: string;
+}
+
+export interface PhotoEssay {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  photographer: string;
+  location: string;
+  publicationDate: string;
+  slides: Array<{ title: string; description: string; location: string }>;
+}
+
 export interface SearchResultItem {
   id: string;
-  type: "COMPANY" | "OPERATOR" | "AIRCRAFT" | "LOCATION" | "ROUTE" | "EXPERIENCE" | "DESTINATION" | "JOURNAL" | "REGION";
+  type:
+    | "COMPANY"
+    | "OPERATOR"
+    | "AIRCRAFT"
+    | "LOCATION"
+    | "ROUTE"
+    | "EXPERIENCE"
+    | "DESTINATION"
+    | "JOURNAL"
+    | "REGION"
+    | "AIRCRAFT_SALE"
+    | "FLIGHT_SCHOOL"
+    | "EXPLAINER"
+    | "TECH"
+    | "PHOTO_ESSAY";
   title: string;
   subtitle?: string;
   href: string;
