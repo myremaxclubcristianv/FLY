@@ -49,6 +49,18 @@ export const MAIN_NAV_ITEMS: NavItem[] = [
     available: true,
   },
   {
+    label: "CAREERS",
+    href: "/aviation/careers",
+    description: "Pilot, crew & engineering pathways.",
+    available: true,
+  },
+  {
+    label: "HISTORY",
+    href: "/aviation/history",
+    description: "Pioneers, Băneasa 1912 & flight heritage.",
+    available: true,
+  },
+  {
     label: "TECHNOLOGY",
     href: "/aviation/technology",
     description: "eVTOL, SAF & future flight innovation.",

@@ -19,6 +19,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/aviation/explainers",
     "/aviation/airports",
     "/aviation/technology",
+    "/aviation/careers",
+    "/aviation/history",
     "/baneasa",
     "/business",
     "/directory",

@@ -73,12 +73,13 @@ const MEGA_MENU_DATA: MegaMenuSection[] = [
         ],
       },
       {
-        heading: "INTELLIGENCE & RULES",
+        heading: "INTELLIGENCE & HERITAGE",
         items: [
+          { label: "Aviation Careers & Professions", href: "/aviation/careers", badge: "CAREERS" },
+          { label: "Aviation History & Pioneers", href: "/aviation/history", badge: "HERITAGE" },
           { label: "Aviation Rules & AOC", href: "/aviation/rules" },
           { label: "Aviation Visual Explainers", href: "/aviation/explainers" },
           { label: "Aviation Technology Journal", href: "/aviation/technology", badge: "eVTOL" },
-          { label: "Aviation Business", href: "/business" },
         ],
       },
     ],
