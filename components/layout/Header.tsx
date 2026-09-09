@@ -59,6 +59,14 @@ export function Header() {
                 <kbd className="text-[9px] bg-[var(--color-surface)] px-1.5 py-0.5 border border-[var(--color-border)] text-[var(--color-text-muted)]">⌘K</kbd>
               </button>
 
+              <Link
+                href="/account"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-data text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-400 bg-amber-500/10 transition-colors"
+                title="My AIR Account & Missions"
+              >
+                <span>MY AIR</span>
+              </Link>
+
               <div className="hidden lg:block">
                 <Link href={PRIMARY_CTA.href}>
                   <Button size="md" variant="primary">

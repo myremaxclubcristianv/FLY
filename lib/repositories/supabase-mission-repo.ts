@@ -1,9 +1,9 @@
 import { FlightMission, FlightOption } from "../../types/domain";
-import { MissionRepository, DemoMissionService } from "../services/mission-service";
+import { MissionRepository, ProductionMissionService } from "../services/mission-service";
 import { createClient } from "../supabase/server";
 
 export class SupabaseMissionRepository implements MissionRepository {
-  private fallback = new DemoMissionService();
+  private fallback = new ProductionMissionService();
 
   async createMission(
     data: Omit<FlightMission, "id" | "createdAt" | "status">

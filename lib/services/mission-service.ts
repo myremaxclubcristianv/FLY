@@ -1,18 +1,29 @@
-import { FlightMission, FlightOption } from "../../types/domain";
+import { FlightMission, FlightOption, AircraftCategory } from "../../types/domain";
+import { evaluateMissionDecision } from "./decision-engine";
+
+export function generateServerMissionReference(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let randomCode = "";
+  for (let i = 0; i < 6; i++) {
+    randomCode += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return `AIR-2026-${randomCode}`;
+}
 
 export interface MissionRepository {
-  createMission(mission: Omit<FlightMission, "id" | "createdAt" | "status">): Promise<FlightMission>;
+  createMission(data: Omit<FlightMission, "id" | "createdAt" | "status">): Promise<FlightMission>;
   getOptionsForMission(mission: FlightMission): Promise<FlightOption[]>;
 }
 
-export class DemoMissionService implements MissionRepository {
+export class ProductionMissionService implements MissionRepository {
   async createMission(
     data: Omit<FlightMission, "id" | "createdAt" | "status">
   ): Promise<FlightMission> {
-    const id = `msn-${Date.now()}`;
+    const referenceId = generateServerMissionReference();
     const mission: FlightMission = {
       ...data,
-      id,
+      id: referenceId,
+      referenceId,
       status: "OPTIONS_READY",
       createdAt: new Date().toISOString(),
     };
@@ -20,70 +31,51 @@ export class DemoMissionService implements MissionRepository {
   }
 
   async getOptionsForMission(mission: FlightMission): Promise<FlightOption[]> {
-    const isHeliCandidate =
-      mission.origin.toLowerCase().includes("bucharest") &&
-      (mission.destination.toLowerCase().includes("bran") ||
-        mission.destination.toLowerCase().includes("brașov") ||
-        mission.destination.toLowerCase().includes("brasov"));
+    const decisionResult = evaluateMissionDecision({
+      origin: mission.origin,
+      destination: mission.destination,
+      passengerCount: mission.passengers,
+      priority: mission.priority,
+    });
 
-    const options: FlightOption[] = [
-      {
-        id: `opt-${mission.id}-1`,
-        missionId: mission.id,
-        aircraftCategory: isHeliCandidate ? "HELICOPTER" : "LIGHT_JET",
-        aircraftName: isHeliCandidate ? "TWIN-ENGINE EXECUTIVE HELICOPTER" : "LIGHT EXECUTIVE JET",
-        operatorName: isHeliCandidate ? "Carpathian Heli Access" : "Danube Executive Charter",
-        routing: isHeliCandidate ? "Direct Pad-to-Pad Access" : "Direct Airfield-to-Airfield Vector",
-        estimatedDuration: isHeliCandidate ? "42 MIN FLIGHT" : "45 MIN FLIGHT",
-        pricingStatus: "REQUEST",
-        indicativePriceRange: "QUOTE REQUIRED",
-        availabilityStatus: "REQUEST",
-        verificationStatus: "IDENTITY_CHECKED",
-        dataStatus: "INDICATIVE",
-        recommendationScore: 98,
-        recommendationReason: isHeliCandidate
-          ? "Fastest door-to-destination option bypassing highway congestion and landing directly at destination pad."
-          : "Optimal balance of range, flight speed, and cabin comfort for this distance.",
-        isPrimary: true,
-      },
-      {
-        id: `opt-${mission.id}-2`,
-        missionId: mission.id,
-        aircraftCategory: "TURBOPROP",
-        aircraftName: "EXECUTIVE TURBOPROP VIA BRAȘOV (LROV)",
-        operatorName: "Transylvania Air Shuttle",
-        routing: "Regional Airfield Landing + Short Ground Transfer",
-        estimatedDuration: "25 MIN FLIGHT + 35 MIN GROUND",
-        pricingStatus: "REQUEST",
-        indicativePriceRange: "QUOTE REQUIRED",
-        availabilityStatus: "REQUEST",
-        verificationStatus: "DATA_VERIFIED",
-        dataStatus: "INDICATIVE",
-        recommendationScore: 88,
-        recommendationReason: "Higher baggage capacity ceiling and all-weather operational capability.",
-        isPrimary: false,
-      },
-      {
-        id: `opt-${mission.id}-3`,
-        missionId: mission.id,
-        aircraftCategory: "HELICOPTER",
-        aircraftName: "CAR + HELICOPTER INTERMODAL",
-        operatorName: "Carpathian Heli Access",
-        routing: "Peripheral Heliport Transfer + Direct Air Flight",
-        estimatedDuration: "15 MIN GROUND + 35 MIN FLIGHT",
-        pricingStatus: "REQUEST",
-        indicativePriceRange: "QUOTE REQUIRED",
-        availabilityStatus: "REQUEST",
-        verificationStatus: "IDENTITY_CHECKED",
-        dataStatus: "INDICATIVE",
-        recommendationScore: 82,
-        recommendationReason: "Bypasses city exit traffic via pre-positioned northern departure pad.",
-        isPrimary: false,
-      },
-    ];
+    const primaryOption: FlightOption = {
+      id: `opt-${mission.id}-1`,
+      missionId: mission.id,
+      aircraftCategory: decisionResult.category,
+      aircraftName: decisionResult.recommendedModelName.toUpperCase(),
+      operatorName: "AIR Operational Access Network (Verified AOC)",
+      routing: `${mission.origin} → ${mission.destination} (Optimal Vector)`,
+      estimatedDuration: decisionResult.estimatedDuration,
+      pricingStatus: "INDICATIVE",
+      indicativePriceRange: "INDICATIVE QUOTE REQUIRED",
+      availabilityStatus: "REQUEST",
+      verificationStatus: "DATA_VERIFIED",
+      dataStatus: decisionResult.dataStatus,
+      recommendationScore: decisionResult.recommendationScore,
+      recommendationReason: decisionResult.rationale,
+      isPrimary: true,
+    };
 
-    return options;
+    const alternativeOptions: FlightOption[] = decisionResult.alternatives.map((alt, idx) => ({
+      id: `opt-${mission.id}-${idx + 2}`,
+      missionId: mission.id,
+      aircraftCategory: alt.category as AircraftCategory,
+      aircraftName: alt.title.toUpperCase(),
+      operatorName: "AIR Partner Supply Network",
+      routing: `${mission.origin} → ${mission.destination}`,
+      estimatedDuration: alt.estimatedDuration,
+      pricingStatus: alt.pricingStatus,
+      indicativePriceRange: alt.indicativePriceRange,
+      availabilityStatus: "REQUEST",
+      verificationStatus: "IDENTITY_CHECKED",
+      dataStatus: "INDICATIVE",
+      recommendationScore: decisionResult.recommendationScore - (idx + 1) * 8,
+      recommendationReason: alt.rationale,
+      isPrimary: false,
+    }));
+
+    return [primaryOption, ...alternativeOptions];
   }
 }
 
-export const missionService = new DemoMissionService();
+export const missionService = new ProductionMissionService();

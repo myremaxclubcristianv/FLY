@@ -318,6 +318,7 @@ export interface Experience {
 
 export interface FlightMission {
   id: string;
+  referenceId?: string;
   origin: string;
   destination: string;
   date: string;

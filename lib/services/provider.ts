@@ -1,7 +1,7 @@
 import { OperatorRepository, DemoOperatorService } from "./operator-service";
 import { AircraftRepository, DemoAircraftService } from "./aircraft-service";
 import { LocationRepository, DemoLocationService } from "./location-service";
-import { MissionRepository, DemoMissionService } from "./mission-service";
+import { MissionRepository, ProductionMissionService } from "./mission-service";
 import { QuoteRepository, DemoQuoteService } from "./quote-service";
 
 import { SupabaseOperatorRepository } from "../repositories/supabase-operator-repo";
@@ -38,7 +38,7 @@ export function getLocationRepository(): LocationRepository {
 export function getMissionRepository(): MissionRepository {
   return isSupabaseConfigured()
     ? new SupabaseMissionRepository()
-    : new DemoMissionService();
+    : new ProductionMissionService();
 }
 
 export function getQuoteRepository(): QuoteRepository {
