@@ -1,5 +1,5 @@
 import { Aircraft, AircraftCategory } from "../../types/domain";
-import { DEMO_AIRCRAFT } from "../../data/demo/aircraft";
+import { UnifiedAviationRepository } from "../repositories/unified-aviation-repo";
 
 export interface AircraftRepository {
   getAll(): Promise<Aircraft[]>;
@@ -7,18 +7,20 @@ export interface AircraftRepository {
   getByCategory(category: AircraftCategory): Promise<Aircraft[]>;
 }
 
-export class DemoAircraftService implements AircraftRepository {
+export class UnifiedAircraftService implements AircraftRepository {
   async getAll(): Promise<Aircraft[]> {
-    return DEMO_AIRCRAFT;
+    return UnifiedAviationRepository.getAircraftModels();
   }
 
   async getBySlug(slug: string): Promise<Aircraft | null> {
-    return DEMO_AIRCRAFT.find((ac) => ac.slug === slug) || null;
+    return UnifiedAviationRepository.getAircraftModelBySlug(slug);
   }
 
   async getByCategory(category: AircraftCategory): Promise<Aircraft[]> {
-    return DEMO_AIRCRAFT.filter((ac) => ac.category === category);
+    const all = await UnifiedAviationRepository.getAircraftModels();
+    return all.filter((ac) => ac.category === category);
   }
 }
 
-export const aircraftService = new DemoAircraftService();
+export const DemoAircraftService = UnifiedAircraftService;
+export const aircraftService = new UnifiedAircraftService();

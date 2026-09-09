@@ -5,8 +5,8 @@ export const BRAND = {
   description:
     "AIR is an aviation access, discovery and decision platform connecting private jets, helicopters, turboprops, experiences, and destinations.",
   location: "BUCHAREST / ROMANIA",
-  hub: "BANEASA (LROP / BBU)",
-  version: "PHASE 1 FOUNDATION",
+  hub: "BĂNEASA (LRBS / BBU)",
+  version: "PHASE 4A AVIATION PLATFORM",
   metaTitleDefault: "AIR — The easiest way to fly",
   metaTitleTemplate: "%s | AIR — The easiest way to fly",
 } as const;

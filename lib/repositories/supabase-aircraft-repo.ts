@@ -66,7 +66,7 @@ export class SupabaseAircraftRepository implements AircraftRepository {
       baggageCapacity: row.baggage_capacity ? String(row.baggage_capacity) : undefined,
       typicalCruiseSpeed: row.typical_cruise_speed ? Number(row.typical_cruise_speed) : undefined,
       approximateRange: row.approximate_range ? Number(row.approximate_range) : undefined,
-      homeBaseName: row.home_base_name ? String(row.home_base_name) : "Bucharest Băneasa (LROP / BBU)",
+      homeBaseName: row.home_base_name ? String(row.home_base_name) : "Bucharest Băneasa (LRBS / BBU)",
       operatorDisplayName: row.operator_name ? String(row.operator_name) : "Danube Executive Charter",
       cabinHighlights: row.cabin_highlights ? String(row.cabin_highlights) : "Executive club seating.",
       verificationStatus: (row.verification_status as Aircraft["verificationStatus"]) || "DATA_VERIFIED",

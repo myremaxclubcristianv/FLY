@@ -42,9 +42,9 @@ export default async function OperatorDetailPage({
           <div className="flex flex-col gap-4 border-b border-[var(--color-border)] pb-8">
             <div className="flex items-center justify-between">
               <span className="text-xs font-data text-[var(--color-accent)] uppercase tracking-widest">
-                OPERATOR PROFILE // {operator.operatorType}
+                OPERATOR PROFILE // {operator.category || operator.operatorType}
               </span>
-              <DataStatusBadge status={operator.verificationStatus === "DATA_VERIFIED" ? "VERIFIED" : "INDICATIVE"} />
+              <DataStatusBadge status={operator.verificationStatus === "VERIFIED" || operator.verificationStatus === "OFFICIAL_SOURCE" ? "VERIFIED" : "INDICATIVE"} />
             </div>
 
             <SectionHeader

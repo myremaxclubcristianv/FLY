@@ -1,32 +1,53 @@
 import { DataStatus, VerificationStatus, DataSource } from "./verification";
 
-export type OperatorType =
-  | "CHARTER"
-  | "HELICOPTER"
-  | "EXECUTIVE_AVIATION"
-  | "AIRCRAFT_MANAGEMENT"
+export type CompanyCategory =
+  | "AOC_AIR_OPERATOR"
+  | "CHARTER_BROKER"
+  | "FBO"
+  | "GROUND_HANDLING"
   | "FLIGHT_SCHOOL"
-  | "EXPERIENCE_PROVIDER"
-  | "HANDLING"
-  | "MAINTENANCE"
-  | "OTHER";
+  | "MRO"
+  | "AIRCRAFT_MANAGEMENT"
+  | "AIRCRAFT_SALES"
+  | "AVIATION_FINANCE"
+  | "AVIATION_INSURANCE"
+  | "AIRPORT_OPERATOR"
+  | "HELICOPTER_OPERATOR"
+  | "TRAINING_ORGANIZATION"
+  | "AVIATION_TECHNOLOGY"
+  | "OTHER_AVIATION_SERVICES";
 
 export type AircraftCategory =
-  | "HELICOPTER"
   | "VERY_LIGHT_JET"
   | "LIGHT_JET"
   | "MIDSIZE_JET"
   | "SUPER_MIDSIZE_JET"
   | "LARGE_CABIN_JET"
   | "TURBOPROP"
+  | "HELICOPTER"
   | "EXECUTIVE_AIRCRAFT";
 
 export type AviationLocationType =
   | "AIRPORT"
-  | "HELIPORT"
   | "AERODROME"
-  | "FBO"
-  | "PAD";
+  | "HELIPORT"
+  | "HELIPAD"
+  | "FBO";
+
+export type LandingAccessStatus =
+  | "CERTIFIED"
+  | "PRIVATE_PRIOR_APPROVAL"
+  | "LANDING_BY_PRIOR_APPROVAL"
+  | "REQUEST"
+  | "NOT_VERIFIED";
+
+export type RouteType =
+  | "SCHEDULED"
+  | "CHARTER_MISSION"
+  | "ROUTE_INTELLIGENCE"
+  | "HELICOPTER_TRANSFER"
+  | "INTERMODAL"
+  | "REQUEST";
 
 export type ExperienceCategory =
   | "SCENIC_FLIGHT"
@@ -39,6 +60,23 @@ export type ExperienceCategory =
   | "EVENT"
   | "CORPORATE"
   | "GIFT_A_FLIGHT";
+
+export type JournalCategory =
+  | "AVIATION_NEWS"
+  | "PRIVATE_AVIATION"
+  | "AIRCRAFT"
+  | "HELICOPTERS"
+  | "AIRPORTS"
+  | "BUSINESS_AVIATION"
+  | "OWNERSHIP"
+  | "CHARTER"
+  | "PILOT_LIFE"
+  | "TECHNOLOGY"
+  | "AVIATION_FINANCE"
+  | "AVIATION_INSURANCE"
+  | "TRAVEL"
+  | "ROMANIA_FROM_ABOVE"
+  | "REGULATIONS";
 
 export type MissionPriority =
   | "FASTEST"
@@ -68,25 +106,36 @@ export type QuoteStatus =
   | "EXPIRED"
   | "CANCELLED";
 
-export interface Operator {
+export interface Company {
   id: string;
   slug: string;
   legalName: string;
   displayName: string;
   country: string;
+  city?: string;
   baseLocationId?: string;
+  baseAirportIcao?: string;
   baseAirportName?: string;
-  operatorType: OperatorType;
+  category: CompanyCategory;
+  operatorType?: CompanyCategory;
   website?: string;
   contactEmail?: string;
   contactPhone?: string;
+  aocVerified?: boolean;
+  aocNumber?: string;
   fleetCount?: number;
-  servicesSummary?: string[];
+  servicesSummary: string[];
+  certifications?: string[];
+  fleetModels?: string[];
   verificationStatus: VerificationStatus;
   dataStatus: DataStatus;
   source?: DataSource;
   lastVerifiedAt?: string;
 }
+
+// Backward compatibility alias
+export type Operator = Company;
+export type OperatorType = CompanyCategory;
 
 export interface Aircraft {
   id: string;
@@ -99,11 +148,22 @@ export interface Aircraft {
   baggageCapacity?: string;
   typicalCruiseSpeed?: number; // KTS
   approximateRange?: number; // NM
+  cabinDimensions?: {
+    lengthM?: number;
+    widthM?: number;
+    heightM?: number;
+  };
+  runwayTakeoffM?: number;
+  runwayLandingM?: number;
+  mtowKg?: number;
   homeBaseLocationId?: string;
   homeBaseName?: string;
   operatorId?: string;
   operatorDisplayName?: string;
   cabinHighlights?: string;
+  strengths?: string[];
+  limitations?: string[];
+  idealProfile?: string;
   verificationStatus: VerificationStatus;
   dataStatus: DataStatus;
   source?: DataSource;
@@ -114,6 +174,7 @@ export interface AviationLocation {
   id: string;
   slug: string;
   name: string;
+  officialName?: string;
   type: AviationLocationType;
   iata?: string;
   icao?: string;
@@ -121,9 +182,116 @@ export interface AviationLocation {
   country: string;
   latitude?: number;
   longitude?: number;
+  runwaySpecs?: {
+    lengthM?: number;
+    widthM?: number;
+    surface?: string;
+    pcn?: string;
+    designation?: string;
+  };
   operatingHours?: string;
   restrictions?: string[];
   fboFacilities?: string[];
+  handlingProviders?: string[];
+  fuelAvailable?: string[];
+  customsImmigration?: string;
+  landingAccessStatus?: LandingAccessStatus;
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  source?: DataSource;
+  lastVerifiedAt?: string;
+}
+
+export interface RouteIntelligence {
+  id: string;
+  slug: string;
+  title: string;
+  originCity: string;
+  originIcao?: string;
+  originIata?: string;
+  destinationCity: string;
+  destinationIcao?: string;
+  destinationIata?: string;
+  distanceNm: number;
+  routeType: RouteType;
+  calculatedDuration: {
+    vljet?: string;
+    lightJet?: string;
+    midsizeJet?: string;
+    superMidsize?: string;
+    heavyJet?: string;
+    turboprop?: string;
+    helicopter?: string;
+  };
+  suitabilityNotes: string;
+  scheduledVsCharterNotice: string;
+  airportOptions: string[];
+  transferPossibilities: string[];
+  recommendedAircraftSlugs: string[];
+  relatedCompanySlugs: string[];
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  source?: DataSource;
+  lastVerifiedAt?: string;
+}
+
+export interface DestinationGuide {
+  id: string;
+  slug: string;
+  title: string;
+  city: string;
+  country: string;
+  airports: string[];
+  gaAccessNotes: string;
+  fboHandlingNotes: string;
+  helicopterAccessNotes: string;
+  cityTransferTime: string;
+  bestTimeFly: string;
+  keyAttractions: string[];
+  relatedRouteSlugs: string[];
+  relatedAircraftSlugs: string[];
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  source?: DataSource;
+  lastVerifiedAt?: string;
+}
+
+export interface JournalArticle {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  category: JournalCategory;
+  author: string;
+  publicationDate: string;
+  lastUpdatedAt: string;
+  readTimeMinutes: number;
+  excerpt: string;
+  sections: Array<{
+    heading: string;
+    paragraphs: string[];
+  }>;
+  relatedEntitySlugs?: string[];
+  faq?: Array<{
+    question: string;
+    answer: string;
+  }>;
+  verificationStatus: VerificationStatus;
+  dataStatus: DataStatus;
+  source?: DataSource;
+}
+
+export interface AerialRegion {
+  id: string;
+  slug: string;
+  name: string;
+  subtitle: string;
+  country: string;
+  aerialHighlights: string[];
+  landingAccessNote: string;
+  nearbyCertifiedAirports: string[];
+  transferOptions: string[];
+  weatherConsiderations: string;
   verificationStatus: VerificationStatus;
   dataStatus: DataStatus;
   source?: DataSource;
@@ -199,7 +367,7 @@ export interface QuoteRequest {
 
 export interface SearchResultItem {
   id: string;
-  type: "OPERATOR" | "AIRCRAFT" | "LOCATION" | "EXPERIENCE" | "DESTINATION" | "JOURNAL";
+  type: "COMPANY" | "OPERATOR" | "AIRCRAFT" | "LOCATION" | "ROUTE" | "EXPERIENCE" | "DESTINATION" | "JOURNAL" | "REGION";
   title: string;
   subtitle?: string;
   href: string;

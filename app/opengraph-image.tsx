@@ -47,7 +47,7 @@ export default async function Image() {
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #292c2f", paddingTop: "24px" }}>
           <span style={{ fontSize: "14px", color: "#6b6e72" }}>
-            BUCHAREST / ROMANIA // BĂNEASA HUB (LROP / BBU)
+            BUCHAREST / ROMANIA // BĂNEASA HUB (LRBS / BBU)
           </span>
           <span style={{ fontSize: "14px", color: "#a7a9ac" }}>
             INDICATIVE DECISION DISCOVERY

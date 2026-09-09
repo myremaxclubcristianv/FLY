@@ -2,7 +2,7 @@ import { DecisionPayload } from "../../types/flight-request";
 
 export const BUCHAREST_BRAN_DECISION: DecisionPayload = {
   missionTitle: "BUCHAREST → BRAN (TRANSYLVANIA)",
-  origin: "Bucharest (Baneasa LROP / Henri Coanda LROP)",
+  origin: "Bucharest Băneasa (LRBS / BBU)",
   destination: "Bran Castle Helipad / Transylvania Region",
   passengers: 4,
   dataStatus: "INDICATIVE",

@@ -60,7 +60,7 @@ export const EXPERIENCE_PREVIEWS: ExperiencePreview[] = [
     type: "DAY MISSION",
     duration: "4.5 HOURS TOTAL",
     description:
-      "Direct heliport transfer from Băneasa (LROP) to private mountain pads. Bypasses ground highway congestion.",
+      "Direct heliport transfer from Băneasa (LRBS) to private mountain pads. Bypasses ground highway congestion.",
     status: "REQUEST",
   },
   {
@@ -123,7 +123,7 @@ export const DESTINATION_PREVIEWS: DestinationPreview[] = [
 export const JOURNAL_PREVIEWS: JournalArticlePreview[] = [
   {
     id: "art-baneasa",
-    title: "Băneasa (LROP) as Bucharest's Premier Business Aviation Gate",
+    title: "Băneasa (LRBS) as Bucharest's Premier Business Aviation Gate",
     category: "INFRASTRUCTURE",
     readTime: "4 MIN READ",
     date: "SEP 2026",

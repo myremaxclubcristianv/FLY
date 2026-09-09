@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { MAIN_NAV_ITEMS, PRIMARY_CTA } from "../../constants/navigation";
+import { PRIMARY_CTA } from "../../constants/navigation";
 import { Button } from "../ui/Button";
 import { MobileNav } from "./MobileNav";
 import { Container } from "./Container";
+import { MegaMenu } from "./MegaMenu";
 import { GlobalSearchModal } from "../search/GlobalSearchModal";
 
 export function Header() {
@@ -40,21 +41,8 @@ export function Header() {
               </span>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav
-              className="hidden lg:flex items-center gap-8"
-              aria-label="Main Navigation"
-            >
-              {MAIN_NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="text-xs font-data tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors duration-150 py-2 border-b border-transparent hover:border-[var(--color-accent)]"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            {/* Desktop Mega Navigation */}
+            <MegaMenu />
 
             {/* Right Action Trigger & Search */}
             <div className="flex items-center gap-4">

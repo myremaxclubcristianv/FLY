@@ -2,7 +2,7 @@
 
 > **Positioning**: AIR is an aviation access, discovery, and decision platform.  
 > **Core Promise**: Tell us where you're going. We'll find the right way to fly.  
-> **Location**: Bucharest, Romania // Primary access hub: Băneasa (LROP / BBU).
+> **Location**: Bucharest, Romania // Primary access hub: Băneasa (LRBS / BBU).
 
 ---
 

@@ -3,10 +3,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { SearchResultItem } from "../../types/domain";
-import { searchService } from "../../lib/services/search-service";
-import { DataStatusBadge } from "../shared/DataStatusBadge";
+import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
+import { ProvenanceBadge } from "../shared/ProvenanceBadge";
 
-export interface GlobalSearchModalProps {
+interface GlobalSearchModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
@@ -14,7 +14,7 @@ export interface GlobalSearchModalProps {
 export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResultItem[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -23,115 +23,135 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
     } else {
       setQuery("");
       setResults([]);
+      setSelectedIndex(0);
     }
   }, [isOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        if (isOpen) {
+          onClose();
+        } else {
+          // Open trigger handled at layout level
+        }
+      }
+      if (!isOpen) return;
+
+      if (e.key === "Escape") {
         onClose();
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSelectedIndex((prev) => (results.length > 0 ? (prev + 1) % results.length : 0));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSelectedIndex((prev) => (results.length > 0 ? (prev - 1 + results.length) % results.length : 0));
       }
     };
+
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, onClose]);
+  }, [isOpen, results, onClose]);
 
-  const handleQueryChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.value;
-    setQuery(val);
-    if (val.trim().length >= 2) {
-      setIsSearching(true);
-      const res = await searchService.search(val);
-      setResults(res);
-      setIsSearching(false);
-    } else {
+  useEffect(() => {
+    if (!query.trim()) {
       setResults([]);
+      setSelectedIndex(0);
+      return;
     }
-  };
+
+    let isMounted = true;
+    UnifiedAviationRepository.searchAll(query).then((items) => {
+      if (isMounted) {
+        setResults(items);
+        setSelectedIndex(0);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [query]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-[var(--color-bg-primary)]/80 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
       <div
-        className="w-full max-w-3xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl flex flex-col overflow-hidden"
+        className="w-full max-w-2xl bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg shadow-2xl overflow-hidden flex flex-col max-h-[80vh]"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Input Bar */}
-        <div className="flex items-center gap-3 px-6 py-4 border-b border-[var(--color-border)]">
-          <svg className="w-5 h-5 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-          </svg>
+        {/* Search Header */}
+        <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)]">
+          <span className="text-[var(--color-text-muted)] text-sm font-data">⌘K</span>
           <input
             ref={inputRef}
             type="text"
-            className="w-full bg-transparent text-[var(--color-text-primary)] text-base focus:outline-none placeholder:text-[var(--color-text-muted)] font-sans"
-            placeholder="Search operators, aircraft, locations, destinations, experiences..."
             value={query}
-            onChange={handleQueryChange}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search aircraft, companies, airports (LRBS), routes, or journal..."
+            className="w-full bg-transparent border-none text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none font-sans"
           />
           <button
-            type="button"
             onClick={onClose}
-            className="text-xs font-data text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] border border-[var(--color-border)] px-2 py-1"
+            className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] px-2 py-1 border border-[var(--color-border)] rounded transition-colors"
           >
             ESC
           </button>
         </div>
 
-        {/* Results Body */}
-        <div className="max-h-[60vh] overflow-y-auto p-4 flex flex-col gap-2">
-          {query.trim().length < 2 ? (
-            <div className="p-8 text-center text-xs font-data text-[var(--color-text-muted)]">
-              TYPE AT LEAST 2 CHARACTERS TO SEARCH THE AIR NETWORK...
-            </div>
-          ) : isSearching ? (
-            <div className="p-8 text-center text-xs font-data text-[var(--color-accent)]">
-              SEARCHING AVIATION DOMAIN...
+        {/* Results Container */}
+        <div className="flex-1 overflow-y-auto p-3 flex flex-col gap-1 divide-y divide-[var(--color-border-subtle)]">
+          {query.trim() === "" ? (
+            <div className="p-6 text-center text-xs text-[var(--color-text-muted)] font-data space-y-2">
+              <p>Type to search across AIR knowledge repository.</p>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+                <span className="px-2 py-1 bg-[var(--color-surface-hover)] border border-[var(--color-border)] rounded">Băneasa (LRBS)</span>
+                <span className="px-2 py-1 bg-[var(--color-surface-hover)] border border-[var(--color-border)] rounded">Phenom 300</span>
+                <span className="px-2 py-1 bg-[var(--color-surface-hover)] border border-[var(--color-border)] rounded">Alpha Handling</span>
+                <span className="px-2 py-1 bg-[var(--color-surface-hover)] border border-[var(--color-border)] rounded">Bucharest to Paris</span>
+              </div>
             </div>
           ) : results.length === 0 ? (
-            <div className="p-8 text-center flex flex-col gap-2">
-              <span className="text-xs font-data text-[var(--color-text-secondary)]">WE COULDN&apos;T FIND A MATCH YET.</span>
-              <span className="text-xs text-[var(--color-text-muted)]">
-                Tell us about your mission in the flight planner and AIR will help identify available options.
-              </span>
+            <div className="p-6 text-center text-xs text-[var(--color-text-muted)] font-data">
+              No verified aviation entities found for &quot;{query}&quot;.
             </div>
           ) : (
-            results.map((res) => (
+            results.map((item, idx) => (
               <Link
-                key={`${res.type}-${res.id}`}
-                href={res.href}
+                key={item.id}
+                href={item.href}
                 onClick={onClose}
-                className="flex items-center justify-between p-4 bg-[var(--color-bg-primary)] hover:bg-[var(--color-surface-elevated)] border border-[var(--color-border-subtle)] transition-colors group"
+                className={`flex items-center justify-between p-3 rounded transition-colors text-left group ${
+                  idx === selectedIndex ? "bg-[var(--color-surface-hover)] border-l-2 border-[var(--color-accent)]" : "hover:bg-[var(--color-surface-hover)]"
+                }`}
               >
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[9px] font-data text-[var(--color-accent)] uppercase">
-                      {res.type} {"//"} {res.categoryTag}
+                    <span className="text-xs font-medium text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                      {item.title}
                     </span>
-                    <DataStatusBadge status={res.dataStatus} showDot={false} />
+                    <span className="text-[9px] font-data px-1.5 py-0.5 rounded bg-[var(--color-bg-primary)] border border-[var(--color-border-subtle)] text-[var(--color-text-muted)] uppercase">
+                      {item.categoryTag}
+                    </span>
                   </div>
-                  <h4 className="text-base font-light text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
-                    {res.title}
-                  </h4>
-                  {res.subtitle && (
-                    <span className="text-xs text-[var(--color-text-muted)] font-sans">
-                      {res.subtitle}
+                  {item.subtitle && (
+                    <span className="text-xs text-[var(--color-text-secondary)] font-sans">
+                      {item.subtitle}
                     </span>
                   )}
                 </div>
-                <span className="text-xs font-data text-[var(--color-text-muted)] group-hover:text-[var(--color-text-primary)]">
-                  SELECT →
-                </span>
+                <ProvenanceBadge status={item.dataStatus} />
               </Link>
             ))
           )}
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-3 bg-[var(--color-bg-primary)] border-t border-[var(--color-border)] flex items-center justify-between text-[10px] font-data text-[var(--color-text-muted)]">
-          <span>AIR UNIFIED AVIATION SEARCH ENGINE</span>
-          <span>PRESS ESC TO CLOSE</span>
+        <div className="px-4 py-2 bg-[var(--color-bg-primary)] border-t border-[var(--color-border-subtle)] flex items-center justify-between text-[10px] font-data text-[var(--color-text-muted)]">
+          <span>Navigate: ↑↓ • Select: ↵ • Close: ESC</span>
+          <span>AIR AVIATION SEARCH ENGINE</span>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ export default async function AviationPage() {
   const categories = [
     { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations." },
     { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes." },
-    { title: "AIRPORTS & HELIPORTS", count: "4 LOCATIONS", desc: "Băneasa (LROP), Brașov (LROV), Constanța (LRCK), Bran Helipad." },
+    { title: "AIRPORTS & HELIPORTS", count: "12 LOCATIONS", desc: "Băneasa (LRBS / BBU), Otopeni (LROP / OTP), Brașov (LROV), Constanța (LRCK), Tuzla (LRTZ)." },
     { title: "FBO & HANDLING", count: "2 FACILITIES", desc: "VIP lounge access, customs clearance, and direct ramp car transfers." },
     { title: "MAINTENANCE & MRO", count: "INFRASTRUCTURE", desc: "Part-145 certified maintenance facilities and line servicing." },
     { title: "HANGARS & PARKING", count: "INFRASTRUCTURE", desc: "Executive aircraft parking, climate-controlled hangarage, and ground support." },
@@ -89,7 +89,7 @@ export default async function AviationPage() {
                       <span className="text-[10px] font-data text-[var(--color-accent)]">
                         {op.operatorType}
                       </span>
-                      <DataStatusBadge status={op.verificationStatus === "DATA_VERIFIED" ? "VERIFIED" : "INDICATIVE"} />
+                      <DataStatusBadge status={op.verificationStatus === "VERIFIED" || op.verificationStatus === "OFFICIAL_SOURCE" ? "VERIFIED" : "INDICATIVE"} />
                     </div>
 
                     <h3 className="text-xl font-light text-[var(--color-text-primary)]">

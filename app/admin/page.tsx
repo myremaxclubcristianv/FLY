@@ -1,13 +1,14 @@
 import React from "react";
 import { Container } from "../../components/layout/Container";
 import { SectionHeader } from "../../components/shared/SectionHeader";
-import { DataStatusBadge } from "../../components/shared/DataStatusBadge";
+import { ProvenanceBadge } from "../../components/shared/ProvenanceBadge";
 import { Card } from "../../components/ui/Card";
 import { quoteService } from "../../lib/services/quote-service";
+import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
 
 export const metadata = {
-  title: "AIR Internal CRM & Supply Verification Portal | Admin Infrastructure",
-  description: "Internal supply verification dashboard, operator registry review, and quote request lifecycle management.",
+  title: "AIR Data Audit & Verification Portal | Admin Infrastructure",
+  description: "Internal data provenance verification queue, operator registry review, and quote request lifecycle management.",
   robots: {
     index: false,
     follow: false,
@@ -16,12 +17,23 @@ export const metadata = {
 
 export default async function AdminPage() {
   const quoteRequests = await quoteService.getAllQuoteRequests();
+  const airports = await UnifiedAviationRepository.getAirports();
+  const companies = await UnifiedAviationRepository.getCompanies();
+  const aircraft = await UnifiedAviationRepository.getAircraftModels();
+  const routes = await UnifiedAviationRepository.getRoutes();
+  const journal = await UnifiedAviationRepository.getJournalArticles();
+  const regions = await UnifiedAviationRepository.getAerialRegions();
 
-  const attentionItems = [
-    { label: "VERIFICATION CHECKS PENDING", count: 12, code: "VERIFY // PENDING", color: "text-[var(--color-accent)]" },
-    { label: "QUOTE REQUESTS AWAITING RESPONSE", count: quoteRequests.length + 3, code: "QUOTES // ACTIVE", color: "text-[#5a9e7c]" },
-    { label: "STALE AIRCRAFT RECORDS", count: 3, code: "AIRCRAFT // STALE", color: "text-amber-400" },
-    { label: "OPERATORS REREQUIRING REVIEW", count: 2, code: "OPERATORS // REVIEW", color: "text-blue-400" },
+  const baneasa = await UnifiedAviationRepository.getBaneasaAirport();
+  const isBaneasaCorrect = baneasa.icao === "LRBS" && baneasa.iata === "BBU";
+
+  const auditItems = [
+    { label: "VERIFIED AIRPORTS & HELIPORTS", count: airports.length, code: "AIRPORTS // AACR/AIP", color: "text-emerald-400" },
+    { label: "VERIFIED AVIATION COMPANIES", count: companies.length, code: "COMPANIES // AACR", color: "text-emerald-400" },
+    { label: "AIRCRAFT MODELS IN CATALOG", count: aircraft.length, code: "AIRCRAFT // SPECS", color: "text-emerald-400" },
+    { label: "ROUTE INTELLIGENCE PROFILES", count: routes.length, code: "ROUTES // AIR CALCULATED", color: "text-sky-400" },
+    { label: "JOURNAL ARTICLES PUBLISHED", count: journal.length, code: "JOURNAL // ARTICLES", color: "text-purple-400" },
+    { label: "AERIAL REGIONS DISCOVERED", count: regions.length, code: "ROMANIA // FROM ABOVE", color: "text-amber-400" },
   ];
 
   return (
@@ -32,21 +44,34 @@ export default async function AdminPage() {
           <div className="flex flex-col gap-4 border-b border-[var(--color-border)] pb-8">
             <div className="flex items-center justify-between">
               <span className="text-xs font-data text-[var(--color-accent)] uppercase tracking-widest">
-                INTERNAL INFRASTRUCTURE // DEVELOPMENT CRM PORTAL
+                INTERNAL DATA AUDIT // PHASE 4B MASTER PLATFORM AUDIT
               </span>
-              <DataStatusBadge status="INDICATIVE" />
+              <ProvenanceBadge status="OFFICIAL_SOURCE" />
             </div>
 
             <SectionHeader
-              title="WHAT NEEDS ATTENTION?"
-              description="Internal supply verification queue, quote request lifecycle monitoring, and operator provenance audit portal."
+              title="AVIATION DATA PROVENANCE AUDIT."
+              description="Real-time monitoring of verified entities, AACR/EASA source attributions, quote requests, and data freshness."
               titleAs="h1"
             />
           </div>
 
-          {/* Attention Summary Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {attentionItems.map((item) => (
+          {/* Băneasa Identifier Health Check */}
+          <Card variant="surface" className={`p-6 border-l-4 ${isBaneasaCorrect ? "border-l-emerald-500" : "border-l-rose-500"} flex flex-col gap-2`}>
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-data text-[var(--color-text-primary)]">BĂNEASA IDENTIFIER FORENSIC STATUS</span>
+              <span className={`text-xs font-data px-2 py-0.5 rounded ${isBaneasaCorrect ? "bg-emerald-950/40 text-emerald-300 border border-emerald-800" : "bg-rose-950 text-rose-300"}`}>
+                {isBaneasaCorrect ? "PASS // LRBS / BBU VERIFIED" : "FAIL // INVALID IDENTIFIER"}
+              </span>
+            </div>
+            <p className="text-xs text-[var(--color-text-secondary)] font-sans">
+              Băneasa Aurel Vlaicu International Airport is strictly identified as ICAO: <strong>LRBS</strong> | IATA: <strong>BBU</strong>. Otopeni (LROP / OTP) is treated as a separate airport entity.
+            </p>
+          </Card>
+
+          {/* Data Audit Summary Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {auditItems.map((item) => (
               <Card key={item.label} variant="surface" className="flex flex-col gap-3 p-6 border-l-4 border-l-[var(--color-accent)]">
                 <span className="text-[10px] font-data text-[var(--color-text-muted)] uppercase">{item.code}</span>
                 <span className={`text-4xl font-light font-data ${item.color}`}>{item.count}</span>
@@ -74,7 +99,6 @@ export default async function AdminPage() {
                     <th className="p-4 font-normal">CUSTOMER</th>
                     <th className="p-4 font-normal">STATUS</th>
                     <th className="p-4 font-normal">REQUESTED AT</th>
-                    <th className="p-4 font-normal">ACTION</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--color-border-subtle)] text-[var(--color-text-secondary)]">
@@ -88,21 +112,11 @@ export default async function AdminPage() {
                         </span>
                       </td>
                       <td className="p-4 text-[var(--color-text-muted)]">{new Date(req.requestedAt).toLocaleString()}</td>
-                      <td className="p-4">
-                        <span className="text-[var(--color-accent)] hover:underline cursor-pointer">
-                          REVIEW QUOTE →
-                        </span>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-          </div>
-
-          {/* Development Boundary Disclaimer */}
-          <div className="p-6 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong>DEVELOPMENT CRM NOTICE:</strong> This admin portal forms the internal data architecture for future operator verification and quote dispatch. It is isolated from public search indexing (`noindex`) and does not expose live customer PII.
           </div>
         </div>
       </Container>

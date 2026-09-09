@@ -10,7 +10,7 @@ export const DEMO_EXPERIENCES: Experience[] = [
     duration: "4.5 HOURS TOTAL",
     capacity: 5,
     description:
-      "Direct twin-engine helicopter flight from Băneasa (LROP) to private mountain pads near Bran and Peleș Castles, bypassing highway congestion.",
+      "Direct twin-engine helicopter flight from Băneasa (LRBS) to private mountain pads near Bran and Peleș Castles, bypassing highway congestion.",
     highlights: [
       "Point-to-point direct helipad landing",
       "Prahova Valley aerial viewpoint",

@@ -3,7 +3,7 @@ import { DataStatus } from "../../types/verification";
 import { cn } from "../../lib/utils";
 
 export interface DataStatusBadgeProps {
-  status: DataStatus;
+  status: DataStatus | string;
   showDot?: boolean;
   className?: string;
 }
@@ -14,9 +14,37 @@ export function DataStatusBadge({
   className,
 }: DataStatusBadgeProps) {
   const styles: Record<
-    DataStatus,
+    string,
     { label: string; bg: string; text: string; border: string; dotBg: string }
   > = {
+    OFFICIAL_SOURCE: {
+      label: "OFFICIAL SOURCE",
+      bg: "bg-[color-mix(in_srgb,#5a9e7c_15%,transparent)]",
+      text: "text-[#7cc49e]",
+      border: "border-[#3d6e55]",
+      dotBg: "bg-[#5a9e7c]",
+    },
+    VERIFIED: {
+      label: "VERIFIED",
+      bg: "bg-[color-mix(in_srgb,#5a9e7c_15%,transparent)]",
+      text: "text-[#7cc49e]",
+      border: "border-[#3d6e55]",
+      dotBg: "bg-[#5a9e7c]",
+    },
+    AIR_CALCULATED: {
+      label: "AIR CALCULATED",
+      bg: "bg-[color-mix(in_srgb,#38bdf8_15%,transparent)]",
+      text: "text-[#7dd3fc]",
+      border: "border-[#0284c7]",
+      dotBg: "bg-[#38bdf8]",
+    },
+    PUBLIC: {
+      label: "PUBLIC DATA",
+      bg: "bg-[color-mix(in_srgb,#8a9199_12%,transparent)]",
+      text: "text-[#a7a9ac]",
+      border: "border-[#292c2f]",
+      dotBg: "bg-[#8a9199]",
+    },
     INDICATIVE: {
       label: "INDICATIVE",
       bg: "bg-[color-mix(in_srgb,#8a9199_12%,transparent)]",
@@ -31,19 +59,19 @@ export function DataStatusBadge({
       border: "border-[var(--color-accent-muted)]",
       dotBg: "bg-[var(--color-accent)]",
     },
-    VERIFIED: {
-      label: "VERIFIED",
-      bg: "bg-[color-mix(in_srgb,#5a9e7c_15%,transparent)]",
-      text: "text-[#7cc49e]",
-      border: "border-[#3d6e55]",
-      dotBg: "bg-[#5a9e7c]",
-    },
     LIVE: {
       label: "LIVE AVAILABILITY",
       bg: "bg-[color-mix(in_srgb,#4aab77_15%,transparent)]",
       text: "text-[#5ed193]",
       border: "border-[#2e7a51]",
       dotBg: "bg-[#4aab77]",
+    },
+    STALE: {
+      label: "STALE DATA",
+      bg: "bg-[var(--color-surface)]",
+      text: "text-[var(--color-text-muted)]",
+      border: "border-[var(--color-border)]",
+      dotBg: "bg-[var(--color-text-muted)]",
     },
     UNAVAILABLE: {
       label: "UNAVAILABLE",

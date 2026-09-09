@@ -1,21 +1,39 @@
 export type DataStatus =
-  | "LIVE"
+  | "OFFICIAL_SOURCE"
   | "VERIFIED"
+  | "PUBLIC"
   | "INDICATIVE"
   | "REQUEST"
-  | "UNAVAILABLE"
-  | "LAST_VERIFIED";
+  | "STALE"
+  | "AIR_CALCULATED"
+  | "LIVE";
 
 export type VerificationStatus =
-  | "IDENTITY_CHECKED"
-  | "DATA_VERIFIED"
+  | "OFFICIAL_SOURCE"
+  | "VERIFIED"
+  | "PUBLIC"
+  | "INDICATIVE"
   | "REQUEST"
-  | "UNAVAILABLE";
+  | "STALE"
+  | "DATA_VERIFIED"
+  | "IDENTITY_CHECKED";
+
+export type SourceType =
+  | "AACR"
+  | "EASA"
+  | "AIP"
+  | "CNAB"
+  | "EUROCONTROL"
+  | "MANUFACTURER"
+  | "OFFICIAL_WEBSITE"
+  | "PUBLIC_DATABASE"
+  | "INTERNAL";
 
 export interface DataSource {
   name: string;
-  type: "OFFICIAL" | "OPERATOR" | "PUBLIC" | "INTERNAL";
+  type: SourceType;
   url?: string;
+  lastVerifiedAt?: string;
 }
 
 export interface VerifiableEntity {
@@ -25,3 +43,4 @@ export interface VerifiableEntity {
   lastVerifiedAt?: string;
   verifiedBy?: string;
 }
+

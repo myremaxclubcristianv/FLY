@@ -1,4 +1,4 @@
-import { Operator } from "../../types/domain";
+import { Operator, CompanyCategory } from "../../types/domain";
 import { OperatorRepository } from "../services/operator-service";
 import { createClient } from "../supabase/server";
 import { DEMO_OPERATORS } from "../../data/demo/operators";
@@ -66,9 +66,10 @@ export class SupabaseOperatorRepository implements OperatorRepository {
       displayName: String(row.display_name),
       country: String(row.country || "Romania"),
       baseLocationId: row.base_location_id ? String(row.base_location_id) : undefined,
-      baseAirportName: row.base_airport_name ? String(row.base_airport_name) : "Bucharest Băneasa (LROP / BBU)",
-      operatorType: (row.operator_type as Operator["operatorType"]) || "CHARTER",
+      category: (row.category as CompanyCategory) || "AOC_AIR_OPERATOR",
+      operatorType: (row.operator_type as CompanyCategory) || "AOC_AIR_OPERATOR",
       website: row.website ? String(row.website) : undefined,
+      servicesSummary: Array.isArray(row.services_summary) ? (row.services_summary as string[]) : ["Executive Aviation Services"],
       verificationStatus: (row.verification_status as Operator["verificationStatus"]) || "IDENTITY_CHECKED",
       dataStatus: (row.data_status as Operator["dataStatus"]) || "INDICATIVE",
       lastVerifiedAt: row.last_verified_at ? String(row.last_verified_at) : undefined,

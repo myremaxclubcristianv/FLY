@@ -78,7 +78,7 @@ export default async function AircraftDetailPage({
             </Card>
             <Card variant="surface" className="flex flex-col gap-1">
               <span className="text-[10px] text-[var(--color-text-muted)]">HOME BASE</span>
-              <span className="text-sm text-[var(--color-text-primary)] font-light">{aircraft.homeBaseName || "Băneasa (LROP)"}</span>
+              <span className="text-sm text-[var(--color-text-primary)] font-light">{aircraft.homeBaseName || "Băneasa (LRBS / BBU)"}</span>
             </Card>
           </div>
 
