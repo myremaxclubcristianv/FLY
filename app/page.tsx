@@ -190,7 +190,7 @@ export default async function HomePage() {
                 BUCHAREST BĂNEASA (LRBS / BBU).
               </h2>
               <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
-                Romania&apos;s premier dedicated executive aviation terminal. 2,203m asphalt runway (07/25), fast-track FBO lounges, zero commercial airline delays, and 10-minute access to Bucharest CBD.
+                Romania&apos;s premier dedicated executive aviation terminal. 2,358m asphalt runway (07/25), fast-track FBO lounges, zero commercial airline delays, and 10-minute access to Bucharest CBD.
               </p>
             </div>
 

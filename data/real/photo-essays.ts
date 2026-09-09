@@ -12,7 +12,7 @@ export const REAL_PHOTO_ESSAYS: PhotoEssay[] = [
     slides: [
       {
         title: "Băneasa Runway 07/25 at Dawn",
-        description: "Golden hour light illuminating the 2,203-meter asphalt runway of Aurel Vlaicu International Airport.",
+        description: "Golden hour light illuminating the 2,358-meter asphalt runway of Aurel Vlaicu International Airport.",
         location: "LRBS / BBU",
       },
       {
