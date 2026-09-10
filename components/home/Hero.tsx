@@ -11,19 +11,19 @@ import { PRIMARY_CTA } from "../../constants/navigation";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[92vh] bg-neutral-950 pt-6 pb-20 border-b border-white/[0.08] overflow-hidden flex flex-col justify-center aerospace-grid-bg">
+    <section className="relative w-full min-h-[92vh] bg-neutral-950 pt-4 pb-20 border-b border-white/[0.08] overflow-hidden flex flex-col justify-center aerospace-grid-bg">
       {/* Atmospheric Background Layer with Cinematic Depth */}
       <div className="absolute inset-0 z-0">
         <AviationImage
           src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
-          alt="Executive Jet Airborne Above Clouds"
+          alt="Executive Jet on Runway Tarmac"
           fill
           priority
-          className="object-cover opacity-40 filter brightness-90 contrast-110"
+          className="object-cover opacity-35 filter brightness-95 contrast-110"
           fallbackTitle="AIR Fleet Airborne"
           fallbackCode="HERO // AIRBORNE"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/80 pointer-events-none" />
       </div>
@@ -52,11 +52,11 @@ export function Hero() {
       </div>
 
       <Container size="wide" className="relative z-10">
-        <div className="flex flex-col gap-10 max-w-5xl mx-auto">
+        <div className="flex flex-col gap-8 max-w-5xl mx-auto">
           {/* Top Tag & Badges */}
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3 py-1 bg-amber-500/10 rounded backdrop-blur-md">
-              THE DIGITAL WORLD OF AVIATION
+              PRIVATE AVIATION ACCESS & INTELLIGENCE
             </span>
             <span className="text-xs font-mono text-neutral-300 border border-white/[0.1] px-3 py-1 bg-white/[0.04] rounded backdrop-blur-md">
               EASA & ICAO PROVENANCE
@@ -64,9 +64,9 @@ export function Hero() {
           </div>
 
           {/* Main Hero Headlines */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-[0.9] font-sans">
-              GO BY AIR<span className="text-amber-400">.</span>
+              THE EASIEST WAY TO FLY<span className="text-amber-400">.</span>
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl text-neutral-300 font-light leading-relaxed max-w-3xl font-sans">
               Tell us where you&apos;re going.<br className="hidden sm:inline" />
@@ -75,26 +75,26 @@ export function Hero() {
           </div>
 
           {/* Action Triggers */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-1">
             <Button size="lg" variant="primary" asChild>
               <Link href={PRIMARY_CTA.href}>
                 {PRIMARY_CTA.label} →
               </Link>
             </Button>
             <Button size="lg" variant="secondary" asChild>
-              <Link href="/destinations">
-                EXPLORE DESTINATIONS ↗
+              <Link href="/aircraft">
+                EXPLORE AIRCRAFT FLEET ↗
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/aircraft">
-                AIRCRAFT FLEET SPECS
+              <Link href="/destinations">
+                GLOBAL DESTINATIONS
               </Link>
             </Button>
           </div>
 
           {/* Hero Flight Search Component Integration */}
-          <div className="pt-4">
+          <div className="pt-2">
             <FlightSearchForm />
           </div>
         </div>
