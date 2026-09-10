@@ -4,14 +4,13 @@ import React from "react";
 import Link from "next/link";
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
-import { FlightSearchForm } from "./FlightSearchForm";
 import { DataStatusBadge } from "../shared/DataStatusBadge";
 import { AviationImage } from "../AviationImage";
 import { PRIMARY_CTA } from "../../constants/navigation";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[92vh] bg-neutral-950 pt-4 pb-20 border-b border-white/[0.08] overflow-hidden flex flex-col justify-center aerospace-grid-bg">
+    <section className="relative w-full min-h-[92vh] sm:min-h-[95vh] bg-neutral-950 pt-4 pb-24 border-b border-white/[0.08] overflow-hidden flex flex-col justify-between aerospace-grid-bg">
       {/* Atmospheric Background Layer with Cinematic Depth */}
       <div className="absolute inset-0 z-0">
         <AviationImage
@@ -51,20 +50,21 @@ export function Hero() {
         </Container>
       </div>
 
-      <Container size="wide" className="relative z-10">
-        <div className="flex flex-col gap-8 max-w-5xl mx-auto">
+      {/* Main Hero Viewport Centerpiece */}
+      <Container size="wide" className="relative z-10 my-auto py-12">
+        <div className="flex flex-col gap-10 max-w-5xl">
           {/* Top Tag & Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3 py-1 bg-amber-500/10 rounded backdrop-blur-md">
+            <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3.5 py-1.5 bg-amber-500/10 rounded backdrop-blur-md font-bold">
               PRIVATE AVIATION ACCESS & INTELLIGENCE
             </span>
-            <span className="text-xs font-mono text-neutral-300 border border-white/[0.1] px-3 py-1 bg-white/[0.04] rounded backdrop-blur-md">
+            <span className="text-xs font-mono text-neutral-300 border border-white/[0.1] px-3.5 py-1.5 bg-white/[0.04] rounded backdrop-blur-md">
               EASA & ICAO PROVENANCE
             </span>
           </div>
 
           {/* Main Hero Headlines */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4">
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-light tracking-tight text-white leading-[0.9] font-sans">
               THE EASIEST WAY TO FLY<span className="text-amber-400">.</span>
             </h1>
@@ -75,25 +75,30 @@ export function Hero() {
           </div>
 
           {/* Action Triggers */}
-          <div className="flex flex-wrap items-center gap-4 pt-1">
-            <Button size="lg" variant="primary" asChild className="px-8 shadow-xl">
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <Button size="lg" variant="primary" asChild className="px-10 shadow-2xl text-base">
               <Link href={PRIMARY_CTA.href}>
                 PLAN A FLIGHT →
               </Link>
             </Button>
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="secondary" asChild className="px-8 text-base">
               <Link href="/aircraft">
                 EXPLORE AIRCRAFT
               </Link>
             </Button>
           </div>
-
-          {/* Hero Flight Search Component Integration */}
-          <div className="pt-2">
-            <FlightSearchForm />
-          </div>
         </div>
       </Container>
+
+      {/* Bottom Telemetry Bar */}
+      <div className="relative z-10 w-full pt-4">
+        <Container size="wide">
+          <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono text-neutral-500 border-t border-white/[0.06] pt-3">
+            <span>FLIGHT READY // ALL EUROPEAN CITY PAIRS</span>
+            <span>LRBS • LFPB • LFMN • LGMK • LSGG • OMDW • EGLF</span>
+          </div>
+        </Container>
+      </div>
     </section>
   );
 }

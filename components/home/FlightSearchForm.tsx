@@ -6,19 +6,21 @@ import { Input } from "../ui/Input";
 import { Select } from "../ui/Select";
 import { Button } from "../ui/Button";
 
+const PRIORITIES = [
+  { id: "FASTEST", label: "FASTEST", desc: "Direct routing & max cruise speed" },
+  { id: "BEST_VALUE", label: "BEST VALUE", desc: "Optimized category economics" },
+  { id: "MOST_COMFORTABLE", label: "MOST COMFORTABLE", desc: "Stand-up cabin & wide floor" },
+  { id: "MOST_PRIVATE", label: "MOST PRIVATE", desc: "Discreet FBO ramp & VIP security" },
+  { id: "MOST_MEMORABLE", label: "MOST MEMORABLE", desc: "Helicopter scenic & island arrival" },
+];
+
 export function FlightSearchForm() {
   const router = useRouter();
-  const [from, setFrom] = useState("Bucharest");
-  const [to, setTo] = useState("Bran");
-  const [date, setDate] = useState("2026-09-12");
+  const [from, setFrom] = useState("Bucharest (LRBS)");
+  const [to, setTo] = useState("Nice (LFMN)");
+  const [date, setDate] = useState("2026-09-15");
   const [passengers, setPassengers] = useState("4");
-
-  // Advanced optional fields (Progressive disclosure)
-  const [showAdvanced, setShowAdvanced] = useState(false);
-  const [time, setTime] = useState("09:00");
-  const [budget, setBudget] = useState("flexible");
   const [priority, setPriority] = useState("FASTEST");
-
   const [errors, setErrors] = useState<{ from?: string; to?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -46,58 +48,53 @@ export function FlightSearchForm() {
       priority,
     });
 
-    if (showAdvanced) {
-      if (time) params.append("time", time);
-      if (budget) params.append("budget", budget);
-    }
-
     router.push(`/plan?${params.toString()}`);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full glass-elevated p-6 sm:p-8 flex flex-col gap-6 rounded-2xl shadow-2xl"
+      className="w-full glass-elevated p-8 sm:p-10 flex flex-col gap-8 rounded-3xl shadow-2xl border border-white/10"
     >
-      <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span className="text-xs font-mono text-white tracking-widest uppercase font-bold">
-            FLIGHT SEARCH & DECISION DISCOVERY
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
+        <div className="flex items-center gap-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-xs font-mono text-amber-400 tracking-widest uppercase font-bold">
+            FLIGHT DECISION ENGINE // CONTROL INTERFACE
           </span>
         </div>
         <span className="text-[10px] font-mono text-neutral-400">
-          STEP 1 OF MISSION DISPATCH
+          LRBS EXECUTIVE DISPATCH ACTIVE
         </span>
       </div>
 
       {/* Main Required Search Fields Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <Input
-          label="FROM // DEPARTURE"
-          placeholder="e.g. Bucharest, OTP, BBU"
+          label="FROM // DEPARTURE AIRPORT / CITY"
+          placeholder="e.g. Bucharest (LRBS), Paris (LFPB)"
           value={from}
           onChange={(e) => setFrom(e.target.value)}
           error={errors.from}
           required
         />
         <Input
-          label="TO // DESTINATION"
-          placeholder="e.g. Bran, Transylvania, Paris"
+          label="TO // ARRIVAL DESTINATION"
+          placeholder="e.g. Nice (LFMN), Mykonos, Geneva"
           value={to}
           onChange={(e) => setTo(e.target.value)}
           error={errors.to}
           required
         />
         <Input
-          label="DATE // MISSION DEPARTURE"
+          label="WHEN // DEPARTURE DATE"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           required
         />
         <Select
-          label="PASSENGERS // WHO"
+          label="WHO // PASSENGER COMPLEMENT"
           value={passengers}
           onChange={(e) => setPassengers(e.target.value)}
           options={[
@@ -111,57 +108,45 @@ export function FlightSearchForm() {
         />
       </div>
 
-      {/* Progressive Disclosure Optional Toggle */}
-      <div>
-        <button
-          type="button"
-          onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors inline-flex items-center gap-2 font-medium"
-        >
-          <span>{showAdvanced ? "— HIDE ADVANCED MISSION PARAMETERS" : "+ ADVANCED PARAMETERS (TIME, PRIORITY, BUDGET)"}</span>
-        </button>
-
-        {showAdvanced && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 mt-4 border-t border-white/[0.08] animate-in fade-in duration-200">
-            <Input
-              label="TIME // DEPARTURE HOUR"
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            />
-            <Select
-              label="PRIORITY // MISSION GOAL"
-              value={priority}
-              onChange={(e) => setPriority(e.target.value)}
-              options={[
-                { value: "FASTEST", label: "FASTEST FLIGHT" },
-                { value: "BEST_VALUE", label: "BEST VALUE" },
-                { value: "MOST_COMFORTABLE", label: "MOST COMFORTABLE" },
-                { value: "MOST_PRIVATE", label: "MOST PRIVATE" },
-                { value: "MOST_MEMORABLE", label: "MOST MEMORABLE" },
-              ]}
-            />
-            <Select
-              label="BUDGET // FLEXIBILITY"
-              value={budget}
-              onChange={(e) => setBudget(e.target.value)}
-              options={[
-                { value: "flexible", label: "FLEXIBLE OPTIMIZATION" },
-                { value: "strict", label: "COST CONSCIOUS" },
-                { value: "uncompromising", label: "UNCOMPROMISING SPEED" },
-              ]}
-            />
-          </div>
-        )}
+      {/* WHAT MATTERS MOST? Priority Selector */}
+      <div className="space-y-3 pt-2">
+        <span className="text-[11px] font-mono text-neutral-300 font-bold uppercase tracking-wider block">
+          WHAT MATTERS MOST? // MISSION CRITERIA
+        </span>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {PRIORITIES.map((p) => {
+            const isSelected = priority === p.id;
+            return (
+              <button
+                type="button"
+                key={p.id}
+                onClick={() => setPriority(p.id)}
+                className={`p-3.5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between gap-1.5 ${
+                  isSelected
+                    ? "bg-amber-500/15 border-amber-400/60 shadow-lg shadow-amber-500/5 text-white ring-1 ring-amber-400/30"
+                    : "bg-white/[0.03] border-white/[0.08] text-neutral-300 hover:border-white/20 hover:bg-white/[0.06]"
+                }`}
+              >
+                <span className={`text-xs font-mono font-bold ${isSelected ? "text-amber-400" : "text-neutral-200"}`}>
+                  {p.label}
+                </span>
+                <span className="text-[10px] text-neutral-400 leading-tight">
+                  {p.desc}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Form Submission CTA */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-white/[0.08]">
-        <p className="text-[11px] font-mono text-neutral-400">
-          INDICATIVE DISCOVERY // VERIFIED OPERATOR NETWORK
-        </p>
-        <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto shadow-lg">
-          SHOW ME HOW TO FLY →
+      {/* Form Submission Trigger */}
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t border-white/[0.08]">
+        <div className="text-[11px] font-mono text-neutral-400 flex items-center gap-2">
+          <span className="text-amber-400">●</span>
+          <span>AIR CALCULATES DIRECT ROUTE, AIR MILES & MATCHED FLEET DOSSIER</span>
+        </div>
+        <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto px-10 shadow-xl text-sm font-bold">
+          PLAN THE FLIGHT →
         </Button>
       </div>
     </form>
