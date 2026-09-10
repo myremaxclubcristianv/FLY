@@ -112,10 +112,10 @@ export default function LegalCenterPage() {
                 <span className="text-xs font-mono font-bold text-amber-500 uppercase tracking-widest block">
                   DATE DE IDENTIFICARE JURIDICĂ
                 </span>
-                <div className="space-y-2 text-xs font-mono text-[var(--color-text-secondary)]">
+                <div className="space-y-3 text-xs font-mono text-[var(--color-text-secondary)]">
                   <div>
-                    <span className="text-[var(--color-text-muted)] block text-[10px]">ENTITATE:</span>
-                    <strong>{LEGAL_CONFIG.entity.legalName}</strong>
+                    <span className="text-[var(--color-text-muted)] block text-[10px]">ENTITATE JURIDICĂ:</span>
+                    <strong className="text-[var(--color-text-primary)]">{LEGAL_CONFIG.entity.legalName}</strong>
                   </div>
                   <div>
                     <span className="text-[var(--color-text-muted)] block text-[10px]">REGISTRUL COMERȚULUI:</span>
@@ -131,9 +131,7 @@ export default function LegalCenterPage() {
                   </div>
                   <div>
                     <span className="text-[var(--color-text-muted)] block text-[10px]">CONTACT LEGAL:</span>
-                    <a href={`mailto:${LEGAL_CONFIG.entity.legalEmail}`} className="text-amber-500 hover:underline">
-                      {LEGAL_CONFIG.entity.legalEmail}
-                    </a>
+                    <span className="text-amber-500">{LEGAL_CONFIG.entity.legalEmail}</span>
                   </div>
                 </div>
               </div>
@@ -141,7 +139,7 @@ export default function LegalCenterPage() {
               {/* Authorities Box */}
               <div className="p-8 rounded-3xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-4">
                 <span className="text-xs font-mono font-bold text-amber-500 uppercase tracking-widest block">
-                  AUTORITĂȚI COMPETENTE & SUPRAVEGHERE
+                  AUTORITĂȚI COMPETENTE DE SUPRAVEGHERE
                 </span>
                 <div className="space-y-3 text-xs text-[var(--color-text-secondary)] font-sans">
                   <div>
@@ -193,13 +191,16 @@ export default function LegalCenterPage() {
               </div>
             </div>
 
-            {/* Mandatory Lawyer Review Notice */}
-            <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 text-xs font-mono text-[var(--color-text-muted)] space-y-1">
-              <span className="text-amber-500 font-bold block">
-                AVIZ JURIDIC PREALABIL // COMPLIANCE GOVERNANCE
+            {/* Mandatory Lawyer Review Notice & Statutory Disclaimers */}
+            <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 text-xs font-mono text-[var(--color-text-muted)] space-y-2">
+              <span className="text-amber-500 font-bold block uppercase">
+                AVIZ JURIDIC PREALABIL // REGULATORY SAFETY & COMPLIANCE
               </span>
-              <p className="font-sans text-xs">
-                Toate politicile și termenii de mai sus reflectă arhitectura tehnică și operațională a platformei AIR la data de {LEGAL_CONFIG.versioning.effectiveDate}. Înainte de operarea de zboruri comerciale cu plată, documentele sunt auditate și validate final de avocați specializați în drept aeronautic și drept comercial din România și UE.
+              <p className="font-sans text-xs leading-relaxed">
+                {LEGAL_CONFIG.disclaimers.generalLegalAdviceRo}
+              </p>
+              <p className="font-mono text-[11px] text-[var(--color-text-muted)] pt-1">
+                {LEGAL_CONFIG.disclaimers.generalLegalAdvice}
               </p>
             </div>
           </div>
@@ -208,3 +209,4 @@ export default function LegalCenterPage() {
     </div>
   );
 }
+

@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const TOC = [
   { id: "angajament", label: "1. Angajamentul Nostru pentru Accesibilitate" },
   { id: "standarde", label: "2. Măsuri Tehnice Implementate" },
-  { id: "stadiu-conformitate", label: "3. Stadiul Curent de Conformitate" },
-  { id: "feedback", label: "4. Feedback & Raportarea Problemelor de Accesibilitate" },
+  { id: "stadiu-conformitate", label: "3. Stadiul Curent & Principii de Accesibilitate" },
+  { id: "feedback", label: "4. Feedback & Raportarea Barierelor de Accesibilitate" },
 ];
 
 export default function AccessibilityPage() {
@@ -30,7 +30,7 @@ export default function AccessibilityPage() {
           1. Angajamentul Nostru pentru Accesibilitate Digitală
         </h2>
         <p>
-          Platforma AIR este dedicată asigurării unei experiențe digitale accesibile, fluide și intuitive pentru toți utilizatorii, inclusiv pentru persoanele cu dizabilități vizuale, motorii sau cognitive, aplicând continuu bunele practici din domeniu.
+          Platforma AIR este dedicată asigurării unei experiențe digitale intuitive și accesibile pentru toți utilizatorii, aplicând principii moderne de design incluziv.
         </p>
       </section>
 
@@ -39,26 +39,29 @@ export default function AccessibilityPage() {
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
           2. Măsuri Tehnice Implementate
         </h2>
-        <p>Pentru atingerea acestui obiectiv, platforma AIR a integrat:</p>
+        <p>Pentru sprijinirea accesibilității, platforma AIR integrează următoarele măsuri tehnice:</p>
         <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
-          <li><strong>Markup Semantic HTML5:</strong> structură logică a titlurilor (H1, H2, H3), elemente de reper (header, main, nav, footer, aside) ușor de parcurs cu cititoare de ecran (Screen Readers);</li>
-          <li><strong>Navigație completă prin tastatură:</strong> toate butoanele, formularele și legăturile interactive pot fi accesate utilizând tasta Tab și tastele direcționale;</li>
-          <li><strong>Contrast și Lizibilitate Tipografică:</strong> utilizarea de rapoarte de contrast optimizate între text și fundal, cu suport pentru moduri vizuale de înaltă claritate;</li>
-          <li><strong>Design Responsiv Fluid:</strong> adaptare automată pe ecrane de smartphone, tabletă și monitoare de înaltă rezoluție, fără pierderea contextului sau a funcționalității la mărirea textului (zoom până la 200%).</li>
+          <li><strong>Markup Semantic HTML5:</strong> structură logică a titlurilor (H1, H2, H3), elemente de reper (header, main, nav, footer, aside) ușor de parcurs cu tehnologii asistive;</li>
+          <li><strong>Navigație prin tastatură:</strong> elementele interactive și formularele pot fi parcurse secvențial prin tasta Tab;</li>
+          <li><strong>Contrast și Lizibilitate Tipografică:</strong> rapoarte de contrast optimizate între text și fundal, cu suport pentru moduri de înaltă lizibilitate;</li>
+          <li><strong>Design Responsiv Fluid:</strong> redimensionare automată pe ecrane de smartphone, tabletă și monitoare desktop fără pierderea conținutului la mărirea textului până la 200%.</li>
         </ul>
       </section>
 
       {/* 3. Stadiu conformitate */}
       <section id="stadiu-conformitate" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          3. Stadiul Curent de Conformitate (Declarație de Transparență)
+          3. Stadiul Curent & Principii de Accesibilitate
         </h2>
         <div className="p-5 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-2 text-xs">
           <span className="font-mono text-amber-500 font-bold block uppercase">
-            EVALUARE CONTINUĂ WCAG 2.1:
+            DECLARAȚIE PRIVIND PRINCIPIILE DE ACCESIBILITATE:
           </span>
           <p className="font-sans text-[var(--color-text-secondary)] leading-relaxed">
-            AIR urmărește alinierea la liniile directoare <strong>Web Content Accessibility Guidelines (WCAG) 2.1 nivel AA</strong>. Platforma se află într-un proces continuu de audit intern de optimizare și nu pretinde o certificare externă formală completă, prioritizând îmbunătățirea reală a experienței de utilizare.
+            {LEGAL_CONFIG.disclaimers.accessibilityPrinciples}
+          </p>
+          <p className="font-sans text-[var(--color-text-muted)] leading-relaxed">
+            Platforma nu pretinde o certificare formală terță de conformitate completă WCAG, dar depune eforturi continue pentru remedierea oricăror deficiențe identificate în navigarea digitală.
           </p>
         </div>
       </section>
@@ -66,18 +69,19 @@ export default function AccessibilityPage() {
       {/* 4. Feedback */}
       <section id="feedback" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          4. Feedback și Raportarea Problemelor de Accesibilitate
+          4. Feedback și Raportarea Barierelor de Accesibilitate
         </h2>
         <p>
-          Dacă întâmpinați orice dificultate în accesarea conținutului sau în navigarea pe platformă, vă rugăm să ne semnalați problema la adresa de e-mail:{" "}
-          <a href={`mailto:${LEGAL_CONFIG.entity.primaryContactEmail}`} className="text-amber-500 underline font-mono">
+          Dacă întâmpinați dificultăți în accesarea oricărei secțiuni a platformei, vă invităm să ne semnalați situația la canalul de contact:{" "}
+          <span className="text-amber-500 font-mono">
             {LEGAL_CONFIG.entity.primaryContactEmail}
-          </a>.
+          </span>.
         </p>
         <p className="text-xs text-[var(--color-text-muted)]">
-          Vom analiza sesizarea dumneavoastră în cel mai scurt timp și vom implementa măsurile tehnice corective necesare.
+          Vom analiza sesizarea dumneavoastră cu prioritate pentru a implementa ajustările tehnice necesare.
         </p>
       </section>
     </LegalDocumentLayout>
   );
 }
+

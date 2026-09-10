@@ -62,6 +62,10 @@ export const FOOTER_SECTIONS = [
       { label: "AVIATION DISCLAIMER", href: "/legal/aviation-disclaimer", isImplemented: true },
       { label: "CHARTER DISCLAIMER", href: "/legal/charter-disclaimer", isImplemented: true },
       { label: "CANCELLATION & REFUNDS", href: "/legal/cancellation-refunds", isImplemented: true },
+      { label: "INTELLECTUAL PROPERTY", href: "/legal/intellectual-property", isImplemented: true },
+      { label: "ACCEPTABLE USE", href: "/legal/acceptable-use", isImplemented: true },
+      { label: "ACCESSIBILITY", href: "/legal/accessibility", isImplemented: true },
+      { label: "GDPR RIGHTS REQUEST", href: "/legal/gdpr-requests", isImplemented: true },
     ],
   },
 ];

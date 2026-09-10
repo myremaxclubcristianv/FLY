@@ -1,131 +1,104 @@
 import { Metadata } from "next";
 import { LegalDocumentLayout } from "@/components/legal/LegalDocumentLayout";
+import { LEGAL_CONFIG } from "@/lib/config/legal";
 
 export const metadata: Metadata = {
   title: "Politica de Anulare și Rambursare — AIR",
   description:
-    "Condițiile aplicabile anulării zborurilor private charter, restituirii sumelor achitate, costurilor operaționale nerecuperabile și anulărilor cauzate de vreme sau forță majoră.",
+    "Condițiile aplicabile anulării solicitărilor de zbor, dependența de contractul operatorului aerian AOC și transparența privind lipsa procesării plăților online pe website.",
 };
 
 const TOC = [
-  { id: "inainte-confirmare", label: "1. Anulare Înainte de Confirmarea Zborului" },
-  { id: "dupa-confirmare", label: "2. Anulare După Confirmarea Contractuală" },
-  { id: "grile-operatori", label: "3. Grile Tipice de Penalizare ale Operatorilor AOC" },
-  { id: "costuri-nerecuperabile", label: "4. Costuri Operaționale Directe Nerecuperabile" },
-  { id: "anulare-meteo", label: "5. Anulări din Motive Meteorologice & Forță Majoră" },
-  { id: "procesare-plati", label: "6. Modalități de Plată & Mecanismul de Rambursare" },
+  { id: "solicitari-necontractate", label: "1. Solicitări Aflate în Curs de Căutare (Necontractate)" },
+  { id: "contract-operator", label: "2. Anulare După Confirmarea Contractuală (Status CONFIRMED)" },
+  { id: "costuri-operationale", label: "3. Costuri Operaționale Directe ale Operatorului" },
+  { id: "siguranta-meteo", label: "4. Anulări Operaționale, Vreme & Forță Majoră" },
+  { id: "statut-plati", label: "5. Statutul Procesării Plăților & Absența Decontărilor Online" },
 ];
 
 export default function CancellationRefundsPage() {
   return (
     <LegalDocumentLayout
-      titleRo="Politica de Anulare și Rambursare a Zborurilor"
-      titleEn="Flight Cancellation & Refund Policy"
+      titleRo="Politica de Anulare și Informare Privind Rambursările"
+      titleEn="Cancellation & Refund Informational Framework"
       documentNumber="DOC-06 // CANCELLATION-REFUNDS"
       category="POLITICĂ COMERCIALĂ"
       tableOfContents={TOC}
     >
-      {/* 1. Inainte de confirmare */}
-      <section id="inainte-confirmare" className="space-y-4">
+      {/* 1. Solicitari necontractate */}
+      <section id="solicitari-necontractate" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          1. Anularea Înainte de Confirmarea Formală a Zborului
+          1. Solicitări de Zbor Aflate în Curs de Căutare (Necontractate)
         </h2>
         <p>
-          Orice solicitare de zbor aflată în stadiile <code>REQUESTED</code>, <code>SOURCING</code>, <code>QUOTES_RECEIVED</code>, <code>AIR_REVIEW</code> sau <code>PRESENTED</code> poate fi <strong>anulată în mod gratuit și necondiționat</strong> de către utilizator în orice moment, fără a suporta nicio penalitate sau cost financiar.
+          Orice căutare sau solicitare de explorare operațională aflată în stadiile <code>REQUESTED</code>, <code>SOURCING</code>, <code>QUOTES_RECEIVED</code>, <code>AIR_REVIEW</code> sau <code>PRESENTED</code> nu generează obligații financiare de plată și poate fi abandonată sau anulată de către utilizator în orice moment, fără perceperea vreunui tarif de platformă.
         </p>
       </section>
 
-      {/* 2. Dupa confirmare */}
-      <section id="dupa-confirmare" className="space-y-4">
+      {/* 2. Contract operator */}
+      <section id="contract-operator" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          2. Anularea După Confirmarea Contractuală (Status CONFIRMED)
+          2. Anulare După Confirmarea Contractuală (Status CONFIRMED)
         </h2>
         <p>
-          Odată ce zborul a fost confirmat de client și contractat cu operatorul aerian (prin blocarea aeronavei și emiterea planului de zbor), anularea din inițiativa clientului este guvernată strict de <strong>grila de penalizare specificată în contractul de charter</strong> semnat cu operatorul respectiv.
+          Odată ce o misiune a fost confirmată formal de către client și contractată cu operatorul aerian titular de Certificat de Operator Aerian (AOC), <strong>condițiile de anulare, termenele de notificare și eventualele drepturi sau rețineri financiare sunt guvernate exclusiv de contractul de charter încheiat cu respectivul operator aerian</strong>.
+        </p>
+        <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+          AIR nu stabilește grile arbitrare de penalizare și nu promite rambursări în nume propriu. Condițiile contractuale specifice fiecărui operator și fiecărei aeronave sunt comunicate transparent clientului înainte de confirmarea și semnarea contractului de transport.
         </p>
       </section>
 
-      {/* 3. Grile tipice */}
-      <section id="grile-operatori" className="space-y-4">
+      {/* 3. Costuri operationale */}
+      <section id="costuri-operationale" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          3. Structura Tipică a Grilelor de Anulare din Industria Aviației Private
+          3. Costuri Operaționale Directe ale Operatorului Aerian
         </h2>
         <p>
-          Fiecare operator deține propria politică de anulare comunicată transparent în cotația detaliată. Orientativ, grilele standard aplicabile în aviația de afaceri europeană urmează următoarele eșaloane:
-        </p>
-        <div className="overflow-x-auto pt-2">
-          <table className="w-full text-left text-xs border border-[var(--color-border)] rounded-xl overflow-hidden font-mono">
-            <thead className="bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] uppercase text-[10px]">
-              <tr>
-                <th className="p-3 border-b border-[var(--color-border)]">Intervalul Notificării Anulării</th>
-                <th className="p-3 border-b border-[var(--color-border)]">Nivel Penalitate Standard</th>
-                <th className="p-3 border-b border-[var(--color-border)]">Procent Rambursabil</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-secondary)] font-sans">
-              <tr>
-                <td className="p-3 font-mono text-xs">Cu mai mult de 7 zile înainte de plecare</td>
-                <td className="p-3 font-mono text-amber-500">10% – 20% (sau taxa administrativă)</td>
-                <td className="p-3 font-mono text-emerald-400">80% – 90%</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-mono text-xs">Între 7 zile și 48 de ore înainte de plecare</td>
-                <td className="p-3 font-mono text-amber-500">30% – 50% din prețul total</td>
-                <td className="p-3 font-mono text-amber-400">50% – 70%</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-mono text-xs">Între 48 de ore și 24 de ore înainte de plecare</td>
-                <td className="p-3 font-mono text-amber-500">70% – 80% din prețul total</td>
-                <td className="p-3 font-mono text-amber-400">20% – 30%</td>
-              </tr>
-              <tr>
-                <td className="p-3 font-mono text-xs">Cu mai puțin de 24 de ore sau No-Show la plecare</td>
-                <td className="p-3 font-mono text-red-400">100% din prețul total</td>
-                <td className="p-3 font-mono text-neutral-500">0% (nerambursabil)</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* 4. Costuri nerecuperabile */}
-      <section id="costuri-nerecuperabile" className="space-y-4">
-        <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          4. Costuri Operaționale Directe Nerecuperabile
-        </h2>
-        <p>
-          Indiferent de momentul anulării, dacă operatorul a efectuat deja cheltuieli operaționale directe și irevocabile pentru misiune (cum ar fi: zborul de repoziționare a aeronavei către aeroportul de plecare, plata sloturilor speciale, permise de survol speciale sau comenzi de catering de lux), aceste sume sunt <strong>integral reținute din cuantumul rambursat</strong>.
-        </p>
-      </section>
-
-      {/* 5. Anulari meteo */}
-      <section id="anulare-meteo" className="space-y-4">
-        <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          5. Anulări Cauzate de Vreme, Restricții ATC și Forță Majoră
-        </h2>
-        <p>
-          În situația în care un zbor nu poate fi operat din considerente meteorologice ce depășesc limitele de siguranță ale aeronavei, restricții neprevăzute de spațiu aerian (NOTAM) sau forță majoră:
+          În aviația privată comercială, în funcție de momentul notificării anulării și de specificul misiunii, contractele operatorilor aerieni pot prevedea reținerea cheltuielilor operaționale deja angajate irevocabil, cum ar fi:
         </p>
         <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
-          <li>Operatorul și AIR vor depune toate eforturile pentru reprogramarea zborului la o oră compatibilă cu programul pasagerilor;</li>
-          <li>Dacă reprogramarea nu este acceptabilă sau posibilă, se va proceda la restituirea sumelor achitate, deducând exclusiv eventualele segmente de zbor deja efectuate și costurile directe nerecuperabile justificate cu documente.</li>
+          <li>Zboruri de poziționare a aeronavei către aeroportul de plecare (ferry flights deja efectuate sau inițiate);</li>
+          <li>Taxe de slot aeroportuar, permise speciale de survol sau taxe de prelungire a orarului FBO;</li>
+          <li>Servicii dedicate de catering VIP, handling special sau degivrare (de-icing) comandate ferm.</li>
+        </ul>
+        <p className="text-xs text-[var(--color-text-muted)] font-mono">
+          Aceste aspecte sunt reglementate individual în contractul de charter aferent fiecărui zbor.
+        </p>
+      </section>
+
+      {/* 4. Siguranta si meteo */}
+      <section id="siguranta-meteo" className="space-y-4">
+        <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
+          4. Anulări din Motive de Siguranță, Condiții Meteorologice & Forță Majoră
+        </h2>
+        <p>
+          Siguranța zborului este prioritatea absolută. În situația în care un zbor nu poate fi operat din cauza condițiilor meteo sub minimele de siguranță ale aeronavei, restricțiilor emise de controlul traficului aerian (ATC / NOTAM) sau forței majore:
+        </p>
+        <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
+          <li>Comandantul de echipaj (Pilot in Command - PIC) deține autoritatea legală finală privind decizia de operare;</li>
+          <li>Reprogramarea zborului sau soluționarea contractuală a misiunii se realizează în conformitate strictă cu clauzele stipulate în contractul de charter emis de operatorul aerian;</li>
+          <li>AIR acordă asistență de conciergerie operațională pentru identificarea soluțiilor alternative compatibile.</li>
         </ul>
       </section>
 
-      {/* 6. Procesare plati */}
-      <section id="procesare-plati" className="space-y-4">
+      {/* 5. Statut plati */}
+      <section id="statut-plati" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          6. Modalități de Plată și Procedura de Rambursare
+          5. Statutul Procesării Plăților & Absența Decontărilor Online pe Website
         </h2>
-        <div className="p-5 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-2 text-xs">
-          <span className="font-mono text-amber-500 font-bold block uppercase">
-            INFORMARE PRIVIND DECONTĂRILE FINANCIARE:
-          </span>
+        <div className="p-6 rounded-2xl bg-[var(--color-bg-secondary)] border border-amber-500/30 space-y-3 text-xs">
+          <div className="flex items-center gap-2 text-amber-500 font-mono font-bold uppercase tracking-wider">
+            <span>⚠ {LEGAL_CONFIG.payment.status}</span>
+          </div>
           <p className="font-sans text-[var(--color-text-secondary)] leading-relaxed">
-            În faza operațională actuală, plățile pentru zborurile charter intermediate se realizează prin transfer bancar direct (ordin de plată / transfer SEPA sau SWIFT) în baza facturii proforme emise conform contractului. Eventualele rambursări aprobate se efectuează în același cont bancar din care s-a efectuat plata inițială, în termen de maximum 14 zile calendaristice de la data agreării rambursării.
+            {LEGAL_CONFIG.payment.disclosure}
+          </p>
+          <p className="font-sans text-[var(--color-text-muted)] leading-relaxed">
+            Acest website nu colectează date de card bancar și nu procesează tranzacții sau rambursări financiare directe. Orice decontare comercială și eventuală rambursare aprobată conform contractului de transport se derulează exclusiv prin canalele financiare oficiale stabilite direct între părțile contractante înainte de zbor.
           </p>
         </div>
       </section>
     </LegalDocumentLayout>
   );
 }
+

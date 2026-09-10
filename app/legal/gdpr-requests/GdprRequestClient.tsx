@@ -11,6 +11,7 @@ export default function GdprRequestClient() {
   const [referenceId, setReferenceId] = useState("");
   const [details, setDetails] = useState("");
   const [isGenerated, setIsGenerated] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const requestOptions = [
     { value: "ACCESS", label: "01 // Dreptul de Acces la Date (Art. 15 GDPR)" },
@@ -22,49 +23,54 @@ export default function GdprRequestClient() {
     { value: "CONSENT_WITHDRAWAL", label: "07 // Retragerea Consimțământului Anterior (Art. 7 GDPR)" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleGenerate = (e: React.FormEvent) => {
     e.preventDefault();
     setIsGenerated(true);
+    setCopied(false);
   };
 
+  const formattedRequestText =
+    `CĂTRE: Responsabil Protecția Datelor AIR\n` +
+    `ADRESĂ DESTINATAR: ${LEGAL_CONFIG.entity.privacyEmail}\n` +
+    `SUBIECT: [GDPR REQUEST // ${requestType}] ${fullName || "Solicitant"}\n\n` +
+    `Subsemnatul/a, ${fullName},\n` +
+    `Adresă de e-mail asociată: ${email}\n` +
+    `Telefon de contact: ${phone || "Nespecificat"}\n` +
+    `Referință solicitare AIR (dacă există): ${referenceId || "N/A"}\n\n` +
+    `Prin prezenta, în temeiul Regulamentului (UE) 2016/679 (GDPR), solicit exercitarea dreptului de tip: ${requestType}.\n\n` +
+    `DETALII SPECIFICE PRIVIND SOLICITAREA:\n` +
+    `${details || "Vă rog să confirmați înregistrarea solicitării mele și măsurile întreprinse conform GDPR."}\n\n` +
+    `Data redactării: ${new Date().toLocaleDateString("ro-RO")}`;
+
   const mailtoSubject = encodeURIComponent(`[GDPR REQUEST // ${requestType}] ${fullName || "Solicitant"}`);
-  const mailtoBody = encodeURIComponent(
-    `CĂTRE: Responsabil Protecția Datelor AIR (${LEGAL_CONFIG.entity.privacyEmail})\n\n` +
-    `TIP SOLICITARE: ${requestType}\n` +
-    `NUME COMPLET: ${fullName}\n` +
-    `E-MAIL ASOCIAT CONTULUI: ${email}\n` +
-    `TELEFON: ${phone || "Nespecificat"}\n` +
-    `REFERINȚĂ MISIUNE AIR: ${referenceId || "N/A"}\n\n` +
-    `DETALII SPECIFICE:\n${details || "Solicit exercitarea dreptului meu conform GDPR."}\n\n` +
-    `Data transmiterii: ${new Date().toLocaleDateString("ro-RO")}`
-  );
+  const mailtoBody = encodeURIComponent(formattedRequestText);
 
   return (
     <div className="space-y-10">
       {/* Intro Box */}
       <div className="p-6 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-3">
-        <h2 className="text-lg font-light text-[var(--color-text-primary)]">
-          Protocol Oficial de Solicitare GDPR
-        </h2>
+        <div className="flex items-center gap-2 text-amber-500 font-mono text-xs font-bold uppercase tracking-wider">
+          <span>ℹ GENERATOR LOCAL DE CERERI GDPR</span>
+        </div>
         <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
-          În conformitate cu Regulamentul (UE) 2016/679 (GDPR), puteți adresa oricând o cerere oficială privind datele dumneavoastră personale gestionate de platforma AIR. Termenul legal de soluționare și răspuns este de <strong>maximum 30 de zile calendaristice</strong> de la data recepționării solicitării și a validării identității.
+          Acest instrument funcționează <strong>exclusiv local în browserul dumneavoastră</strong> pentru redactarea și formatarea unei cereri oficiale de exercitare a drepturilor prevăzute de Regulamentul (UE) 2016/679 (GDPR). Nicio dată din acest formular nu este salvată pe un server extern până la transmiterea efectivă a mesajului de către dumneavoastră.
         </p>
       </div>
 
       {/* Interactive Form */}
-      <form onSubmit={handleSubmit} className="p-8 rounded-3xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-6 shadow-md">
+      <form onSubmit={handleGenerate} className="p-8 rounded-3xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-6 shadow-md">
         <div className="border-b border-[var(--color-border)] pb-4">
           <span className="text-xs font-mono font-bold text-amber-500 uppercase tracking-widest block">
-            FORMULAR GENERARE CERERE FORMALĂ
+            REDACTARE CERERE FORMALĂ GDPR
           </span>
           <p className="text-xs text-[var(--color-text-muted)] mt-1 font-mono">
-            Completați câmpurile pentru a genera cererea oficială securizată către Departamentul de Confidențialitate AIR.
+            Completați datele pentru a genera textul oficial gata de trimitere.
           </p>
         </div>
 
         <div className="space-y-4 text-xs font-mono">
           <div>
-            <label className="text-[var(--color-text-muted)] block mb-1">SELECTAȚI TIPUL DREPTULUI EXERCITAT *</label>
+            <label className="text-[var(--color-text-muted)] block mb-1">SELECTAȚI DREPTUL PE CARE DORIȚI SĂ ÎL EXERCITAȚI *</label>
             <select
               value={requestType}
               onChange={(e) => setRequestType(e.target.value)}
@@ -92,7 +98,7 @@ export default function GdprRequestClient() {
               />
             </div>
             <div>
-              <label className="text-[var(--color-text-muted)] block mb-1">E-MAIL ASOCIAT CONTULUI AIR *</label>
+              <label className="text-[var(--color-text-muted)] block mb-1">E-MAIL ASOCIAT SOLICITĂRII AIR *</label>
               <input
                 type="email"
                 value={email}
@@ -106,7 +112,7 @@ export default function GdprRequestClient() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-[var(--color-text-muted)] block mb-1">NUMĂR DE TELEFON PENTRU VALIDARE</label>
+              <label className="text-[var(--color-text-muted)] block mb-1">NUMĂR DE TELEFON (OPȚIONAL)</label>
               <input
                 type="tel"
                 value={phone}
@@ -116,7 +122,7 @@ export default function GdprRequestClient() {
               />
             </div>
             <div>
-              <label className="text-[var(--color-text-muted)] block mb-1">REFERINȚĂ MISIUNE AIR (DACĂ EXISTĂ)</label>
+              <label className="text-[var(--color-text-muted)] block mb-1">REFERINȚĂ SOLICITARE AIR (DACĂ EXISTĂ)</label>
               <input
                 type="text"
                 value={referenceId}
@@ -133,7 +139,7 @@ export default function GdprRequestClient() {
               value={details}
               onChange={(e) => setDetails(e.target.value)}
               rows={4}
-              placeholder="Vă rugăm să specificați exact datele la care faceți referire sau motivele particulare ale solicitării..."
+              placeholder="Specificați detaliile particulare ale cererii dumneavoastră..."
               className="w-full bg-[var(--color-bg-primary)] border border-[var(--color-border)] rounded-xl p-3 text-[var(--color-text-primary)] focus:border-amber-500 focus:outline-none font-sans"
             />
           </div>
@@ -141,41 +147,51 @@ export default function GdprRequestClient() {
 
         <div className="pt-4 border-t border-[var(--color-border)] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-[11px] text-[var(--color-text-muted)] font-mono">
-            * Câmpuri obligatorii pentru procesarea identificării.
+            * Câmpuri necesare pentru redactarea corectă a cererii.
           </p>
           <button
             type="submit"
             className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold px-6 py-3 rounded-xl text-xs font-mono transition shadow"
           >
-            Generează & Trimite Solicitarea Oficială →
+            Generează Textul Cererii Oficiale →
           </button>
         </div>
       </form>
 
-      {/* Generated Transmission Action */}
+      {/* Generated Result Output */}
       {isGenerated && (
         <div className="p-8 rounded-3xl bg-amber-500/10 border border-amber-500/30 space-y-4 shadow-xl">
-          <div className="flex items-center gap-2 text-amber-500 font-mono font-bold text-xs">
-            <span>✓ CERERE GENERATĂ CU SUCCES</span>
+          <div className="flex items-center justify-between">
+            <span className="text-amber-500 font-mono font-bold text-xs">
+              ✓ CERERE GENERATĂ LOCAL CU SUCCES
+            </span>
+            {copied && (
+              <span className="text-emerald-400 font-mono text-[11px]">
+                Copiat în clipboard!
+              </span>
+            )}
           </div>
-          <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
-            Pentru asigurarea confidențialității și autenticității, cererea dumneavoastră a fost formatată în protocol oficial. Puteți trimite solicitarea direct din clientul dumneavoastră de e-mail către Responsabilul de Protecție a Datelor (DPO).
+
+          <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
+            Textul cererii dumneavoastră a fost structurat conform cerințelor GDPR. Pentru a trimite cererea către departamentul de confidențialitate, puteți deschide clientul dumneavoastră de e-mail sau copia textul de mai jos.
           </p>
+
+          <pre className="p-4 rounded-xl bg-[var(--color-bg-primary)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-text-secondary)] whitespace-pre-wrap overflow-x-auto">
+            {formattedRequestText}
+          </pre>
 
           <div className="pt-2 flex flex-wrap gap-3">
             <a
-              href={`mailto:${LEGAL_CONFIG.entity.privacyEmail}?subject=${mailtoSubject}&body=${mailtoBody}`}
+              href={`mailto:?subject=${mailtoSubject}&body=${mailtoBody}`}
               className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-xs font-mono px-5 py-2.5 rounded-xl transition shadow"
             >
-              Deschide E-mail Pre-completat ({LEGAL_CONFIG.entity.privacyEmail}) →
+              Deschide în Clientul de E-mail →
             </a>
             <button
               type="button"
               onClick={() => {
-                navigator.clipboard.writeText(
-                  `CĂTRE: ${LEGAL_CONFIG.entity.privacyEmail}\nSUBIECT: [GDPR REQUEST // ${requestType}]\n\nNume: ${fullName}\nE-mail: ${email}\nTelefon: ${phone}\nReferință: ${referenceId}\nDetalii: ${details}`
-                );
-                alert("Textul cererii a fost copiat în clipboard.");
+                navigator.clipboard.writeText(formattedRequestText);
+                setCopied(true);
               }}
               className="bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] text-xs font-mono px-4 py-2.5 rounded-xl transition"
             >
@@ -185,15 +201,16 @@ export default function GdprRequestClient() {
         </div>
       )}
 
-      {/* Security & Verification Notice */}
+      {/* Identity Verification Notice */}
       <div className="p-6 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] text-xs text-[var(--color-text-muted)] space-y-2 font-mono">
         <span className="font-bold text-[var(--color-text-primary)] block">
-          PROCEDURĂ DE VERIFICARE A IDENTITĂȚII (ANTI-FRAUDĂ)
+          PROCEDURĂ DE VERIFICARE A IDENTITĂȚII
         </span>
         <p className="font-sans text-xs leading-relaxed">
-          Pentru a preveni divulgarea neautorizată a datelor pasagerilor sau a manifestelor de zbor către terți neautorizați, AIR va proceda la verificarea rezonabilă a identității solicitantului prin transmiterea unui cod de confirmare către adresa de e-mail sau numărul de telefon înregistrat pe platformă, înainte de eliberarea oricărei copii a datelor personale.
+          În conformitate cu Art. 12(6) GDPR, pentru a preveni divulgarea neautorizată a datelor personale către terți, operatorul poate solicita informații suplimentare necesare pentru confirmarea identității solicitantului înainte de a da curs cererii.
         </p>
       </div>
     </div>
   );
 }
+

@@ -11,14 +11,14 @@ export const metadata: Metadata = {
 
 const TOC = [
   { id: "operator", label: "1. Operatorul Datelor cu Caracter Personal" },
-  { id: "categorii", label: "2. Categorii de Date Prelucrate" },
-  { id: "scopuri", label: "3. Scopurile și Temeiurile Prelucrării (Art. 6 GDPR)" },
-  { id: "date-speciale", label: "4. Date din Categorii Speciale (Medical / Dietar)" },
+  { id: "categorii", label: "2. Categorii de Date Colectate Efectiv" },
+  { id: "necolectate", label: "3. Categorii de Date Necolectate pe Platformă" },
+  { id: "scopuri", label: "4. Scopurile și Temeiurile Prelucrării (Art. 6 GDPR)" },
   { id: "destinatari", label: "5. Destinatarii Datelor & Operatori Aerieni" },
   { id: "transferuri", label: "6. Transferuri Internaționale de Date" },
   { id: "retentie", label: "7. Perioada de Păstrare a Datelor" },
   { id: "drepturi", label: "8. Drepturile Persoanelor Vizate conform GDPR" },
-  { id: "automat", label: "9. Recomandări Algoritmice & Profilare" },
+  { id: "automat", label: "9. Recomandări Algoritmice & Absența Profilării" },
   { id: "securitate", label: "10. Măsuri Tehnice de Securitate" },
   { id: "contact-gdpr", label: "11. Contact DPO & Autoritatea de Supraveghere" },
 ];
@@ -38,40 +38,57 @@ export default function PrivacyPage() {
           1. Operatorul Datelor cu Caracter Personal
         </h2>
         <p>
-          În sensul Regulamentului General privind Protecția Datelor (Regulamentul UE 2016/679 — „<strong>GDPR</strong>”), operatorul de date este <strong>{LEGAL_CONFIG.entity.legalName}</strong>, cu sediul social în {LEGAL_CONFIG.entity.registeredOffice}, e-mail dedicat protecției datelor: <a href={`mailto:${LEGAL_CONFIG.entity.privacyEmail}`} className="text-amber-500 font-mono underline">{LEGAL_CONFIG.entity.privacyEmail}</a>.
+          În sensul Regulamentului General privind Protecția Datelor (Regulamentul UE 2016/679 — „<strong>GDPR</strong>”), operatorul de date este entitatea: <strong>{LEGAL_CONFIG.entity.legalName}</strong>.
+        </p>
+        <p className="text-xs text-[var(--color-text-muted)] font-mono">
+          Canal dedicat protecției datelor: {LEGAL_CONFIG.entity.privacyEmail}
         </p>
       </section>
 
-      {/* 2. Categorii de Date */}
+      {/* 2. Categorii de Date Colectate */}
       <section id="categorii" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          2. Categorii de Date cu Caracter Personal Prelucrate
+          2. Categorii de Date cu Caracter Personal Colectate Efectiv
         </h2>
-        <p>Platforma AIR prelucrează exclusiv datele necesare configurării și intermedierii misiunilor de zbor:</p>
+        <p>Platforma AIR colectează exclusiv datele transmise voluntar de utilizator în procesul de căutare și planificare a zborurilor:</p>
         <div className="space-y-3 pt-2 text-xs sm:text-sm">
           <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
             <strong className="text-[var(--color-text-primary)] block mb-1">A. Date de Identificare și Contact ale Solicitantului:</strong>
-            <span className="text-[var(--color-text-muted)]">Nume, prenume, adresă de e-mail profesională/personală, număr de telefon de contact, companie/organizație (dacă este cazul).</span>
+            <span className="text-[var(--color-text-muted)]">Nume, prenume, adresă de e-mail, număr de telefon de contact, companie / organizație (furnizate voluntar în formularele de planificare sau solicitare).</span>
           </div>
           <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
             <strong className="text-[var(--color-text-primary)] block mb-1">B. Parametri de Misiune și Preferințe de Călătorie:</strong>
-            <span className="text-[var(--color-text-muted)]">Aeroport de origine, aeroport de destinație, dată și oră de zbor, flexibilitate calendaristică, număr de pasageri, preferințe de categorie de aeronavă, cerințe specifice de bagaj sau catering.</span>
+            <span className="text-[var(--color-text-muted)]">Aeroport de plecare, aeroport de destinație, dată și oră dorite, număr estimat de pasageri, preferințe de categorie de aeronavă, mențiuni operaționale.</span>
           </div>
           <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-            <strong className="text-[var(--color-text-primary)] block mb-1">C. Date Manifest Pasageri (în faza de confirmare a zborului):</strong>
-            <span className="text-[var(--color-text-muted)]">Nume complet, data nașterii, cetățenie, serie și număr pașaport/act de identitate, data expirării documentului (date solicitate strict de normele aeronautice internaționale pentru autorizarea planului de zbor și proceduri vamale/frontieră).</span>
-          </div>
-          <div className="p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)]">
-            <strong className="text-[var(--color-text-primary)] block mb-1">D. Date Tehnice & Jurnale de Navigare:</strong>
-            <span className="text-[var(--color-text-muted)]">Adresă IP (în jurnalele de securitate server), tipul browserului, identificatori de sesiune locală necesari funcționării contului de utilizator.</span>
+            <strong className="text-[var(--color-text-primary)] block mb-1">C. Date Tehnice de Sesiune și Jurnale Server:</strong>
+            <span className="text-[var(--color-text-muted)]">Adresă IP (în jurnalele standard de securitate server), identificatori de sesiune locală stocați în browser (localStorage) pentru recunoașterea istoricului solicitărilor pe dispozitiv.</span>
           </div>
         </div>
       </section>
 
-      {/* 3. Scopuri & Temeiuri */}
+      {/* 3. Categorii Necolectate */}
+      <section id="necolectate" className="space-y-4">
+        <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
+          3. Categorii de Date Necolectate pe Acest Website
+        </h2>
+        <div className="p-5 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-2 text-xs">
+          <strong className="text-amber-500 font-mono uppercase block">
+            TRANSPARENȚĂ PRIVIND MINIMIZAREA DATELOR (PRIVACY BY DESIGN):
+          </strong>
+          <p className="font-sans text-[var(--color-text-secondary)] leading-relaxed">
+            Platforma web AIR <strong>nu colectează și nu prelucrează</strong>: date biometrice, date privind sănătatea, date despre convingeri religioase sau politice, localizare geografică precisă prin GPS continuu, profile de marketing comportamental sau date ale instrumentelor de plată (carduri bancare).
+          </p>
+          <p className="font-sans text-[var(--color-text-muted)] leading-relaxed">
+            În măsura în care un zbor este confirmat contractual, documentele de călătorie ale pasagerilor (pașapoarte / acte de identitate pentru manifestul de zbor) sunt colectate exclusiv conform cerințelor legale aeronautice și transmise direct operatorului aerian titular de AOC.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. Scopuri & Temeiuri */}
       <section id="scopuri" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          3. Scopurile și Temeiurile Juridice ale Prelucrării
+          4. Scopurile și Temeiurile Juridice ale Prelucrării
         </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border border-[var(--color-border)] rounded-xl overflow-hidden font-mono">
@@ -83,19 +100,19 @@ export default function PrivacyPage() {
             </thead>
             <tbody className="divide-y divide-[var(--color-border)] text-[var(--color-text-secondary)] font-sans">
               <tr>
-                <td className="p-3">Configurarea cererii de zbor și obținerea cotațiilor de la operatori</td>
+                <td className="p-3">Configurarea cererii de zbor și interogarea operatorilor aerieni pentru cotații</td>
                 <td className="p-3 font-mono text-xs">Art. 6(1)(b) — Demersuri la cererea persoanei vizate înainte de încheierea unui contract</td>
               </tr>
               <tr>
-                <td className="p-3">Gestionarea contului de utilizator și a istoricului misiunilor</td>
-                <td className="p-3 font-mono text-xs">Art. 6(1)(b) — Executarea contractului / Termenilor de utilizare</td>
+                <td className="p-3">Gestionarea contului de utilizator și afișarea istoricului misiunilor</td>
+                <td className="p-3 font-mono text-xs">Art. 6(1)(b) — Executarea Termenilor și Condițiilor de utilizare</td>
               </tr>
               <tr>
                 <td className="p-3">Securitatea platformei, prevenirea fraudelor și auditul operațional</td>
-                <td className="p-3 font-mono text-xs">Art. 6(1)(f) — Interesul legitim al operatorului de a proteja integritatea platformei</td>
+                <td className="p-3 font-mono text-xs">Art. 6(1)(f) — Interesul legitim de a asigura securitatea cibernetică a sistemului</td>
               </tr>
               <tr>
-                <td className="p-3">Îndeplinirea obligațiilor legale (fiscale, aeronautice, evidență contabilă)</td>
+                <td className="p-3">Îndeplinirea obligațiilor legale aplicabile</td>
                 <td className="p-3 font-mono text-xs">Art. 6(1)(c) — Îndeplinirea unei obligații legale</td>
               </tr>
             </tbody>
@@ -103,27 +120,16 @@ export default function PrivacyPage() {
         </div>
       </section>
 
-      {/* 4. Date Speciale */}
-      <section id="date-speciale" className="space-y-4">
-        <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          4. Date din Categorii Speciale (Medicale / Asistență Specială)
-        </h2>
-        <p>
-          AIR nu solicită în mod activ date privind sănătatea. În cazul în care un pasager transmite voluntar cerințe de asistență specială (de ex. acces fotoliu rulant pe rampă, echipament medical la bord sau restricții alimentare severe), aceste date sunt prelucrate exclusiv în temeiul <strong>consimțământului explicit (Art. 9(2)(a) GDPR)</strong> și sunt transmise exclusiv operatorului aerian și echipei de handling FBO pentru acomodarea operațională necesară zborului.
-        </p>
-      </section>
-
       {/* 5. Destinatari */}
       <section id="destinatari" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
           5. Destinatarii Datelor cu Caracter Personal
         </h2>
-        <p>Datele cu caracter personal pot fi transmise următoarelor categorii de destinatari:</p>
+        <p>Datele transmise voluntar pot fi partajate strict conform necesității operaționale cu:</p>
         <ul className="list-disc pl-5 space-y-2 text-xs sm:text-sm">
-          <li><strong>Operatori Aerieni deținători de AOC:</strong> strict pentru emiterea cotației și întocmirea manifestului de zbor;</li>
-          <li><strong>Operatori de Bază Fixă (FBO) și Agenți de Handling Aeroportuar:</strong> pentru primirea pasagerilor la terminalul privat și acces pe platforma aeroportuară;</li>
-          <li><strong>Furnizori de Servicii Tehnice și Cloud:</strong> furnizori de găzduire securizată din UE pentru infrastructura bazei de date;</li>
-          <li><strong>Autorități Publice și de Frontieră:</strong> poliția de frontieră, autoritățile vamale și AACR, atunci când există o obligație legală expresă.</li>
+          <li><strong>Operatori Aerieni independenți deținători de AOC:</strong> strict pentru emiterea cotațiilor de preț solicitate;</li>
+          <li><strong>Furnizori de Servicii Tehnice de Găzduire (Cloud):</strong> furnizori de infrastructură securizată localizați în Uniunea Europeană;</li>
+          <li><strong>Autorități Publice:</strong> exclusiv în cazurile în care există o obligație legală expresă prevăzută de lege.</li>
         </ul>
       </section>
 
@@ -133,7 +139,7 @@ export default function PrivacyPage() {
           6. Transferuri Internaționale de Date
         </h2>
         <p>
-          Pentru zborurile cu destinație sau escală în afara Spațiului Economic European (SEE), datele necesare manifestului de zbor sunt transmise autorităților aeronautice și de imigrare din țara de destinație, în conformitate cu <strong>Art. 49(1)(b) GDPR</strong> (transfer necesar pentru executarea contractului de transport aerian în interesul pasagerului).
+          Pentru zborurile cu destinație sau escală în afara Spațiului Economic European (SEE), datele necesare operării zborului sunt transmise operatorului aerian și autorităților relevante din țara de destinație, în conformitate cu <strong>Art. 49(1)(b) GDPR</strong> (transfer necesar pentru executarea contractului încheiat în interesul pasagerului).
         </p>
       </section>
 
@@ -143,7 +149,7 @@ export default function PrivacyPage() {
           7. Perioada de Păstrare a Datelor
         </h2>
         <p>
-          Datele asociate solicitărilor de cotație nefinalizate cu o rezervare fermă sunt șterse sau anonimizate în termen de <strong>24 de luni</strong> de la data solicitării. Datele aferente zborurilor confirmate și facturate sunt păstrate pe durata impusă de legislația fiscală și aeronautică aplicabilă din România (termen standard de 5 până la 10 ani pentru documente justificative contabile).
+          Datele asociate solicitărilor de cotație nefinalizate printr-un contract sunt păstrate pentru o perioadă de maximum <strong>24 de luni</strong> de la data transmiterii solicitării sau până la solicitarea de ștergere de către utilizator. Datele aferente zborurilor contractate sunt păstrate pe durata impusă de legislația fiscală și aeronautică aplicabilă.
         </p>
       </section>
 
@@ -188,20 +194,20 @@ export default function PrivacyPage() {
           10. Măsuri Tehnice și Organizatorice de Securitate
         </h2>
         <p>
-          Toate transmisiile de date sunt criptate utilizând protocoale TLS 1.3 moderne. Accesul la datele clienților este strict restricționat pe baza principiului rolului minim necesar (RBAC) și protejat prin mecanisme Row Level Security (RLS) la nivel de bază de date.
+          Toate transmisiile de date sunt criptate utilizând protocoale TLS moderne. Accesul la bazele de date este restricționat pe baza rolurilor (RBAC) și protejat prin mecanisme Row Level Security (RLS).
         </p>
       </section>
 
       {/* 11. Contact GDPR */}
       <section id="contact-gdpr" className="space-y-4">
         <h2 className="text-2xl font-light text-[var(--color-text-primary)] border-b border-[var(--color-border)] pb-3">
-          11. Contact Protecția Datelor & Dreptul de a Depune Plângere
+          11. Contact Protecția Datelor & Autoritatea de Supraveghere
         </h2>
         <p>
-          Pentru orice solicitare privind datele dumneavoastră, ne puteți contacta direct la: <a href={`mailto:${LEGAL_CONFIG.entity.privacyEmail}`} className="text-amber-500 underline font-mono">{LEGAL_CONFIG.entity.privacyEmail}</a>.
+          Pentru orice solicitare privind datele dumneavoastră, puteți utiliza formularul dedicat sau canalul: <span className="text-amber-500 font-mono">{LEGAL_CONFIG.entity.privacyEmail}</span>.
         </p>
         <p className="text-xs text-[var(--color-text-muted)]">
-          De asemenea, aveți dreptul de a depune o plângere la autoritatea națională de supraveghere:
+          De asemenea, aveți dreptul de a depune o plângere la autoritatea de supraveghere competentă în materie de date:
           <br />
           <strong>{LEGAL_CONFIG.regulatory.supervisoryAuthorityGdpr.name}</strong>
           <br />
@@ -220,3 +226,4 @@ export default function PrivacyPage() {
     </LegalDocumentLayout>
   );
 }
+

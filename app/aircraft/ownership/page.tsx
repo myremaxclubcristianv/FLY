@@ -27,7 +27,7 @@ export default function AircraftOwnershipPage() {
       title: "BLOCK-HOUR / LEASING",
       hours: "50 - 150 HOURS / YEAR",
       commitment: "PREDICTABLE MONTHLY LEASE",
-      summary: "Guaranteed aircraft access and fixed monthly economics without balance sheet capital lockup.",
+      summary: "Contracted aircraft access and predictable monthly economics without balance sheet capital lockup.",
       bestFor: "Growing enterprises needing regular multi-city European shuttle availability.",
       link: "/aviation/finance",
       cta: "EXPLORE LEASING →",

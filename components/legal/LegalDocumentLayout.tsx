@@ -121,10 +121,13 @@ export function LegalDocumentLayout({
               {/* Lawyer Advisory Disclaimer */}
               <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 text-xs text-[var(--color-text-muted)] space-y-2 mt-16 font-mono">
                 <div className="font-bold text-amber-500 uppercase text-[11px]">
-                  DECLINARE ASISTENȚĂ JURIDICĂ (LEGAL ADVICE DISCLAIMER)
+                  DECLINARE ASISTENȚĂ JURIDICĂ // LEGAL ADVICE DISCLAIMER
                 </div>
                 <p className="font-sans text-xs leading-relaxed">
-                  Informațiile cuprinse în prezentul document sunt furnizate în scop de transparență informațională și contractuală. Acest conținut nu constituie consultanță juridică personalizată. Înainte de lansarea comercială sau contractarea de operațiuni speciale, documentele sunt supuse reviziei finale de către avocați autorizați Baroul București / Uniunea Națională a Barourilor din România (UNBR).
+                  {LEGAL_CONFIG.disclaimers.generalLegalAdviceRo}
+                </p>
+                <p className="font-mono text-[11px] text-[var(--color-text-muted)] pt-1">
+                  {LEGAL_CONFIG.disclaimers.generalLegalAdvice}
                 </p>
               </div>
 
