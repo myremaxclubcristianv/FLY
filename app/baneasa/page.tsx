@@ -59,58 +59,58 @@ export default async function BaneasaPage() {
 
             {/* Technical Infrastructure Specs */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Card variant="surface" className="p-4 flex flex-col gap-1">
-                <span className="text-[10px] font-data text-[var(--color-text-muted)]">ICAO / IATA CODES</span>
-                <span className="text-2xl font-light text-[var(--color-text-primary)] font-data">LRBS / BBU</span>
+              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
+                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">ICAO / IATA CODES</span>
+                <span className="text-2xl font-light text-white font-data">LRBS / BBU</span>
               </Card>
 
-              <Card variant="surface" className="p-4 flex flex-col gap-1">
-                <span className="text-[10px] font-data text-[var(--color-text-muted)]">RUNWAY 07/25 SPECS</span>
-                <span className="text-xl font-light text-[var(--color-text-primary)] font-data">2,358m x 45m</span>
+              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
+                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">RUNWAY 07/25 SPECS</span>
+                <span className="text-xl font-light text-white font-data">2,358m × 45m</span>
               </Card>
 
-              <Card variant="surface" className="p-4 flex flex-col gap-1">
-                <span className="text-[10px] font-data text-[var(--color-text-muted)]">SURFACE & PCN</span>
-                <span className="text-xs font-light text-[var(--color-text-primary)] font-data">Asphalt (PCN 51/F/C/W/T)</span>
+              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
+                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">SURFACE & PCN</span>
+                <span className="text-xs font-light text-white font-data">Asphalt (PCN 51/F/C/W/T)</span>
               </Card>
 
-              <Card variant="surface" className="p-4 flex flex-col gap-1">
-                <span className="text-[10px] font-data text-[var(--color-text-muted)]">AIRPORT AUTHORITY</span>
-                <span className="text-xs font-light text-[var(--color-text-primary)] font-data">CNAB (State Airport Co.)</span>
+              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
+                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">AIRPORT AUTHORITY</span>
+                <span className="text-xs font-light text-white font-data">CNAB (State Airport Co.)</span>
               </Card>
             </div>
 
             {/* Operational Capabilities Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card variant="surface" className="p-6 flex flex-col gap-4">
-                <h2 className="text-sm font-data text-[var(--color-text-primary)] uppercase tracking-wider border-b border-[var(--color-border-subtle)] pb-3">
+              <Card variant="surface" className="p-8 flex flex-col gap-5 rounded-2xl">
+                <h2 className="text-sm font-data text-amber-400 uppercase tracking-wider border-b border-white/10 pb-3 font-semibold">
                   EXECUTIVE & BUSINESS AVIATION ADVANTAGES
                 </h2>
-                <ul className="flex flex-col gap-2.5 text-xs text-[var(--color-text-secondary)] font-sans">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-accent)] font-data">•</span>
-                    <span><strong>Zero Commercial Airline Congestion:</strong> Exclusively handles executive jets, twin-engine helicopters, and general aviation.</span>
+                <ul className="flex flex-col gap-3 text-xs text-[var(--color-text-secondary)] font-sans">
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
+                    <span><strong className="text-white">Zero Commercial Airline Congestion:</strong> Exclusively handles executive jets, twin-engine helicopters, and general aviation.</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-accent)] font-data">•</span>
-                    <span><strong>10-Minute CBD Access:</strong> Located just 7 km from Bucharest central business district and northern commercial towers.</span>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
+                    <span><strong className="text-white">10-Minute CBD Access:</strong> Located just 7 km from Bucharest central business district and northern commercial towers.</span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[var(--color-accent)] font-data">•</span>
-                    <span><strong>Fast-Track Handling:</strong> Passengers arrive 15-20 minutes before departure directly to the private FBO lounge.</span>
+                  <li className="flex items-start gap-2.5">
+                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
+                    <span><strong className="text-white">Fast-Track Handling:</strong> Passengers arrive 15-20 minutes before departure directly to the private FBO lounge.</span>
                   </li>
                 </ul>
               </Card>
 
-              <Card variant="surface" className="p-6 flex flex-col gap-4">
-                <h2 className="text-sm font-data text-[var(--color-text-primary)] uppercase tracking-wider border-b border-[var(--color-border-subtle)] pb-3">
+              <Card variant="surface" className="p-8 flex flex-col gap-5 rounded-2xl">
+                <h2 className="text-sm font-data text-amber-400 uppercase tracking-wider border-b border-white/10 pb-3 font-semibold">
                   AUTHORIZED GROUND HANDLERS AT BĂNEASA
                 </h2>
-                <div className="flex flex-col gap-2.5 text-xs text-[var(--color-text-secondary)] font-sans">
+                <div className="flex flex-col gap-3 text-xs text-[var(--color-text-secondary)] font-sans">
                   {baneasa.handlingProviders?.map((handler, i) => (
-                    <div key={i} className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-1.5">
-                      <span>{handler}</span>
-                      <span className="text-[10px] font-data text-[var(--color-accent)]">VERIFIED HANDLER</span>
+                    <div key={i} className="flex items-center justify-between border-b border-white/5 pb-2">
+                      <span className="text-white font-medium">{handler}</span>
+                      <span className="text-[10px] font-data text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">VERIFIED HANDLER</span>
                     </div>
                   ))}
                 </div>
@@ -119,21 +119,21 @@ export default async function BaneasaPage() {
 
             {/* Related Routes from Băneasa */}
             {baneasaRoutes.length > 0 && (
-              <div className="flex flex-col gap-6 pt-6 border-t border-[var(--color-border)]">
-                <h2 className="text-xs font-data text-[var(--color-accent)] uppercase tracking-widest">
+              <div className="flex flex-col gap-6 pt-6 border-t border-white/10">
+                <h2 className="text-xs font-data text-amber-400 uppercase tracking-widest font-semibold">
                   DEPARTING CHARTER ROUTES FROM BĂNEASA (LRBS)
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {baneasaRoutes.map((rt) => (
-                    <Card key={rt.id} variant="surface" className="p-6 flex flex-col justify-between gap-4">
+                    <Card key={rt.id} variant="surface" className="p-6 flex flex-col justify-between gap-4 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
                       <div className="flex flex-col gap-2">
-                        <span className="text-[10px] font-data text-[var(--color-accent)]">{rt.distanceNm} NM • {rt.routeType.replace(/_/g, " ")}</span>
+                        <span className="text-[10px] font-data text-amber-400">{rt.distanceNm} NM • {rt.routeType.replace(/_/g, " ")}</span>
                         <h3 className="text-lg font-light text-[var(--color-text-primary)]">{rt.title}</h3>
-                        <p className="text-xs text-[var(--color-text-secondary)]">Light Jet: {rt.calculatedDuration.lightJet}</p>
+                        <p className="text-xs text-[var(--color-text-secondary)] font-data">Light Jet: {rt.calculatedDuration.lightJet}</p>
                       </div>
 
-                      <Link href={`/routes/${rt.slug}`} className="text-xs font-data text-[var(--color-accent)] hover:underline">
+                      <Link href={`/routes/${rt.slug}`} className="text-xs font-data text-amber-400 hover:underline">
                         VIEW ROUTE PROFILE →
                       </Link>
                     </Card>
@@ -143,12 +143,12 @@ export default async function BaneasaPage() {
             )}
 
             {/* Action Trigger */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-8 bg-[var(--color-surface)] border border-[var(--color-border)]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
               <div>
                 <h4 className="text-xl font-light text-[var(--color-text-primary)]">
                   PLAN A DEPARTURE FROM BĂNEASA (LRBS / BBU)
                 </h4>
-                <p className="text-xs text-[var(--color-text-secondary)]">
+                <p className="text-xs text-[var(--color-text-secondary)] font-data mt-1">
                   Calculate flight time, aircraft availability, and ground handling for your Băneasa departure.
                 </p>
               </div>

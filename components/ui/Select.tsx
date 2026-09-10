@@ -22,7 +22,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="text-[11px] font-data text-[var(--color-text-secondary)] tracking-wider"
+            className="text-[10px] font-mono text-neutral-400 tracking-wider uppercase"
           >
             {label}
           </label>
@@ -33,7 +33,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             id={selectId}
             aria-invalid={!!error}
             className={cn(
-              "w-full bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] px-4 py-3 text-sm appearance-none transition-colors duration-150 focus:border-[var(--color-accent)] focus:outline-none cursor-pointer pr-10",
+              "w-full bg-neutral-950/70 text-white border border-white/[0.12] rounded-lg px-4 py-3 text-sm font-sans appearance-none backdrop-blur-md transition-all duration-200 focus:border-amber-400/90 focus:bg-neutral-900/80 focus:shadow-[0_0_15px_rgba(245,158,11,0.15)] focus:outline-none cursor-pointer pr-10",
               error && "border-red-500/80",
               className
             )}
@@ -43,13 +43,13 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               <option
                 key={opt.value}
                 value={opt.value}
-                className="bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
+                className="bg-neutral-900 text-white"
               >
                 {opt.label}
               </option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[var(--color-text-muted)]">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-amber-400/80">
             <svg
               className="h-4 w-4"
               fill="none"
@@ -73,3 +73,4 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 );
 
 Select.displayName = "Select";
+

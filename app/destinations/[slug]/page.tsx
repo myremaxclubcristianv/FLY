@@ -5,6 +5,7 @@ import { Container } from "../../../components/layout/Container";
 import { ProvenanceBadge } from "../../../components/shared/ProvenanceBadge";
 import { AviationImage } from "../../../components/AviationImage";
 import { Button } from "../../../components/ui/Button";
+import { Card } from "../../../components/ui/Card";
 import { LUXURY_DESTINATIONS } from "../../../data/real/destinations";
 import { AirportCode } from "../../../components/ui/aerospace/AirportCode";
 import { CoordinateLabel } from "../../../components/ui/aerospace/CoordinateLabel";
@@ -93,8 +94,8 @@ export default async function DestinationDetailPage({
           </div>
 
           {/* 02 AVIATION VIEW — Aircraft, Runway, or FBO View */}
-          <div className="grid md:grid-cols-2 gap-8 items-center bg-neutral-900/40 border border-neutral-800 rounded-3xl p-8 backdrop-blur-xl">
-            <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800">
+          <div className="grid md:grid-cols-2 gap-8 items-center glass-surface rounded-3xl p-8 border border-white/10">
+            <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden bg-neutral-900 border border-white/10">
               <AviationImage
                 src={dest.aviationImage}
                 alt={`${dest.name} Airfield Approach`}
@@ -103,32 +104,32 @@ export default async function DestinationDetailPage({
                 fallbackTitle={`${dest.name} Airport`}
                 fallbackCode={`AVIONICS // ${dest.airportCode}`}
               />
-              <div className="absolute top-4 left-4 z-10 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-3 py-1 rounded text-xs font-mono text-amber-400 font-bold">
+              <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-data text-amber-400 font-semibold">
                 AIRFIELD APPROACH & FBO SPECS
               </div>
             </div>
 
             <div className="space-y-6">
               <div className="space-y-2">
-                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20">
+                <span className="text-xs font-data text-amber-400 font-semibold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20">
                   02 // AVIATION VIEW & RUNWAY DATA
                 </span>
                 <h2 className="text-3xl font-light text-white font-sans">Airfield & Runway Intelligence</h2>
               </div>
 
-              <p className="text-xs sm:text-sm text-neutral-300 font-mono leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 font-data leading-relaxed">
                 {dest.description}
               </p>
 
               <RunwayMarker designation="07 / 25" dimensions="2,358 × 45 M" surface="ASPHALT" />
 
-              <div className="pt-4 border-t border-neutral-800/80 font-mono text-xs space-y-2">
+              <div className="pt-4 border-t border-white/10 font-data text-xs space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">Destination Airport:</span>
+                  <span className="text-[var(--color-text-muted)]">Destination Airport:</span>
                   <span className="text-white font-bold">{dest.airportName}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-neutral-500">ICAO / IATA Identifier:</span>
+                  <span className="text-[var(--color-text-muted)]">ICAO / IATA Identifier:</span>
                   <span className="text-amber-400 font-bold">{dest.airportCode}</span>
                 </div>
               </div>
@@ -138,7 +139,7 @@ export default async function DestinationDetailPage({
           {/* 03 EXPERIENCE & 04 ARRIVAL VIEWS — Dual Editorial Panel */}
           <div className="grid md:grid-cols-2 gap-8">
             {/* Experience Panel */}
-            <div className="bg-neutral-900/40 border border-neutral-800 rounded-3xl overflow-hidden flex flex-col justify-between">
+            <Card variant="surface" className="rounded-3xl overflow-hidden flex flex-col justify-between p-0">
               <div className="relative h-72 w-full overflow-hidden bg-neutral-900">
                 <AviationImage
                   src={dest.experienceImage}
@@ -148,21 +149,21 @@ export default async function DestinationDetailPage({
                   fallbackTitle={`${dest.name} Experience`}
                   fallbackCode="03 // EXPERIENCE VIEW"
                 />
-                <div className="absolute top-4 left-4 z-10 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-3 py-1 rounded text-xs font-mono text-amber-400 font-bold">
+                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-data text-amber-400 font-semibold">
                   03 // LUXURY DESTINATION SANCTUARY
                 </div>
               </div>
 
-              <div className="p-6 space-y-3 font-mono text-xs">
+              <div className="p-6 space-y-3 font-data text-xs">
                 <h3 className="text-xl font-light text-white font-sans">{dest.tagline}</h3>
-                <p className="text-neutral-400 leading-relaxed">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed font-sans">
                   AIR provides bespoke on-demand flight routing tailored for executive passengers, families, and private flight departments.
                 </p>
               </div>
-            </div>
+            </Card>
 
             {/* Arrival Panel */}
-            <div className="bg-neutral-900/40 border border-neutral-800 rounded-3xl overflow-hidden flex flex-col justify-between">
+            <Card variant="surface" className="rounded-3xl overflow-hidden flex flex-col justify-between p-0">
               <div className="relative h-72 w-full overflow-hidden bg-neutral-900">
                 <AviationImage
                   src={dest.arrivalImage}
@@ -172,33 +173,33 @@ export default async function DestinationDetailPage({
                   fallbackTitle={`${dest.name} Intermodal Transfer`}
                   fallbackCode="04 // ARRIVAL VIEW"
                 />
-                <div className="absolute top-4 left-4 z-10 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-3 py-1 rounded text-xs font-mono text-amber-400 font-bold">
+                <div className="absolute top-4 left-4 z-10 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-xs font-data text-amber-400 font-semibold">
                   04 // THE LAST 50 MILES TRANSFER
                 </div>
               </div>
 
-              <div className="p-6 space-y-3 font-mono text-xs">
+              <div className="p-6 space-y-3 font-data text-xs">
                 <h3 className="text-xl font-light text-white font-sans">Intermodal Arrival Protocol</h3>
-                <p className="text-neutral-400 leading-relaxed">
+                <p className="text-[var(--color-text-secondary)] leading-relaxed font-sans">
                   Transfer protocol: <span className="text-amber-300 font-bold">{dest.transferType}</span>. Seamless transition from jet ramp to luxury touchdown.
                 </p>
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Mission Planner CTA Box */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-10 bg-neutral-900/60 border border-neutral-800 rounded-3xl backdrop-blur-xl">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-10 glass-elevated rounded-3xl">
             <div className="space-y-2">
               <h3 className="text-2xl sm:text-3xl font-light text-white font-sans">
                 REQUEST MISSION TO {dest.name.toUpperCase()}
               </h3>
-              <p className="text-xs sm:text-sm text-neutral-400 font-mono">
+              <p className="text-xs sm:text-sm text-neutral-400 font-data">
                 Calculate vehicle options, jet categories, and request a verified quote from AIR Decision Engine.
               </p>
             </div>
 
             <Link href={`/plan?to=${encodeURIComponent(dest.name)}`}>
-              <Button variant="primary" size="lg" className="font-mono text-xs bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold whitespace-nowrap">
+              <Button variant="primary" size="lg" className="font-data text-xs whitespace-nowrap">
                 RUN MISSION IN PLANNER →
               </Button>
             </Link>

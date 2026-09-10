@@ -11,24 +11,25 @@ import { PRIMARY_CTA } from "../../constants/navigation";
 
 export function Hero() {
   return (
-    <section className="relative w-full min-h-[90vh] bg-neutral-950 pt-8 pb-20 border-b border-neutral-800 overflow-hidden flex flex-col justify-center">
-      {/* Background Visual Aviation Panel */}
+    <section className="relative w-full min-h-[92vh] bg-neutral-950 pt-6 pb-20 border-b border-white/[0.08] overflow-hidden flex flex-col justify-center aerospace-grid-bg">
+      {/* Atmospheric Background Layer with Cinematic Depth */}
       <div className="absolute inset-0 z-0">
         <AviationImage
           src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
           alt="Executive Jet Airborne Above Clouds"
           fill
           priority
-          className="object-cover opacity-35 filter brightness-90 contrast-110"
+          className="object-cover opacity-40 filter brightness-90 contrast-110"
           fallbackTitle="AIR Fleet Airborne"
           fallbackCode="HERO // AIRBORNE"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/30" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/80 pointer-events-none" />
       </div>
 
       {/* Aerospace Telemetry Top Ribbon */}
-      <div className="relative z-10 w-full border-b border-white/10 bg-black/40 backdrop-blur-md py-2.5 mb-8">
+      <div className="relative z-10 w-full border-b border-white/[0.08] bg-black/40 backdrop-blur-xl py-2.5 mb-8">
         <Container size="wide">
           <div className="flex flex-wrap items-center justify-between gap-4 text-[10px] font-mono text-neutral-400">
             <div className="flex items-center gap-4">
@@ -37,13 +38,13 @@ export function Hero() {
                 BUCHAREST / LRBS
               </span>
               <span className="hidden sm:inline text-neutral-600">|</span>
-              <span className="hidden sm:inline">POSITION: 47°27&apos;N 26°06&apos;E</span>
+              <span className="hidden sm:inline">POSITION: 44°30&apos;N 26°06&apos;E</span>
               <span className="hidden md:inline text-neutral-600">|</span>
               <span className="hidden md:inline text-neutral-300">DISPATCH: ACTIVE</span>
             </div>
 
             <div className="flex items-center gap-4">
-              <span className="text-amber-300/80">ILLUSTRATIVE TELEMETRY: ALT 41,000 FT • CRZ 460 KT</span>
+              <span className="text-amber-300/90 font-mono">CRZ 460 KT • FL410 • POINT-TO-POINT</span>
               <DataStatusBadge status="VERIFIED" showDot={false} />
             </div>
           </div>
@@ -52,12 +53,12 @@ export function Hero() {
 
       <Container size="wide" className="relative z-10">
         <div className="flex flex-col gap-10 max-w-5xl mx-auto">
-          {/* Top Tag & Status */}
+          {/* Top Tag & Badges */}
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3 py-1 bg-amber-500/10 rounded-sm">
+            <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3 py-1 bg-amber-500/10 rounded backdrop-blur-md">
               THE DIGITAL WORLD OF AVIATION
             </span>
-            <span className="text-xs font-mono text-neutral-400 border border-neutral-800 px-3 py-1 bg-neutral-900/60 rounded-sm">
+            <span className="text-xs font-mono text-neutral-300 border border-white/[0.1] px-3 py-1 bg-white/[0.04] rounded backdrop-blur-md">
               EASA & ICAO PROVENANCE
             </span>
           </div>
@@ -73,23 +74,23 @@ export function Hero() {
             </p>
           </div>
 
-          {/* Secondary Statement & Action Buttons */}
+          {/* Action Triggers */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
-            <Link href={PRIMARY_CTA.href}>
-              <Button size="lg" variant="primary" className="bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold font-mono">
+            <Button size="lg" variant="primary" asChild>
+              <Link href={PRIMARY_CTA.href}>
                 {PRIMARY_CTA.label} →
-              </Button>
-            </Link>
-            <Link href="/destinations">
-              <Button size="lg" variant="outline" className="border-neutral-700 hover:border-amber-400 font-mono text-xs">
+              </Link>
+            </Button>
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="/destinations">
                 EXPLORE DESTINATIONS ↗
-              </Button>
-            </Link>
-            <Link href="/aircraft">
-              <Button size="lg" variant="outline" className="border-neutral-800 hover:border-neutral-600 font-mono text-xs text-neutral-400">
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/aircraft">
                 AIRCRAFT FLEET SPECS
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           {/* Hero Flight Search Component Integration */}
@@ -103,3 +104,4 @@ export function Hero() {
 }
 
 export default Hero;
+

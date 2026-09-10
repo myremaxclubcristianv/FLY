@@ -70,7 +70,7 @@ export default async function AircraftPage() {
 
           {/* Categories Summary */}
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-light text-[var(--color-text-primary)]">
                 AIRCRAFT CATEGORIES
               </h2>
@@ -81,10 +81,10 @@ export default async function AircraftPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {categories.map((cat) => (
-                <Card key={cat.name} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-500/50 transition">
-                  <div className="relative h-44 w-full bg-neutral-900 overflow-hidden">
+                <Card key={cat.name} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-400/50 transition-all duration-300 rounded-2xl">
+                  <div className="relative h-48 w-full bg-neutral-900 overflow-hidden">
                     <AviationImage src={cat.img} alt={cat.name} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={cat.name} fallbackCode={`CAT // ${cat.name}`} />
-                    <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
+                    <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                       {cat.name}
                     </div>
                   </div>
@@ -94,17 +94,17 @@ export default async function AircraftPage() {
                       {cat.desc}
                     </p>
 
-                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-[var(--color-border-subtle)] text-[10px] font-data text-[var(--color-text-muted)]">
+                    <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/10 text-[10px] font-data text-[var(--color-text-muted)]">
                       <div>
-                        <span className="block text-[8px] uppercase">RANGE</span>
+                        <span className="block text-[8px] uppercase tracking-wider">RANGE</span>
                         <span className="text-[var(--color-text-primary)] font-medium">{cat.range}</span>
                       </div>
                       <div>
-                        <span className="block text-[8px] uppercase">SEATS</span>
+                        <span className="block text-[8px] uppercase tracking-wider">SEATS</span>
                         <span className="text-[var(--color-text-primary)] font-medium">{cat.seats}</span>
                       </div>
                       <div>
-                        <span className="block text-[8px] uppercase">SPEED</span>
+                        <span className="block text-[8px] uppercase tracking-wider">SPEED</span>
                         <span className="text-[var(--color-text-primary)] font-medium">{cat.speed}</span>
                       </div>
                     </div>
@@ -115,12 +115,12 @@ export default async function AircraftPage() {
           </div>
 
           {/* All Verified Aircraft Models List */}
-          <div className="flex flex-col gap-8 pt-8 border-t border-[var(--color-border)]">
-            <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-4">
+          <div className="flex flex-col gap-8 pt-8 border-t border-white/10">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-light text-[var(--color-text-primary)]">
                 VERIFIED FLEET MODELS ({allAircraft.length})
               </h2>
-              <span className="text-xs font-data text-[var(--color-accent)]">
+              <span className="text-xs font-data text-amber-400">
                 MANUFACTURER VERIFIED DATASETS
               </span>
             </div>
@@ -129,10 +129,10 @@ export default async function AircraftPage() {
               {allAircraft.map((ac) => {
                 const img = MODEL_IMAGES[ac.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
                 return (
-                  <Card key={ac.id} variant="default" className="flex flex-col justify-between overflow-hidden group hover:border-amber-500/50 transition">
-                    <div className="relative h-48 w-full bg-neutral-900 overflow-hidden">
+                  <Card key={ac.id} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-400/50 transition-all duration-300 rounded-2xl">
+                    <div className="relative h-52 w-full bg-neutral-900 overflow-hidden">
                       <AviationImage src={img} alt={`${ac.manufacturer} ${ac.model}`} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={`${ac.manufacturer} ${ac.model}`} fallbackCode={`FLEET // ${ac.model}`} />
-                      <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
+                      <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                         {ac.category.replace(/_/g, " ")}
                       </div>
                     </div>
@@ -148,18 +148,18 @@ export default async function AircraftPage() {
                         </p>
                       </div>
 
-                      <div className="flex flex-col gap-4 pt-4 border-t border-[var(--color-border-subtle)] font-data text-xs">
+                      <div className="flex flex-col gap-4 pt-4 border-t border-white/10 font-data text-xs">
                         <div className="grid grid-cols-3 gap-2 text-[10px] text-[var(--color-text-muted)]">
                           <div>
-                            <span className="block uppercase text-[8px]">PASSENGERS</span>
+                            <span className="block uppercase text-[8px] tracking-wider">PASSENGERS</span>
                             <span className="text-[var(--color-text-primary)] font-medium">{ac.passengerCapacity} SEATS</span>
                           </div>
                           <div>
-                            <span className="block uppercase text-[8px]">MAX RANGE</span>
+                            <span className="block uppercase text-[8px] tracking-wider">MAX RANGE</span>
                             <span className="text-[var(--color-text-primary)] font-medium">{ac.approximateRange} NM</span>
                           </div>
                           <div>
-                            <span className="block uppercase text-[8px]">CRUISE</span>
+                            <span className="block uppercase text-[8px] tracking-wider">CRUISE</span>
                             <span className="text-[var(--color-text-primary)] font-medium">{ac.typicalCruiseSpeed} KTS</span>
                           </div>
                         </div>

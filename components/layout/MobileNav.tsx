@@ -29,24 +29,21 @@ export function MobileNav() {
   return (
     <>
       {/* Mobile Top Header Toggle (Visible only on mobile) */}
-      <div className="flex items-center gap-3 lg:hidden">
-        <Link
-          href={PRIMARY_CTA.href}
-          className="hidden sm:inline-flex"
-        >
-          <Button size="sm" variant="primary">
+      <div className="flex items-center gap-2 lg:hidden">
+        <Button size="sm" variant="primary" asChild className="hidden sm:inline-flex">
+          <Link href={PRIMARY_CTA.href}>
             {PRIMARY_CTA.label}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="p-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)]"
+          className="p-2.5 text-neutral-200 hover:text-amber-400 bg-white/[0.04] border border-white/[0.08] rounded-lg backdrop-blur-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors"
         >
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -70,23 +67,23 @@ export function MobileNav() {
         </button>
       </div>
 
-      {/* Slide-out Overlay Drawer */}
+      {/* Slide-out Glass Overlay Drawer */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-[var(--color-bg-primary)] border-b border-[var(--color-border)] animate-fadeIn">
+        <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-neutral-950/95 backdrop-blur-2xl animate-in fade-in duration-200">
           {/* Top Bar inside Overlay */}
-          <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--color-border)]">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.08]">
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="text-xl font-light tracking-widest text-[var(--color-text-primary)] font-data"
+              className="text-xl font-light tracking-[0.2em] text-white font-mono"
             >
-              AIR
+              AIR <span className="text-[10px] text-amber-400 border border-amber-400/40 px-1.5 py-0.5 rounded ml-2">ACCESS</span>
             </Link>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
               aria-label="Close menu"
-              className="p-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent)]"
+              className="p-2 text-neutral-300 hover:text-amber-400 rounded-lg bg-white/[0.05]"
             >
               <svg
                 className="w-6 h-6"
@@ -105,16 +102,16 @@ export function MobileNav() {
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-6" aria-label="Mobile Navigation">
+          <nav className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-4" aria-label="Mobile Navigation">
             {MAIN_NAV_ITEMS.map((item, idx) => (
               <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center justify-between py-2 text-lg font-light tracking-wider text-[var(--color-text-primary)] hover:text-[var(--color-accent)] border-b border-[var(--color-border-subtle)]"
+                className="flex items-center justify-between py-3 px-4 rounded-xl text-base font-light tracking-wider text-white hover:text-amber-400 bg-white/[0.03] border border-white/[0.06] hover:border-amber-400/30 transition-all font-sans"
               >
                 <span>{item.label}</span>
-                <span className="text-xs font-data text-[var(--color-text-muted)]">
+                <span className="text-[10px] font-mono text-amber-400/80 font-bold">
                   0{idx + 1}
                 </span>
               </Link>
@@ -122,27 +119,28 @@ export function MobileNav() {
           </nav>
 
           {/* Bottom CTA in Drawer */}
-          <div className="p-6 border-t border-[var(--color-border)] bg-[var(--color-surface)]">
-            <Link href={PRIMARY_CTA.href} onClick={() => setIsOpen(false)}>
-              <Button fullWidth variant="primary" size="lg">
-                {PRIMARY_CTA.label}
-              </Button>
-            </Link>
-            <p className="text-[10px] font-data text-center text-[var(--color-text-muted)] mt-3">
-              THE EASIEST WAY TO FLY // BUCHAREST
+          <div className="p-6 border-t border-white/[0.08] glass-elevated">
+            <Button fullWidth variant="primary" size="lg" asChild onClick={() => setIsOpen(false)}>
+              <Link href={PRIMARY_CTA.href}>
+                {PRIMARY_CTA.label} →
+              </Link>
+            </Button>
+            <p className="text-[10px] font-mono text-center text-neutral-400 mt-3 tracking-wider uppercase">
+              THE EASIEST WAY TO FLY // BUCHAREST BĂNEASA
             </p>
           </div>
         </div>
       )}
 
       {/* Persistent Sticky Mobile Bottom CTA Bar (visible on viewports < 768px) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 p-3 bg-[var(--color-bg-primary)]/90 backdrop-blur-md border-t border-[var(--color-border)] md:hidden">
-        <Link href={PRIMARY_CTA.href} className="w-full block">
-          <Button fullWidth size="md" variant="primary">
-            {PRIMARY_CTA.label}
-          </Button>
-        </Link>
+      <div className="fixed bottom-0 left-0 right-0 z-40 p-3 bg-neutral-950/85 backdrop-blur-xl border-t border-white/[0.1] md:hidden shadow-[0_-4px_25px_rgba(0,0,0,0.6)]">
+        <Button fullWidth size="md" variant="primary" asChild>
+          <Link href={PRIMARY_CTA.href}>
+            {PRIMARY_CTA.label} →
+          </Link>
+        </Button>
       </div>
     </>
   );
 }
+

@@ -57,27 +57,27 @@ export default function BusinessPage() {
 
           {/* Workflow Comparison Grid */}
           <div className="flex flex-col gap-8">
-            <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-4">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <h2 className="text-2xl font-light text-[var(--color-text-primary)]">
                 COMMERCIAL VS EXECUTIVE AVIATION WORKFLOW
               </h2>
-              <span className="text-xs font-data text-[var(--color-text-muted)]">
+              <span className="text-xs font-data text-amber-400 font-semibold">
                 EFFICIENCY COMPARISON
               </span>
             </div>
 
             <div className="grid grid-cols-1 gap-6">
               {comparison.map((c) => (
-                <div key={c.step} className="grid grid-cols-1 md:grid-cols-12 gap-6 bg-[var(--color-surface)] p-6 sm:p-8 border border-[var(--color-border)]">
+                <div key={c.step} className="grid grid-cols-1 md:grid-cols-12 gap-6 glass-surface p-6 sm:p-8 rounded-2xl">
                   <div className="md:col-span-3 flex flex-col justify-center">
-                    <span className="text-xs font-data text-[var(--color-accent)]">{c.step}</span>
+                    <span className="text-xs font-data text-amber-400 font-semibold">{c.step}</span>
                   </div>
                   <div className="md:col-span-4 flex flex-col gap-1 border-l-2 border-red-500/40 pl-4">
-                    <span className="text-[10px] font-data text-red-400 uppercase">COMMERCIAL AIRLINE</span>
+                    <span className="text-[10px] font-data text-red-400 uppercase tracking-wider">COMMERCIAL AIRLINE</span>
                     <p className="text-xs text-[var(--color-text-secondary)] font-sans">{c.commercial}</p>
                   </div>
-                  <div className="md:col-span-5 flex flex-col gap-1 border-l-2 border-[var(--color-accent)] pl-4">
-                    <span className="text-[10px] font-data text-[var(--color-accent)] uppercase">AIR EXECUTIVE ACCESS</span>
+                  <div className="md:col-span-5 flex flex-col gap-1 border-l-2 border-amber-400 pl-4">
+                    <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">AIR EXECUTIVE ACCESS</span>
                     <p className="text-xs text-[var(--color-text-primary)] font-sans font-medium">{c.executive}</p>
                   </div>
                 </div>
@@ -86,12 +86,12 @@ export default function BusinessPage() {
           </div>
 
           {/* Action Trigger */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-8 bg-[var(--color-surface)] border border-[var(--color-border)]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
             <div>
               <h3 className="text-xl font-light text-[var(--color-text-primary)]">
                 PLAN A CORPORATE MULTI-STOP MISSION
               </h3>
-              <p className="text-xs text-[var(--color-text-secondary)]">
+              <p className="text-xs text-[var(--color-text-secondary)] font-data mt-1">
                 Tell AIR your itinerary parameters to calculate the optimal flight vehicle profile.
               </p>
             </div>

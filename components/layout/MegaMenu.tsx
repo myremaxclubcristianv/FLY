@@ -147,36 +147,36 @@ export function MegaMenu() {
         >
           <Link
             href={menu.triggerHref}
-            className={`text-xs font-data tracking-widest transition-colors py-2 border-b ${
+            className={`text-xs font-mono tracking-widest transition-all py-2 border-b select-none ${
               activeTab === menu.title
-                ? "text-[var(--color-text-primary)] border-[var(--color-accent)]"
-                : "text-[var(--color-text-secondary)] border-transparent hover:text-[var(--color-text-primary)]"
+                ? "text-amber-400 border-amber-400 font-bold"
+                : "text-neutral-300 border-transparent hover:text-white"
             }`}
           >
             {menu.title}
           </Link>
 
-          {/* Mega Dropdown Panel */}
+          {/* Mega Dropdown Glass Panel */}
           {activeTab === menu.title && (
-            <div className="absolute top-full left-0 w-[540px] bg-[var(--color-bg-primary)] border border-[var(--color-border)] p-6 shadow-2xl z-50 grid grid-cols-2 gap-8 animate-in fade-in slide-in-from-top-1 duration-150 rounded-sm">
+            <div className="absolute top-full left-0 w-[560px] glass-modal p-6 z-50 grid grid-cols-2 gap-8 animate-in fade-in slide-in-from-top-2 duration-200 rounded-2xl">
               {menu.columns.map((col, idx) => (
                 <div key={idx} className="flex flex-col gap-3">
-                  <span className="text-[10px] font-data text-[var(--color-accent)] uppercase tracking-widest border-b border-[var(--color-border-subtle)] pb-2">
+                  <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest border-b border-white/[0.08] pb-2 font-bold">
                     {col.heading}
                   </span>
-                  <ul className="flex flex-col gap-2">
+                  <ul className="flex flex-col gap-1.5">
                     {col.items.map((item) => (
                       <li key={item.label}>
                         <Link
                           href={item.href}
                           onClick={() => setActiveTab(null)}
-                          className="text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] flex items-center justify-between py-1 transition-colors group"
+                          className="text-xs text-neutral-300 hover:text-white flex items-center justify-between py-1.5 px-2 rounded-lg hover:bg-white/[0.06] transition-all group"
                         >
-                          <span className="group-hover:translate-x-0.5 transition-transform duration-150">
+                          <span className="group-hover:translate-x-1 transition-transform duration-150 font-sans">
                             {item.label}
                           </span>
                           {item.badge && (
-                            <span className="text-[8px] font-data px-1.5 py-0.5 bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-accent)]">
+                            <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/30 text-amber-400 rounded">
                               {item.badge}
                             </span>
                           )}
@@ -194,17 +194,18 @@ export function MegaMenu() {
       {/* Direct Quick Links */}
       <Link
         href="/routes"
-        className="text-xs font-data tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors py-2"
+        className="text-xs font-mono tracking-widest text-neutral-300 hover:text-amber-400 transition-colors py-2"
       >
         ROUTES
       </Link>
 
       <Link
         href="/destinations"
-        className="text-xs font-data tracking-widest text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors py-2"
+        className="text-xs font-mono tracking-widest text-neutral-300 hover:text-amber-400 transition-colors py-2"
       >
         DESTINATIONS
       </Link>
     </div>
   );
 }
+

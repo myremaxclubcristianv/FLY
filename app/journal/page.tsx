@@ -38,16 +38,16 @@ export default async function JournalIndexPage() {
           {/* Articles Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {articles.map((art) => (
-              <Card key={art.id} variant="surface" className="flex flex-col justify-between p-8 gap-6 group hover:border-[var(--color-accent)] transition-colors">
+              <Card key={art.id} variant="surface" className="flex flex-col justify-between p-8 gap-6 group hover:border-amber-400/50 transition-all duration-300 rounded-2xl">
                 <div className="flex flex-col gap-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-data text-[var(--color-accent)] uppercase tracking-widest">
+                    <span className="text-[10px] font-data text-amber-400 uppercase tracking-widest font-semibold">
                       {art.category.replace(/_/g, " ")} • {art.readTimeMinutes} MIN READ
                     </span>
                     <ProvenanceBadge status={art.dataStatus} />
                   </div>
 
-                  <h2 className="text-2xl font-light text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors font-sans leading-snug">
+                  <h2 className="text-2xl font-light text-[var(--color-text-primary)] group-hover:text-amber-300 transition-colors font-sans leading-snug">
                     {art.title}
                   </h2>
 
@@ -55,14 +55,14 @@ export default async function JournalIndexPage() {
                     {art.subtitle}
                   </p>
 
-                  <p className="text-xs text-[var(--color-text-muted)] line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-[var(--color-text-muted)] line-clamp-3 leading-relaxed font-sans">
                     {art.excerpt}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border-subtle)] text-[10px] font-data text-[var(--color-text-muted)]">
+                <div className="flex items-center justify-between pt-4 border-t border-white/10 text-[10px] font-data text-[var(--color-text-muted)]">
                   <span>BY {art.author} • {art.publicationDate}</span>
-                  <Link href={`/journal/${art.slug}`} className="text-xs font-data text-[var(--color-accent)] hover:underline">
+                  <Link href={`/journal/${art.slug}`} className="text-xs font-data text-amber-400 hover:underline font-semibold">
                     READ ARTICLE →
                   </Link>
                 </div>

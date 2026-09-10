@@ -110,53 +110,53 @@ export default async function AircraftDetailPage({
           </div>
 
           {/* Key Specifications Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-mono">
-            <Card variant="surface" className="flex flex-col gap-1 p-5">
-              <span className="text-[10px] text-neutral-400 uppercase">PASSENGER CAPACITY</span>
-              <span className="text-xl text-amber-300 font-bold">{aircraft.passengerCapacity} SEATS</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-data">
+            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">PASSENGER CAPACITY</span>
+              <span className="text-2xl text-amber-400 font-bold">{aircraft.passengerCapacity} SEATS</span>
             </Card>
-            <Card variant="surface" className="flex flex-col gap-1 p-5">
-              <span className="text-[10px] text-neutral-400 uppercase">TYPICAL CRUISE SPEED</span>
-              <span className="text-xl text-amber-300 font-bold">{aircraft.typicalCruiseSpeed || "420"} KTS</span>
+            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">TYPICAL CRUISE SPEED</span>
+              <span className="text-2xl text-amber-400 font-bold">{aircraft.typicalCruiseSpeed || "420"} KTS</span>
             </Card>
-            <Card variant="surface" className="flex flex-col gap-1 p-5">
-              <span className="text-[10px] text-neutral-400 uppercase">MAXIMUM RANGE</span>
-              <span className="text-xl text-amber-300 font-bold">{aircraft.approximateRange || "1,800"} NM</span>
+            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">MAXIMUM RANGE</span>
+              <span className="text-2xl text-amber-400 font-bold">{aircraft.approximateRange || "1,800"} NM</span>
             </Card>
-            <Card variant="surface" className="flex flex-col gap-1 p-5">
-              <span className="text-[10px] text-neutral-400 uppercase">HOME OPERATIONAL BASE</span>
-              <span className="text-sm text-neutral-100 font-bold">{aircraft.homeBaseName || "Băneasa (LRBS / BBU)"}</span>
+            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">HOME OPERATIONAL BASE</span>
+              <span className="text-sm text-white font-bold">{aircraft.homeBaseName || "Băneasa (LRBS / BBU)"}</span>
             </Card>
           </div>
 
           {/* Visual Gallery Grid */}
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="relative h-64 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
+            <div className="relative h-72 rounded-2xl overflow-hidden border border-white/10 bg-neutral-900">
               <AviationImage src={photos.interior} alt="Cabin interior" fill className="object-cover" fallbackTitle="Executive Cabin" fallbackCode="CABIN // INTERIOR" />
-              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 z-10">
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                 EXECUTIVE CABIN CONFIGURATION
               </div>
             </div>
-            <div className="relative h-64 rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
+            <div className="relative h-72 rounded-2xl overflow-hidden border border-white/10 bg-neutral-900">
               <AviationImage src={photos.cockpit} alt="Cockpit avionics" fill className="object-cover" fallbackTitle="Digital Flight Deck" fallbackCode="COCKPIT // AVIONICS" />
-              <div className="absolute bottom-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 z-10">
+              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                 DIGITAL FLIGHT DECK AVIONICS
               </div>
             </div>
           </div>
 
           {/* Cabin Characteristics & Strengths */}
-          <Card variant="surface" className="flex flex-col gap-4 p-8">
-            <h3 className="text-lg font-light text-white font-mono uppercase tracking-wider text-amber-400">
+          <Card variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl">
+            <h3 className="text-lg font-light text-amber-400 font-data uppercase tracking-wider">
               Cabin Characteristics & Mission Profile
             </h3>
             <p className="text-sm text-neutral-300 leading-relaxed font-sans">
               {aircraft.cabinHighlights}
             </p>
             {aircraft.strengths && aircraft.strengths.length > 0 && (
-              <div className="space-y-2 pt-2 border-t border-neutral-800/80 text-xs font-mono">
-                <span className="text-neutral-400 block font-bold uppercase">Key Strengths:</span>
-                <ul className="list-disc list-inside text-neutral-300 space-y-1">
+              <div className="space-y-2 pt-4 border-t border-white/10 text-xs font-data">
+                <span className="text-neutral-400 block font-bold uppercase tracking-wider">Key Strengths:</span>
+                <ul className="list-disc list-inside text-neutral-300 space-y-1.5 font-sans">
                   {aircraft.strengths.map((str, i) => (
                     <li key={i}>{str}</li>
                   ))}
@@ -166,12 +166,12 @@ export default async function AircraftDetailPage({
           </Card>
 
           {/* Action CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-8 bg-neutral-900/60 border border-neutral-800 rounded-2xl backdrop-blur-xl">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
             <div>
               <h4 className="text-xl font-light text-white">
                 EVALUATE THIS VEHICLE FOR YOUR NEXT MISSION
               </h4>
-              <p className="text-xs text-neutral-400 font-mono mt-1">
+              <p className="text-xs text-neutral-400 font-data mt-1">
                 Compare route durations, airfield weather, and binding operator quotes.
               </p>
             </div>

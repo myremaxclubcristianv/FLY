@@ -81,26 +81,26 @@ export function StepPriority({
               key={p.id}
               onClick={() => onChangePriority(p.id)}
               className={cn(
-                "p-6 border transition-all duration-200 cursor-pointer flex flex-col gap-3 relative",
+                "p-6 rounded-2xl border transition-all duration-200 cursor-pointer flex flex-col gap-3 relative",
                 isSelected
-                  ? "bg-[var(--color-surface)] border-[var(--color-accent)]"
-                  : "bg-[var(--color-bg-primary)] border-[var(--color-border)] hover:border-[var(--color-text-secondary)]"
+                  ? "bg-amber-500/10 border-amber-400/80 shadow-[0_0_20px_rgba(245,158,11,0.15)] ring-1 ring-amber-400/50"
+                  : "glass-surface glass-surface-hover border-white/10"
               )}
             >
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-data text-[var(--color-accent)]">
+                <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider">
                   {p.code}
                 </span>
                 <div
                   className={cn(
                     "w-4 h-4 rounded-full border flex items-center justify-center transition-colors",
                     isSelected
-                      ? "border-[var(--color-accent)] bg-[var(--color-accent)]"
-                      : "border-[var(--color-border)]"
+                      ? "border-amber-400 bg-amber-400"
+                      : "border-white/20"
                   )}
                 >
                   {isSelected && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-bg-primary)]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-black" />
                   )}
                 </div>
               </div>

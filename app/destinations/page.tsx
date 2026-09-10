@@ -73,7 +73,7 @@ export default function DestinationsPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {LUXURY_DESTINATIONS.map((dest) => (
-              <Card key={dest.id} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-500/50 transition p-0 bg-neutral-900/40 border-neutral-800">
+              <Card key={dest.id} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-400/50 transition-all duration-300 p-0 rounded-2xl">
                 <div className="relative h-64 w-full overflow-hidden bg-neutral-900">
                   <AviationImage
                     src={dest.image}
@@ -83,43 +83,43 @@ export default function DestinationsPage() {
                     fallbackTitle={dest.name}
                     fallbackCode={`DEST // ${dest.airportCode}`}
                   />
-                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                     {dest.airportCode}
                   </div>
-                  <div className="absolute top-3 right-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-neutral-300 z-10">
+                  <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-white z-10">
                     {dest.category}
                   </div>
                 </div>
 
                 <div className="p-6 flex flex-col justify-between gap-6 flex-1">
                   <div className="space-y-3">
-                    <span className="text-[10px] font-mono text-amber-400 uppercase tracking-widest block">
+                    <span className="text-[10px] font-data text-amber-400 uppercase tracking-widest block font-semibold">
                       {dest.region} • {dest.country}
                     </span>
                     <h3 className="text-2xl font-light text-white group-hover:text-amber-300 transition">
                       {dest.name}
                     </h3>
-                    <p className="text-xs text-neutral-400 leading-relaxed font-mono">
+                    <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                       {dest.tagline}
                     </p>
                   </div>
 
-                  <div className="space-y-2 pt-4 border-t border-neutral-800/80 font-mono text-xs">
+                  <div className="space-y-2 pt-4 border-t border-white/10 font-data text-xs">
                     <div className="flex justify-between">
-                      <span className="text-neutral-500">From Bucharest (LRBS):</span>
+                      <span className="text-[var(--color-text-muted)]">From Bucharest (LRBS):</span>
                       <span className="text-amber-300 font-bold">{dest.estimatedFlightFromLRBS}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-500">Recommended Jet:</span>
-                      <span className="text-neutral-300">{dest.recommendedCategory}</span>
+                      <span className="text-[var(--color-text-muted)]">Recommended Jet:</span>
+                      <span className="text-white">{dest.recommendedCategory}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-neutral-500">Last 50 Miles Transfer:</span>
+                      <span className="text-[var(--color-text-muted)]">Last 50 Miles Transfer:</span>
                       <span className="text-neutral-400 text-[11px]">{dest.transferType}</span>
                     </div>
 
                     <Link href={`/destinations/${dest.slug}`} className="pt-2 block">
-                      <Button variant="outline" size="sm" fullWidth className="font-mono text-xs border-neutral-800 hover:border-amber-400">
+                      <Button variant="outline" size="sm" fullWidth className="font-data text-xs">
                         INSPECT DISPATCH SPECS →
                       </Button>
                     </Link>
@@ -133,10 +133,10 @@ export default function DestinationsPage() {
 
       {/* 3. FROM BUCHAREST, ANYWHERE — Route Intelligence */}
       <Container size="wide">
-        <div className="flex flex-col gap-8 pt-8 border-t border-neutral-800">
+        <div className="flex flex-col gap-8 pt-8 border-t border-white/10">
           <div className="space-y-2">
             <div className="flex items-center gap-3">
-              <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest">
+              <span className="text-xs font-data text-amber-400 font-semibold uppercase tracking-widest">
                 BUCHAREST DISPATCH VECTOR // LRBS / BBU
               </span>
               <ProvenanceBadge status="AIR_CALCULATED" />
@@ -144,51 +144,51 @@ export default function DestinationsPage() {
             <h2 className="text-3xl font-light text-white font-sans">
               FROM BUCHAREST, ANYWHERE<span className="text-amber-400">.</span>
             </h2>
-            <p className="text-xs text-neutral-400 font-mono max-w-3xl">
+            <p className="text-xs text-[var(--color-text-secondary)] font-data max-w-3xl">
               Calculated flight durations, air distances, and recommended jet categories originating from Bucharest Băneasa Executive Terminal (LRBS / BBU).
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {BUCHAREST_ROUTES.map((route, i) => (
-              <div key={i} className="bg-neutral-900/40 border border-neutral-800 rounded-2xl overflow-hidden backdrop-blur-xl p-6 flex flex-col justify-between gap-6 group hover:border-amber-500/50 transition">
-                <div className="relative h-44 w-full rounded-xl overflow-hidden bg-neutral-900">
+              <Card key={i} variant="surface" className="p-6 flex flex-col justify-between gap-6 group hover:border-amber-400/50 transition-all duration-300 rounded-2xl">
+                <div className="relative h-48 w-full rounded-xl overflow-hidden bg-neutral-900">
                   <AviationImage src={route.img} alt={route.dest} fill className="object-cover group-hover:scale-105 transition duration-500" fallbackTitle={route.dest} fallbackCode="ROUTE // LRBS" />
-                  <div className="absolute top-3 left-3 bg-neutral-950/80 backdrop-blur border border-neutral-800 px-2.5 py-1 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
                     {route.dest}
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center text-xs font-mono border-b border-neutral-800 pb-2">
-                    <span className="text-neutral-400 font-bold">{route.origin}</span>
+                  <div className="flex justify-between items-center text-xs font-data border-b border-white/10 pb-2">
+                    <span className="text-white font-bold">{route.origin}</span>
                     <span className="text-amber-400">→</span>
                     <span className="text-white font-bold">{route.dest}</span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+                  <div className="grid grid-cols-2 gap-2 text-xs font-data">
                     <div>
-                      <span className="text-[10px] text-neutral-500 uppercase block">AIR DISTANCE</span>
-                      <span className="text-neutral-200 font-bold">{route.dist}</span>
+                      <span className="text-[10px] text-[var(--color-text-muted)] uppercase block">AIR DISTANCE</span>
+                      <span className="text-white font-bold">{route.dist}</span>
                     </div>
                     <div>
-                      <span className="text-[10px] text-neutral-500 uppercase block">EST. FLIGHT TIME</span>
+                      <span className="text-[10px] text-[var(--color-text-muted)] uppercase block">EST. FLIGHT TIME</span>
                       <span className="text-amber-300 font-bold">{route.time}</span>
                     </div>
                     <div className="col-span-2">
-                      <span className="text-[10px] text-neutral-500 uppercase block">RECOMMENDED FLEET</span>
+                      <span className="text-[10px] text-[var(--color-text-muted)] uppercase block">RECOMMENDED FLEET</span>
                       <span className="text-neutral-300">{route.ac}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-neutral-800/80 flex justify-between items-center text-[10px] font-mono text-neutral-500">
+                <div className="pt-3 border-t border-white/10 flex justify-between items-center text-[10px] font-data text-[var(--color-text-muted)]">
                   <span>PROVENANCE: {route.prov}</span>
                   <Link href="/plan" className="text-amber-400 hover:underline font-bold">
                     REQUEST FLIGHT ↗
                   </Link>
                 </div>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

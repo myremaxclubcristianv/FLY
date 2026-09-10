@@ -48,10 +48,10 @@ export default async function AviationPage() {
           {/* Infrastructure Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat) => (
-              <Card key={cat.title} variant="surface" className="flex flex-col justify-between gap-6 p-8">
+              <Card key={cat.title} variant="surface" className="flex flex-col justify-between gap-6 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-data text-[var(--color-accent)]">
+                    <span className="text-[10px] font-data text-amber-400 font-semibold">
                       {cat.count}
                     </span>
                     <DataStatusBadge status="INDICATIVE" showDot={false} />
@@ -59,7 +59,7 @@ export default async function AviationPage() {
                   <h3 className="text-2xl font-light text-[var(--color-text-primary)]">
                     {cat.title}
                   </h3>
-                  <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+                  <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                     {cat.desc}
                   </p>
                 </div>
@@ -68,10 +68,10 @@ export default async function AviationPage() {
           </div>
 
           {/* Operators Directory Section */}
-          <div className="flex flex-col gap-8 pt-8 border-t border-[var(--color-border)]">
+          <div className="flex flex-col gap-8 pt-8 border-t border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-data text-[var(--color-accent)] uppercase">
+                <span className="text-[10px] font-data text-amber-400 uppercase font-semibold">
                   VERIFIED SUPPLY DIRECTORY
                 </span>
                 <h2 className="text-2xl font-light text-[var(--color-text-primary)]">
@@ -83,10 +83,10 @@ export default async function AviationPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {operators.map((op) => (
-                <Card key={op.id} variant="default" className="flex flex-col justify-between gap-6">
+                <Card key={op.id} variant="surface" className="flex flex-col justify-between gap-6 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-data text-[var(--color-accent)]">
+                      <span className="text-[10px] font-data text-amber-400 font-semibold">
                         {op.operatorType}
                       </span>
                       <DataStatusBadge status={op.verificationStatus === "VERIFIED" || op.verificationStatus === "OFFICIAL_SOURCE" ? "VERIFIED" : "INDICATIVE"} />
@@ -99,12 +99,12 @@ export default async function AviationPage() {
                       LEGAL: {op.legalName}
                     </span>
 
-                    <p className="text-xs text-[var(--color-text-secondary)]">
+                    <p className="text-xs text-[var(--color-text-secondary)] font-sans">
                       Base: {op.baseAirportName}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[var(--color-border-subtle)] flex items-center justify-between">
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
                     <span className="text-[10px] font-data text-[var(--color-text-muted)]">
                       FLEET: {op.fleetCount} AIRCRAFT
                     </span>
@@ -121,14 +121,14 @@ export default async function AviationPage() {
 
           {/* Specialized Services Entry Points */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-            <Card variant="surface" className="flex flex-col gap-4 p-8">
-              <span className="text-[10px] font-data text-[var(--color-accent)]">
+            <Card variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
+              <span className="text-[10px] font-data text-amber-400 font-semibold">
                 SERVICES // FINANCE
               </span>
               <h3 className="text-xl font-light text-[var(--color-text-primary)]">
                 AVIATION FINANCE & LEASING
               </h3>
-              <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                 Educational decision support on asset-based financing, leasing structures, and capital allocation.
               </p>
               <Link href="/aviation/finance">
@@ -138,14 +138,14 @@ export default async function AviationPage() {
               </Link>
             </Card>
 
-            <Card variant="surface" className="flex flex-col gap-4 p-8">
-              <span className="text-[10px] font-data text-[var(--color-accent)]">
+            <Card variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
+              <span className="text-[10px] font-data text-amber-400 font-semibold">
                 SERVICES // INSURANCE
               </span>
               <h3 className="text-xl font-light text-[var(--color-text-primary)]">
                 AIRCRAFT & HULL INSURANCE
               </h3>
-              <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
+              <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                 Hull risk, third-party liability, passenger cover, and war risk insurance architecture guidelines.
               </p>
               <Link href="/aviation/insurance">

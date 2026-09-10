@@ -57,17 +57,17 @@ export function FlightSearchForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-6 sm:p-8 flex flex-col gap-6"
+      className="w-full glass-elevated p-6 sm:p-8 flex flex-col gap-6 rounded-2xl shadow-2xl"
     >
-      <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] pb-4">
+      <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
-          <span className="text-xs font-data text-[var(--color-text-primary)] tracking-widest uppercase">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+          <span className="text-xs font-mono text-white tracking-widest uppercase font-bold">
             FLIGHT SEARCH & DECISION DISCOVERY
           </span>
         </div>
-        <span className="text-[10px] font-data text-[var(--color-text-muted)]">
-          STEP 1 OF DECISION
+        <span className="text-[10px] font-mono text-neutral-400">
+          STEP 1 OF MISSION DISPATCH
         </span>
       </div>
 
@@ -116,13 +116,13 @@ export function FlightSearchForm() {
         <button
           type="button"
           onClick={() => setShowAdvanced(!showAdvanced)}
-          className="text-xs font-data text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors inline-flex items-center gap-2"
+          className="text-xs font-mono text-amber-400 hover:text-amber-300 transition-colors inline-flex items-center gap-2 font-medium"
         >
-          <span>{showAdvanced ? "— HIDE ADVANCED OPTIONS" : "+ ADVANCED PARAMETERS (TIME, PRIORITY, BUDGET)"}</span>
+          <span>{showAdvanced ? "— HIDE ADVANCED MISSION PARAMETERS" : "+ ADVANCED PARAMETERS (TIME, PRIORITY, BUDGET)"}</span>
         </button>
 
         {showAdvanced && (
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 mt-4 border-t border-[var(--color-border-subtle)] animate-fadeIn">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 mt-4 border-t border-white/[0.08] animate-in fade-in duration-200">
             <Input
               label="TIME // DEPARTURE HOUR"
               type="time"
@@ -156,14 +156,15 @@ export function FlightSearchForm() {
       </div>
 
       {/* Form Submission CTA */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-[var(--color-border-subtle)]">
-        <p className="text-[11px] font-data text-[var(--color-text-muted)]">
-          INDICATIVE DISCOVERY // NO COMMITMENT REQUIRED
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 border-t border-white/[0.08]">
+        <p className="text-[11px] font-mono text-neutral-400">
+          INDICATIVE DISCOVERY // VERIFIED OPERATOR NETWORK
         </p>
-        <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto">
-          SHOW ME HOW TO FLY
+        <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto shadow-lg">
+          SHOW ME HOW TO FLY →
         </Button>
       </div>
     </form>
   );
 }
+

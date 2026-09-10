@@ -20,22 +20,22 @@ export function FlightOptionCard({
     <Card
       variant="surface"
       className={cn(
-        "flex flex-col justify-between gap-6 p-6 sm:p-8 transition-all duration-300 relative border-2",
+        "flex flex-col justify-between gap-6 p-6 sm:p-8 transition-all duration-300 relative border rounded-2xl",
         isSelected
-          ? "border-[var(--color-accent)] bg-[var(--color-surface-elevated)]"
-          : "border-[var(--color-border)] hover:border-[var(--color-text-secondary)]"
+          ? "border-amber-400/80 bg-amber-500/10 shadow-[0_0_30px_rgba(245,158,11,0.15)] ring-1 ring-amber-400/50"
+          : "hover:border-white/20"
       )}
     >
       {option.isPrimary && (
-        <div className="absolute top-0 right-0 bg-[var(--color-accent)] text-[var(--color-bg-primary)] text-[9px] font-data px-3 py-1 font-semibold tracking-widest uppercase">
+        <div className="absolute -top-3 right-6 bg-gradient-to-r from-amber-500 to-amber-400 text-black text-[9px] font-data px-3 py-1 font-bold tracking-widest uppercase rounded-full shadow-lg">
           RECOMMENDED FIT
         </div>
       )}
 
       {/* Card Header */}
-      <div className="flex flex-col gap-2 pt-2">
+      <div className="flex flex-col gap-2 pt-1">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[10px] font-data text-[var(--color-accent)] uppercase">
+          <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider font-semibold">
             {option.aircraftCategory}
           </span>
           <DataStatusBadge status={option.dataStatus} showDot={false} />
@@ -50,20 +50,20 @@ export function FlightOptionCard({
       </div>
 
       {/* Specs Matrix */}
-      <div className="grid grid-cols-2 gap-4 text-xs font-data bg-[var(--color-bg-primary)] p-4 border border-[var(--color-border-subtle)]">
+      <div className="grid grid-cols-2 gap-4 text-xs font-data glass-instrument p-4 rounded-xl border border-white/5">
         <div>
-          <span className="block text-[9px] text-[var(--color-text-muted)] uppercase">ESTIMATED DURATION</span>
-          <span className="text-[var(--color-text-primary)] font-medium">{option.estimatedDuration}</span>
+          <span className="block text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">ESTIMATED DURATION</span>
+          <span className="text-[var(--color-text-primary)] font-medium text-sm">{option.estimatedDuration}</span>
         </div>
         <div>
-          <span className="block text-[9px] text-[var(--color-text-muted)] uppercase">PRICING STATUS</span>
-          <span className="text-[var(--color-accent)] font-medium">{option.indicativePriceRange || "QUOTE REQUIRED"}</span>
+          <span className="block text-[9px] text-[var(--color-text-muted)] uppercase tracking-wider">PRICING STATUS</span>
+          <span className="text-amber-400 font-medium text-sm">{option.indicativePriceRange || "QUOTE REQUIRED"}</span>
         </div>
       </div>
 
       {/* Recommendation Reason */}
-      <div className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans border-l-2 border-[var(--color-accent-muted)] pl-3 py-1">
-        <span className="text-[9px] font-data text-[var(--color-text-muted)] block uppercase mb-0.5">
+      <div className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans border-l-2 border-amber-400/40 pl-3 py-1">
+        <span className="text-[9px] font-data text-amber-400/80 block uppercase mb-0.5 tracking-wider font-semibold">
           WHY THIS OPTION FITS
         </span>
         {option.recommendationReason}
@@ -77,7 +77,7 @@ export function FlightOptionCard({
           size="md"
           onClick={onSelect}
         >
-          {isSelected ? "✓ SELECTED OPTION" : "REQUEST THIS MISSION OPTION"}
+          {isSelected ? "✓ SELECTED OPTION" : "SELECT MISSION OPTION"}
         </Button>
       </div>
     </Card>

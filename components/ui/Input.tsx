@@ -17,7 +17,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="text-[11px] font-data text-[var(--color-text-secondary)] tracking-wider"
+            className="text-[10px] font-mono text-neutral-400 tracking-wider uppercase"
           >
             {label}
           </label>
@@ -30,7 +30,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined
           }
           className={cn(
-            "w-full bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] border border-[var(--color-border)] px-4 py-3 text-sm transition-colors duration-150 focus:border-[var(--color-accent)] focus:outline-none placeholder:text-[var(--color-text-muted)]",
+            "w-full bg-neutral-950/70 text-white border border-white/[0.12] rounded-lg px-4 py-3 text-sm font-sans backdrop-blur-md transition-all duration-200 focus:border-amber-400/90 focus:bg-neutral-900/80 focus:shadow-[0_0_15px_rgba(245,158,11,0.15)] focus:outline-none placeholder:text-neutral-500",
             error && "border-red-500/80 focus:border-red-500",
             className
           )}
@@ -43,7 +43,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         ) : helperText ? (
           <span
             id={`${inputId}-helper`}
-            className="text-[11px] text-[var(--color-text-muted)] font-sans"
+            className="text-[11px] text-neutral-400 font-sans"
           >
             {helperText}
           </span>
@@ -54,3 +54,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
+

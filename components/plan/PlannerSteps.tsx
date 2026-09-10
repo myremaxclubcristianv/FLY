@@ -101,15 +101,16 @@ function PlannerStepsContent() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-10">
+    <div className="w-full flex flex-col gap-8">
       {/* Editorial Progress Header Indicator */}
       {step < 7 && (
-        <div className="w-full bg-[var(--color-bg-secondary)] border border-[var(--color-border)] p-4 sm:p-6 flex flex-col gap-4">
+        <div className="w-full glass-instrument p-5 sm:p-6 rounded-2xl flex flex-col gap-4">
           <div className="flex items-center justify-between text-xs font-data">
-            <span className="text-[var(--color-accent)]">
-              DECISION ENGINE // STEP 0{step} OF 06
+            <span className="text-[var(--color-accent)] font-semibold flex items-center gap-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+              MISSION DISPATCH // STEP 0{step} OF 06
             </span>
-            <span className="text-[var(--color-text-muted)]">
+            <span className="text-[var(--color-text-secondary)] font-medium tracking-wider">
               {stepsList[step - 1]?.label}
             </span>
           </div>
@@ -119,10 +120,10 @@ function PlannerStepsContent() {
               <div
                 key={s.num}
                 className={cn(
-                  "h-1 transition-colors duration-300",
+                  "h-1.5 rounded-full transition-all duration-300",
                   step >= s.num
-                    ? "bg-[var(--color-accent)]"
-                    : "bg-[var(--color-border)]"
+                    ? "bg-[var(--color-accent)] shadow-[0_0_8px_rgba(245,158,11,0.5)]"
+                    : "bg-white/5"
                 )}
               />
             ))}
@@ -131,7 +132,7 @@ function PlannerStepsContent() {
       )}
 
       {/* Step Render Area */}
-      <div className="w-full bg-[var(--color-surface)] border border-[var(--color-border)] p-6 sm:p-10">
+      <div className="w-full glass-elevated rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
         {step === 1 && (
           <StepWhere
             from={from}
@@ -178,18 +179,18 @@ function PlannerStepsContent() {
               selectedOptionId={selectedOption?.id}
               onSelectOption={handleSelectOption}
             />
-            <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
+            <div className="flex items-center justify-between pt-6 border-t border-white/10">
               <button
                 type="button"
                 onClick={() => setStep(4)}
-                className="text-xs font-data text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"
+                className="text-xs font-data text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
               >
                 ← BACK TO MISSION PRIORITY
               </button>
               <button
                 type="button"
                 onClick={() => setStep(6)}
-                className="px-6 py-3 bg-[var(--color-text-primary)] text-[var(--color-bg-primary)] font-data text-xs uppercase font-medium hover:bg-white transition-colors"
+                className="px-6 py-3 bg-[var(--color-accent)] text-black font-data text-xs uppercase font-bold rounded-xl hover:bg-amber-400 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]"
               >
                 PROCEED TO QUOTE DETAILS →
               </button>

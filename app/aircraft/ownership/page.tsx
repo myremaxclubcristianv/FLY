@@ -74,13 +74,13 @@ export default function AircraftOwnershipPage() {
           {/* Matrix Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {models.map((m) => (
-              <Card key={m.title} variant="surface" className="flex flex-col justify-between gap-6 p-8">
+              <Card key={m.title} variant="surface" className="flex flex-col justify-between gap-6 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-data text-[var(--color-accent)]">
+                    <span className="text-[10px] font-data text-amber-400 font-semibold">
                       {m.hours}
                     </span>
-                    <span className="text-[9px] font-data text-[var(--color-text-muted)] border border-[var(--color-border)] px-2 py-0.5">
+                    <span className="text-[9px] font-data text-[var(--color-text-secondary)] border border-white/10 px-2 py-0.5 rounded">
                       {m.commitment}
                     </span>
                   </div>
@@ -94,8 +94,8 @@ export default function AircraftOwnershipPage() {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-[var(--color-border-subtle)] flex flex-col gap-2">
-                  <span className="text-[9px] font-data text-[var(--color-text-muted)] block uppercase">
+                <div className="pt-4 border-t border-white/10 flex flex-col gap-2">
+                  <span className="text-[9px] font-data text-[var(--color-text-muted)] block uppercase tracking-wider">
                     BEST SUITED FOR:
                   </span>
                   <span className="text-xs font-medium text-[var(--color-text-primary)] font-sans">
@@ -107,13 +107,13 @@ export default function AircraftOwnershipPage() {
           </div>
 
           {/* Decision Disclaimer */}
-          <div className="p-6 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong>DISCLOSURE:</strong> This matrix provides educational decision support for aircraft access evaluation. AIR coordinates aviation services with verified operators and does not provide financial or tax advice.
+          <div className="p-6 glass-instrument rounded-2xl text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
+            <strong className="text-amber-400 font-data">DISCLOSURE:</strong> This matrix provides educational decision support for aircraft access evaluation. AIR coordinates aviation services with verified operators and does not provide financial or tax advice.
           </div>
 
           {/* Action CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[var(--color-border)]">
-            <p className="text-xs text-[var(--color-text-secondary)]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
+            <p className="text-xs text-[var(--color-text-secondary)] font-data">
               Unsure which model fits your corporate flight department?
             </p>
             <Link href="/plan">

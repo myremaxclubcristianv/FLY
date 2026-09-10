@@ -40,19 +40,19 @@ export default function AviationInsurancePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {topics.map((t) => (
-              <Card key={t.title} variant="surface" className="flex flex-col gap-4 p-8">
-                <span className="text-[10px] font-data text-[var(--color-accent)]">RISK COVERAGE</span>
+              <Card key={t.title} variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
+                <span className="text-[10px] font-data text-amber-400 font-semibold">RISK COVERAGE</span>
                 <h3 className="text-xl font-light text-[var(--color-text-primary)]">{t.title}</h3>
                 <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">{t.desc}</p>
               </Card>
             ))}
           </div>
 
-          <div className="p-6 bg-[var(--color-surface)] border border-[var(--color-border)] text-xs text-[var(--color-text-muted)] leading-relaxed">
-            <strong>DISCLOSURE:</strong> AIR is an aviation access platform and does not act as a licensed insurance broker or insurer. Information is provided strictly for educational purposes.
+          <div className="p-6 glass-instrument rounded-2xl text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
+            <strong className="text-amber-400 font-data">DISCLOSURE:</strong> AIR is an aviation access platform and does not act as a licensed insurance broker or insurer. Information is provided strictly for educational purposes.
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border)]">
+          <div className="flex items-center justify-between pt-6 border-t border-white/10">
             <Link href="/aviation">
               <Button variant="outline" size="md">← BACK TO AVIATION DIRECTORY</Button>
             </Link>
