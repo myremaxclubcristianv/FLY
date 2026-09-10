@@ -3,7 +3,10 @@ import { DEMO_OPERATORS } from "../../data/demo/operators";
 import { DEMO_AIRCRAFT } from "../../data/demo/aircraft";
 import { DEMO_LOCATIONS } from "../../data/demo/locations";
 import { DEMO_EXPERIENCES } from "../../data/demo/experiences";
-import { DESTINATION_PREVIEWS, JOURNAL_PREVIEWS } from "../../data/demo/experiences-preview";
+import { JOURNAL_PREVIEWS } from "../../data/demo/experiences-preview";
+import { LUXURY_DESTINATIONS } from "../../data/real/destinations";
+import { REAL_AIRCRAFT_MODELS } from "../../data/real/aircraft";
+import { REAL_COMPANIES } from "../../data/real/companies";
 
 export interface UnifiedSearchEngine {
   search(query: string): Promise<SearchResultItem[]>;
@@ -93,19 +96,70 @@ export class DemoSearchService implements UnifiedSearchEngine {
       }
     });
 
-    // Search Destinations
-    DESTINATION_PREVIEWS.forEach((dest) => {
-      if (dest.name.toLowerCase().includes(q) || dest.region.toLowerCase().includes(q)) {
-        const slug = dest.name.split(" ")[0].toLowerCase();
-        results.push({
-          id: dest.id,
-          type: "DESTINATION",
-          title: dest.name,
-          subtitle: `${dest.region} // ${dest.indicativeAccess}`,
-          href: `/destinations/${slug}`,
-          dataStatus: dest.status,
-          categoryTag: dest.region,
-        });
+    // Search Luxury Destinations
+    LUXURY_DESTINATIONS.forEach((dest) => {
+      if (
+        dest.name.toLowerCase().includes(q) ||
+        dest.country.toLowerCase().includes(q) ||
+        dest.region.toLowerCase().includes(q) ||
+        dest.airportCode.toLowerCase().includes(q) ||
+        dest.tagline.toLowerCase().includes(q) ||
+        dest.description.toLowerCase().includes(q)
+      ) {
+        if (!results.some((r) => r.id === dest.id || r.title.toLowerCase() === dest.name.toLowerCase())) {
+          results.push({
+            id: dest.id,
+            type: "DESTINATION",
+            title: dest.name,
+            subtitle: `${dest.airportCode} // ${dest.region} • ${dest.country}`,
+            href: `/destinations/${dest.slug}`,
+            dataStatus: dest.provenance,
+            categoryTag: dest.category,
+          });
+        }
+      }
+    });
+
+    // Search Real Aircraft Models
+    REAL_AIRCRAFT_MODELS.forEach((ac) => {
+      if (
+        ac.model.toLowerCase().includes(q) ||
+        ac.category.toLowerCase().includes(q) ||
+        ac.manufacturer.toLowerCase().includes(q)
+      ) {
+        if (!results.some((r) => r.id === ac.id || r.title.toLowerCase() === ac.model.toLowerCase())) {
+          results.push({
+            id: ac.id,
+            type: "AIRCRAFT",
+            title: ac.model,
+            subtitle: `${ac.category.replace(/_/g, " ")} // Up to ${ac.passengerCapacity} Passengers`,
+            href: `/aircraft/${ac.slug}`,
+            dataStatus: ac.dataStatus,
+            categoryTag: ac.category,
+          });
+        }
+      }
+    });
+
+    // Search Real Companies & Operators
+    REAL_COMPANIES.forEach((op) => {
+      if (
+        op.displayName.toLowerCase().includes(q) ||
+        op.legalName.toLowerCase().includes(q) ||
+        op.baseAirportName?.toLowerCase().includes(q) ||
+        (op.aocNumber && op.aocNumber.toLowerCase().includes(q))
+      ) {
+        if (!results.some((r) => r.id === op.id || r.title.toLowerCase() === op.displayName.toLowerCase())) {
+          results.push({
+            id: op.id,
+            type: "OPERATOR",
+            title: op.displayName,
+            subtitle: `Base: ${op.baseAirportName || op.country} // ${op.category.replace(/_/g, " ")}`,
+            href: op.slug === "tiriac-air" || op.baseAirportIcao === "LRBS" ? "/baneasa" : `/aviation`,
+            dataStatus: op.dataStatus,
+            categoryTag: op.category,
+          });
+        }
       }
     });
 

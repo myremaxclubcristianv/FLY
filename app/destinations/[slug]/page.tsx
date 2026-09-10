@@ -13,7 +13,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const dest = LUXURY_DESTINATIONS.find((d) => d.slug === slug);
+  const dest = LUXURY_DESTINATIONS.find((d) => d.slug === slug || (slug === "nice" && d.slug === "cannes"));
   if (!dest) return { title: "Destination Dossier | AIR" };
   return {
     title: `${dest.name} (${dest.airportCode}) Private Aviation Dossier | AIR`,
@@ -38,6 +38,10 @@ const DESTINATION_EDITORIALS: Record<string, { philosophy: string; subtitle: str
     philosophy: "TOUCHDOWN ON THE CÔTE D'AZUR IN UNDER THREE HOURS.",
     subtitle: "Direct business jet approach over the Mediterranean followed by dedicated 7-minute Monaco helicopter transfer.",
   },
+  cannes: {
+    philosophy: "TOUCHDOWN ON THE CÔTE D'AZUR IN UNDER THREE HOURS.",
+    subtitle: "Direct business jet approach over the Mediterranean followed by dedicated 7-minute Monaco helicopter transfer.",
+  },
   mykonos: {
     philosophy: "AEGEAN BLUE AT 41,000 FEET.",
     subtitle: "Fast-track island executive ramp dispatch direct from Bucharest Băneasa with zero commercial terminal congestion.",
@@ -54,7 +58,7 @@ export default async function DestinationDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const dest = LUXURY_DESTINATIONS.find((d) => d.slug === slug);
+  const dest = LUXURY_DESTINATIONS.find((d) => d.slug === slug || (slug === "nice" && d.slug === "cannes"));
 
   if (!dest) {
     notFound();
