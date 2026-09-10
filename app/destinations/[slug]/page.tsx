@@ -21,6 +21,33 @@ export async function generateMetadata({
   };
 }
 
+const DESTINATION_EDITORIALS: Record<string, { philosophy: string; subtitle: string }> = {
+  maldives: {
+    philosophy: "THE LAST HOUR SHOULD FEEL LIKE THE FIRST.",
+    subtitle: "Direct intercontinental flight paired with private twin-otter seaplane transfer directly into your overwater lagoon.",
+  },
+  seychelles: {
+    philosophy: "GRANITE PEAKS, TURQUOISE SHALLOWS, DIRECT RAMP SOVEREIGNTY.",
+    subtitle: "Land directly at Mahé International Airport with private island helicopter transfers bypassing boat schedules.",
+  },
+  "st-barth": {
+    philosophy: "STOL RUNWAY PRECISION INTO CARIBBEAN SANCTUARY.",
+    subtitle: "Intercontinental jet pairing with certified short-field turboprop shuttle landing directly onto Saint-Jean runway.",
+  },
+  nice: {
+    philosophy: "TOUCHDOWN ON THE CÔTE D'AZUR IN UNDER THREE HOURS.",
+    subtitle: "Direct business jet approach over the Mediterranean followed by dedicated 7-minute Monaco helicopter transfer.",
+  },
+  mykonos: {
+    philosophy: "AEGEAN BLUE AT 41,000 FEET.",
+    subtitle: "Fast-track island executive ramp dispatch direct from Bucharest Băneasa with zero commercial terminal congestion.",
+  },
+  dubai: {
+    philosophy: "THE FINANCIAL & DESERT OASIS AT MACH 0.88.",
+    subtitle: "Non-stop heavy jet access into dedicated executive FBOs at Al Maktoum International Airport.",
+  },
+};
+
 export default async function DestinationDetailPage({
   params,
 }: {
@@ -32,6 +59,11 @@ export default async function DestinationDetailPage({
   if (!dest) {
     notFound();
   }
+
+  const editorial = DESTINATION_EDITORIALS[slug] || {
+    philosophy: "WHERE PRIVATE WINGS MEET THE HORIZON.",
+    subtitle: dest.description,
+  };
 
   return (
     <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
@@ -99,11 +131,28 @@ export default async function DestinationDetailPage({
         </Container>
       </section>
 
+      {/* PAUSE / PHILOSOPHY STRIP (Unique Dreamlike Moment for Each Destination) */}
+      <section className="w-full py-20 sm:py-28 bg-[#fafaf7] border-b border-neutral-200/80">
+        <Container size="wide">
+          <div className="max-w-4xl mx-auto text-center space-y-4">
+            <span className="editorial-tag-muted">
+              THE ESSENCE OF ARRIVAL
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
+              {editorial.philosophy}
+            </h2>
+            <p className="text-sm sm:text-base text-neutral-600 font-light max-w-2xl mx-auto leading-relaxed">
+              {editorial.subtitle}
+            </p>
+          </div>
+        </Container>
+      </section>
+
       {/* 02 — FLIGHT TELEMETRY STRIP */}
-      <section className="w-full py-16 bg-[#fafaf7] border-b border-neutral-200/80">
+      <section className="w-full py-16 bg-white border-b border-neutral-200/80">
         <Container size="wide">
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+            <div className="p-6 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm space-y-1">
               <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
                 ESTIMATED FLIGHT TIME
               </span>
@@ -113,7 +162,7 @@ export default async function DestinationDetailPage({
               <span className="text-xs font-mono text-neutral-400">DIRECT ROUTE FROM LRBS</span>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+            <div className="p-6 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm space-y-1">
               <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
                 PRIMARY AIRPORT CODE
               </span>
@@ -123,7 +172,7 @@ export default async function DestinationDetailPage({
               <span className="text-xs font-mono text-neutral-400">{dest.country}</span>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+            <div className="p-6 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm space-y-1">
               <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
                 LAST-MILE TRANSFER
               </span>
@@ -133,7 +182,7 @@ export default async function DestinationDetailPage({
               <span className="text-xs font-mono text-neutral-400">INTERMODAL ACCESS</span>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+            <div className="p-6 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm space-y-1">
               <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
                 RECOMMENDED FLEET
               </span>
@@ -147,7 +196,7 @@ export default async function DestinationDetailPage({
       </section>
 
       {/* 03 — DUAL EDITORIAL PRESENTATION: AIRCRAFT + DESTINATION */}
-      <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
+      <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80">
         <Container size="wide">
           <div className="max-w-6xl mx-auto space-y-16">
             <div className="space-y-4">
