@@ -52,5 +52,17 @@ export const FOOTER_SECTIONS = [
       { label: "DATA AUDIT DASHBOARD", href: "/admin", isImplemented: true },
     ],
   },
+  {
+    title: "LEGAL & COMPLIANCE",
+    items: [
+      { label: "LEGAL CENTER", href: "/legal", isImplemented: true },
+      { label: "TERMS & CONDITIONS", href: "/legal/terms", isImplemented: true },
+      { label: "PRIVACY POLICY (GDPR)", href: "/legal/privacy", isImplemented: true },
+      { label: "COOKIE POLICY", href: "/legal/cookies", isImplemented: true },
+      { label: "AVIATION DISCLAIMER", href: "/legal/aviation-disclaimer", isImplemented: true },
+      { label: "CHARTER DISCLAIMER", href: "/legal/charter-disclaimer", isImplemented: true },
+      { label: "CANCELLATION & REFUNDS", href: "/legal/cancellation-refunds", isImplemented: true },
+    ],
+  },
 ];
 

@@ -12,7 +12,7 @@ export function Footer() {
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-[var(--color-border)]">
           {/* Brand & Mission Statement Column */}
-          <div className="lg:col-span-5 flex flex-col gap-6">
+          <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <span className="text-3xl font-light tracking-[0.25em] text-[var(--color-text-primary)] font-data">
                 {BRAND.name}
@@ -44,7 +44,7 @@ export function Footer() {
           </div>
 
           {/* Navigation Links Columns */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {FOOTER_SECTIONS.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
                 <h4 className="text-[11px] font-data text-[var(--color-text-primary)] tracking-widest uppercase border-b border-[var(--color-border-subtle)] pb-2">
@@ -72,22 +72,47 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Data Integrity & Disclosure Footer */}
+        {/* Data Integrity, Non-Carrier Disclosure & Legal Footer */}
         <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[11px] font-data text-[var(--color-text-muted)]">
-          <p>
-            © {new Date().getFullYear()} {BRAND.name} PLATFORM. ALL RIGHTS RESERVED.
-          </p>
+          <div className="space-y-1">
+            <p>
+              © {new Date().getFullYear()} {BRAND.name} PLATFORM. ALL RIGHTS RESERVED.
+            </p>
+            <p className="text-[10px] text-[var(--color-text-muted)] max-w-xl font-sans">
+              AIR is an aviation concierge & sourcing technology platform. Flights are operated exclusively by certified AOC air carriers.
+            </p>
+          </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
-              <span>DATA STATUS DISCLOSURE ACTIVE</span>
-            </span>
             <Link
-              href="#data-status"
-              className="hover:text-[var(--color-text-primary)] underline underline-offset-4"
+              href="/legal"
+              className="text-amber-500 hover:underline font-bold"
             >
-              INTEGRITY POLICY
+              LEGAL CENTER
+            </Link>
+            <Link
+              href="/legal/terms"
+              className="hover:text-[var(--color-text-primary)] transition"
+            >
+              TERMS
+            </Link>
+            <Link
+              href="/legal/privacy"
+              className="hover:text-[var(--color-text-primary)] transition"
+            >
+              PRIVACY (GDPR)
+            </Link>
+            <Link
+              href="/legal/cookies"
+              className="hover:text-[var(--color-text-primary)] transition"
+            >
+              COOKIES
+            </Link>
+            <Link
+              href="/legal/aviation-disclaimer"
+              className="hover:text-[var(--color-text-primary)] transition"
+            >
+              AVIATION DISCLAIMER
             </Link>
           </div>
         </div>
