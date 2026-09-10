@@ -2,8 +2,6 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Input } from "../ui/Input";
-import { Select } from "../ui/Select";
 import { Button } from "../ui/Button";
 
 const PRIORITIES = [
@@ -14,7 +12,7 @@ const PRIORITIES = [
   { id: "MOST_MEMORABLE", label: "MOST MEMORABLE", desc: "Helicopter scenic & island arrival" },
 ];
 
-export function FlightSearchForm() {
+export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark" }) {
   const router = useRouter();
   const [from, setFrom] = useState("Bucharest (LRBS)");
   const [to, setTo] = useState("Nice (LFMN)");
@@ -51,66 +49,116 @@ export function FlightSearchForm() {
     router.push(`/plan?${params.toString()}`);
   };
 
+  const isLight = theme === "light";
+
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full glass-elevated p-8 sm:p-10 flex flex-col gap-8 rounded-3xl shadow-2xl border border-white/10"
+      className={`w-full p-8 sm:p-12 flex flex-col gap-8 rounded-3xl transition-all duration-300 ${
+        isLight
+          ? "bg-white text-neutral-900 border border-neutral-200/80 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)]"
+          : "glass-elevated text-white border border-white/10 shadow-2xl"
+      }`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.08] pb-5">
+      <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b pb-5 ${
+        isLight ? "border-neutral-200" : "border-white/[0.08]"
+      }`}>
         <div className="flex items-center gap-3">
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
-          <span className="text-xs font-mono text-amber-400 tracking-widest uppercase font-bold">
-            FLIGHT DECISION ENGINE // CONTROL INTERFACE
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse" />
+          <span className="text-xs font-mono text-amber-600 font-bold tracking-widest uppercase">
+            FLIGHT DECISION ENGINE // MISSION DISPATCH
           </span>
         </div>
-        <span className="text-[10px] font-mono text-neutral-400">
+        <span className={`text-[10px] font-mono ${isLight ? "text-neutral-500 font-medium" : "text-neutral-400"}`}>
           LRBS EXECUTIVE DISPATCH ACTIVE
         </span>
       </div>
 
       {/* Main Required Search Fields Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <Input
-          label="FROM // DEPARTURE AIRPORT / CITY"
-          placeholder="e.g. Bucharest (LRBS), Paris (LFPB)"
-          value={from}
-          onChange={(e) => setFrom(e.target.value)}
-          error={errors.from}
-          required
-        />
-        <Input
-          label="TO // ARRIVAL DESTINATION"
-          placeholder="e.g. Nice (LFMN), Mykonos, Geneva"
-          value={to}
-          onChange={(e) => setTo(e.target.value)}
-          error={errors.to}
-          required
-        />
-        <Input
-          label="WHEN // DEPARTURE DATE"
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-        />
-        <Select
-          label="WHO // PASSENGER COMPLEMENT"
-          value={passengers}
-          onChange={(e) => setPassengers(e.target.value)}
-          options={[
-            { value: "1", label: "1 PASSENGER" },
-            { value: "2", label: "2 PASSENGERS" },
-            { value: "3", label: "3 PASSENGERS" },
-            { value: "4", label: "4 PASSENGERS" },
-            { value: "5-7", label: "5 - 7 PASSENGERS" },
-            { value: "8+", label: "8+ PASSENGERS" },
-          ]}
-        />
+        <div className="flex flex-col gap-1.5">
+          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+            FROM // DEPARTURE AIRPORT / CITY
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Bucharest (LRBS), Paris (LFPB)"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            required
+            className={`w-full rounded-xl px-4 py-3.5 text-sm font-sans transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+              isLight
+                ? "bg-neutral-50 text-neutral-900 border border-neutral-300/80 placeholder:text-neutral-400 focus:border-amber-500 focus:bg-white"
+                : "bg-neutral-950/70 text-white border border-white/[0.12] placeholder:text-neutral-500 focus:border-amber-400 focus:bg-neutral-900"
+            }`}
+          />
+          {errors.from && <span className="text-xs text-red-500">{errors.from}</span>}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+            TO // ARRIVAL DESTINATION
+          </label>
+          <input
+            type="text"
+            placeholder="e.g. Nice (LFMN), Mykonos, Geneva"
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            required
+            className={`w-full rounded-xl px-4 py-3.5 text-sm font-sans transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+              isLight
+                ? "bg-neutral-50 text-neutral-900 border border-neutral-300/80 placeholder:text-neutral-400 focus:border-amber-500 focus:bg-white"
+                : "bg-neutral-950/70 text-white border border-white/[0.12] placeholder:text-neutral-500 focus:border-amber-400 focus:bg-neutral-900"
+            }`}
+          />
+          {errors.to && <span className="text-xs text-red-500">{errors.to}</span>}
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+            WHEN // DEPARTURE DATE
+          </label>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+            className={`w-full rounded-xl px-4 py-3.5 text-sm font-sans transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+              isLight
+                ? "bg-neutral-50 text-neutral-900 border border-neutral-300/80 focus:border-amber-500 focus:bg-white"
+                : "bg-neutral-950/70 text-white border border-white/[0.12] focus:border-amber-400 focus:bg-neutral-900"
+            }`}
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+            WHO // PASSENGER COMPLEMENT
+          </label>
+          <select
+            value={passengers}
+            onChange={(e) => setPassengers(e.target.value)}
+            className={`w-full rounded-xl px-4 py-3.5 text-sm font-sans transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${
+              isLight
+                ? "bg-neutral-50 text-neutral-900 border border-neutral-300/80 focus:border-amber-500 focus:bg-white"
+                : "bg-neutral-950/70 text-white border border-white/[0.12] focus:border-amber-400 focus:bg-neutral-900"
+            }`}
+          >
+            <option value="1">1 PASSENGER</option>
+            <option value="2">2 PASSENGERS</option>
+            <option value="3">3 PASSENGERS</option>
+            <option value="4">4 PASSENGERS</option>
+            <option value="5-7">5 - 7 PASSENGERS</option>
+            <option value="8+">8+ PASSENGERS</option>
+          </select>
+        </div>
       </div>
 
       {/* WHAT MATTERS MOST? Priority Selector */}
       <div className="space-y-3 pt-2">
-        <span className="text-[11px] font-mono text-neutral-300 font-bold uppercase tracking-wider block">
+        <span className={`text-[11px] font-mono font-bold uppercase tracking-wider block ${
+          isLight ? "text-neutral-800" : "text-neutral-300"
+        }`}>
           WHAT MATTERS MOST? // MISSION CRITERIA
         </span>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
@@ -121,16 +169,24 @@ export function FlightSearchForm() {
                 type="button"
                 key={p.id}
                 onClick={() => setPriority(p.id)}
-                className={`p-3.5 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between gap-1.5 ${
+                className={`p-4 rounded-xl border text-left transition-all duration-200 flex flex-col justify-between gap-1.5 ${
                   isSelected
-                    ? "bg-amber-500/15 border-amber-400/60 shadow-lg shadow-amber-500/5 text-white ring-1 ring-amber-400/30"
+                    ? isLight
+                      ? "bg-amber-500/10 border-amber-500 shadow-sm text-neutral-900 ring-2 ring-amber-500/30"
+                      : "bg-amber-500/15 border-amber-400/60 shadow-lg shadow-amber-500/5 text-white ring-1 ring-amber-400/30"
+                    : isLight
+                    ? "bg-neutral-50/80 border-neutral-200 text-neutral-700 hover:border-neutral-400 hover:bg-neutral-100"
                     : "bg-white/[0.03] border-white/[0.08] text-neutral-300 hover:border-white/20 hover:bg-white/[0.06]"
                 }`}
               >
-                <span className={`text-xs font-mono font-bold ${isSelected ? "text-amber-400" : "text-neutral-200"}`}>
+                <span className={`text-xs font-mono font-bold ${
+                  isSelected ? "text-amber-600" : isLight ? "text-neutral-900" : "text-neutral-200"
+                }`}>
                   {p.label}
                 </span>
-                <span className="text-[10px] text-neutral-400 leading-tight">
+                <span className={`text-[10px] leading-tight ${
+                  isLight ? "text-neutral-500" : "text-neutral-400"
+                }`}>
                   {p.desc}
                 </span>
               </button>
@@ -140,9 +196,13 @@ export function FlightSearchForm() {
       </div>
 
       {/* Form Submission Trigger */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t border-white/[0.08]">
-        <div className="text-[11px] font-mono text-neutral-400 flex items-center gap-2">
-          <span className="text-amber-400">●</span>
+      <div className={`flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t ${
+        isLight ? "border-neutral-200" : "border-white/[0.08]"
+      }`}>
+        <div className={`text-[11px] font-mono flex items-center gap-2 ${
+          isLight ? "text-neutral-500" : "text-neutral-400"
+        }`}>
+          <span className="text-amber-500 font-bold">●</span>
           <span>AIR CALCULATES DIRECT ROUTE, AIR MILES & MATCHED FLEET DOSSIER</span>
         </div>
         <Button type="submit" variant="primary" size="lg" className="w-full sm:w-auto px-10 shadow-xl text-sm font-bold">

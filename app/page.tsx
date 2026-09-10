@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container } from "../components/layout/Container";
 import { Hero } from "../components/home/Hero";
 import { FlightSearchForm } from "../components/home/FlightSearchForm";
-import { SectionHeader } from "../components/shared/SectionHeader";
 import { ProvenanceBadge } from "../components/shared/ProvenanceBadge";
 import { Button } from "../components/ui/Button";
 import { UnifiedAviationRepository } from "../lib/repositories/unified-aviation-repo";
@@ -12,7 +11,7 @@ import { AviationImage } from "../components/AviationImage";
 import { DestinationExplorer } from "../components/destinations/DestinationExplorer";
 
 export const metadata = {
-  title: "AIR — The Easiest Way to Fly | Private Aviation Access & Intelligence",
+  title: "AIR — The Easiest Way to Fly | Luxury Private Aviation & Intelligence",
   description:
     "Explore the world of flight: private jets, turboprops, helicopters, certified airports, aircraft marketplace for sale, flight schools, and aviation regulations.",
 };
@@ -34,48 +33,48 @@ const AIR_RECOMMENDS = [
     manufacturer: "Embraer",
     category: "LIGHT JET",
     slug: "phenom-300",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
-    passengers: 7,
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=85",
+    passengers: "7 PASSENGERS",
     speed: "464 KTAS",
     range: "2,010 NM",
     mission: "European city pairs (Bucharest to Paris, London, Nice, or Geneva)",
-    reason: "Fast, efficient, and ideal for European regional hops with class-leading speed.",
+    reason: "Fast, efficient, and undisputed class leader for European regional hops with stand-out agility.",
   },
   {
     name: "Praetor 600",
     manufacturer: "Embraer",
     category: "SUPER MIDSIZE JET",
     slug: "praetor-600",
-    image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=80",
-    passengers: "9 - 12",
+    image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1400&q=85",
+    passengers: "9 - 12 PASSENGERS",
     speed: "466 KTAS",
     range: "4,018 NM",
     mission: "Transcontinental & Middle East routes (Bucharest to Dubai, Riyadh, New York)",
-    reason: "Stand-up flat-floor luxury with true intercontinental non-stop range.",
+    reason: "Stand-up flat-floor luxury with true intercontinental non-stop range and lowest cabin altitude.",
   },
   {
     name: "Challenger 350",
     manufacturer: "Bombardier",
     category: "SUPER MIDSIZE JET",
     slug: "challenger-350",
-    image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
-    passengers: 9,
+    image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1400&q=85",
+    passengers: "9 PASSENGERS",
     speed: "470 KTAS",
     range: "3,200 NM",
-    mission: "Cross-continental corporate missions with maximum quietness",
-    reason: "Unmatched cabin width, whisper-quiet flight deck, and proven reliability.",
+    mission: "Cross-continental corporate missions with maximum cabin width",
+    reason: "Unmatched cabin width, whisper-quiet acoustics, and proven trans-European reliability.",
   },
   {
     name: "Gulfstream G650ER",
     manufacturer: "Gulfstream",
     category: "LARGE CABIN JET",
     slug: "gulfstream-g650er",
-    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
-    passengers: "14 - 19",
+    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1400&q=85",
+    passengers: "14 - 19 PASSENGERS",
     speed: "516 KTAS",
     range: "7,500 NM",
     mission: "Global non-stop missions (Bucharest to Tokyo, Singapore, Los Angeles)",
-    reason: "Ultra-long range flagship connecting continents at Mach 0.90 with 4 living areas.",
+    reason: "Ultra-long range flagship connecting continents at Mach 0.90 with 4 distinct living zones.",
   },
 ];
 
@@ -83,30 +82,63 @@ const EXPERIENCES = [
   {
     title: "ISLAND ESCAPES",
     tagline: "Direct runway & seaplane landing in the Mediterranean & Maldives.",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=1000&q=85",
     badge: "TROPICAL // SEAPLANE",
     link: "/destinations/maldives",
   },
   {
     title: "ALPINE WEEKENDS",
     tagline: "Direct access to Samedan St. Moritz, Courchevel, and Geneva.",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85",
     badge: "ALPINE // RUNWAY",
     link: "/destinations",
   },
   {
     title: "MEDITERRANEAN COAST",
     tagline: "Fly directly into Nice Côte d'Azur, Cannes Mandelieu, or Ibiza.",
-    image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=85",
     badge: "COASTAL // FBO",
     link: "/destinations",
   },
   {
     title: "ROMANIA FROM ABOVE",
-    tagline: "Danube Delta, Transylvanian Alps, and castle helipads.",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+    tagline: "Danube Delta, Transylvanian Alps, and historic castle helipads.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=85",
     badge: "HELICOPTER // SCENIC",
     link: "/romania-from-above",
+  },
+];
+
+const MASONRY_PHOTOS = [
+  {
+    src: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85",
+    title: "Executive Jet Apron Staging",
+    caption: "RAMP STAGING // LRBS",
+    aspect: "col-span-12 md:col-span-7 h-96 sm:h-[480px]",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1000&q=85",
+    title: "Digital Flight Deck Avionics",
+    caption: "FLIGHT DECK // EASA ATPL",
+    aspect: "col-span-12 md:col-span-5 h-96 sm:h-[480px]",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1000&q=85",
+    title: "Four-Club Executive Cabin",
+    caption: "CABIN // STRATOSPHERE",
+    aspect: "col-span-12 md:col-span-4 h-80 sm:h-[380px]",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1000&q=85",
+    title: "Agusta AW139 Helicopter Touchdown",
+    caption: "TWIN TURBINE // HELIPAD",
+    aspect: "col-span-12 md:col-span-4 h-80 sm:h-[380px]",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=85",
+    title: "Cruising at FL410 Sunset",
+    caption: "AIRBORNE // CRUISE",
+    aspect: "col-span-12 md:col-span-4 h-80 sm:h-[380px]",
   },
 ];
 
@@ -116,654 +148,760 @@ export default async function HomePage() {
   return (
     <>
       <JsonLd data={createOrganizationJsonLd()} />
-      <div className="w-full flex flex-col gap-28 pb-24 bg-neutral-950 text-neutral-100 font-sans">
-        {/* 01 — HERO (Full Viewport Authentic Aviation Showcase) */}
+      <div className="w-full flex flex-col bg-white text-neutral-900 font-sans">
+        {/* 01 — HERO (Full Viewport Authentic Aviation Showcase - Cinematic Darkness) */}
         <Hero />
 
-        {/* 02 — THE FLIGHT DECISION (Aviation Control Interface) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-8">
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                  MISSION DISPATCH // SECTION 02
+        {/* 02 — EDITORIAL INTRODUCTION (White / Ivory Editorial Masterpiece) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="space-y-6">
+                <span className="editorial-tag-dark">
+                  EDITORIAL ESSENCE // THE PHILOSOPHY OF FLIGHT
                 </span>
-                <ProvenanceBadge status="VERIFIED" />
-              </div>
-              <SectionHeader
-                title="WHERE DO YOU WANT TO GO?"
-                description="Tell AIR where you want to go. We find the right way to fly, calculating direct flight tracks, aircraft performance, and optimal runway access."
-                titleAs="h2"
-              />
-            </div>
-
-            <FlightSearchForm />
-          </div>
-        </Container>
-
-        {/* 03 — AIR RECOMMENDS (Automotive Configurator Style Aircraft Recommendations) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-10 pt-8 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    CURATED FLEET RECOMMENDATIONS // SECTION 03
-                  </span>
-                  <ProvenanceBadge status="OFFICIAL_SOURCE" />
-                </div>
-                <h2 className="text-3xl sm:text-5xl font-light text-white tracking-tight font-sans">
-                  YOU DON&apos;T NEED TO KNOW WHICH AIRCRAFT<span className="text-amber-400">.</span><br />
-                  <span className="text-neutral-400">YOU JUST NEED TO KNOW WHERE YOU&apos;RE GOING.</span>
+                <h2 className="text-4xl sm:text-6xl md:text-7xl font-light text-neutral-900 tracking-tight leading-[1.05] font-sans">
+                  THE RIGHT WAY TO FLY<br />
+                  <span className="text-neutral-400">STARTS WITH THE RIGHT QUESTION.</span>
                 </h2>
+                <p className="text-lg sm:text-2xl text-neutral-600 font-light max-w-3xl leading-relaxed">
+                  Private aviation is not simply about chartering an aircraft. It is about understanding your exact mission envelope—range, passenger cabin requirements, runway length, and arrival access.
+                </p>
               </div>
-              <Button variant="outline" size="sm" asChild className="whitespace-nowrap">
-                <Link href="/aircraft">
-                  EXPLORE ALL AIRCRAFT →
-                </Link>
-              </Button>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {AIR_RECOMMENDS.map((rec) => (
-                <div
-                  key={rec.slug}
-                  className="glass-surface glass-surface-hover rounded-3xl overflow-hidden flex flex-col justify-between group border border-white/10"
-                >
-                  <div className="relative h-64 sm:h-72 w-full bg-neutral-900 overflow-hidden">
-                    <AviationImage
-                      src={rec.image}
-                      alt={`${rec.manufacturer} ${rec.name}`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      fallbackTitle={rec.name}
-                      fallbackCode={`FLEET // ${rec.name}`}
-                    />
-                    <div className="absolute top-4 left-4 bg-black/80 backdrop-blur-md border border-white/15 px-3 py-1 rounded text-[11px] font-mono text-amber-400 font-bold z-10">
-                      {rec.category}
-                    </div>
-                    <div className="absolute top-4 right-4 bg-black/80 backdrop-blur-md border border-white/15 px-3 py-1 rounded text-[11px] font-mono text-white z-10">
-                      {rec.speed}
-                    </div>
+              {/* Massive Magazine Cover Style Aircraft Showcase */}
+              <div className="relative h-[420px] sm:h-[620px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 group">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=2000&q=85"
+                  alt="Flagship Executive Jet Airborne Over Horizon"
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                  fallbackTitle="Flagship Jet"
+                  fallbackCode="EDITORIAL // HORIZON"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-white z-10">
+                  <div className="space-y-1">
+                    <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
+                      AIR FLAGSHIP DOSSIER // GULFSTREAM G650ER
+                    </span>
+                    <h3 className="text-2xl sm:text-4xl font-light font-sans">
+                      Stratospheric Precision at Mach 0.90
+                    </h3>
                   </div>
-
-                  <div className="p-8 space-y-6 flex-1 flex flex-col justify-between">
-                    <div className="space-y-2">
-                      <span className="text-[11px] font-mono text-neutral-400 uppercase tracking-wider block">
-                        {rec.manufacturer}
-                      </span>
-                      <h3 className="text-2xl sm:text-3xl font-light text-white group-hover:text-amber-300 transition font-sans">
-                        {rec.name}
-                      </h3>
-                      <p className="text-sm text-neutral-300 font-sans italic leading-relaxed pt-1">
-                        &ldquo;{rec.reason}&rdquo;
-                      </p>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] font-mono text-xs">
-                      <div>
-                        <span className="text-[9px] text-neutral-400 block uppercase">PASSENGERS</span>
-                        <span className="text-white font-bold">{rec.passengers}</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] text-neutral-400 block uppercase">MAX RANGE</span>
-                        <span className="text-amber-300 font-bold">{rec.range}</span>
-                      </div>
-                      <div>
-                        <span className="text-[9px] text-neutral-400 block uppercase">CRUISE</span>
-                        <span className="text-neutral-200">{rec.speed}</span>
-                      </div>
-                    </div>
-
-                    <div className="space-y-1 text-xs font-mono text-neutral-400">
-                      <span className="text-neutral-500 block uppercase text-[10px]">MISSION PROFILE:</span>
-                      <span className="text-neutral-300">{rec.mission}</span>
-                    </div>
-
-                    <div className="pt-2">
-                      <Button variant="outline" size="md" fullWidth asChild className="group-hover:border-amber-400/50">
-                        <Link href={`/aircraft/${rec.slug}`}>
-                          WHY AIR RECOMMENDS IT →
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
+                  <span className="text-xs font-mono text-neutral-300 bg-black/60 px-4 py-2 rounded-full border border-white/20 backdrop-blur-md">
+                    7,500 NM INTERCONTINENTAL RANGE
+                  </span>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </section>
 
-        {/* 04 — THE WORLD FROM ABOVE (Editorial Aviation Atlas & Departure Board) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-10 pt-8 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+        {/* 03 — FLIGHT DECISION (White / Ivory Luxury Editorial Environment) */}
+        <section className="w-full py-24 sm:py-32 bg-[#f8f8f5] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-10 max-w-6xl mx-auto">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    THE WORLD FROM ABOVE // EDITORIAL AVIATION ATLAS
+                  <span className="editorial-tag-dark">
+                    MISSION DISPATCH // SECTION 03
                   </span>
                   <ProvenanceBadge status="VERIFIED" />
                 </div>
-                <SectionHeader
-                  title="DESTINATIONS & AIRPORT INTELLIGENCE."
-                  description="Explore premier European business aviation gateways, runway approaches, and FBO handling availability originating from Bucharest Băneasa (LRBS)."
-                  titleAs="h2"
-                />
+                <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight font-sans">
+                  WHERE DO YOU WANT TO GO<span className="text-amber-600">?</span>
+                </h2>
+                <p className="text-base sm:text-lg text-neutral-600 font-light max-w-3xl leading-relaxed">
+                  Tell AIR where you want to go. We find the right way to fly, calculating direct flight tracks, aircraft performance, and optimal runway access.
+                </p>
               </div>
-              <Button variant="outline" size="sm" asChild className="whitespace-nowrap">
-                <Link href="/destinations">
-                  ALL DESTINATIONS →
-                </Link>
-              </Button>
-            </div>
 
-            {/* City Atlas Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-              {CITY_STRIP.map((c, i) => (
-                <Link
-                  key={i}
-                  href={`/${c.slug}`}
-                  className="group relative h-64 sm:h-72 rounded-2xl overflow-hidden glass-surface glass-surface-hover flex flex-col justify-end p-5 bg-neutral-900 border border-white/10"
-                >
-                  <AviationImage
-                    src={c.image}
-                    alt={c.city}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-500 opacity-60 group-hover:opacity-85"
-                    fallbackTitle={c.city}
-                    fallbackCode={`CITY // ${c.country}`}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/50 to-transparent pointer-events-none" />
-                  <div className="relative z-10 space-y-1">
-                    <span className="text-[10px] font-mono text-amber-400 font-bold uppercase block">{c.country}</span>
-                    <h3 className="text-2xl font-light text-white group-hover:text-amber-300 transition font-sans">{c.city}</h3>
-                    <p className="text-[10px] font-mono text-neutral-300">{c.airport}</p>
-                    <p className="text-[10px] font-mono text-amber-300/90 pt-1 border-t border-white/10">{c.route}</p>
-                  </div>
-                </Link>
-              ))}
+              <FlightSearchForm theme="light" />
             </div>
+          </Container>
+        </section>
 
-            {/* Interactive Departure Board Integration */}
-            <div className="pt-4">
-              <DestinationExplorer />
-            </div>
-          </div>
-        </Container>
-
-        {/* 05 — AIRCRAFT SHOWROOM (The Right Aircraft for the Right Mission) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-10 pt-8 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    AIRCRAFT SHOWROOM // CATEGORY INTELLIGENCE
+        {/* 04 — AIR RECOMMENDS (Light Editorial Aircraft Gallery) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    CURATED FLEET RECOMMENDATIONS // SECTION 04
                   </span>
-                  <ProvenanceBadge status="OFFICIAL_SOURCE" />
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight leading-tight font-sans">
+                    YOU DON&apos;T NEED TO KNOW WHICH AIRCRAFT<span className="text-amber-600">.</span><br />
+                    <span className="text-neutral-400 font-light">YOU JUST NEED TO KNOW WHERE YOU&apos;RE GOING.</span>
+                  </h2>
                 </div>
-                <SectionHeader
-                  title="THE RIGHT AIRCRAFT FOR THE RIGHT MISSION."
-                  description="Manufacturer specifications, cabin dimensions, runway performance, and mission suitability profiles across every business aviation category."
-                  titleAs="h2"
-                />
+                <Button variant="outline" size="md" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                  <Link href="/aircraft">
+                    EXPLORE ALL AIRCRAFT →
+                  </Link>
+                </Button>
               </div>
-              <Button variant="outline" size="sm" asChild className="whitespace-nowrap">
-                <Link href="/aircraft">
-                  VIEW COMPLETE FLEET (23 MODELS) →
-                </Link>
-              </Button>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {aircraftModels.slice(0, 3).map((ac) => {
-                const modelImg = ac.slug === "phenom-300"
-                  ? "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
-                  : ac.slug === "phenom-100"
-                  ? "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80"
-                  : "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80";
-                return (
-                  <div key={ac.id} className="glass-surface glass-surface-hover rounded-2xl overflow-hidden flex flex-col justify-between group border border-white/[0.08]">
-                    <div className="relative h-52 w-full bg-neutral-900 overflow-hidden">
+              {/* Editorial Product Presentation Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                {AIR_RECOMMENDS.map((rec) => (
+                  <div
+                    key={rec.slug}
+                    className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group"
+                  >
+                    <div className="relative h-72 sm:h-80 w-full bg-neutral-100 overflow-hidden">
                       <AviationImage
-                        src={modelImg}
-                        alt={`${ac.manufacturer} ${ac.model}`}
+                        src={rec.image}
+                        alt={`${rec.manufacturer} ${rec.name}`}
                         fill
-                        className="object-cover group-hover:scale-105 transition duration-500"
-                        fallbackTitle={`${ac.manufacturer} ${ac.model}`}
-                        fallbackCode={`FLEET // ${ac.model}`}
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        fallbackTitle={rec.name}
+                        fallbackCode={`FLEET // ${rec.name}`}
                       />
-                      <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md border border-white/[0.12] px-2.5 py-0.5 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
-                        {ac.category.replace(/_/g, " ")}
+                      <div className="absolute top-4 left-4 bg-white/95 text-neutral-900 backdrop-blur-md border border-neutral-200 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold z-10 shadow-sm">
+                        {rec.category}
+                      </div>
+                      <div className="absolute top-4 right-4 bg-neutral-900 text-amber-400 px-3.5 py-1 rounded-full text-[11px] font-mono font-bold z-10 shadow-sm">
+                        {rec.speed}
                       </div>
                     </div>
 
-                    <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono text-neutral-400 uppercase">{ac.manufacturer}</span>
-                          <ProvenanceBadge status={ac.dataStatus} />
-                        </div>
-                        <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">{ac.model}</h3>
-                        <p className="text-xs text-neutral-300 font-sans line-clamp-2 leading-relaxed">
-                          {ac.cabinHighlights}
+                    <div className="p-8 sm:p-10 space-y-6 flex-1 flex flex-col justify-between bg-white">
+                      <div className="space-y-2">
+                        <span className="text-[11px] font-mono text-neutral-500 uppercase tracking-wider block font-semibold">
+                          {rec.manufacturer} EXECUTIVE JETS
+                        </span>
+                        <h3 className="text-3xl font-light text-neutral-900 group-hover:text-amber-600 transition font-sans">
+                          {rec.name}
+                        </h3>
+                        <p className="text-sm text-neutral-600 font-sans italic leading-relaxed pt-1">
+                          &ldquo;{rec.reason}&rdquo;
                         </p>
                       </div>
 
-                      <div className="pt-3 border-t border-white/[0.08] font-mono text-xs space-y-1.5">
-                        <div className="flex justify-between text-neutral-400">
-                          <span>Max Range:</span>
-                          <span className="text-amber-300 font-bold">{ac.approximateRange} NM</span>
+                      <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-[#f8f8f5] border border-neutral-200/80 font-mono text-xs">
+                        <div>
+                          <span className="text-[9px] text-neutral-500 block uppercase font-bold">CAPACITY</span>
+                          <span className="text-neutral-900 font-bold">{rec.passengers}</span>
                         </div>
-                        <div className="flex justify-between text-neutral-400">
-                          <span>Cruise Speed:</span>
-                          <span className="text-neutral-200">{ac.typicalCruiseSpeed} KTAS</span>
+                        <div>
+                          <span className="text-[9px] text-neutral-500 block uppercase font-bold">RANGE</span>
+                          <span className="text-amber-600 font-bold">{rec.range}</span>
                         </div>
-                        <div className="flex justify-between text-neutral-400">
-                          <span>Capacity:</span>
-                          <span className="text-neutral-200">{ac.passengerCapacity} Passengers</span>
+                        <div>
+                          <span className="text-[9px] text-neutral-500 block uppercase font-bold">SPEED</span>
+                          <span className="text-neutral-900 font-bold">{rec.speed}</span>
                         </div>
                       </div>
 
+                      <div className="space-y-1 text-xs font-mono text-neutral-500 border-t border-neutral-100 pt-3">
+                        <span className="text-neutral-400 block uppercase text-[10px] font-bold">MISSION PROFILE:</span>
+                        <span className="text-neutral-700">{rec.mission}</span>
+                      </div>
+
                       <div className="pt-2">
-                        <Button variant="outline" size="sm" fullWidth asChild>
-                          <Link href={`/aircraft/${ac.slug}`}>
-                            VIEW DOSSIER & SPECS →
+                        <Button variant="primary" size="md" fullWidth asChild className="shadow-md">
+                          <Link href={`/aircraft/${rec.slug}`}>
+                            WHY AIR RECOMMENDS IT →
                           </Link>
                         </Button>
                       </div>
                     </div>
                   </div>
-                );
-              })}
+                ))}
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </section>
 
-        {/* 06 — BĂNEASA (Bucharest Executive Aviation Gateway) */}
-        <Container size="wide">
-          <div className="glass-elevated rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-white/10">
-            <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-between gap-6">
+        {/* 05 — PHOTOGRAPHIC AIRCRAFT GRID (Asymmetric Aviation Gallery) */}
+        <section className="w-full py-28 sm:py-36 bg-neutral-950 text-white border-b border-neutral-800">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    BUCHAREST AVIATION HUB // LRBS / BBU
-                  </span>
-                  <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB AIP Romania" showSource />
-                </div>
-                <h2 className="text-3xl sm:text-4xl font-light text-white font-sans">
-                  BUCHAREST BĂNEASA (LRBS / BBU).
+                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20">
+                  VISUAL ARCHIVE // SECTION 05
+                </span>
+                <h2 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight font-sans leading-tight">
+                  THE AIRCRAFT<br />
+                  <span className="text-amber-400">IS THE EXPERIENCE.</span>
                 </h2>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
-                  Romania&apos;s dedicated business aviation gateway. 2,358m asphalt runway (07/25), executive FBO VIP lounges, specialized ground handling, and direct proximity to northern Bucharest business hubs.
+                <p className="text-base sm:text-xl text-neutral-400 font-light max-w-2xl leading-relaxed">
+                  Every journey is defined by the vehicle that carries you. From flight decks and executive cabins to high-altitude wings and ramp arrivals.
                 </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 font-mono text-xs">
-                  <div className="glass-instrument p-3 rounded-xl">
-                    <span className="text-[9px] text-neutral-400 block">RUNWAY 07/25</span>
-                    <span className="text-white font-bold">2,358 × 45 M</span>
-                  </div>
-                  <div className="glass-instrument p-3 rounded-xl">
-                    <span className="text-[9px] text-neutral-400 block">FBO ACCESS</span>
-                    <span className="text-amber-400 font-bold">VIP LOUNGE</span>
-                  </div>
-                  <div className="glass-instrument p-3 rounded-xl col-span-2 sm:col-span-1">
-                    <span className="text-[9px] text-neutral-400 block">LOCATION</span>
-                    <span className="text-white font-bold">NORTH BUCHAREST</span>
-                  </div>
-                </div>
               </div>
 
-              <div>
-                <Button variant="primary" size="lg" asChild className="whitespace-nowrap">
-                  <Link href="/baneasa">
-                    EXPLORE BĂNEASA HUB (LRBS) →
+              {/* Asymmetric Masonry Grid */}
+              <div className="grid grid-cols-12 gap-6">
+                {MASONRY_PHOTOS.map((photo, i) => (
+                  <div
+                    key={i}
+                    className={`relative rounded-3xl overflow-hidden border border-white/10 group bg-neutral-900 ${photo.aspect}`}
+                  >
+                    <AviationImage
+                      src={photo.src}
+                      alt={photo.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100"
+                      fallbackTitle={photo.title}
+                      fallbackCode={photo.caption}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end z-10">
+                      <div>
+                        <span className="text-[10px] font-mono text-amber-400 font-bold block">{photo.caption}</span>
+                        <h4 className="text-lg sm:text-xl font-light text-white font-sans">{photo.title}</h4>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 06 — AIRCRAFT SHOWROOM (Aircraft, Without the Noise - Light Background) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    AIRCRAFT SHOWROOM // CATEGORY INTELLIGENCE
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight font-sans">
+                    AIRCRAFT, WITHOUT THE NOISE<span className="text-amber-600">.</span>
+                  </h2>
+                  <p className="text-base sm:text-lg text-neutral-600 font-light max-w-2xl leading-relaxed">
+                    Manufacturer specifications, cabin dimensions, runway performance, and mission suitability profiles across 23 verified fleet models.
+                  </p>
+                </div>
+                <Button variant="outline" size="md" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                  <Link href="/aircraft">
+                    VIEW COMPLETE FLEET (23 MODELS) →
                   </Link>
                 </Button>
               </div>
-            </div>
 
-            <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full bg-neutral-900">
-              <AviationImage
-                src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80"
-                alt="Bucharest Băneasa Executive Jet on Ramp"
-                fill
-                className="object-cover"
-                fallbackTitle="Băneasa LRBS Ramp"
-                fallbackCode="HUB // LRBS"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-neutral-950/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-mono text-amber-400">
-                LRBS // 44°30&apos;N 26°06&apos;E
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {aircraftModels.slice(0, 3).map((ac) => {
+                  const modelImg = ac.slug === "phenom-300"
+                    ? "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85"
+                    : ac.slug === "phenom-100"
+                    ? "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1000&q=85"
+                    : "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1000&q=85";
+                  return (
+                    <div key={ac.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group">
+                      <div className="relative h-60 w-full bg-neutral-100 overflow-hidden">
+                        <AviationImage
+                          src={modelImg}
+                          alt={`${ac.manufacturer} ${ac.model}`}
+                          fill
+                          className="object-cover group-hover:scale-105 transition duration-500"
+                          fallbackTitle={`${ac.manufacturer} ${ac.model}`}
+                          fallbackCode={`FLEET // ${ac.model}`}
+                        />
+                        <div className="absolute top-4 right-4 bg-white/95 text-neutral-900 backdrop-blur-md border border-neutral-200 px-3 py-1 rounded-full text-[10px] font-mono font-bold z-10 shadow-sm">
+                          {ac.category.replace(/_/g, " ")}
+                        </div>
+                      </div>
+
+                      <div className="p-8 space-y-5 flex-1 flex flex-col justify-between bg-white">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-mono text-neutral-500 uppercase font-bold">{ac.manufacturer}</span>
+                            <ProvenanceBadge status={ac.dataStatus} />
+                          </div>
+                          <h3 className="text-2xl font-light text-neutral-900 group-hover:text-amber-600 transition font-sans">{ac.model}</h3>
+                          <p className="text-xs text-neutral-600 font-sans line-clamp-2 leading-relaxed">
+                            {ac.cabinHighlights}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-neutral-100 font-mono text-xs space-y-2 text-neutral-700">
+                          <div className="flex justify-between">
+                            <span className="text-neutral-500">Max Range:</span>
+                            <span className="text-amber-600 font-bold">{ac.approximateRange} NM</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-neutral-500">Cruise Speed:</span>
+                            <span className="text-neutral-900 font-bold">{ac.typicalCruiseSpeed} KTAS</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-neutral-500">Capacity:</span>
+                            <span className="text-neutral-900 font-bold">{ac.passengerCapacity} Passengers</span>
+                          </div>
+                        </div>
+
+                        <div className="pt-2">
+                          <Button variant="outline" size="sm" fullWidth asChild className="border-neutral-200 hover:border-amber-500">
+                            <Link href={`/aircraft/${ac.slug}`}>
+                              VIEW DOSSIER & SPECS →
+                            </Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </section>
 
-        {/* 07 — EXPERIENCES (Some Places Are Better Reached By Air) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-10 pt-8 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    AVIATION EXPERIENCES // SECTION 07
+        {/* 07 — DESTINATIONS & AVIATION ATLAS (Light Travel Atlas) */}
+        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    THE WORLD FROM ABOVE // EDITORIAL AVIATION ATLAS
                   </span>
-                  <ProvenanceBadge status="VERIFIED" />
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight font-sans">
+                    THE WORLD, CONNECTED BY WINGS<span className="text-amber-600">.</span>
+                  </h2>
+                  <p className="text-base sm:text-lg text-neutral-600 font-light max-w-2xl leading-relaxed">
+                    Explore premier European business aviation gateways, runway approaches, and FBO handling availability originating from Bucharest Băneasa (LRBS).
+                  </p>
                 </div>
-                <SectionHeader
-                  title="SOME PLACES ARE BETTER REACHED BY AIR."
-                  description="From Mediterranean island airstrips to Alpine mountain runways, discover destinations built for private wings."
-                  titleAs="h2"
-                />
+                <Button variant="outline" size="md" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                  <Link href="/destinations">
+                    ALL DESTINATIONS →
+                  </Link>
+                </Button>
               </div>
-              <Button variant="outline" size="sm" asChild className="whitespace-nowrap">
-                <Link href="/destinations">
-                  ALL EXPERIENCES →
-                </Link>
-              </Button>
+
+              {/* City Atlas Strip */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                {CITY_STRIP.map((c, i) => (
+                  <Link
+                    key={i}
+                    href={`/${c.slug}`}
+                    className="group relative h-72 sm:h-80 rounded-3xl overflow-hidden editorial-card-light flex flex-col justify-end p-6 bg-neutral-900 border border-neutral-200"
+                  >
+                    <AviationImage
+                      src={c.image}
+                      alt={c.city}
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-700 opacity-60 group-hover:opacity-85"
+                      fallbackTitle={c.city}
+                      fallbackCode={`CITY // ${c.country}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none" />
+                    <div className="relative z-10 space-y-1 text-white">
+                      <span className="text-[10px] font-mono text-amber-400 font-bold uppercase block">{c.country}</span>
+                      <h3 className="text-2xl font-light group-hover:text-amber-300 transition font-sans">{c.city}</h3>
+                      <p className="text-[10px] font-mono text-neutral-300">{c.airport}</p>
+                      <p className="text-[10px] font-mono text-amber-300/90 pt-1 border-t border-white/10">{c.route}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Interactive Departure Board Integration */}
+              <div className="pt-6">
+                <DestinationExplorer />
+              </div>
             </div>
+          </Container>
+        </section>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {EXPERIENCES.map((exp, i) => (
-                <Link
-                  key={i}
-                  href={exp.link}
-                  className="group relative h-80 rounded-2xl overflow-hidden glass-surface glass-surface-hover flex flex-col justify-between p-6 bg-neutral-900 border border-white/10"
-                >
-                  <AviationImage
-                    src={exp.image}
-                    alt={exp.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-700 opacity-60 group-hover:opacity-80"
-                    fallbackTitle={exp.title}
-                    fallbackCode="EXP // AIR"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-transparent pointer-events-none" />
-
-                  <div className="relative z-10">
-                    <span className="text-[10px] font-mono text-amber-400 font-bold bg-black/60 px-2.5 py-1 rounded border border-white/10 backdrop-blur-md">
-                      {exp.badge}
+        {/* 08 — BUCHAREST BĂNEASA // LRBS / BBU (Home Gateway Dossier) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-[#fbfbfa]">
+              <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <span className="editorial-tag-dark">
+                      BUCHAREST AVIATION HUB // LRBS / BBU
                     </span>
+                    <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB AIP Romania" showSource />
                   </div>
-
-                  <div className="relative z-10 space-y-2">
-                    <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">{exp.title}</h3>
-                    <p className="text-xs text-neutral-300 font-sans leading-relaxed">{exp.tagline}</p>
-                    <span className="text-xs font-mono text-amber-400 block pt-1 group-hover:underline">
-                      EXPLORE MISSION →
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </Container>
-
-        {/* 08 — HELICOPTERS (When the Road is Too Slow / Intermodal Transfers) */}
-        <Container size="wide">
-          <div className="glass-elevated rounded-3xl p-8 md:p-12 space-y-10 shadow-2xl border border-white/10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
-              <div className="space-y-3 max-w-3xl">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    HELICOPTER DIRECT ACCESS // SECTION 08
-                  </span>
-                  <ProvenanceBadge status="VERIFIED" />
-                </div>
-                <h2 className="text-3xl sm:text-5xl font-light text-white tracking-tight font-sans">
-                  WHEN THE ROAD IS TOO SLOW<span className="text-amber-400">.</span>
-                </h2>
-                <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed">
-                  Aviation doesn&apos;t end at the runway. AIR seamlessly connects fixed-wing jet arrivals with twin-turbine helicopter transfers directly to city helipads, Alpine chalets, island resorts, and private superyachts.
-                </p>
-              </div>
-
-              <Link href="/plan">
-                <Button variant="primary" size="md" className="font-mono text-xs whitespace-nowrap">
-                  REQUEST HELICOPTER DISPATCH →
-                </Button>
-              </Link>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="glass-surface rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group">
-                <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                  <AviationImage
-                    src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
-                    alt="Executive Jet Touchdown"
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-500"
-                    fallbackTitle="Executive Touchdown"
-                    fallbackCode="STEP // 01"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-semibold z-10">
-                    STEP 01 • AIRPORT TOUCHDOWN
+                  <h2 className="text-4xl sm:text-5xl font-light text-neutral-900 font-sans">
+                    BUCHAREST BĂNEASA (LRBS / BBU).
+                  </h2>
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-sans">
+                    Romania&apos;s dedicated business aviation gateway. 2,358m asphalt runway (07/25), executive FBO VIP lounges, specialized ground handling, and direct proximity to northern Bucharest business hubs.
+                  </p>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 font-mono text-xs">
+                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                      <span className="text-[9px] text-neutral-500 block uppercase font-bold">RUNWAY 07/25</span>
+                      <span className="text-neutral-900 font-bold text-sm">2,358 × 45 M</span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                      <span className="text-[9px] text-neutral-500 block uppercase font-bold">FBO ACCESS</span>
+                      <span className="text-amber-600 font-bold text-sm">VIP LOUNGE</span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm col-span-2 sm:col-span-1">
+                      <span className="text-[9px] text-neutral-500 block uppercase font-bold">LOCATION</span>
+                      <span className="text-neutral-900 font-bold text-sm">NORTH BUCHAREST</span>
+                    </div>
                   </div>
                 </div>
-                <div className="p-6 space-y-2">
-                  <h3 className="text-lg font-medium text-white group-hover:text-amber-300 transition font-sans">Bucharest Băneasa Arrival</h3>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">Your jet lands at LRBS with zero commercial terminal congestion.</p>
+
+                <div>
+                  <Button variant="primary" size="lg" asChild className="whitespace-nowrap px-8">
+                    <Link href="/baneasa">
+                      EXPLORE BĂNEASA HUB (LRBS) →
+                    </Link>
+                  </Button>
                 </div>
               </div>
 
-              <div className="glass-surface rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group">
-                <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                  <AviationImage
-                    src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80"
-                    alt="Helicopter Ramp Boarding"
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-500"
-                    fallbackTitle="Helicopter Ramp Transfer"
-                    fallbackCode="STEP // 02"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-semibold z-10">
-                    STEP 02 • DIRECT RAMP BOARDING
-                  </div>
-                </div>
-                <div className="p-6 space-y-2">
-                  <h3 className="text-lg font-medium text-white group-hover:text-amber-300 transition font-sans">Agusta AW139 / H145</h3>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">Board a waiting twin-engine helicopter directly on the apron.</p>
-                </div>
-              </div>
-
-              <div className="glass-surface rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10 group">
-                <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                  <AviationImage
-                    src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"
-                    alt="Point-to-Point Helipad Arrival"
-                    fill
-                    className="object-cover group-hover:scale-105 transition duration-500"
-                    fallbackTitle="Helipad Arrival"
-                    fallbackCode="STEP // 03"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-semibold z-10">
-                    STEP 03 • POINT-TO-POINT TOUCHDOWN
-                  </div>
-                </div>
-                <div className="p-6 space-y-2">
-                  <h3 className="text-lg font-medium text-white group-hover:text-amber-300 transition font-sans">Helipad Direct Touchdown</h3>
-                  <p className="text-xs text-neutral-300 font-sans leading-relaxed">Bypass mountain roads and traffic directly to your destination.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-
-        {/* 09 — BUSINESS & CORPORATE AVIATION (Buy Back Your Time) */}
-        <Container size="wide">
-          <div className="glass-elevated rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-white/10">
-            <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-between gap-6">
-              <div className="space-y-4">
-                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                  CORPORATE AVIATION // SECTION 09
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-light text-white font-sans">
-                  BUY BACK YOUR TIME<span className="text-amber-400">.</span>
-                </h2>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
-                  Executive aviation was built to reclaim control of time. AIR streamlines corporate multi-city itineraries, executive shuttle optimization, and time-critical missions across 3,000+ European airfields.
-                </p>
-                <div className="grid grid-cols-2 gap-4 pt-2 font-mono text-xs">
-                  <div className="glass-instrument p-3 rounded-xl">
-                    <span className="text-[9px] text-neutral-400 block">MULTIPLE CITIES</span>
-                    <span className="text-white font-bold">SAME-DAY RETURN</span>
-                  </div>
-                  <div className="glass-instrument p-3 rounded-xl">
-                    <span className="text-[9px] text-neutral-400 block">ON-BOARD PRIVACY</span>
-                    <span className="text-amber-400 font-bold">CABIN CONFERENCE</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <Button variant="primary" size="lg" asChild className="whitespace-nowrap">
-                  <Link href="/business">
-                    EXPLORE CORPORATE SOLUTIONS →
-                  </Link>
-                </Button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5 relative min-h-[280px] lg:min-h-full bg-neutral-900">
-              <AviationImage
-                src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80"
-                alt="Executive Cabin Conference Boardroom"
-                fill
-                className="object-cover"
-                fallbackTitle="Executive Cabin"
-                fallbackCode="CORP // CABIN"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-neutral-950/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-mono text-amber-400">
-                BOARDROOM IN THE STRATOSPHERE
-              </div>
-            </div>
-          </div>
-        </Container>
-
-        {/* 10 — OWNERSHIP & ASSET INTELLIGENCE (When Flying Becomes Part of the Plan) */}
-        <Container size="wide">
-          <div className="flex flex-col gap-10 pt-8 border-t border-white/[0.08]">
-            <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                    ASSET & FLEET INTELLIGENCE // SECTION 10
-                  </span>
-                  <ProvenanceBadge status="VERIFIED" />
-                </div>
-                <SectionHeader
-                  title="WHEN FLYING BECOMES PART OF THE PLAN."
-                  description="Evaluate chartering, fractional ownership, full acquisition, and management structures tailored to your annual flight hours."
-                  titleAs="h2"
+              <div className="lg:col-span-5 relative min-h-[340px] lg:min-h-full bg-neutral-900">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80"
+                  alt="Bucharest Băneasa Executive Jet on Ramp"
+                  fill
+                  className="object-cover"
+                  fallbackTitle="Băneasa LRBS Ramp"
+                  fallbackCode="HUB // LRBS"
                 />
-              </div>
-              <Button variant="outline" size="sm" asChild className="whitespace-nowrap">
-                <Link href="/aircraft/ownership">
-                  OWNERSHIP GUIDE →
-                </Link>
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { title: "CHARTER", hours: "< 50 HOURS / YR", desc: "Pay-as-you-fly flexibility with zero capital commitment.", link: "/plan" },
-                { title: "LEASE", hours: "50 - 150 HOURS / YR", desc: "Predictable monthly economics with dedicated tail availability.", link: "/aviation/finance" },
-                { title: "MANAGE", hours: "AIRCRAFT OWNERS", desc: "Turnkey CAMO, crew, hangarage, and charter revenue offset.", link: "/aircraft/ownership" },
-                { title: "ACQUIRE", hours: "> 200 HOURS / YR", desc: "Full asset ownership, tax optimization, and bespoke cabin styling.", link: "/aircraft-for-sale" },
-              ].map((p, i) => (
-                <div key={i} className="glass-surface glass-surface-hover p-6 rounded-2xl flex flex-col justify-between gap-4 border border-white/10">
-                  <div className="space-y-2">
-                    <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-wider block">{p.hours}</span>
-                    <h3 className="text-2xl font-light text-white font-sans">{p.title}</h3>
-                    <p className="text-xs text-neutral-300 font-sans leading-relaxed">{p.desc}</p>
-                  </div>
-                  <Link href={p.link} className="text-xs font-mono text-amber-400 hover:underline pt-2 border-t border-white/10">
-                    DISCOVER {p.title} →
-                  </Link>
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-6 left-6 z-10 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs font-mono text-amber-400 font-bold">
+                  LRBS // 44°30&apos;N 26°06&apos;E
                 </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-
-        {/* 11 — JOURNAL & PHOTO ESSAYS (Aviation Editorial) */}
-        <Container size="wide">
-          <div className="glass-elevated rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-white/10">
-            <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-between gap-6">
-              <div className="space-y-4">
-                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20 backdrop-blur-md">
-                  AVIATION EDITORIAL & PHOTO STORIES // SECTION 11
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-light text-white font-sans">AIR Journal & Photo Stories</h2>
-                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans">
-                  Image-led visual stories exploring aviation from above, ramp operations at Băneasa, and the life of executive flight crews.
-                </p>
-              </div>
-
-              <div>
-                <Button variant="outline" size="lg" asChild className="whitespace-nowrap">
-                  <Link href="/journal">
-                    READ AIR JOURNAL →
-                  </Link>
-                </Button>
               </div>
             </div>
+          </Container>
+        </section>
 
-            <div className="lg:col-span-5 relative min-h-[260px] lg:min-h-full bg-neutral-900">
-              <AviationImage
-                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
-                alt="Aircraft Wing at Sunset Over Clouds"
-                fill
-                className="object-cover"
-                fallbackTitle="Aviation Editorial Photo"
-                fallbackCode="PHOTO // ESSAYS"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-neutral-950/80 via-transparent to-transparent pointer-events-none" />
-              <div className="absolute bottom-4 left-4 z-10 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-mono text-amber-400">
-                PHOTO ESSAY // ROMANIA FROM ABOVE
-              </div>
-            </div>
-          </div>
-        </Container>
+        {/* 09 — HELICOPTERS (When the Road is Too Slow - Dramatic Photographic Feature) */}
+        <section className="w-full py-28 sm:py-36 bg-neutral-950 text-white border-b border-neutral-800">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8">
+                <div className="space-y-4 max-w-3xl">
+                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded border border-amber-500/20">
+                    HELICOPTER DIRECT ACCESS // SECTION 09
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-white tracking-tight font-sans">
+                    WHEN THE ROAD<br />
+                    <span className="text-amber-400">IS TOO SLOW.</span>
+                  </h2>
+                  <p className="text-base sm:text-lg text-neutral-400 font-light leading-relaxed">
+                    Aviation doesn&apos;t end at the runway. AIR seamlessly connects fixed-wing jet arrivals with twin-turbine helicopter transfers directly to city helipads, Alpine chalets, island resorts, and private superyachts.
+                  </p>
+                </div>
 
-        {/* 12 — FINAL CTA (Your Next Flight Starts Here) */}
-        <Container size="wide">
-          <div className="relative overflow-hidden rounded-3xl border border-amber-400/30 glass-elevated p-10 sm:p-16 shadow-2xl">
-            <div className="absolute inset-0 z-0 opacity-25">
-              <AviationImage
-                src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80"
-                alt="Cruising Executive Jet in Clouds"
-                fill
-                className="object-cover filter brightness-75"
-                fallbackTitle="Executive Jet Airborne"
-                fallbackCode="CTA // AIRBORNE"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/80 to-neutral-950/60" />
-            </div>
-
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-8">
-              <div className="space-y-3 max-w-2xl">
-                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
-                  READY TO FIND THE RIGHT WAY TO FLY?
-                </span>
-                <h3 className="text-4xl sm:text-6xl font-light text-white font-sans tracking-tight leading-none">
-                  YOUR NEXT FLIGHT<br />STARTS HERE<span className="text-amber-400">.</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-neutral-300 font-sans leading-relaxed pt-1">
-                  Tell AIR where you want to go. We calculate aircraft range, airport runways, and matched fleet options within seconds.
-                </p>
-              </div>
-
-              <Button variant="primary" size="lg" asChild className="whitespace-nowrap px-10 py-5 text-base shadow-2xl">
                 <Link href="/plan">
-                  PLAN A FLIGHT →
+                  <Button variant="primary" size="lg" className="font-mono text-xs whitespace-nowrap px-8">
+                    REQUEST HELICOPTER DISPATCH →
+                  </Button>
                 </Link>
-              </Button>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group bg-neutral-900">
+                  <div className="relative h-64 w-full overflow-hidden">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
+                      alt="Executive Jet Touchdown"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="Executive Touchdown"
+                      fallbackCode="STEP // 01"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      STEP 01 • AIRPORT TOUCHDOWN
+                    </div>
+                  </div>
+                  <div className="p-8 space-y-2">
+                    <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">Bucharest Băneasa Arrival</h3>
+                    <p className="text-xs text-neutral-400 font-sans leading-relaxed">Your jet lands at LRBS with zero commercial terminal congestion.</p>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group bg-neutral-900">
+                  <div className="relative h-64 w-full overflow-hidden">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80"
+                      alt="Helicopter Ramp Boarding"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="Helicopter Ramp Transfer"
+                      fallbackCode="STEP // 02"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      STEP 02 • DIRECT RAMP BOARDING
+                    </div>
+                  </div>
+                  <div className="p-8 space-y-2">
+                    <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">Agusta AW139 / H145</h3>
+                    <p className="text-xs text-neutral-400 font-sans leading-relaxed">Board a waiting twin-engine turbine helicopter directly on the apron.</p>
+                  </div>
+                </div>
+
+                <div className="rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group bg-neutral-900">
+                  <div className="relative h-64 w-full overflow-hidden">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"
+                      alt="Point-to-Point Helipad Arrival"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="Helipad Arrival"
+                      fallbackCode="STEP // 03"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      STEP 03 • POINT-TO-POINT TOUCHDOWN
+                    </div>
+                  </div>
+                  <div className="p-8 space-y-2">
+                    <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">Helipad Direct Touchdown</h3>
+                    <p className="text-xs text-neutral-400 font-sans leading-relaxed">Bypass mountain roads and traffic directly to your destination chalet or yacht.</p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </section>
+
+        {/* 10 — BUSINESS AVIATION (Buy Back Your Time - White Editorial Canvas) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-[#fbfbfa]">
+              <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    CORPORATE AVIATION // SECTION 10
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 font-sans">
+                    BUY BACK YOUR TIME<span className="text-amber-600">.</span>
+                  </h2>
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-sans">
+                    Executive aviation was built to reclaim control of time. AIR streamlines corporate multi-city itineraries, executive shuttle optimization, and time-critical missions across 3,000+ European airfields.
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 pt-3 font-mono text-xs">
+                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                      <span className="text-[9px] text-neutral-500 block uppercase font-bold">MULTIPLE CITIES</span>
+                      <span className="text-neutral-900 font-bold text-sm">SAME-DAY RETURN</span>
+                    </div>
+                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                      <span className="text-[9px] text-neutral-500 block uppercase font-bold">ON-BOARD PRIVACY</span>
+                      <span className="text-amber-600 font-bold text-sm">CABIN CONFERENCE</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <Button variant="primary" size="lg" asChild className="whitespace-nowrap px-8">
+                    <Link href="/business">
+                      EXPLORE CORPORATE SOLUTIONS →
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 relative min-h-[340px] lg:min-h-full bg-neutral-900">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80"
+                  alt="Executive Cabin Conference Boardroom"
+                  fill
+                  className="object-cover"
+                  fallbackTitle="Executive Cabin"
+                  fallbackCode="CORP // CABIN"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-6 left-6 z-10 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs font-mono text-amber-400 font-bold">
+                  BOARDROOM IN THE STRATOSPHERE
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 11 — EXPERIENCES (Some Places Are Better Reached By Air) */}
+        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    AVIATION EXPERIENCES // SECTION 11
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight font-sans">
+                    SOME PLACES ARE BETTER REACHED BY AIR<span className="text-amber-600">.</span>
+                  </h2>
+                  <p className="text-base sm:text-lg text-neutral-600 font-light max-w-2xl leading-relaxed">
+                    From Mediterranean island airstrips to Alpine mountain runways, discover destinations built for private wings.
+                  </p>
+                </div>
+                <Button variant="outline" size="md" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                  <Link href="/destinations">
+                    ALL EXPERIENCES →
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {EXPERIENCES.map((exp, i) => (
+                  <Link
+                    key={i}
+                    href={exp.link}
+                    className="group relative h-96 rounded-3xl overflow-hidden editorial-card-light flex flex-col justify-between p-6 bg-neutral-900 border border-neutral-200"
+                  >
+                    <AviationImage
+                      src={exp.image}
+                      alt={exp.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-700 opacity-70 group-hover:opacity-90"
+                      fallbackTitle={exp.title}
+                      fallbackCode="EXP // AIR"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
+
+                    <div className="relative z-10">
+                      <span className="text-[10px] font-mono text-amber-400 font-bold bg-black/70 px-3 py-1 rounded-full border border-white/20 backdrop-blur-md">
+                        {exp.badge}
+                      </span>
+                    </div>
+
+                    <div className="relative z-10 space-y-2 text-white">
+                      <h3 className="text-2xl font-light group-hover:text-amber-300 transition font-sans">{exp.title}</h3>
+                      <p className="text-xs text-neutral-300 font-sans leading-relaxed">{exp.tagline}</p>
+                      <span className="text-xs font-mono text-amber-400 block pt-2 group-hover:underline">
+                        EXPLORE MISSION →
+                      </span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 12 — OWNERSHIP (When Flying Becomes Part of the Plan - Light Editorial Canvas) */}
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="flex flex-col gap-16 max-w-6xl mx-auto">
+              <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    ASSET & FLEET INTELLIGENCE // SECTION 12
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 tracking-tight font-sans">
+                    WHEN FLYING BECOMES PART OF THE PLAN<span className="text-amber-600">.</span>
+                  </h2>
+                  <p className="text-base sm:text-lg text-neutral-600 font-light max-w-2xl leading-relaxed">
+                    Evaluate chartering, fractional ownership, full acquisition, and management structures tailored to your annual flight hours.
+                  </p>
+                </div>
+                <Button variant="outline" size="md" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                  <Link href="/aircraft/ownership">
+                    OWNERSHIP GUIDE →
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { title: "CHARTER", hours: "< 50 HOURS / YR", desc: "Pay-as-you-fly flexibility with zero capital commitment.", link: "/plan" },
+                  { title: "LEASE", hours: "50 - 150 HOURS / YR", desc: "Predictable monthly economics with dedicated tail availability.", link: "/aviation/finance" },
+                  { title: "MANAGE", hours: "AIRCRAFT OWNERS", desc: "Turnkey CAMO, crew, hangarage, and charter revenue offset.", link: "/aircraft/ownership" },
+                  { title: "ACQUIRE", hours: "> 200 HOURS / YR", desc: "Full asset ownership, tax optimization, and bespoke cabin styling.", link: "/aircraft-for-sale" },
+                ].map((p, i) => (
+                  <div key={i} className="editorial-card-light p-8 rounded-3xl flex flex-col justify-between gap-6 bg-white">
+                    <div className="space-y-3">
+                      <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">{p.hours}</span>
+                      <h3 className="text-3xl font-light text-neutral-900 font-sans">{p.title}</h3>
+                      <p className="text-xs text-neutral-600 font-sans leading-relaxed">{p.desc}</p>
+                    </div>
+                    <Link href={p.link} className="text-xs font-mono text-amber-600 font-bold hover:underline pt-3 border-t border-neutral-100">
+                      DISCOVER {p.title} →
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 13 — JOURNAL & PHOTO ESSAYS (Print Publication Aesthetic) */}
+        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-white">
+              <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    AVIATION EDITORIAL & PHOTO STORIES // SECTION 13
+                  </span>
+                  <h2 className="text-4xl sm:text-6xl font-light text-neutral-900 font-sans">
+                    AIR Journal & Photo Stories
+                  </h2>
+                  <p className="text-sm sm:text-base text-neutral-600 leading-relaxed font-sans">
+                    Image-led visual stories exploring aviation from above, ramp operations at Băneasa, and the life of executive flight crews.
+                  </p>
+                </div>
+
+                <div>
+                  <Button variant="outline" size="lg" asChild className="whitespace-nowrap border-neutral-300 text-neutral-900 hover:bg-neutral-100 px-8">
+                    <Link href="/journal">
+                      READ AIR JOURNAL →
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5 relative min-h-[320px] lg:min-h-full bg-neutral-900">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
+                  alt="Aircraft Wing at Sunset Over Clouds"
+                  fill
+                  className="object-cover"
+                  fallbackTitle="Aviation Editorial Photo"
+                  fallbackCode="PHOTO // ESSAYS"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-6 left-6 z-10 bg-black/80 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20 text-xs font-mono text-amber-400 font-bold">
+                  PHOTO ESSAY // ROMANIA FROM ABOVE
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 14 — FINAL CTA (Your Next Flight Starts Here) */}
+        <section className="w-full py-28 sm:py-36 bg-neutral-950 text-white">
+          <Container size="wide">
+            <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-20 shadow-2xl max-w-6xl mx-auto">
+              <div className="absolute inset-0 z-0 opacity-25">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80"
+                  alt="Cruising Executive Jet in Clouds"
+                  fill
+                  className="object-cover filter brightness-75"
+                  fallbackTitle="Executive Jet Airborne"
+                  fallbackCode="CTA // AIRBORNE"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black via-black/85 to-black/60" />
+              </div>
+
+              <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-10">
+                <div className="space-y-4 max-w-2xl">
+                  <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
+                    READY TO FIND THE RIGHT WAY TO FLY?
+                  </span>
+                  <h3 className="text-4xl sm:text-6xl font-light text-white font-sans tracking-tight leading-none">
+                    YOUR NEXT FLIGHT<br />STARTS HERE<span className="text-amber-400">.</span>
+                  </h3>
+                  <p className="text-sm sm:text-base text-neutral-300 font-sans leading-relaxed pt-1">
+                    Tell AIR where you want to go. We calculate aircraft range, airport runways, and matched fleet options within seconds.
+                  </p>
+                </div>
+
+                <Button variant="primary" size="lg" asChild className="whitespace-nowrap px-12 py-6 text-base shadow-2xl font-bold">
+                  <Link href="/plan">
+                    PLAN A FLIGHT →
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          </Container>
+        </section>
       </div>
     </>
   );
