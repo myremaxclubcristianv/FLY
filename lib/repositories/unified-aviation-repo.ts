@@ -24,6 +24,7 @@ import { REAL_FLIGHT_SCHOOLS } from "../../data/real/schools";
 import { REAL_AVIATION_EXPLAINERS } from "../../data/real/explainers";
 import { REAL_AVIATION_TECH_ARTICLES } from "../../data/real/tech-articles";
 import { REAL_PHOTO_ESSAYS } from "../../data/real/photo-essays";
+import { LUXURY_DESTINATIONS } from "../../data/real/destinations";
 
 export class UnifiedAviationRepository {
   // Airports
@@ -150,6 +151,26 @@ export class UnifiedAviationRepository {
     if (!q) return [];
 
     const results: SearchResultItem[] = [];
+
+    // Destinations
+    LUXURY_DESTINATIONS.forEach((dest) => {
+      if (
+        dest.name.toLowerCase().includes(q) ||
+        dest.country.toLowerCase().includes(q) ||
+        dest.airportCode.toLowerCase().includes(q) ||
+        dest.region.toLowerCase().includes(q)
+      ) {
+        results.push({
+          id: `dest-${dest.id}`,
+          type: "DESTINATION",
+          title: dest.name,
+          subtitle: `${dest.region}, ${dest.country} • ${dest.airportCode}`,
+          href: `/destinations/${dest.slug}`,
+          dataStatus: "VERIFIED",
+          categoryTag: "DESTINATION",
+        });
+      }
+    });
 
     // Aircraft
     REAL_AIRCRAFT_MODELS.forEach((ac) => {

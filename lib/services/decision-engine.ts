@@ -11,7 +11,7 @@ import {
   TransportOption,
   DecisionPayload,
 } from "@/types/flight-request";
-import { formatFlightDuration } from "@/lib/utils/distance";
+import { formatFlightDuration, calculateGreatCircleDistanceNm } from "@/lib/utils/distance";
 
 export interface DecisionEngineInput {
   origin: string;
@@ -55,6 +55,57 @@ export interface RecommendationResult {
   }>;
 }
 
+const CITY_COORDINATES: Record<string, [number, number]> = {
+  bucharest: [44.5032, 26.1021], // LRBS
+  baneasa: [44.5032, 26.1021],
+  otopeni: [44.5711, 26.085],
+  bran: [45.515, 25.367],
+  brasov: [45.703, 25.529], // LROV
+  mamaia: [44.276, 28.618], // LRTZ
+  constanta: [44.362, 28.488], // LRCK
+  cluj: [46.785, 23.686], // CLJ
+  timisoara: [45.81, 21.337], // TSR
+  iasi: [47.178, 27.62], // IAS
+  sibiu: [45.785, 24.091], // SBZ
+  nice: [43.665, 7.215], // LFMN
+  cannes: [43.541, 6.953],
+  paris: [48.969, 2.441], // LFPB Le Bourget
+  london: [51.275, -0.776], // EGLF Farnborough
+  geneva: [46.238, 6.108], // LSGG
+  zurich: [47.458, 8.548], // LSZH
+  vienna: [48.11, 16.569], // LOWW
+  munich: [48.353, 11.786], // EDDM
+  frankfurt: [50.037, 8.562], // EDDF
+  milan: [45.445, 9.276], // LIML Linate
+  rome: [41.799, 12.246], // LIRF
+  madrid: [40.493, -3.566], // LEMD
+  ibiza: [38.872, 1.373], // LEIB
+  mykonos: [37.435, 25.348], // LGMK
+  athens: [37.936, 23.944], // LGAV
+  dubai: [24.896, 55.161], // OMDW
+  maldives: [4.191, 73.529], // VRMM
+  seychelles: [-4.674, 55.521], // FSIA
+  newyork: [40.639, -73.778], // KJFK
+};
+
+function resolveCoordinates(name: string): [number, number] | null {
+  const lower = name.toLowerCase();
+  for (const [key, coords] of Object.entries(CITY_COORDINATES)) {
+    if (lower.includes(key)) return coords;
+  }
+  return null;
+}
+
+function resolveDistance(origin: string, destination: string, explicitDistance?: number): number {
+  if (explicitDistance && explicitDistance > 0) return explicitDistance;
+  const c1 = resolveCoordinates(origin);
+  const c2 = resolveCoordinates(destination);
+  if (c1 && c2) {
+    return Math.max(calculateGreatCircleDistanceNm(c1[0], c1[1], c2[0], c2[1]), 35);
+  }
+  return 420; // Standard European regional default
+}
+
 /**
  * Deterministic AIR Mission Decision & Way-to-Fly Engine
  * Analyzes mission vector, airfield constraints, passenger count, mission purpose,
@@ -64,7 +115,6 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
   const {
     origin,
     destination,
-    distanceNm = 350,
     passengerCount = 2,
     priority = "FASTEST",
     tripType = "ONE_WAY",
@@ -77,6 +127,7 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
     runwayConstrained = false,
   } = input;
 
+  const distanceNm = resolveDistance(origin, destination, input.distanceNm);
   const originLower = origin.toLowerCase();
   const destLower = destination.toLowerCase();
   const isShortHop = distanceNm <= 180;
@@ -96,7 +147,7 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
     destLower.includes("tuzla") ||
     runwayConstrained;
 
-  // Case 1: Point-to-Point Helicopter Mission (Mountain resort, coastal pad, or short hop)
+  // Case 1: Point-to-Point Helicopter Mission (Mountain resort, coastal pad, or short hop under 180 NM)
   if (isMountainOrPad && isShortHop && passengerCount <= 6) {
     const primaryOpt: TransportOption = {
       id: "opt-primary-heli",
@@ -212,8 +263,95 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
     };
   }
 
-  // Case 2: High Passenger Manifest (8+ passengers)
-  if (passengerCount >= 8) {
+  // Case 2: Ultra Long Range (Transcontinental > 1,500 NM) or Heavy Manifest (10+ passengers)
+  if (distanceNm > 1500 || passengerCount >= 10) {
+    const primaryOpt: TransportOption = {
+      id: "opt-primary-heavy",
+      category: "LARGE_CABIN_JET",
+      categoryDisplayName: "Large Cabin / Heavy Jet",
+      name: "BOMBARDIER GLOBAL 6000 / GULFSTREAM G650",
+      tagline: "Transcontinental non-stop endurance with 3-zone private staterooms and high-speed cruise",
+      estimatedDuration: formatFlightDuration(distanceNm, 490),
+      status: "VERIFIED",
+      verificationStatus: "OFFICIAL_SOURCE",
+      pricingStatus: "REQUEST",
+      indicativePriceRange: "REQUEST OPERATOR QUOTE",
+      keyBenefit: "Over 6,000 NM non-stop range, full lie-flat berthing, flight attendant, hot galley dining",
+      suitableFor: "Transcontinental flights, Middle East/Asia routes, and delegations up to 14 passengers",
+      operationalConstraints: [
+        "Requires certified airport runway >= 1,650m",
+        "Two pilots + flight attendant mandatory",
+      ],
+      recommendationReason:
+        distanceNm > 1500
+          ? `For a transcontinental mission of ${distanceNm} NM, AIR recommends a Large Cabin Heavy Jet (Global 6000 / G650) to guarantee direct non-stop fuel endurance with full IFR reserves, eliminating time-consuming technical fuel stops.`
+          : `For a manifest of ${passengerCount} passengers, a Large Cabin Heavy Jet is required to provide certified seat belts, weight and balance compliance, and unrestricted baggage hold capacity.`,
+      routing: `${origin} → ${destination} (Transcontinental Direct Vector)`,
+      isPrimary: true,
+    };
+
+    const alt1: TransportOption = {
+      id: "opt-alt-super-mid",
+      category: "SUPER_MIDSIZE_JET",
+      categoryDisplayName: "Super Midsize Jet",
+      name: "BOMBARDIER CHALLENGER 350",
+      tagline: "Stand-up flat floor cabin for up to 9 passengers",
+      estimatedDuration: formatFlightDuration(distanceNm, 470),
+      status: "VERIFIED",
+      verificationStatus: "OFFICIAL_SOURCE",
+      pricingStatus: "INDICATIVE",
+      indicativePriceRange: "€14,000 - €18,500",
+      keyBenefit: "Economical stand-up cabin for missions up to 2,700 NM",
+      suitableFor: "Mid-to-long continental European and Middle East routes",
+      operationalConstraints: ["Max 9 passengers", "Range limit 2,700 NM"],
+      recommendationReason: "Optimized super-midsize alternative for medium-range legs.",
+      routing: `${origin} → ${destination} (Super Mid Vector)`,
+    };
+
+    return {
+      category: "LARGE_CABIN_JET",
+      categoryDisplayName: "Large Cabin Heavy Jet",
+      recommendedModelSlug: "global-6000",
+      recommendedModelName: "Bombardier Global 6000 / Gulfstream G650",
+      rationale: primaryOpt.recommendationReason,
+      estimatedDuration: formatFlightDuration(distanceNm, 490),
+      constraints: ["Requires minimum 1,650m runway length"],
+      dataStatus: "VERIFIED",
+      verificationStatus: "OFFICIAL_SOURCE",
+      recommendationScore: 96,
+      payload: {
+        missionTitle: `${origin} to ${destination} Long-Range Heavy Mission`,
+        origin,
+        destination,
+        passengers: passengerCount,
+        tripType,
+        date,
+        returnDate,
+        priority,
+        purpose,
+        dataStatus: "VERIFIED",
+        verificationStatus: "OFFICIAL_SOURCE",
+        summaryReason: primaryOpt.recommendationReason,
+        primaryOption: primaryOpt,
+        alternativeOptions: [alt1],
+      },
+      alternatives: [
+        {
+          category: "SUPER_MIDSIZE_JET",
+          categoryDisplayName: "Super Midsize Jet",
+          title: "Bombardier Challenger 350",
+          estimatedDuration: alt1.estimatedDuration,
+          rationale: alt1.recommendationReason,
+          indicativePriceRange: alt1.indicativePriceRange || "€14,000 - €18,500",
+          pricingStatus: "INDICATIVE",
+          constraints: alt1.operationalConstraints,
+        },
+      ],
+    };
+  }
+
+  // Case 3: High Passenger Manifest (7-9 passengers)
+  if (passengerCount >= 7) {
     const primaryOpt: TransportOption = {
       id: "opt-primary-super-mid",
       category: "SUPER_MIDSIZE_JET",
@@ -232,44 +370,26 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
         "Dedicated dual-pilot crew + optional flight hostess",
       ],
       recommendationReason:
-        "With 8+ passengers on manifest, AIR recommends a Super Midsize Jet (Bombardier Challenger 350). Smaller light jets cannot accommodate 8 passengers with full luggage without exceeding weight and balance limits. The Challenger 350 delivers true stand-up comfort, high-speed cruise (470 KTS), and extensive baggage capacity.",
+        `With ${passengerCount} passengers on manifest, AIR recommends a Super Midsize Jet (Bombardier Challenger 350). Smaller light jets cannot comfortably accommodate 7-9 passengers with full luggage without exceeding payload limits. The Challenger 350 delivers true stand-up comfort and high-speed cruise (470 KTS).`,
       routing: `${origin} → ${destination} (Direct Jet Vector)`,
       isPrimary: true,
     };
 
     const alt1: TransportOption = {
-      id: "opt-alt-large-cabin",
-      category: "LARGE_CABIN_JET",
-      categoryDisplayName: "Large Cabin Heavy Jet",
-      name: "BOMBARDIER GLOBAL 5000 / 6000",
-      tagline: "Ultra-long-range luxury flagship with 3 distinct zone cabins",
-      estimatedDuration: formatFlightDuration(distanceNm, 490),
-      status: "VERIFIED",
-      verificationStatus: "OFFICIAL_SOURCE",
-      pricingStatus: "INDICATIVE",
-      indicativePriceRange: "€14,000 - €21,000",
-      keyBenefit: "Master stateroom, full hot galley dining, transoceanic endurance",
-      suitableFor: "Ultra-VIP missions requiring maximum prestige, quiet, and private suite",
-      operationalConstraints: ["Requires major airport with long runway (>= 1,700m)"],
-      recommendationReason: "Expanded cabin volume with 3 distinct living zones and full lie-flat berthing.",
-      routing: `${origin} → ${destination} (Flagship Heavy Vector)`,
-    };
-
-    const alt2: TransportOption = {
       id: "opt-alt-midsize",
       category: "MIDSIZE_JET",
       categoryDisplayName: "Midsize Jet",
       name: "CESSNA CITATION XLS+",
-      tagline: "Efficient stand-up cabin sized precisely for 8 passengers on regional legs",
+      tagline: "Efficient stand-up cabin sized precisely for 7-8 passengers on regional legs",
       estimatedDuration: formatFlightDuration(distanceNm, 440),
       status: "VERIFIED",
       verificationStatus: "OFFICIAL_SOURCE",
       pricingStatus: "INDICATIVE",
       indicativePriceRange: "€7,800 - €10,500",
       keyBenefit: "Lower operating cost while maintaining stand-up headroom",
-      suitableFor: "Budget-conscious corporate travel within Europe for 8 passengers",
+      suitableFor: "Budget-conscious corporate travel within Europe",
       operationalConstraints: ["Reduced luggage allowance per seat compared to Super Midsize"],
-      recommendationReason: "Optimized budget alternative for 8 passengers on European routes.",
+      recommendationReason: "Optimized budget alternative for 7-8 passengers on European routes.",
       routing: `${origin} → ${destination} (Midsize Jet Vector)`,
     };
 
@@ -279,14 +399,14 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
       recommendedModelSlug: "challenger-350",
       recommendedModelName: "Bombardier Challenger 350",
       rationale:
-        "Stand-up cabin required for 8+ passengers with full luggage capacity, flight attendant service, and extended range capability.",
+        "Stand-up cabin required for 7+ passengers with full luggage capacity, flight attendant service, and extended range capability.",
       estimatedDuration: formatFlightDuration(distanceNm, 470),
       constraints: ["Requires minimum 1,400m runway length"],
       dataStatus: "VERIFIED",
       verificationStatus: "OFFICIAL_SOURCE",
       recommendationScore: 95,
       payload: {
-        missionTitle: `${origin} to ${destination} Executive Heavy Manifest Mission`,
+        missionTitle: `${origin} to ${destination} Executive Manifest Mission`,
         origin,
         destination,
         passengers: passengerCount,
@@ -299,34 +419,24 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
         verificationStatus: "OFFICIAL_SOURCE",
         summaryReason: primaryOpt.recommendationReason,
         primaryOption: primaryOpt,
-        alternativeOptions: [alt1, alt2],
+        alternativeOptions: [alt1],
       },
       alternatives: [
-        {
-          category: "LARGE_CABIN_JET",
-          categoryDisplayName: "Large Cabin Jet",
-          title: "Bombardier Global 5000 / 6000",
-          estimatedDuration: alt1.estimatedDuration,
-          rationale: alt1.recommendationReason,
-          indicativePriceRange: alt1.indicativePriceRange || "€14,000 - €21,000",
-          pricingStatus: "INDICATIVE",
-          constraints: alt1.operationalConstraints,
-        },
         {
           category: "MIDSIZE_JET",
           categoryDisplayName: "Midsize Jet",
           title: "Cessna Citation XLS+",
-          estimatedDuration: alt2.estimatedDuration,
-          rationale: alt2.recommendationReason,
-          indicativePriceRange: alt2.indicativePriceRange || "€7,800 - €10,500",
+          estimatedDuration: alt1.estimatedDuration,
+          rationale: alt1.recommendationReason,
+          indicativePriceRange: alt1.indicativePriceRange || "€7,800 - €10,500",
           pricingStatus: "INDICATIVE",
-          constraints: alt2.operationalConstraints,
+          constraints: alt1.operationalConstraints,
         },
       ],
     };
   }
 
-  // Case 3: Priority BEST_VALUE & Medium Distance (Pilatus PC-12 NGX)
+  // Case 4: Priority BEST_VALUE & Medium Distance (Pilatus PC-12 NGX)
   if (
     (priority === "BEST_VALUE" || budgetPreference === "VALUE_OPTIMIZED") &&
     distanceNm <= 500 &&
@@ -373,24 +483,6 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
       routing: `${origin} → ${destination} (Jet Vector)`,
     };
 
-    const alt2: TransportOption = {
-      id: "opt-alt-vlj",
-      category: "VERY_LIGHT_JET",
-      categoryDisplayName: "Very Light Jet",
-      name: "CESSNA CITATION MUSTANG",
-      tagline: "Ultra-compact jet pricing for 2 to 4 passengers",
-      estimatedDuration: formatFlightDuration(distanceNm, 360),
-      status: "VERIFIED",
-      verificationStatus: "OFFICIAL_SOURCE",
-      pricingStatus: "INDICATIVE",
-      indicativePriceRange: "€2,900 - €4,100",
-      keyBenefit: "Lowest entry charter price for pure jet flight",
-      suitableFor: "Solo travelers or couples with light luggage",
-      operationalConstraints: ["Strict 4-passenger cabin, compact baggage hold"],
-      recommendationReason: "Entry-level jet charter with compact 4-seat cabin.",
-      routing: `${origin} → ${destination} (VLJ Vector)`,
-    };
-
     return {
       category: "TURBOPROP",
       categoryDisplayName: "Single-Engine Executive Turboprop",
@@ -417,7 +509,7 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
         verificationStatus: "OFFICIAL_SOURCE",
         summaryReason: primaryOpt.recommendationReason,
         primaryOption: primaryOpt,
-        alternativeOptions: [alt1, alt2],
+        alternativeOptions: [alt1],
       },
       alternatives: [
         {
@@ -430,21 +522,11 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
           pricingStatus: "INDICATIVE",
           constraints: alt1.operationalConstraints,
         },
-        {
-          category: "VERY_LIGHT_JET",
-          categoryDisplayName: "Very Light Jet",
-          title: "Cessna Citation Mustang",
-          estimatedDuration: alt2.estimatedDuration,
-          rationale: alt2.recommendationReason,
-          indicativePriceRange: alt2.indicativePriceRange || "€2,900 - €4,100",
-          pricingStatus: "INDICATIVE",
-          constraints: alt2.operationalConstraints,
-        },
       ],
     };
   }
 
-  // Case 4: Standard European Mission -> EMBRAER PHENOM 300E (Europe's #1 Light Jet)
+  // Case 5: Default European Light Jet Mission -> EMBRAER PHENOM 300E (Europe's #1 Light Jet)
   const primaryOpt: TransportOption = {
     id: "opt-primary-phenom",
     category: "LIGHT_JET",
@@ -463,7 +545,7 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
       "Full IFR operational clearance",
     ],
     recommendationReason:
-      "AIR recommends the Embraer Phenom 300E as the optimal way to fly for this mission. It combines the highest speed in its class (453 KTS) with a quiet, low-altitude pressurized cabin, generous baggage hold, and proven operational availability across Romanian and European bases.",
+      `AIR recommends the Embraer Phenom 300E as the optimal way to fly for this ${distanceNm} NM mission. It combines the highest speed in its class (453 KTS) with a quiet, low-altitude pressurized cabin, generous baggage hold, and proven operational availability across Romanian and European bases.`,
     routing: `${origin} → ${destination} (Optimal Direct Jet Vector)`,
     isPrimary: true,
   };
@@ -509,8 +591,7 @@ export function evaluateMissionDecision(input: DecisionEngineInput): Recommendat
     categoryDisplayName: "Light Jet",
     recommendedModelSlug: "phenom-300e",
     recommendedModelName: "Embraer Phenom 300E",
-    rationale:
-      "Europe's most requested light jet class. Delivers high speed (453 KTS), best-in-class cabin altitude, and superior baggage capacity for up to 6 passengers.",
+    rationale: primaryOpt.recommendationReason,
     estimatedDuration: formatFlightDuration(distanceNm, 420),
     constraints: ["Requires certified asphalt/concrete runway >= 1,100m"],
     dataStatus: "VERIFIED",
