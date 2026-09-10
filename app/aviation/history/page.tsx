@@ -36,7 +36,7 @@ const HISTORICAL_TIMELINE = [
     title: "CFRNA — World's First Transcontinental Airline",
     desc: "The Franco-Rumanian Navigation Company (CFRNA) launched the first transcontinental scheduled passenger and night flight service connecting Paris, Strasbourg, Prague, Vienna, Budapest, and Bucharest Băneasa.",
     source: "ICAO Aviation History Registry",
-    img: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
   },
   {
     year: "1963",

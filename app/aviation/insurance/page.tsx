@@ -42,7 +42,7 @@ export default function AviationInsurancePage() {
           {/* Visual Showcase: Aircraft Hull & Maintenance Risk Verification */}
           <div className="relative h-72 sm:h-80 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
             <AviationImage
-              src="https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=80"
               alt="Aircraft Hull & Airframe Risk Verification"
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-700"

@@ -110,6 +110,6 @@ export const REAL_FLIGHT_SCHOOLS: FlightSchool[] = [
     dataStatus: "VERIFIED",
     source: { name: "Tuzla Heliport AACR Accreditation", type: "AACR", url: "https://regionalair.ro" },
     lastVerifiedAt: "2026-09-09",
-    image: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=80",
   },
 ];

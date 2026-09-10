@@ -40,7 +40,7 @@ const CAREER_PATHWAYS = [
     requirements: "Flight Dispatcher License (EASA/AACR) • Flight Planning & Meteorology Certification",
     desc: "Calculating fuel loads, filing ATC flight plans, evaluating airport NOTAMs, and monitoring live ADS-B tracking.",
     salary: "€32,000 – €70,000 / year",
-    img: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Air Traffic Controller (ATCO)",

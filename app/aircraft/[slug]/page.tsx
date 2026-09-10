@@ -36,7 +36,7 @@ const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit:
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
   },
   "cirrus-vision-jet": {
-    hero: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
   },
@@ -53,10 +53,10 @@ const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit:
   "citation-cj4": {
     hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1200&q=80",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
   },
   "citation-latitude": {
-    hero: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
   },
@@ -73,10 +73,10 @@ const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit:
   "challenger-350": {
     hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1200&q=80",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
   },
   "challenger-3500": {
-    hero: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
   },
@@ -93,7 +93,7 @@ const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit:
   "gulfstream-g650er": {
     hero: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1200&q=80",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
   },
   "gulfstream-g700": {
     hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=80",
@@ -101,27 +101,27 @@ const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit:
     cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
   },
   "global-6500": {
-    hero: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
   },
   "dassault-falcon-8x": {
     hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=1200&q=80",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
   },
   "pilatus-pc-12": {
-    hero: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
   },
   "daher-tbm-960": {
-    hero: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
   },
   "king-air-350i": {
-    hero: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
     interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
   },

@@ -22,7 +22,7 @@ export const metadata = {
 const CITY_STRIP = [
   { city: "BUCHAREST", airport: "LRBS — Băneasa Executive", country: "Romania", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80", slug: "baneasa" },
   { city: "PARIS", airport: "LFPB — Le Bourget", country: "France", image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
-  { city: "LONDON", airport: "EGLF — Farnborough", country: "United Kingdom", image: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
+  { city: "LONDON", airport: "EGLF — Farnborough", country: "United Kingdom", image: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
   { city: "NICE", airport: "LFMN — Côte d'Azur", country: "France", image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
   { city: "GENEVA", airport: "LSGG — Cointrin", country: "Switzerland", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
   { city: "MYKONOS", airport: "LGMK — Island Terminal", country: "Greece", image: "https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
@@ -32,7 +32,7 @@ const CITY_STRIP = [
 
 const BUCHAREST_ROUTES = [
   { origin: "BUCHAREST / LRBS", dest: "MALDIVES / MLE", time: "8h 30m", ac: "Heavy Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80" },
-  { origin: "BUCHAREST / LRBS", dest: "SEYCHELLES / SEZ", time: "9h 00m", ac: "Intercontinental Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1589553460732-58ef7a71fbb5?auto=format&fit=crop&w=800&q=80" },
+  { origin: "BUCHAREST / LRBS", dest: "SEYCHELLES / SEZ", time: "9h 00m", ac: "Intercontinental Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" },
   { origin: "BUCHAREST / LRBS", dest: "NICE / LFMN", time: "2h 35m", ac: "Light Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" },
   { origin: "BUCHAREST / LRBS", dest: "DUBAI / OMDW", time: "4h 50m", ac: "Super Midsize Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80" },
 ];
@@ -447,7 +447,7 @@ export default async function HomePage() {
                 const saleImgs = [
                   "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
                   "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80",
-                  "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80",
+                  "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
                 ];
                 return (
                   <Card key={item.id} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-400/50 transition-all duration-300 rounded-2xl p-0">

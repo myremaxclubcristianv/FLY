@@ -27,7 +27,7 @@ export const REAL_AVIATION_TECH_ARTICLES: AviationTechArticle[] = [
         ],
       },
     ],
-    image: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "tech-2",

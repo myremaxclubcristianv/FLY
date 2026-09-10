@@ -19,10 +19,10 @@ export default async function AviationPage() {
 
   const categories = [
     { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations.", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
-    { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes.", img: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=800&q=80" },
+    { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes.", img: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80" },
     { title: "AIRPORTS & HELIPORTS", count: "12 LOCATIONS", desc: "Băneasa (LRBS / BBU), Otopeni (LROP / OTP), Brașov (LROV), Constanța (LRCK), Tuzla (LRTZ).", img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" },
     { title: "FBO & HANDLING", count: "2 FACILITIES", desc: "VIP lounge access, customs clearance, and direct ramp car transfers.", img: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=800&q=80" },
-    { title: "MAINTENANCE & MRO", count: "INFRASTRUCTURE", desc: "Part-145 certified maintenance facilities and line servicing.", img: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80" },
+    { title: "MAINTENANCE & MRO", count: "INFRASTRUCTURE", desc: "Part-145 certified maintenance facilities and line servicing.", img: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80" },
     { title: "HANGARS & PARKING", count: "INFRASTRUCTURE", desc: "Executive aircraft parking, climate-controlled hangarage, and ground support.", img: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80" },
   ];
 

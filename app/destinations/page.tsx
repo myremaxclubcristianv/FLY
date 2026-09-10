@@ -18,7 +18,7 @@ export const metadata = {
 
 const BUCHAREST_ROUTES = [
   { origin: "BUCHAREST / LRBS", dest: "MALDIVES / MLE", dist: "3,820 NM", time: "8h 30m", ac: "Heavy Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80" },
-  { origin: "BUCHAREST / LRBS", dest: "SEYCHELLES / SEZ", dist: "3,950 NM", time: "9h 00m", ac: "Intercontinental Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1589553460732-58ef7a71fbb5?auto=format&fit=crop&w=800&q=80" },
+  { origin: "BUCHAREST / LRBS", dest: "SEYCHELLES / SEZ", dist: "3,950 NM", time: "9h 00m", ac: "Intercontinental Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80" },
   { origin: "BUCHAREST / LRBS", dest: "ST. BARTH / SBH", dist: "5,100 NM", time: "11h 45m", ac: "Heavy Jet + STOL", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" },
   { origin: "BUCHAREST / LRBS", dest: "NICE / LFMN", dist: "890 NM", time: "2h 35m", ac: "Light Jet", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80" },
   { origin: "BUCHAREST / LRBS", dest: "MYKONOS / JMK", dist: "480 NM", time: "1h 40m", ac: "Light Jet / Turboprop", prov: "AIR CALCULATED", img: "https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?auto=format&fit=crop&w=800&q=80" },
