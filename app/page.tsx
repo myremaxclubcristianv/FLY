@@ -153,7 +153,7 @@ export default async function HomePage() {
         <Hero />
 
         {/* 02 — EDITORIAL INTRODUCTION (White / Ivory Editorial Masterpiece) */}
-        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-40 bg-white border-b border-neutral-200/80">
           <Container size="wide">
             <div className="flex flex-col gap-16 max-w-6xl mx-auto">
               <div className="space-y-6">
@@ -199,8 +199,26 @@ export default async function HomePage() {
           </Container>
         </section>
 
+        {/* PAUSE SECTION 01 — THE EDITORIAL SILENCE */}
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <span className="editorial-tag-muted">
+                AIR // MISSION PHILOSOPHY
+              </span>
+              <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
+                THE BEST AIRCRAFT<br />
+                <span className="text-amber-600">IS THE ONE THAT FITS THE MISSION.</span>
+              </h3>
+              <p className="text-base sm:text-lg text-neutral-500 font-light max-w-xl mx-auto">
+                No single jet solves every journey. Speed, airfield runway length, passenger volume, and economics dictate the right choice.
+              </p>
+            </div>
+          </Container>
+        </section>
+
         {/* 03 — FLIGHT DECISION (White / Ivory Luxury Editorial Environment) */}
-        <section className="w-full py-24 sm:py-32 bg-[#f8f8f5] border-b border-neutral-200/80">
+        <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
           <Container size="wide">
             <div className="flex flex-col gap-10 max-w-6xl mx-auto">
               <div className="space-y-3">
@@ -224,7 +242,7 @@ export default async function HomePage() {
         </section>
 
         {/* 04 — AIR RECOMMENDS (Light Editorial Aircraft Gallery) */}
-        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
           <Container size="wide">
             <div className="flex flex-col gap-16 max-w-6xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -249,7 +267,7 @@ export default async function HomePage() {
                 {AIR_RECOMMENDS.map((rec) => (
                   <div
                     key={rec.slug}
-                    className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group"
+                    className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group bg-white"
                   >
                     <div className="relative h-72 sm:h-80 w-full bg-neutral-100 overflow-hidden">
                       <AviationImage
@@ -281,7 +299,7 @@ export default async function HomePage() {
                         </p>
                       </div>
 
-                      <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-[#f8f8f5] border border-neutral-200/80 font-mono text-xs">
+                      <div className="grid grid-cols-3 gap-3 p-4 rounded-2xl bg-[#fafaf7] border border-neutral-200/80 font-mono text-xs">
                         <div>
                           <span className="text-[9px] text-neutral-500 block uppercase font-bold">CAPACITY</span>
                           <span className="text-neutral-900 font-bold">{rec.passengers}</span>
@@ -317,7 +335,7 @@ export default async function HomePage() {
         </section>
 
         {/* EDITORIAL IMAGE MOMENT 01 — FULL WIDTH MAGAZINE PAUSE */}
-        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-32 sm:py-48">
+        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-36 sm:py-48">
           <div className="absolute inset-0 z-0">
             <AviationImage
               src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2200&q=85"
@@ -422,7 +440,7 @@ export default async function HomePage() {
                     ? "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1000&q=85"
                     : "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1000&q=85";
                   return (
-                    <div key={ac.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group">
+                    <div key={ac.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group bg-white">
                       <div className="relative h-60 w-full bg-neutral-100 overflow-hidden">
                         <AviationImage
                           src={modelImg}
@@ -480,8 +498,26 @@ export default async function HomePage() {
           </Container>
         </section>
 
+        {/* PAUSE SECTION 02 — THE ACCESS SOVEREIGNTY */}
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <span className="editorial-tag-muted">
+                AIR // ACCESS SOVEREIGNTY
+              </span>
+              <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
+                THE DISTANCE IS NOT THE PROBLEM.<br />
+                <span className="text-amber-600">THE WAY THERE IS.</span>
+              </h3>
+              <p className="text-base sm:text-lg text-neutral-500 font-light max-w-xl mx-auto">
+                Bypass commercial hub layovers and public security corridors with direct point-to-point runway dispatch.
+              </p>
+            </div>
+          </Container>
+        </section>
+
         {/* 07 — DESTINATIONS & AVIATION ATLAS (Light Travel Atlas) */}
-        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
           <Container size="wide">
             <div className="flex flex-col gap-16 max-w-6xl mx-auto">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -539,9 +575,9 @@ export default async function HomePage() {
         </section>
 
         {/* 08 — BUCHAREST BĂNEASA // LRBS / BBU (Home Gateway Dossier) */}
-        <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
           <Container size="wide">
-            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-[#fbfbfa]">
+            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-white">
               <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -557,15 +593,15 @@ export default async function HomePage() {
                     Romania&apos;s dedicated business aviation gateway. 2,358m asphalt runway (07/25), executive FBO VIP lounges, specialized ground handling, and direct proximity to northern Bucharest business hubs.
                   </p>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-3 font-mono text-xs">
-                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                    <div className="p-4 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm">
                       <span className="text-[9px] text-neutral-500 block uppercase font-bold">RUNWAY 07/25</span>
                       <span className="text-neutral-900 font-bold text-sm">2,358 × 45 M</span>
                     </div>
-                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm">
+                    <div className="p-4 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm">
                       <span className="text-[9px] text-neutral-500 block uppercase font-bold">FBO ACCESS</span>
                       <span className="text-amber-600 font-bold text-sm">VIP LOUNGE</span>
                     </div>
-                    <div className="p-4 rounded-2xl bg-white border border-neutral-200 shadow-sm col-span-2 sm:col-span-1">
+                    <div className="p-4 rounded-2xl bg-[#fafaf7] border border-neutral-200 shadow-sm col-span-2 sm:col-span-1">
                       <span className="text-[9px] text-neutral-500 block uppercase font-bold">LOCATION</span>
                       <span className="text-neutral-900 font-bold text-sm">NORTH BUCHAREST</span>
                     </div>
@@ -690,7 +726,7 @@ export default async function HomePage() {
         </section>
 
         {/* EDITORIAL IMAGE MOMENT 02 — THE SOVEREIGNTY OF TIME */}
-        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-32 sm:py-48">
+        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-36 sm:py-48">
           <div className="absolute inset-0 z-0">
             <AviationImage
               src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2200&q=85"
@@ -721,7 +757,7 @@ export default async function HomePage() {
         {/* 10 — BUSINESS AVIATION (Buy Back Your Time - White Editorial Canvas) */}
         <section className="w-full py-28 sm:py-36 bg-white border-b border-neutral-200/80">
           <Container size="wide">
-            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-[#fbfbfa]">
+            <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-[#fafaf7]">
               <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
                 <div className="space-y-4">
                   <span className="editorial-tag-dark">
@@ -773,7 +809,7 @@ export default async function HomePage() {
         </section>
 
         {/* 11 — EXPERIENCES (Some Places Are Better Reached By Air) */}
-        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
           <Container size="wide">
             <div className="flex flex-col gap-16 max-w-6xl mx-auto">
               <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
@@ -879,7 +915,7 @@ export default async function HomePage() {
         </section>
 
         {/* 13 — JOURNAL & PHOTO ESSAYS (Print Publication Aesthetic) */}
-        <section className="w-full py-28 sm:py-36 bg-[#f8f8f5] border-b border-neutral-200/80">
+        <section className="w-full py-28 sm:py-36 bg-[#fafaf7] border-b border-neutral-200/80">
           <Container size="wide">
             <div className="max-w-6xl mx-auto rounded-3xl overflow-hidden grid lg:grid-cols-12 shadow-2xl border border-neutral-200 bg-white">
               <div className="lg:col-span-7 p-10 md:p-14 flex flex-col justify-between gap-8">
