@@ -5,6 +5,7 @@ import { SectionHeader } from "../../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Card } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
+import { AviationImage } from "../../../components/AviationImage";
 
 export const metadata = {
   title: "Aircraft Ownership & Access Decision Matrix | AIR",
@@ -69,6 +70,49 @@ export default function AircraftOwnershipPage() {
               description="Selecting between on-demand charter, jet cards, fractional shares, full ownership, and management services requires matching annual block hours against capital liquidity goals."
               titleAs="h1"
             />
+          </div>
+
+          {/* Visual Asset Inspection Banner */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="relative h-64 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
+              <AviationImage
+                src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80"
+                alt="Aircraft Hangar Delivery & Management"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                fallbackTitle="Hangar Management"
+                fallbackCode="HANGAR // 01"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 z-10">
+                <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider block">
+                  FACILITY & HANGARAGE
+                </span>
+                <p className="text-xs text-neutral-200 font-sans mt-0.5">
+                  Controlled climate storage, Part-145 line maintenance, and secure ramp positioning at LRBS.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative h-64 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
+              <AviationImage
+                src="https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1200&q=80"
+                alt="Pre-Flight Airframe Inspection"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                fallbackTitle="Asset Inspection"
+                fallbackCode="INSPECTION // 02"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-4 left-4 right-4 z-10">
+                <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider block">
+                  TECHNICAL COMPLIANCE & AUDIT
+                </span>
+                <p className="text-xs text-neutral-200 font-sans mt-0.5">
+                  Rigorous airworthiness verification, engine cycle logging, and CAMO continuing management oversight.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Matrix Grid */}

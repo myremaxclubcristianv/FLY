@@ -5,6 +5,7 @@ import { SectionHeader } from "../../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Card } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
+import { AviationImage } from "../../../components/AviationImage";
 
 export const metadata = {
   title: "Aviation Insurance & Risk Coverage | AIR",
@@ -38,6 +39,31 @@ export default function AviationInsurancePage() {
             />
           </div>
 
+          {/* Visual Showcase: Aircraft Hull & Maintenance Risk Verification */}
+          <div className="relative h-72 sm:h-80 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
+            <AviationImage
+              src="https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=1200&q=80"
+              alt="Aircraft Hull & Airframe Risk Verification"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+              fallbackTitle="Aircraft Hull Risk"
+              fallbackCode="INSURANCE // HULL"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+            <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-1.5 z-10">
+              <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider">
+                PART-CAT STATUTORY RISK COMPLIANCE
+              </span>
+              <h3 className="text-xl font-light text-white">
+                Hull, War, and Third-Party Underwriting
+              </h3>
+              <p className="text-xs text-neutral-300 font-sans max-w-2xl">
+                Comprehensive flight line liability verification ensuring all charter operators carry minimum $50M–$500M third-party hull and passenger risk cover.
+              </p>
+            </div>
+          </div>
+
+          {/* Topics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {topics.map((t) => (
               <Card key={t.title} variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">

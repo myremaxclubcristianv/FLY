@@ -5,6 +5,7 @@ import { SectionHeader } from "../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../components/shared/DataStatusBadge";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
+import { AviationImage } from "../../components/AviationImage";
 import { operatorService } from "../../lib/services/operator-service";
 
 export const metadata = {
@@ -17,12 +18,12 @@ export default async function AviationPage() {
   const operators = await operatorService.getAll();
 
   const categories = [
-    { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations." },
-    { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes." },
-    { title: "AIRPORTS & HELIPORTS", count: "12 LOCATIONS", desc: "Băneasa (LRBS / BBU), Otopeni (LROP / OTP), Brașov (LROV), Constanța (LRCK), Tuzla (LRTZ)." },
-    { title: "FBO & HANDLING", count: "2 FACILITIES", desc: "VIP lounge access, customs clearance, and direct ramp car transfers." },
-    { title: "MAINTENANCE & MRO", count: "INFRASTRUCTURE", desc: "Part-145 certified maintenance facilities and line servicing." },
-    { title: "HANGARS & PARKING", count: "INFRASTRUCTURE", desc: "Executive aircraft parking, climate-controlled hangarage, and ground support." },
+    { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations.", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
+    { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes.", img: "https://images.unsplash.com/photo-1583071299210-c6c113f4cb91?auto=format&fit=crop&w=800&q=80" },
+    { title: "AIRPORTS & HELIPORTS", count: "12 LOCATIONS", desc: "Băneasa (LRBS / BBU), Otopeni (LROP / OTP), Brașov (LROV), Constanța (LRCK), Tuzla (LRTZ).", img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" },
+    { title: "FBO & HANDLING", count: "2 FACILITIES", desc: "VIP lounge access, customs clearance, and direct ramp car transfers.", img: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=800&q=80" },
+    { title: "MAINTENANCE & MRO", count: "INFRASTRUCTURE", desc: "Part-145 certified maintenance facilities and line servicing.", img: "https://images.unsplash.com/photo-1519074069444-1ba4ea16007e?auto=format&fit=crop&w=800&q=80" },
+    { title: "HANGARS & PARKING", count: "INFRASTRUCTURE", desc: "Executive aircraft parking, climate-controlled hangarage, and ground support.", img: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80" },
   ];
 
   return (
@@ -48,15 +49,23 @@ export default async function AviationPage() {
           {/* Infrastructure Categories */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((cat) => (
-              <Card key={cat.title} variant="surface" className="flex flex-col justify-between gap-6 p-8 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
-                <div className="flex flex-col gap-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-data text-amber-400 font-semibold">
-                      {cat.count}
-                    </span>
-                    <DataStatusBadge status="INDICATIVE" showDot={false} />
+              <Card key={cat.title} variant="surface" className="flex flex-col justify-between overflow-hidden group hover:border-amber-400/50 transition-all duration-300 rounded-2xl">
+                <div className="relative h-44 w-full bg-neutral-900 overflow-hidden">
+                  <AviationImage
+                    src={cat.img}
+                    alt={cat.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-500"
+                    fallbackTitle={cat.title}
+                    fallbackCode={`ECO // ${cat.title}`}
+                  />
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
+                    {cat.count}
                   </div>
-                  <h3 className="text-2xl font-light text-[var(--color-text-primary)]">
+                </div>
+
+                <div className="p-6 flex flex-col justify-between gap-3 flex-1">
+                  <h3 className="text-xl font-light text-[var(--color-text-primary)] group-hover:text-amber-300 transition-colors">
                     {cat.title}
                   </h3>
                   <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">

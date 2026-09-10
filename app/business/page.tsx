@@ -4,6 +4,7 @@ import { Container } from "../../components/layout/Container";
 import { SectionHeader } from "../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../components/shared/DataStatusBadge";
 import { Button } from "../../components/ui/Button";
+import { AviationImage } from "../../components/AviationImage";
 
 export const metadata = {
   title: "Corporate Aviation & Executive Flight Management | AIR",
@@ -53,6 +54,79 @@ export default function BusinessPage() {
               description="Executive aviation was built to reclaim control of time. AIR streamlines corporate multi-city itineraries, executive shuttle optimization, and time-critical missions."
               titleAs="h1"
             />
+          </div>
+
+          {/* Visual Showcase: Executive Flight Operations */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
+              <AviationImage
+                src="https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80"
+                alt="Executive Jet Cabin Conference"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                fallbackTitle="Executive Cabin"
+                fallbackCode="CABIN // 01"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-2 z-10">
+                <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider">
+                  CONFIDENTIAL IN-FLIGHT WORKSPACE
+                </span>
+                <h3 className="text-xl font-light text-white">
+                  Boardroom in the Stratosphere
+                </h3>
+                <p className="text-xs text-neutral-300 font-sans line-clamp-2">
+                  High-speed Ka-band connectivity, four-club conference seating, and zero acoustic interference for executive teams.
+                </p>
+              </div>
+            </div>
+
+            <div className="relative h-80 sm:h-96 rounded-2xl overflow-hidden glass-surface border border-white/10 group">
+              <AviationImage
+                src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80"
+                alt="Direct FBO Ramp Boarding"
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                fallbackTitle="FBO Ramp Transfer"
+                fallbackCode="RAMP // 02"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-2 z-10">
+                <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider">
+                  15-MINUTE FAST-TRACK DISPATCH
+                </span>
+                <h3 className="text-xl font-light text-white">
+                  Direct Tarmac Vehicle Access
+                </h3>
+                <p className="text-xs text-neutral-300 font-sans line-clamp-2">
+                  Arrive at Bucharest Băneasa (LRBS) 15 minutes prior to wheels up with dedicated customs, passport control, and ramp clearance.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Telemetry Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-data">
+            <div className="glass-instrument p-5 rounded-2xl flex flex-col gap-1">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">CURB-TO-CABIN TIME</span>
+              <span className="text-2xl text-amber-400 font-bold">15 MIN</span>
+              <span className="text-[10px] text-neutral-400">Băneasa LRBS VIP FBO</span>
+            </div>
+            <div className="glass-instrument p-5 rounded-2xl flex flex-col gap-1">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">EUROPEAN AIRFIELD ACCESS</span>
+              <span className="text-2xl text-amber-400 font-bold">3,000+</span>
+              <span className="text-[10px] text-neutral-400">vs 300 commercial hubs</span>
+            </div>
+            <div className="glass-instrument p-5 rounded-2xl flex flex-col gap-1">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">ANNUAL TIME RECLAIMED</span>
+              <span className="text-2xl text-amber-400 font-bold">140+ HRS</span>
+              <span className="text-[10px] text-neutral-400">Per executive traveler</span>
+            </div>
+            <div className="glass-instrument p-5 rounded-2xl flex flex-col gap-1">
+              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">CONFIDENTIALITY RISK</span>
+              <span className="text-2xl text-amber-400 font-bold">0%</span>
+              <span className="text-[10px] text-neutral-400">100% private cabin enclave</span>
+            </div>
           </div>
 
           {/* Workflow Comparison Grid */}
