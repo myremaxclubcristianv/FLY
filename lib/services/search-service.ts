@@ -117,8 +117,8 @@ export class DemoSearchService implements UnifiedSearchEngine {
           type: "JOURNAL",
           title: art.title,
           subtitle: `${art.category} // ${art.date}`,
-          href: "/#journal",
-          dataStatus: "LIVE",
+          href: "/journal",
+          dataStatus: "VERIFIED",
           categoryTag: "EDITORIAL",
         });
       }

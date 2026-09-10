@@ -40,7 +40,7 @@ export default function BusinessPage() {
       title: "Executive Shuttle Missions",
       tagline: "Recurring Corridors & Roadshows",
       desc: "Regular scheduled charter flights connecting Bucharest, Cluj, Timișoara, Vienna, Frankfurt, and London for leadership teams.",
-      features: ["Fixed dispatch schedules", "Pre-cleared passenger manifests", "Guaranteed aircraft staging at LRBS"],
+      features: ["Fixed dispatch schedules", "Pre-cleared passenger manifests", "Priority aircraft staging at LRBS"],
     },
     {
       title: "Multi-City Same-Day Itineraries",
@@ -240,7 +240,7 @@ export default function BusinessPage() {
                 OPTIMIZE YOUR CORPORATE TRAVEL
               </h3>
               <p className="text-sm text-neutral-300 font-sans">
-                Set up corporate accounts, recurring multi-city European routes, and guaranteed aircraft availability with verified AOC operators.
+                Set up corporate accounts, recurring multi-city European routes, and contracted fleet availability with verified AOC operators.
               </p>
             </div>
 

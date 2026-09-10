@@ -137,6 +137,12 @@ export default function QuoteComparisonView({ referenceId }: { referenceId: stri
         {hasLiveQuotes ? (
           /* PRESENTED QUOTES VIEW */
           <div className="space-y-6">
+            {(missionRecord?.isDemoRecord || referenceId === "AIR-2026-F982A1") && (
+              <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 font-mono flex items-center gap-2">
+                <span>ℹ</span>
+                <span>SAMPLE AUDITED DOSSIER // INDICATIVE ARCHIVE: The quotes displayed below illustrate historical operator filings for reference. Active charter dispatches require direct AOC confirmation.</span>
+              </div>
+            )}
             <h2 className="text-xl font-light text-white">Compare Verified Operator Options & Quotes</h2>
 
             <div className="grid lg:grid-cols-2 gap-6">
@@ -261,7 +267,7 @@ export default function QuoteComparisonView({ referenceId }: { referenceId: stri
                   Awaiting Verified Operator Bids
                 </h2>
                 <p className="text-sm text-neutral-300 leading-relaxed max-w-3xl">
-                  AIR Operations is currently contacting certified Romanian and European AOC operators for tail availability, crew duty cycles, and confirmed positioning costs. To maintain complete data integrity, no quotes are displayed until verified directly by operator dispatch.
+                  Your mission dispatch has been received. AIR Flight Operations will source verified operator availability, crew duty clearance, and positioning costs before presenting any quote. To maintain complete data integrity, no quotes are displayed until verified directly by operator dispatch.
                 </p>
               </div>
 

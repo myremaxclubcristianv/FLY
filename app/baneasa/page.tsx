@@ -253,7 +253,7 @@ export default async function BaneasaPage() {
                   PLAN YOUR DEPARTURE FROM LRBS
                 </h3>
                 <p className="text-sm text-neutral-300 font-sans">
-                  Calculate flight times, aircraft range envelopes, and instant quotes departing Bucharest Băneasa.
+                  Calculate flight times, aircraft range envelopes, and indicative operator quotes departing Bucharest Băneasa.
                 </p>
               </div>
 

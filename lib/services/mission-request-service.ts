@@ -33,6 +33,7 @@ export interface MissionDetailRecord extends FlightRequest {
   estimatedFlightTime: string;
   recommendationReason: string;
   constraints: string[];
+  isDemoRecord?: boolean;
 }
 
 export class MissionRequestService {
@@ -57,9 +58,10 @@ export class MissionRequestService {
         phone: "+40 722 000 001",
         message: "Direct transfer needed to Port Hercule following arrival.",
         status: "PRESENTED",
-        statusLabel: "Quotes Presented for Client Selection",
+        statusLabel: "Sample Audited Dossier // Indicative Archive",
         assignedAdvisor: "AIR Flight Operations Desk // LRBS",
         createdAt: "2026-09-08T14:30:00Z",
+        isDemoRecord: true,
         recommendedAircraft: "Embraer Phenom 300E",
         recommendedCategory: "Light Jet",
         estimatedFlightTime: "2h 15m",

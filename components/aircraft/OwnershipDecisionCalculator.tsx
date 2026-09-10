@@ -48,7 +48,7 @@ export function OwnershipDecisionCalculator() {
     } else if (annualHours >= 60) {
       recommendation = "FRACTIONAL LEASE / BLOCK-HOUR JET CARD";
       recommendationHeadline = "Block-Hour Program / Fractional Lease is the Sweet Spot";
-      recommendationReason = `Between 60 and 150 hours annually, a 25-50 hour corporate block program or dry lease provides guaranteed availability and locked pricing without committing €${(acquisitionCapital / 1000000).toFixed(1)}M in capital acquisition.`;
+      recommendationReason = `Between 60 and 150 hours annually, a 25-50 hour corporate block program or dry lease provides priority fleet access and contracted pricing without committing €${(acquisitionCapital / 1000000).toFixed(1)}M in capital acquisition.`;
     }
 
     return {

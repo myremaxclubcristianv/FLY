@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Container } from "../layout/Container";
 import { SectionHeader } from "../shared/SectionHeader";
 import { Card } from "../ui/Card";
@@ -24,12 +25,14 @@ export function JournalPreview() {
                     <span className="text-[10px] font-data text-[var(--color-accent)]">
                       {art.category} {"//"} {art.date}
                     </span>
-                    <DataStatusBadge status="LIVE" showDot={false} />
+                    <DataStatusBadge status="OFFICIAL_SOURCE" showDot={false} />
                   </div>
 
-                  <h4 className="text-xl font-light text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer">
-                    {art.title}
-                  </h4>
+                  <Link href="/journal">
+                    <h4 className="text-xl font-light text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer">
+                      {art.title}
+                    </h4>
+                  </Link>
 
                   <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                     {art.excerpt}
@@ -38,9 +41,9 @@ export function JournalPreview() {
 
                 <div className="pt-4 border-t border-[var(--color-border-subtle)] flex items-center justify-between text-[10px] font-data text-[var(--color-text-muted)]">
                   <span>READ TIME: {art.readTime}</span>
-                  <span className="text-[var(--color-accent)] hover:underline cursor-pointer">
+                  <Link href="/journal" className="text-[var(--color-accent)] hover:underline cursor-pointer">
                     READ ANALYSIS →
-                  </span>
+                  </Link>
                 </div>
               </Card>
             ))}

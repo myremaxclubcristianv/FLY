@@ -37,13 +37,13 @@ export function PlannerConfirmation({
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             MISSION DISPATCH // SOURCING INITIATED
           </span>
-          <DataStatusBadge status="OFFICIAL_SOURCE" />
+          <DataStatusBadge status="REQUEST" />
         </div>
         <h2 className="text-3xl sm:text-4xl font-light text-white">
           FLIGHT REQUEST SUBMITTED.
         </h2>
         <p className="text-sm text-neutral-300 leading-relaxed max-w-2xl">
-          AIR Operations has registered your mission parameters. We are currently querying verified AOC operators for authentic fleet availability and schedule confirmation.
+          Your mission dispatch has been received. AIR Flight Operations will source verified operator availability and itinerary clearance before presenting any quote.
         </p>
       </div>
 
@@ -51,7 +51,7 @@ export function PlannerConfirmation({
       <div className="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-neutral-900 to-neutral-900 border border-amber-500/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
         <div>
           <span className="text-[10px] font-data text-amber-400 uppercase tracking-widest block font-bold">
-            SERVER REFERENCE IDENTIFIER
+            AIR DISPATCH REFERENCE
           </span>
           <h3 className="text-2xl sm:text-3xl font-mono font-bold text-white tracking-wider mt-1">
             {refCode}

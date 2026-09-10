@@ -185,9 +185,14 @@ export default function AccountDashboard() {
         {/* Tab 1: Missions & Requests */}
         {activeTab === "missions" && (
           <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-light text-white">Active Flight Missions & Requests</h2>
-              <span className="text-xs text-neutral-400 font-mono">Real-time Sourcing Lifecycle</span>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+              <div>
+                <h2 className="text-lg font-light text-white">Client Mission Dossiers & Requests</h2>
+                <p className="text-xs text-neutral-400 mt-0.5">
+                  Client Session Dispatch Cache // Requests created locally are queued for AIR Flight Operations review.
+                </p>
+              </div>
+              <span className="text-xs text-neutral-400 font-mono">Sourcing Lifecycle</span>
             </div>
 
             <div className="grid gap-4">
@@ -201,10 +206,16 @@ export default function AccountDashboard() {
                       <span className="font-mono text-xs text-amber-400 font-semibold bg-neutral-950 px-2.5 py-1 rounded border border-amber-500/20">
                         {m.referenceId}
                       </span>
-                      <span className="px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                        {m.status} {"//"} {m.statusLabel}
-                      </span>
-                      <DataStatusBadge status="OFFICIAL_SOURCE" />
+                      {m.isDemoRecord || m.referenceId === "AIR-2026-F982A1" ? (
+                        <span className="px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                          SAMPLE AUDITED ARCHIVE
+                        </span>
+                      ) : (
+                        <span className="px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                          {m.status} {"//"} {m.statusLabel}
+                        </span>
+                      )}
+                      <DataStatusBadge status={m.quotes && m.quotes.length > 0 ? "INDICATIVE" : "REQUEST"} />
                     </div>
 
                     <div className="text-lg text-white font-medium">
