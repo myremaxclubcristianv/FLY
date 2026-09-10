@@ -3,7 +3,6 @@ import Link from "next/link";
 import { FlightMission, FlightOption, QuoteRequest } from "../../types/domain";
 import { DataStatusBadge } from "../shared/DataStatusBadge";
 import { Button } from "../ui/Button";
-import { Card } from "../ui/Card";
 
 export interface PlannerConfirmationProps {
   mission: FlightMission;
@@ -12,118 +11,151 @@ export interface PlannerConfirmationProps {
   onReset: () => void;
 }
 
+const WORKFLOW_STEPS = [
+  { step: "01", key: "REQUESTED", label: "REQUESTED", desc: "Mission logged & registered", active: true },
+  { step: "02", key: "SOURCING", label: "SOURCING", desc: "AOC fleet availability dispatch", active: true },
+  { step: "03", key: "QUOTES_RECEIVED", label: "QUOTES RECEIVED", desc: "Direct operator pricing received", active: false },
+  { step: "04", key: "AIR_REVIEW", label: "AIR REVIEW", desc: "Safety audit & itinerary vetting", active: false },
+  { step: "05", key: "PRESENTED", label: "PRESENTED", desc: "Presented in My AIR portal", active: false },
+  { step: "06", key: "CONFIRMED", label: "CONFIRMED", desc: "Contract & flight dispatch", active: false },
+];
+
 export function PlannerConfirmation({
   mission,
   selectedOption,
   quoteRequest,
   onReset,
 }: PlannerConfirmationProps) {
-  const statusSteps = [
-    { key: "REQUESTED", label: "01. REQUESTED" },
-    { key: "UNDER_REVIEW", label: "02. UNDER REVIEW" },
-    { key: "SENT", label: "03. SENT TO OPERATOR" },
-    { key: "PRESENTED", label: "04. OPTION PRESENTED" },
-  ];
+  const refCode = quoteRequest.id || mission.referenceId || "AIR-2026-DISPATCH";
 
   return (
-    <div className="flex flex-col gap-10 animate-fadeIn">
-      {/* Header Banner */}
-      <div className="bg-[var(--color-surface)] border border-[var(--color-border)] p-8 flex flex-col gap-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <span className="text-xs font-data text-[var(--color-accent)] tracking-widest uppercase">
-            QUOTE REQUEST // ID: {quoteRequest.id}
+    <div className="flex flex-col gap-10">
+      {/* Header */}
+      <div className="flex flex-col gap-3 border-b border-white/10 pb-6">
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-data text-emerald-400 uppercase font-semibold flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+            MISSION DISPATCH // SOURCING INITIATED
           </span>
-          <DataStatusBadge status="REQUEST" />
+          <DataStatusBadge status="OFFICIAL_SOURCE" />
         </div>
+        <h2 className="text-3xl sm:text-4xl font-light text-white">
+          FLIGHT REQUEST SUBMITTED.
+        </h2>
+        <p className="text-sm text-neutral-300 leading-relaxed max-w-2xl">
+          AIR Operations has registered your mission parameters. We are currently querying verified AOC operators for authentic fleet availability and schedule confirmation.
+        </p>
+      </div>
 
-        <div className="flex flex-col gap-2">
-          <h2 className="text-3xl sm:text-4xl font-light text-[var(--color-text-primary)]">
-            AIR IS PREPARING YOUR FLIGHT OPTIONS<span className="text-[var(--color-accent)]">.</span>
-          </h2>
-          <p className="text-sm text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
-            Thank you, <strong className="text-[var(--color-text-primary)]">{quoteRequest.customerName}</strong>. Your flight mission request for <strong className="text-[var(--color-text-primary)]">{mission.origin} → {mission.destination}</strong> has been logged in Phase 2 CRM infrastructure.
+      {/* Reference Card */}
+      <div className="p-6 rounded-2xl bg-gradient-to-r from-amber-500/10 via-neutral-900 to-neutral-900 border border-amber-500/30 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div>
+          <span className="text-[10px] font-data text-amber-400 uppercase tracking-widest block font-bold">
+            SERVER REFERENCE IDENTIFIER
+          </span>
+          <h3 className="text-2xl sm:text-3xl font-mono font-bold text-white tracking-wider mt-1">
+            {refCode}
+          </h3>
+          <p className="text-xs text-neutral-400 font-mono mt-1">
+            Timestamp: {new Date().toISOString()} {"//"} Status: SOURCING DISPATCH
           </p>
         </div>
 
-        {/* Quote Lifecycle Progress Indicator */}
-        <div className="pt-4 border-t border-[var(--color-border-subtle)] flex flex-col gap-3">
-          <span className="text-[10px] font-data text-[var(--color-text-muted)] uppercase">
-            OPERATOR QUOTE LIFECYCLE TRACKER
-          </span>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {statusSteps.map((st) => (
-              <div
-                key={st.key}
-                className={`p-3 border text-xs font-data text-center ${
-                  quoteRequest.status === st.key || st.key === "REQUESTED" || st.key === "UNDER_REVIEW"
-                    ? "bg-[var(--color-bg-primary)] border-[var(--color-accent)] text-[var(--color-accent)]"
-                    : "bg-[var(--color-surface)] border-[var(--color-border-subtle)] text-[var(--color-text-muted)]"
-                }`}
-              >
-                {st.label}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="p-4 bg-[var(--color-bg-primary)] border-l-2 border-[var(--color-accent)] text-xs text-[var(--color-text-muted)]">
-          <strong>PHASE 2 ARCHITECTURE NOTICE:</strong> Your quote request has been processed locally using Phase 2 CRM services. No live payment or binding charter contract has been finalized.
+        <div className="flex flex-wrap gap-3">
+          <Link href={`/account/requests/${refCode}`}>
+            <Button variant="primary" size="md">
+              TRACK IN MY AIR PORTAL →
+            </Button>
+          </Link>
+          <Button variant="outline" size="md" onClick={onReset}>
+            + PLAN ANOTHER FLIGHT
+          </Button>
         </div>
       </div>
 
-      {/* Selected Option Summary */}
-      <Card variant="surface" className="flex flex-col gap-6 p-8 border-2 border-[var(--color-accent-muted)]">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[var(--color-border)] pb-4">
-          <div>
-            <span className="text-[10px] font-data text-[var(--color-accent)] uppercase">
-              SELECTED VEHICLE PROFILE
-            </span>
-            <h3 className="text-2xl font-light text-[var(--color-text-primary)]">
-              {selectedOption.aircraftName}
-            </h3>
+      {/* SOURCING WORKFLOW PIPELINE */}
+      <div className="flex flex-col gap-4">
+        <span className="text-xs font-data text-neutral-400 uppercase tracking-widest">
+          AIR SOURCING & REVIEW WORKFLOW
+        </span>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {WORKFLOW_STEPS.map((ws, i) => (
+            <div
+              key={ws.key}
+              className={`p-4 rounded-xl border flex flex-col justify-between gap-3 text-xs font-data ${
+                i === 0
+                  ? "bg-emerald-500/10 border-emerald-400 text-emerald-400"
+                  : i === 1
+                  ? "bg-amber-500/10 border-amber-400 text-amber-400 ring-1 ring-amber-400/40 animate-pulse"
+                  : "bg-neutral-950/60 border-white/10 text-neutral-500"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] opacity-75 font-mono">{ws.step}</span>
+                {i <= 1 && <span>●</span>}
+              </div>
+              <div>
+                <h4 className="font-bold tracking-wider uppercase text-[11px]">
+                  {ws.label}
+                </h4>
+                <p className="text-[9px] text-neutral-400 mt-0.5 leading-tight">
+                  {ws.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mission Summary Breakdown */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 rounded-2xl bg-neutral-900/60 border border-white/10">
+        <div className="space-y-4">
+          <h4 className="text-xs font-data text-amber-400 uppercase tracking-wider font-bold">
+            MISSION FLIGHT PARAMETERS
+          </h4>
+          <div className="space-y-2 text-xs font-data text-neutral-300">
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">ROUTING</span>
+              <span className="text-white font-medium">{mission.origin} → {mission.destination}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">DATE & TIME</span>
+              <span className="text-white font-medium">{mission.date} {mission.preferredTime ? `@ ${mission.preferredTime}` : ""}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">PASSENGERS</span>
+              <span className="text-white font-medium">{mission.passengers} pax</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">CORE PRIORITY</span>
+              <span className="text-amber-400 font-medium">{mission.priority}</span>
+            </div>
           </div>
-          <span className="text-xs font-data text-[var(--color-text-primary)] bg-[var(--color-bg-primary)] px-3 py-1.5 border border-[var(--color-border)]">
-            ESTIMATED: {selectedOption.estimatedDuration}
-          </span>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-data text-[var(--color-text-secondary)]">
-          <div>
-            <span className="block text-[10px] text-[var(--color-text-muted)]">ORIGIN</span>
-            <span className="text-[var(--color-text-primary)]">{mission.origin}</span>
-          </div>
-          <div>
-            <span className="block text-[10px] text-[var(--color-text-muted)]">DESTINATION</span>
-            <span className="text-[var(--color-text-primary)]">{mission.destination}</span>
-          </div>
-          <div>
-            <span className="block text-[10px] text-[var(--color-text-muted)]">DATE</span>
-            <span className="text-[var(--color-text-primary)]">{mission.date}</span>
-          </div>
-          <div>
-            <span className="block text-[10px] text-[var(--color-text-muted)]">PASSENGERS</span>
-            <span className="text-[var(--color-text-primary)]">{mission.passengers} PASSENGERS</span>
+        <div className="space-y-4">
+          <h4 className="text-xs font-data text-amber-400 uppercase tracking-wider font-bold">
+            SELECTED AIRCRAFT VEHICLE
+          </h4>
+          <div className="space-y-2 text-xs font-data text-neutral-300">
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">MODEL</span>
+              <span className="text-white font-medium">{selectedOption.aircraftName}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">CATEGORY</span>
+              <span className="text-white font-medium">{selectedOption.aircraftCategory.replace(/_/g, " ")}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">ESTIMATED FLIGHT TIME</span>
+              <span className="text-white font-medium">{selectedOption.estimatedDuration}</span>
+            </div>
+            <div className="flex justify-between py-1.5 border-b border-white/5">
+              <span className="text-neutral-500">STATUS</span>
+              <span className="text-amber-400 font-medium">AOC SOURCING ACTIVE</span>
+            </div>
           </div>
         </div>
-
-        <div className="p-4 bg-[var(--color-bg-primary)] text-xs text-[var(--color-text-secondary)] leading-relaxed">
-          <span className="text-[10px] font-data text-[var(--color-accent)] block mb-1">
-            WHY THIS FITS YOUR MISSION
-          </span>
-          {selectedOption.recommendationReason}
-        </div>
-      </Card>
-
-      {/* Action Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[var(--color-border)]">
-        <Button variant="outline" size="md" onClick={onReset}>
-          PLAN ANOTHER MISSION
-        </Button>
-        <Link href="/">
-          <Button variant="primary" size="md">
-            RETURN TO AIR HOMEPAGE
-          </Button>
-        </Link>
       </div>
     </div>
   );

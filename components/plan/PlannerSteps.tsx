@@ -3,8 +3,16 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { FlightMission, FlightOption, QuoteRequest, MissionPriority } from "../../types/domain";
+import {
+  TripType,
+  DateFlexibility,
+  BudgetPreference,
+  MissionPurpose,
+  SpecialRequirement,
+} from "../../types/flight-request";
 import { missionService } from "../../lib/services/mission-service";
 import { quoteService } from "../../lib/services/quote-service";
+import { missionRequestService } from "../../lib/services/mission-request-service";
 import { StepWhere } from "./StepWhere";
 import { StepWhen } from "./StepWhen";
 import { StepWho } from "./StepWho";
@@ -18,16 +26,22 @@ function PlannerStepsContent() {
   const searchParams = useSearchParams();
 
   const [step, setStep] = useState<number>(1);
-  const [from, setFrom] = useState(searchParams.get("from") || "Bucharest");
-  const [to, setTo] = useState(searchParams.get("to") || "Bran");
-  const [date, setDate] = useState(searchParams.get("date") || "2026-09-12");
-  const [time, setTime] = useState(searchParams.get("time") || "09:00");
+  const [from, setFrom] = useState(searchParams.get("from") || "Bucharest Băneasa (LRBS)");
+  const [to, setTo] = useState(searchParams.get("to") || "Nice Côte d'Azur (LFMN)");
+  const [tripType, setTripType] = useState<TripType>("ONE_WAY");
+  const [date, setDate] = useState(searchParams.get("date") || "2026-09-24");
+  const [returnDate, setReturnDate] = useState("2026-09-28");
+  const [time, setTime] = useState(searchParams.get("time") || "10:30");
+  const [dateFlexibility, setDateFlexibility] = useState<DateFlexibility>("EXACT");
   const [passengers, setPassengers] = useState<number>(
     parseInt(searchParams.get("passengers") || "4", 10) || 4
   );
+  const [purpose, setPurpose] = useState<MissionPurpose>("EXECUTIVE_BUSINESS");
+  const [budgetPreference, setBudgetPreference] = useState<BudgetPreference>("STANDARD_CHARTER");
   const [priority, setPriority] = useState<MissionPriority>(
     (searchParams.get("priority") as MissionPriority) || "FASTEST"
   );
+  const [requirements, setRequirements] = useState<SpecialRequirement[]>([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -43,7 +57,17 @@ function PlannerStepsContent() {
     if (searchParams.has("to")) setTo(searchParams.get("to")!);
     if (searchParams.has("date")) setDate(searchParams.get("date")!);
     if (searchParams.has("time")) setTime(searchParams.get("time")!);
+    if (searchParams.has("passengers")) {
+      const p = parseInt(searchParams.get("passengers")!, 10);
+      if (!isNaN(p)) setPassengers(p);
+    }
   }, [searchParams]);
+
+  const handleToggleRequirement = (req: SpecialRequirement) => {
+    setRequirements((prev) =>
+      prev.includes(req) ? prev.filter((r) => r !== req) : [...prev, req]
+    );
+  };
 
   // When step reaches step 5 (comparison / evaluation), generate mission options
   const handleProceedToComparison = async () => {
@@ -79,6 +103,31 @@ function PlannerStepsContent() {
       notes: message,
     });
 
+    // Register in client-side mission storage
+    missionRequestService.createRequest({
+      from,
+      to,
+      tripType,
+      date,
+      returnDate: tripType === "ROUND_TRIP" ? returnDate : undefined,
+      time,
+      dateFlexibility,
+      passengers,
+      budgetPreference,
+      priority,
+      purpose,
+      requirements,
+      name,
+      email,
+      phone,
+      message,
+      recommendedAircraft: selectedOption.aircraftName,
+      recommendedCategory: selectedOption.aircraftCategory,
+      estimatedFlightTime: selectedOption.estimatedDuration,
+      recommendationReason: selectedOption.recommendationReason,
+      constraints: ["Verified AOC operator dispatch", "Standard IFR/VFR minima"],
+    });
+
     setQuoteRequest(qReq);
     setStep(7); // Confirmation
   };
@@ -86,9 +135,9 @@ function PlannerStepsContent() {
   const stepsList = [
     { num: 1, label: "WHERE" },
     { num: 2, label: "WHEN" },
-    { num: 3, label: "WHO" },
+    { num: 3, label: "WHO & PURPOSE" },
     { num: 4, label: "PRIORITY" },
-    { num: 5, label: "COMPARE" },
+    { num: 5, label: "WAY TO FLY" },
     { num: 6, label: "CONTACT" },
   ];
 
@@ -145,10 +194,16 @@ function PlannerStepsContent() {
 
         {step === 2 && (
           <StepWhen
+            tripType={tripType}
             date={date}
+            returnDate={returnDate}
             time={time}
+            dateFlexibility={dateFlexibility}
+            onChangeTripType={setTripType}
             onChangeDate={setDate}
+            onChangeReturnDate={setReturnDate}
             onChangeTime={setTime}
+            onChangeDateFlexibility={setDateFlexibility}
             onNext={() => setStep(3)}
             onBack={() => setStep(1)}
           />
@@ -157,7 +212,11 @@ function PlannerStepsContent() {
         {step === 3 && (
           <StepWho
             passengers={passengers}
+            purpose={purpose}
+            budgetPreference={budgetPreference}
             onChangePassengers={setPassengers}
+            onChangePurpose={setPurpose}
+            onChangeBudgetPreference={setBudgetPreference}
             onNext={() => setStep(4)}
             onBack={() => setStep(2)}
           />
@@ -166,36 +225,22 @@ function PlannerStepsContent() {
         {step === 4 && (
           <StepPriority
             priority={priority}
+            requirements={requirements}
             onChangePriority={setPriority}
+            onToggleRequirement={handleToggleRequirement}
             onNext={handleProceedToComparison}
             onBack={() => setStep(3)}
           />
         )}
 
         {step === 5 && (
-          <div className="flex flex-col gap-8">
-            <FlightComparison
-              options={options}
-              selectedOptionId={selectedOption?.id}
-              onSelectOption={handleSelectOption}
-            />
-            <div className="flex items-center justify-between pt-6 border-t border-white/10">
-              <button
-                type="button"
-                onClick={() => setStep(4)}
-                className="text-xs font-data text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-              >
-                ← BACK TO MISSION PRIORITY
-              </button>
-              <button
-                type="button"
-                onClick={() => setStep(6)}
-                className="px-6 py-3 bg-[var(--color-accent)] text-black font-data text-xs uppercase font-bold rounded-xl hover:bg-amber-400 transition-all shadow-lg hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]"
-              >
-                PROCEED TO QUOTE DETAILS →
-              </button>
-            </div>
-          </div>
+          <FlightComparison
+            options={options}
+            selectedOptionId={selectedOption?.id}
+            onSelectOption={handleSelectOption}
+            onProceed={() => setStep(6)}
+            onBack={() => setStep(4)}
+          />
         )}
 
         {step === 6 && (

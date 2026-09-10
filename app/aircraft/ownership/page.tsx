@@ -4,9 +4,10 @@ import { Container } from "../../../components/layout/Container";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Button } from "../../../components/ui/Button";
 import { AviationImage } from "../../../components/AviationImage";
+import { OwnershipDecisionCalculator } from "../../../components/aircraft/OwnershipDecisionCalculator";
 
 export const metadata = {
-  title: "Aircraft Ownership & Access Decision Matrix | AIR",
+  title: "Aircraft Ownership & Access Decision Matrix | CHARTER / SHARE / OWN | AIR",
   description:
     "Evaluate charter, membership, fractional, leasing, full ownership, and aircraft management models based on annual flight hours and operational complexity.",
 };
@@ -15,7 +16,7 @@ export default function AircraftOwnershipPage() {
   const models = [
     {
       title: "ON-DEMAND CHARTER",
-      hours: "1 - 25 HOURS / YEAR",
+      hours: "1 - 50 HOURS / YEAR",
       commitment: "ZERO CAPITAL COMMITMENT",
       summary: "Ideal for flexible, occasional flight needs with zero residual asset risk or fixed monthly overhead.",
       bestFor: "Individual missions, occasional corporate trips, seasonal vacation hops.",
@@ -23,7 +24,7 @@ export default function AircraftOwnershipPage() {
       cta: "PLAN FLIGHT →",
     },
     {
-      title: "LEASE & FINANCING",
+      title: "BLOCK-HOUR / LEASING",
       hours: "50 - 150 HOURS / YEAR",
       commitment: "PREDICTABLE MONTHLY LEASE",
       summary: "Guaranteed aircraft access and fixed monthly economics without balance sheet capital lockup.",
@@ -98,10 +99,10 @@ export default function AircraftOwnershipPage() {
                       FACILITY & HANGARAGE
                     </span>
                     <h3 className="text-2xl font-light font-sans">
-                      Controlled Climate Hangarage
+                      Turnkey Operational Oversight
                     </h3>
                     <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                      Climate-controlled storage, Part-145 line maintenance, and secure ramp positioning at Băneasa (LRBS).
+                      CAMO continuous airworthiness, EASA Part-145 maintenance, and dedicated crew scheduling.
                     </p>
                   </div>
                 </div>
@@ -110,23 +111,23 @@ export default function AircraftOwnershipPage() {
               <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white shadow-xl">
                 <div className="relative h-80 sm:h-96 w-full overflow-hidden bg-neutral-900">
                   <AviationImage
-                    src="https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=85"
-                    alt="Pre-Flight Airframe Inspection"
+                    src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85"
+                    alt="Executive Private Jet Aircraft Cockpit and Interior"
                     fill
                     className="object-cover group-hover:scale-105 transition duration-700"
-                    fallbackTitle="Airframe Inspection"
-                    fallbackCode="INSPECTION // CAMO"
+                    fallbackTitle="Private Aircraft Cockpit"
+                    fallbackCode="FLIGHT // ASSET"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
                   <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-2 z-10 text-white">
                     <span className="text-[10px] font-mono text-amber-400 font-bold tracking-wider uppercase">
-                      AIRWORTHINESS & COMPLIANCE
+                      WHOLE ASSET ACQUISITION
                     </span>
                     <h3 className="text-2xl font-light font-sans">
-                      Continuous CAMO Oversight
+                      Dedicated Fleet Sovereignty
                     </h3>
                     <p className="text-xs text-neutral-300 font-sans leading-relaxed">
-                      Full regulatory compliance, engine program enrollment, and certified maintenance tracking.
+                      100% mission availability, customized cabin configuration, and private tail registration.
                     </p>
                   </div>
                 </div>
@@ -136,54 +137,53 @@ export default function AircraftOwnershipPage() {
         </Container>
       </section>
 
-      {/* 02 — FOUR PILLARS OF ACCESS & OWNERSHIP */}
+      {/* 02 — INTERACTIVE OWNERSHIP CALCULATOR */}
+      <section className="w-full py-20 bg-white border-b border-neutral-200/80">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto">
+            <OwnershipDecisionCalculator />
+          </div>
+        </Container>
+      </section>
+
+      {/* 03 — COMPARATIVE MATRIX */}
       <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80">
         <Container size="wide">
           <div className="max-w-6xl mx-auto space-y-16">
             <div className="space-y-4">
               <span className="editorial-tag-dark">
-                ANNUAL UTILIZATION MATRIX
+                DECISION FRAMEWORK // 4 ACCESS TIERS
               </span>
               <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans">
-                Four Pillars of Private Aviation Access
+                Access Models Evaluated
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {models.map((m, i) => (
-                <div key={i} className="editorial-card-light p-8 sm:p-10 rounded-3xl space-y-6 flex flex-col justify-between bg-white">
+                <div key={i} className="editorial-card-light p-8 rounded-3xl space-y-6 flex flex-col justify-between bg-white shadow-sm">
                   <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono text-amber-600 font-bold tracking-wider uppercase">
-                        {m.hours}
-                      </span>
-                      <span className="text-[10px] font-mono px-3 py-1 bg-neutral-100 rounded-full text-neutral-600 font-semibold">
-                        {m.commitment}
-                      </span>
-                    </div>
-
-                    <h3 className="text-3xl font-light text-neutral-900 font-sans">
+                    <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                      {m.hours}
+                    </span>
+                    <h3 className="text-xl font-light text-neutral-900 font-sans">
                       {m.title}
                     </h3>
-
-                    <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    <p className="text-xs text-neutral-600 leading-relaxed font-sans">
                       {m.summary}
                     </p>
 
-                    <div className="pt-3 border-t border-neutral-100 space-y-1">
-                      <span className="text-[10px] font-mono text-neutral-400 uppercase font-bold block">RECOMMENDED PROFILE:</span>
-                      <p className="text-xs text-neutral-700 font-sans">{m.bestFor}</p>
+                    <div className="pt-2 border-t border-neutral-200 text-xs text-neutral-500 font-sans">
+                      <span className="text-[10px] font-mono uppercase text-neutral-400 block mb-1">BEST SUITED FOR:</span>
+                      {m.bestFor}
                     </div>
                   </div>
 
-                  <div className="pt-4">
-                    <Link
-                      href={m.link}
-                      className="text-xs font-mono text-amber-600 font-bold hover:underline"
-                    >
+                  <Link href={m.link} className="pt-4 border-t border-neutral-200">
+                    <Button variant="outline" size="sm" className="w-full text-center justify-center">
                       {m.cta}
-                    </Link>
-                  </div>
+                    </Button>
+                  </Link>
                 </div>
               ))}
             </div>
@@ -191,25 +191,25 @@ export default function AircraftOwnershipPage() {
         </Container>
       </section>
 
-      {/* 03 — MISSION PLANNER CTA */}
+      {/* 04 — CTA */}
       <section className="w-full py-24 sm:py-32 bg-neutral-950 text-white">
         <Container size="wide">
           <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-16 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-2xl">
               <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
-                PRIVATE AVIATION ADVISORY
+                AVIATION ASSET ADVISORY
               </span>
               <h3 className="text-3xl sm:text-5xl font-light text-white font-sans">
-                EVALUATE YOUR FLIGHT PROFILE
+                TALK WITH AN ASSET STRATEGIST
               </h3>
               <p className="text-sm text-neutral-300 font-sans">
-                Receive an objective fleet economics audit tailored to your corporate or family office flight patterns.
+                AIR provides unbiased operational audits comparing charter expenses against dry lease and Part-145 management.
               </p>
             </div>
 
             <Link href="/plan">
               <Button variant="primary" size="lg" className="whitespace-nowrap px-10 py-5 text-base shadow-2xl">
-                START ADVISORY REVIEW →
+                REQUEST AUDIT →
               </Button>
             </Link>
           </div>

@@ -6,9 +6,9 @@ import { Button } from "../../components/ui/Button";
 import { AviationImage } from "../../components/AviationImage";
 
 export const metadata = {
-  title: "Corporate Aviation & Executive Flight Management | AIR",
+  title: "Corporate Aviation & Executive Flight Management | BUY BACK YOUR TIME | AIR",
   description:
-    "Buy back your time. Optimize executive team travel, multi-city European shuttle missions, and time-sensitive corporate flight requirements.",
+    "Buy back your time. Optimize executive team travel, multi-city European shuttle missions, recurring corporate routes, and block-hour flight management.",
 };
 
 export default function BusinessPage() {
@@ -16,22 +16,43 @@ export default function BusinessPage() {
     {
       step: "01. DEPARTURE PLANNING",
       commercial: "Fixed airline flight schedules; 2-hour early arrival required at major hubs.",
-      executive: "Depart on your custom schedule; streamlined VIP arrival typically 20–30 minutes prior to boarding.",
+      executive: "Depart on your custom schedule; streamlined VIP arrival typically 15–20 minutes prior to boarding at Băneasa (LRBS).",
     },
     {
       step: "02. SECURITY & TERMINAL",
-      commercial: "Long TSA/security queues, public terminal crowds, and gate walking distance.",
-      executive: "Private FBO terminal handling, direct ramp vehicle transfer, quiet environment.",
+      commercial: "Long public queues, intrusive screening lines, crowded gates, and public exposure.",
+      executive: "Dedicated private FBO lounge handling, fast-track discreet customs, direct ramp vehicle to aircraft stairs.",
     },
     {
       step: "03. ROUTING & CONNECTIONS",
-      commercial: "Hub-and-spoke layovers, baggage transfers, connection risk, and regional delays.",
-      executive: "Point-to-point direct routing; access to 3,000+ regional airfields across Europe.",
+      commercial: "Hub-and-spoke layovers, baggage transit risks, connection delays, and rigid routes.",
+      executive: "Direct point-to-point vectors; access to 3,000+ regional European airfields closer to final business destinations.",
     },
     {
-      step: "04. ON-BOARD PRODUCTIVITY",
-      commercial: "Shared cabin noise, limited privacy, restricted internet, and confidential risk.",
-      executive: "Private cabin conference layout; zero eavesdropping risk for executive teams.",
+      step: "04. IN-FLIGHT PRODUCTIVITY",
+      commercial: "Noise, tight seating, public eavesdropping risks on confidential M&A discussions.",
+      executive: "Private conference cabin, Ka-band high-speed satellite Wi-Fi, four-club executive leather seats.",
+    },
+  ];
+
+  const corporateSolutions = [
+    {
+      title: "Executive Shuttle Missions",
+      tagline: "Recurring Corridors & Roadshows",
+      desc: "Regular scheduled charter flights connecting Bucharest, Cluj, Timișoara, Vienna, Frankfurt, and London for leadership teams.",
+      features: ["Fixed dispatch schedules", "Pre-cleared passenger manifests", "Guaranteed aircraft staging at LRBS"],
+    },
+    {
+      title: "Multi-City Same-Day Itineraries",
+      tagline: "3 Cities in 1 Day",
+      desc: "Fly Bucharest → Munich for morning meeting → Zurich for lunch → return to Bucharest by evening. Impossible on commercial airlines.",
+      features: ["Zero overnight hotel costs", "Aircraft stands by on tarmac", "Dynamic route adjustments on demand"],
+    },
+    {
+      title: "Corporate Block-Hour Accounts",
+      tagline: "Predictable Flight Access",
+      desc: "Pre-funded flight hours with priority booking windows, locked hourly rates, and zero asset ownership liability.",
+      features: ["25, 50, and 100 block-hour tiers", "Multi-aircraft fleet interchange", "Consolidated monthly billing & carbon audit"],
     },
   ];
 
@@ -47,7 +68,7 @@ export default function BusinessPage() {
                   <span className="editorial-tag-dark">
                     EXECUTIVE ADVISORY // TIME SOVEREIGNTY
                   </span>
-                  <DataStatusBadge status="INDICATIVE" />
+                  <DataStatusBadge status="OFFICIAL_SOURCE" />
                 </div>
                 <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-neutral-900 leading-[1.05] font-sans">
                   BUY BACK YOUR TIME<span className="text-amber-600">.</span>
@@ -57,7 +78,7 @@ export default function BusinessPage() {
                 </p>
               </div>
 
-              <Link href="/plan">
+              <Link href="/plan?priority=FASTEST">
                 <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
                   REQUEST CORPORATE FLIGHT →
                 </Button>
@@ -120,7 +141,58 @@ export default function BusinessPage() {
         </Container>
       </section>
 
-      {/* 02 — EFFICIENCY COMPARATIVE TIMELINE */}
+      {/* 02 — CORPORATE AVIATION PRODUCT ARCHITECTURE */}
+      <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto space-y-16">
+            <div className="space-y-4">
+              <span className="editorial-tag-dark">
+                CORPORATE AVIATION CAPABILITIES
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans">
+                Engineered for Enterprise Mobility
+              </h2>
+              <p className="text-base text-neutral-600 max-w-2xl font-light leading-relaxed">
+                Whether coordinating quarterly roadshows across Central Europe or providing on-call repatriation access, AIR structures verified AOC solutions.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {corporateSolutions.map((sol, i) => (
+                <div key={i} className="editorial-card-light p-8 rounded-3xl bg-[#fafaf7] border border-neutral-200/80 space-y-6 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                      {sol.tagline}
+                    </span>
+                    <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                      {sol.title}
+                    </h3>
+                    <p className="text-xs text-neutral-600 leading-relaxed font-sans">
+                      {sol.desc}
+                    </p>
+
+                    <ul className="space-y-2 pt-2 border-t border-neutral-200 text-xs text-neutral-700 font-data">
+                      {sol.features.map((f, fi) => (
+                        <li key={fi} className="flex items-center gap-2">
+                          <span className="text-amber-600">✓</span> {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <Link href={`/plan?purpose=EXECUTIVE_BUSINESS&notes=${encodeURIComponent(sol.title)}`} className="w-full pt-4">
+                    <Button variant="outline" size="sm" className="w-full text-center justify-center">
+                      REQUEST THIS PROGRAM →
+                    </Button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 03 — EFFICIENCY COMPARATIVE TIMELINE */}
       <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80">
         <Container size="wide">
           <div className="max-w-6xl mx-auto space-y-16">
@@ -135,7 +207,7 @@ export default function BusinessPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {comparison.map((c, i) => (
-                <div key={i} className="editorial-card-light p-8 rounded-3xl space-y-6 bg-white">
+                <div key={i} className="editorial-card-light p-8 rounded-3xl space-y-6 bg-white shadow-sm">
                   <span className="text-xs font-mono text-amber-600 font-bold tracking-wider block">
                     {c.step}
                   </span>
@@ -156,7 +228,7 @@ export default function BusinessPage() {
         </Container>
       </section>
 
-      {/* 03 — MISSION PLANNER CTA */}
+      {/* 04 — MISSION PLANNER CTA */}
       <section className="w-full py-24 sm:py-32 bg-neutral-950 text-white">
         <Container size="wide">
           <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-16 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">
@@ -168,11 +240,11 @@ export default function BusinessPage() {
                 OPTIMIZE YOUR CORPORATE TRAVEL
               </h3>
               <p className="text-sm text-neutral-300 font-sans">
-                Set up corporate accounts, multi-city European routes, and guaranteed aircraft availability.
+                Set up corporate accounts, recurring multi-city European routes, and guaranteed aircraft availability with verified AOC operators.
               </p>
             </div>
 
-            <Link href="/plan">
+            <Link href="/plan?purpose=EXECUTIVE_BUSINESS">
               <Button variant="primary" size="lg" className="whitespace-nowrap px-10 py-5 text-base shadow-2xl">
                 PLAN CORPORATE MISSION →
               </Button>
