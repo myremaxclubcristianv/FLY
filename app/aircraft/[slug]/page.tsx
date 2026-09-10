@@ -6,6 +6,7 @@ import { Container } from "../../../components/layout/Container";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Button } from "../../../components/ui/Button";
 import { AviationImage } from "../../../components/AviationImage";
+import { AIRCRAFT_MODEL_PHOTOS } from "../../../data/real/aviation-photos";
 
 export async function generateMetadata({
   params,
@@ -21,124 +22,6 @@ export async function generateMetadata({
   };
 }
 
-const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit: string }> = {
-  "phenom-300": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "phenom-100": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "cirrus-vision-jet": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "hondajet-ha420": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "citation-m2": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "citation-cj4": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
-  },
-  "citation-latitude": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "praetor-500": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "hawker-900xp": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "challenger-350": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
-  },
-  "challenger-3500": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "citation-longitude": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "praetor-600": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "gulfstream-g650er": {
-    hero: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
-  },
-  "gulfstream-g700": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "global-6500": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "dassault-falcon-8x": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "pilatus-pc-12": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "daher-tbm-960": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "king-air-350i": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "leonardo-aw139": {
-    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-  "airbus-h145": {
-    hero: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  },
-  "airbus-h125": {
-    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  },
-};
-
 export default async function AircraftDetailPage({
   params,
 }: {
@@ -151,10 +34,11 @@ export default async function AircraftDetailPage({
     notFound();
   }
 
-  const photos = AIRCRAFT_PHOTOS[slug] || {
+  const photos = AIRCRAFT_MODEL_PHOTOS[slug] || {
     hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
-    interior: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
+    exterior: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1200&q=85",
   };
 
   return (
@@ -289,10 +173,10 @@ export default async function AircraftDetailPage({
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-3 gap-8">
               {/* Cabin Feature */}
               <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white">
-                <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-neutral-900">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-neutral-900">
                   <AviationImage
                     src={photos.interior}
                     alt="Cabin Interior"
@@ -306,18 +190,18 @@ export default async function AircraftDetailPage({
                   </div>
                 </div>
                 <div className="p-8 space-y-3">
-                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                  <h3 className="text-xl font-light text-neutral-900 font-sans">
                     Quiet Comfort in the Stratosphere
                   </h3>
-                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
-                    Sculpted leather seating, low cabin altitude pressurization, and acoustic engineering to enable confidential conversation or restorative rest.
+                  <p className="text-xs text-neutral-600 font-sans leading-relaxed">
+                    Sculpted leather seating, low cabin altitude pressurization, and acoustic engineering for confidential focus.
                   </p>
                 </div>
               </div>
 
               {/* Cockpit Feature */}
               <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white">
-                <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-neutral-900">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-neutral-900">
                   <AviationImage
                     src={photos.cockpit}
                     alt="Digital Flight Deck Avionics"
@@ -331,11 +215,36 @@ export default async function AircraftDetailPage({
                   </div>
                 </div>
                 <div className="p-8 space-y-3">
-                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                  <h3 className="text-xl font-light text-neutral-900 font-sans">
                     Certified EASA / FAA Precision
                   </h3>
-                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
-                    Integrated synthetic vision systems, synthetic weather radar, and steep approach certification for restricted Alpine runways.
+                  <p className="text-xs text-neutral-600 font-sans leading-relaxed">
+                    Integrated synthetic vision systems, digital flight director, and steep approach approval for restricted airfields.
+                  </p>
+                </div>
+              </div>
+
+              {/* Exterior Airframe Feature */}
+              <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white">
+                <div className="relative h-64 sm:h-72 w-full overflow-hidden bg-neutral-900">
+                  <AviationImage
+                    src={photos.exterior}
+                    alt="Aircraft Exterior & Wing Geometry"
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-700"
+                    fallbackTitle="Airframe Profile"
+                    fallbackCode="EXTERIOR // AIRFRAME"
+                  />
+                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                    AERODYNAMIC PROFILE & WINGS
+                  </div>
+                </div>
+                <div className="p-8 space-y-3">
+                  <h3 className="text-xl font-light text-neutral-900 font-sans">
+                    Optimized Cruise Performance
+                  </h3>
+                  <p className="text-xs text-neutral-600 font-sans leading-relaxed">
+                    Swept-wing efficiency, high-altitude climb gradient, and short-field takeoff envelope for regional airfields.
                   </p>
                 </div>
               </div>

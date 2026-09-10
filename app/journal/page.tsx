@@ -5,32 +5,12 @@ import { ProvenanceBadge } from "../../components/shared/ProvenanceBadge";
 import { Button } from "../../components/ui/Button";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
 import { AviationImage } from "../../components/AviationImage";
+import { JOURNAL_ARTICLE_PHOTOS } from "../../data/real/aviation-photos";
 
 export const metadata = {
   title: "AIR Journal — The Aviation Publication & Intelligence Dossier | AIR",
   description:
     "Authoritative aviation journalism, charter mechanics, jet vs turboprop analyses, FBO operations, operator verification guides, and regulatory insights.",
-};
-
-const ARTICLE_IMAGES: Record<string, string> = {
-  "how-private-charter-works": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85",
-  "what-happens-after-requesting-a-flight": "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  "what-determines-private-charter-pricing": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=85",
-  "when-private-aviation-makes-sense": "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
-  "jet-vs-turboprop": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1200&q=85",
-  "light-jet-vs-midsize-jet": "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
-  "how-far-can-a-private-jet-fly": "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1200&q=85",
-  "choosing-an-aircraft-for-4-passengers": "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
-  "what-is-an-fbo": "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
-  "baneasa-vs-otopeni-comparative-report": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=85",
-  "how-business-aviation-handling-works": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=85",
-  "what-prior-permission-required-ppr-means": "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  "helicopter-transfers-and-landing-access": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=85",
-  "helicopter-mountain-operations-and-weather": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1200&q=85",
-  "charter-vs-ownership": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
-  "aircraft-management-and-operating-costs": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
-  "verifying-an-aircraft-operator": "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-  "easa-commercial-air-transport-regulations-explained": "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
 };
 
 export default async function JournalIndexPage() {
@@ -79,7 +59,7 @@ export default async function JournalIndexPage() {
               <div className="rounded-3xl overflow-hidden bg-white border border-neutral-200 shadow-2xl grid lg:grid-cols-12 group">
                 <div className="lg:col-span-7 relative min-h-[380px] lg:min-h-[540px] bg-neutral-900 overflow-hidden">
                   <AviationImage
-                    src={ARTICLE_IMAGES[coverStory.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=85"}
+                    src={JOURNAL_ARTICLE_PHOTOS[coverStory.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=85"}
                     alt={coverStory.title}
                     fill
                     priority
@@ -133,7 +113,7 @@ export default async function JournalIndexPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {secondaryStories.map((art) => {
-                const img = ARTICLE_IMAGES[art.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
+                const img = JOURNAL_ARTICLE_PHOTOS[art.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
                 return (
                   <div key={art.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group bg-white">
                     <div className="relative h-60 w-full overflow-hidden bg-neutral-900">
@@ -195,7 +175,7 @@ export default async function JournalIndexPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {remainingStories.map((art) => {
-                const img = ARTICLE_IMAGES[art.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
+                const img = JOURNAL_ARTICLE_PHOTOS[art.slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
                 return (
                   <div key={art.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group bg-white">
                     <div className="relative h-48 w-full overflow-hidden bg-neutral-900">

@@ -155,40 +155,76 @@ export default async function BaneasaPage() {
               </div>
 
               <div className="grid md:grid-cols-3 gap-8">
-                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
-                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
-                    01
+                <div className="editorial-card-light rounded-3xl overflow-hidden space-y-4 bg-white shadow-md group">
+                  <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80"
+                      alt="Dedicated Executive FBO VIP Terminal"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="VIP Terminal"
+                      fallbackCode="FBO // BĂNEASA"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      ADVANTAGE 01 • FBO LOUNGES
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
-                    Dedicated FBO VIP Lounges
-                  </h3>
-                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
-                    Private customs and border control directly inside the executive terminal. Arrive 20 minutes prior to departure with zero commercial passenger interaction.
-                  </p>
+                  <div className="p-8 pt-2 space-y-2">
+                    <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                      Dedicated FBO VIP Lounges
+                    </h3>
+                    <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                      Private customs and border control directly inside the executive terminal. Arrive 20 minutes prior to departure with zero commercial passenger interaction.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
-                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
-                    02
+                <div className="editorial-card-light rounded-3xl overflow-hidden space-y-4 bg-white shadow-md group">
+                  <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=800&q=80"
+                      alt="Direct Apron Ramp Vehicle Access"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="Apron Ramp Transit"
+                      fallbackCode="RAMP // VEHICLE"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      ADVANTAGE 02 • DIRECT TARMAC
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
-                    Direct Apron Vehicle Access
-                  </h3>
-                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
-                    Chauffeured vehicles drive directly to the aircraft steps on the ramp, ensuring maximum privacy, security, and discreet luggage handling.
-                  </p>
+                  <div className="p-8 pt-2 space-y-2">
+                    <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                      Direct Apron Vehicle Access
+                    </h3>
+                    <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                      Chauffeured vehicles drive directly to the aircraft steps on the ramp, ensuring maximum privacy, security, and discreet luggage handling.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
-                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
-                    03
+                <div className="editorial-card-light rounded-3xl overflow-hidden space-y-4 bg-white shadow-md group">
+                  <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
+                    <AviationImage
+                      src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80"
+                      alt="Intermodal Twin-Turbine Helicopter Base"
+                      fill
+                      className="object-cover group-hover:scale-105 transition duration-500"
+                      fallbackTitle="Helicopter Staging"
+                      fallbackCode="ROTOR // LRBS"
+                    />
+                    <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                      ADVANTAGE 03 • ROTORCRAFT BASE
+                    </div>
                   </div>
-                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
-                    Intermodal Helicopter Base
-                  </h3>
-                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
-                    Direct transition from incoming fixed-wing private jets to twin-turbine helicopters for flights across Romania, Transylvania, and the Black Sea.
-                  </p>
+                  <div className="p-8 pt-2 space-y-2">
+                    <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                      Intermodal Helicopter Base
+                    </h3>
+                    <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                      Direct transition from incoming fixed-wing private jets to twin-turbine helicopters for flights across Romania, Transylvania, and the Black Sea.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

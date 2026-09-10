@@ -10,6 +10,11 @@ import { JsonLd, createOrganizationJsonLd } from "../components/shared/JsonLd";
 import { AviationImage } from "../components/AviationImage";
 import { DestinationExplorer } from "../components/destinations/DestinationExplorer";
 
+import {
+  AIRCRAFT_MODEL_PHOTOS,
+  EDITORIAL_ATMOSPHERE,
+} from "../data/real/aviation-photos";
+
 export const metadata = {
   title: "AIR — The Easiest Way to Fly | Luxury Private Aviation & Intelligence",
   description:
@@ -33,7 +38,7 @@ const AIR_RECOMMENDS = [
     manufacturer: "Embraer",
     category: "LIGHT JET",
     slug: "phenom-300",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=85",
+    image: AIRCRAFT_MODEL_PHOTOS["phenom-300"].hero,
     passengers: "7 PASSENGERS",
     speed: "464 KTAS",
     range: "2,010 NM",
@@ -45,7 +50,7 @@ const AIR_RECOMMENDS = [
     manufacturer: "Embraer",
     category: "SUPER MIDSIZE JET",
     slug: "praetor-600",
-    image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1400&q=85",
+    image: AIRCRAFT_MODEL_PHOTOS["praetor-600"].hero,
     passengers: "9 - 12 PASSENGERS",
     speed: "466 KTAS",
     range: "4,018 NM",
@@ -57,7 +62,7 @@ const AIR_RECOMMENDS = [
     manufacturer: "Bombardier",
     category: "SUPER MIDSIZE JET",
     slug: "challenger-350",
-    image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1400&q=85",
+    image: AIRCRAFT_MODEL_PHOTOS["challenger-350"].hero,
     passengers: "9 PASSENGERS",
     speed: "470 KTAS",
     range: "3,200 NM",
@@ -69,7 +74,7 @@ const AIR_RECOMMENDS = [
     manufacturer: "Gulfstream",
     category: "LARGE CABIN JET",
     slug: "gulfstream-g650er",
-    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1400&q=85",
+    image: AIRCRAFT_MODEL_PHOTOS["gulfstream-g650er"].hero,
     passengers: "14 - 19 PASSENGERS",
     speed: "516 KTAS",
     range: "7,500 NM",
@@ -103,7 +108,7 @@ const EXPERIENCES = [
   {
     title: "ROMANIA FROM ABOVE",
     tagline: "Danube Delta, Transylvanian Alps, and historic castle helipads.",
-    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=85",
+    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1000&q=85",
     badge: "HELICOPTER // SCENIC",
     link: "/romania-from-above",
   },
@@ -172,7 +177,7 @@ export default async function HomePage() {
               {/* Massive Magazine Cover Style Aircraft Showcase */}
               <div className="relative h-[420px] sm:h-[620px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 group">
                 <AviationImage
-                  src="https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=2000&q=85"
+                  src={EDITORIAL_ATMOSPHERE.heroJet}
                   alt="Flagship Executive Jet Airborne Over Horizon"
                   fill
                   priority
@@ -197,6 +202,27 @@ export default async function HomePage() {
               </div>
             </div>
           </Container>
+        </section>
+
+        {/* EDITORIAL TRANSITION — AIRCRAFT WING DISAPPEARING INTO CLOUD */}
+        <section className="w-full relative h-72 sm:h-96 overflow-hidden bg-neutral-950 border-b border-white/[0.08]">
+          <AviationImage
+            src={EDITORIAL_ATMOSPHERE.wingOverClouds}
+            alt="Aircraft Wing Disappearing into Cloud Horizon"
+            fill
+            className="object-cover filter brightness-90 contrast-105"
+            fallbackTitle="Aircraft Wing Horizon"
+            fallbackCode="ATMOSPHERE // CRUISE"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/60 via-transparent to-neutral-950/40" />
+          <div className="absolute bottom-6 left-8 right-8 flex justify-between items-end z-10 text-white/80 font-mono text-xs">
+            <span className="bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 text-amber-400 font-bold">
+              EN ROUTE // FL410 STRATOSPHERE
+            </span>
+            <span className="hidden sm:inline text-neutral-400">
+              MACH 0.86 • SILENT CABIN CRUISE
+            </span>
+          </div>
         </section>
 
         {/* PAUSE SECTION 01 — THE EDITORIAL SILENCE */}
@@ -434,11 +460,9 @@ export default async function HomePage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {aircraftModels.slice(0, 3).map((ac) => {
-                  const modelImg = ac.slug === "phenom-300"
-                    ? "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1000&q=85"
-                    : ac.slug === "phenom-100"
-                    ? "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1000&q=85"
-                    : "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1000&q=85";
+                  const modelImg =
+                    AIRCRAFT_MODEL_PHOTOS[ac.slug]?.hero ||
+                    AIRCRAFT_MODEL_PHOTOS["phenom-300"].hero;
                   return (
                     <div key={ac.id} className="editorial-card-light rounded-3xl overflow-hidden flex flex-col justify-between group bg-white">
                       <div className="relative h-60 w-full bg-neutral-100 overflow-hidden">
@@ -664,7 +688,7 @@ export default async function HomePage() {
                 <div className="rounded-3xl overflow-hidden flex flex-col justify-between border border-white/10 group bg-neutral-900">
                   <div className="relative h-64 w-full overflow-hidden">
                     <AviationImage
-                      src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
+                      src="https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80"
                       alt="Executive Jet Touchdown"
                       fill
                       className="object-cover group-hover:scale-105 transition duration-500"

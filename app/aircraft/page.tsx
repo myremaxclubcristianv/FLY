@@ -6,6 +6,10 @@ import { Button } from "../../components/ui/Button";
 import { AircraftMatcher } from "../../components/aircraft/AircraftMatcher";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
 import { AviationImage } from "../../components/AviationImage";
+import {
+  AIRCRAFT_CATEGORY_PHOTOS,
+  AIRCRAFT_MODEL_PHOTOS,
+} from "../../data/real/aviation-photos";
 
 export const metadata = {
   title: "Aircraft Explorer & Category Intelligence | AIR",
@@ -24,7 +28,7 @@ const CHAPTERS = [
     capacity: "4 - 5 PASSENGERS",
     aspect: "16:9",
     featuredSlug: "phenom-100",
-    image: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.VERY_LIGHT_JET,
     models: ["Phenom 100", "Citation M2", "Cirrus Vision Jet", "HondaJet HA-420"],
   },
   {
@@ -37,7 +41,7 @@ const CHAPTERS = [
     capacity: "6 - 8 PASSENGERS",
     aspect: "4:3",
     featuredSlug: "phenom-300",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.LIGHT_JET,
     models: ["Phenom 300E", "Citation CJ4"],
   },
   {
@@ -50,7 +54,7 @@ const CHAPTERS = [
     capacity: "8 - 9 PASSENGERS",
     aspect: "16:9",
     featuredSlug: "citation-latitude",
-    image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.MIDSIZE_JET,
     models: ["Citation Latitude", "Praetor 500", "Hawker 900XP"],
   },
   {
@@ -63,7 +67,7 @@ const CHAPTERS = [
     capacity: "9 - 12 PASSENGERS",
     aspect: "4:3",
     featuredSlug: "praetor-600",
-    image: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.SUPER_MIDSIZE_JET,
     models: ["Praetor 600", "Challenger 350", "Challenger 3500", "Citation Longitude"],
   },
   {
@@ -76,7 +80,7 @@ const CHAPTERS = [
     capacity: "12 - 19 PASSENGERS",
     aspect: "16:9",
     featuredSlug: "gulfstream-g650er",
-    image: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.LARGE_CABIN_JET,
     models: ["Gulfstream G650ER", "Gulfstream G700", "Global 6500", "Falcon 8X"],
   },
   {
@@ -89,7 +93,7 @@ const CHAPTERS = [
     capacity: "6 - 9 PASSENGERS",
     aspect: "4:3",
     featuredSlug: "pilatus-pc-12",
-    image: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.TURBOPROP,
     models: ["Pilatus PC-12", "Daher TBM 960", "King Air 350i"],
   },
   {
@@ -102,36 +106,10 @@ const CHAPTERS = [
     capacity: "5 - 8 PASSENGERS",
     aspect: "16:9",
     featuredSlug: "leonardo-aw139",
-    image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=85",
+    image: AIRCRAFT_CATEGORY_PHOTOS.HELICOPTER,
     models: ["Leonardo AW139", "Airbus H145", "Airbus H125"],
   },
 ];
-
-const MODEL_IMAGES: Record<string, string> = {
-  "phenom-300": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-  "phenom-100": "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80",
-  "cirrus-vision-jet": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
-  "hondajet-ha420": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-  "citation-m2": "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80",
-  "citation-cj4": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80",
-  "citation-latitude": "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80",
-  "praetor-500": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-  "hawker-900xp": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80",
-  "challenger-350": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80",
-  "challenger-3500": "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80",
-  "citation-longitude": "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80",
-  "praetor-600": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-  "gulfstream-g650er": "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=800&q=80",
-  "gulfstream-g700": "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80",
-  "global-6500": "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80",
-  "dassault-falcon-8x": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-  "pilatus-pc-12": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
-  "daher-tbm-960": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
-  "king-air-350i": "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80",
-  "leonardo-aw139": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
-  "airbus-h145": "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80",
-  "airbus-h125": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=800&q=80",
-};
 
 export default async function AircraftPage() {
   const allAircraft = await UnifiedAviationRepository.getAircraftModels();
@@ -320,8 +298,8 @@ export default async function AircraftPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {allAircraft.map((ac) => {
                 const img =
-                  MODEL_IMAGES[ac.slug] ||
-                  "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80";
+                  AIRCRAFT_MODEL_PHOTOS[ac.slug]?.hero ||
+                  AIRCRAFT_MODEL_PHOTOS["phenom-300"].hero;
                 return (
                   <div
                     key={ac.id}
