@@ -12,10 +12,10 @@ export interface AirportCodeProps {
 
 export function AirportCode({ code, name, className, size = "md" }: AirportCodeProps) {
   const sizeClasses = {
-    sm: "text-lg font-mono tracking-widest",
-    md: "text-3xl font-mono tracking-widest font-bold",
-    lg: "text-5xl font-mono tracking-widest font-extrabold",
-    xl: "text-7xl sm:text-8xl font-mono tracking-widest font-black",
+    sm: "text-lg font-data tracking-widest",
+    md: "text-3xl font-data tracking-widest font-bold",
+    lg: "text-5xl font-data tracking-widest font-extrabold",
+    xl: "text-7xl sm:text-8xl font-data tracking-widest font-black",
   };
 
   return (
@@ -24,7 +24,7 @@ export function AirportCode({ code, name, className, size = "md" }: AirportCodeP
         {code}
       </span>
       {name && (
-        <span className="text-[10px] font-mono text-neutral-400 tracking-wider uppercase mt-1">
+        <span className="text-[10px] font-data text-[var(--color-text-secondary)] tracking-wider uppercase mt-1.5">
           {name}
         </span>
       )}
