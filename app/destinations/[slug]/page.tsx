@@ -199,8 +199,8 @@ export default async function DestinationDetailPage({
             </div>
 
             <Link href={`/plan?to=${encodeURIComponent(dest.name)}`}>
-              <Button variant="primary" size="lg" className="font-data text-xs whitespace-nowrap">
-                RUN MISSION IN PLANNER →
+              <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
+                PLAN FLIGHT TO {dest.name.toUpperCase()} →
               </Button>
             </Link>
           </div>

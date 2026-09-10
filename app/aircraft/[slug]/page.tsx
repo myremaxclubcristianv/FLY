@@ -256,18 +256,21 @@ export default async function AircraftDetailPage({
           </Card>
 
           {/* Action CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
-            <div>
-              <h4 className="text-xl font-light text-white">
-                EVALUATE THIS VEHICLE FOR YOUR NEXT MISSION
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 glass-elevated rounded-3xl border border-white/10 shadow-2xl">
+            <div className="space-y-1">
+              <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block">
+                MISSION DISPATCH // {aircraft.model}
+              </span>
+              <h4 className="text-2xl font-light text-white font-sans">
+                READY TO FLY THE {aircraft.manufacturer} {aircraft.model.toUpperCase()}?
               </h4>
-              <p className="text-xs text-neutral-400 font-data mt-1">
-                Compare route durations, airfield weather, and binding operator quotes.
+              <p className="text-xs text-neutral-300 font-sans mt-1">
+                Calculate custom flight times, airfield availability, and matched quotes with this aircraft.
               </p>
             </div>
-            <Link href="/plan?priority=FASTEST">
-              <Button variant="primary" size="lg">
-                RUN MISSION PLANNER →
+            <Link href={`/plan?aircraft=${aircraft.slug}`}>
+              <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
+                PLAN WITH THIS AIRCRAFT →
               </Button>
             </Link>
           </div>
