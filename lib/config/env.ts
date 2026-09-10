@@ -63,8 +63,8 @@ export function getAirServerEnvConfig(): AirServerEnvConfig {
         ? "TEST"
         : "CONNECTED"
       : "NOT_CONNECTED",
-    supplyChannelStatus: "CONNECTED", // AOC Toyo Aviation / Real Verified Sourcing Channel
-    operatorChannelStatus: "CONNECTED", // Single-Use Tokenized Operator Dispatch Link
+    supplyChannelStatus: isGdsConfigured ? "CONNECTED" : "NOT_CONNECTED",
+    operatorChannelStatus: isGdsConfigured ? "CONNECTED" : "NOT_CONNECTED",
     notificationProviderStatus: isResendConfigured ? "CONNECTED" : "NOT_CONNECTED",
     trackingProviderStatus: isFlightAwareConfigured ? "CONNECTED" : "NOT_CONNECTED",
   };

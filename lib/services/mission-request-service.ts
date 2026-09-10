@@ -1,5 +1,6 @@
 import { FlightRequest, RequestLifecycleStatus } from "@/types/flight-request";
 import { generateServerMissionReference } from "./mission-service";
+import { validateLifecycleTransition } from "../auth/rbac";
 
 const STORAGE_KEY = "air_mission_requests";
 
@@ -39,7 +40,7 @@ export interface StoredQuote {
   receivedAt: string;
   reviewedAt?: string;
   status: QuoteStatus;
-  verificationStatus: "VERIFIED" | "OFFICIAL_SOURCE";
+  verificationStatus: "OFFICIAL_SOURCE" | "VERIFIED" | "PUBLIC" | "INDICATIVE" | "SIMULATED / ARCHIVE";
   isArchiveSample?: boolean;
 }
 
@@ -311,6 +312,23 @@ export class MissionRequestService {
     if (idx === -1) return undefined;
 
     const current = all[idx];
+
+    // Validate lifecycle transition rules
+    const validation = validateLifecycleTransition(
+      current.status,
+      status,
+      actor === "CUSTOMER" ? "CLIENT" : "OPERATIONS",
+      current.quotes && current.quotes.length > 0,
+      Boolean(current.airReviewNotes)
+    );
+
+    if (!validation.allowed) {
+      console.warn(
+        `[MISSION LIFECYCLE REJECTED] Cannot transition ${current.referenceId} from ${current.status} to ${status}: ${validation.reason}`
+      );
+      return undefined;
+    }
+
     const now = new Date().toISOString();
     const defaultLabels: Record<RequestLifecycleStatus, string> = {
       REQUESTED: "Mission Logged // Sourcing Dispatch Initiated",
@@ -350,6 +368,13 @@ export class MissionRequestService {
     if (idx === -1) return undefined;
 
     const current = all[idx];
+
+    // Prevent attaching quotes to completed or cancelled missions
+    if (current.status === "CONFIRMED" || current.status === "CANCELLED") {
+      console.warn(`[ATTACH QUOTE REJECTED] Mission ${current.referenceId} is in terminal state ${current.status}.`);
+      return undefined;
+    }
+
     const now = new Date().toISOString();
     const newQuote: StoredQuote = {
       ...quote,
@@ -438,6 +463,13 @@ export class MissionRequestService {
     if (idx === -1) return undefined;
 
     const current = all[idx];
+
+    // Cannot review a mission with zero quotes
+    if (!current.quotes || current.quotes.length === 0) {
+      console.warn(`[AIR REVIEW REJECTED] Cannot conduct safety review on mission ${current.referenceId} with 0 quotes.`);
+      return undefined;
+    }
+
     const now = new Date().toISOString();
     const updatedQuotes = current.quotes.map((q) => {
       if (!approvedQuoteIds || approvedQuoteIds.includes(q.id)) {
@@ -476,13 +508,26 @@ export class MissionRequestService {
     if (idx === -1) return undefined;
 
     const current = all[idx];
+
+    // Ensure mission is in PRESENTED status before confirming
+    if (current.status !== "PRESENTED") {
+      console.warn(
+        `[MISSION CONFIRMATION REJECTED] Mission ${current.referenceId} must be in PRESENTED state to confirm. Current state: ${current.status}.`
+      );
+      return undefined;
+    }
+
+    const selectedQuote = current.quotes.find((q) => q.id === quoteId);
+    if (!selectedQuote) {
+      console.warn(`[MISSION CONFIRMATION REJECTED] Quote ${quoteId} does not exist in mission ${current.referenceId}.`);
+      return undefined;
+    }
+
     const now = new Date().toISOString();
     const updatedQuotes = current.quotes.map((q) => ({
       ...q,
       status: q.id === quoteId ? ("ACCEPTED" as QuoteStatus) : ("DECLINED" as QuoteStatus),
     }));
-
-    const selectedQuote = current.quotes.find((q) => q.id === quoteId);
 
     const updated: MissionDetailRecord = {
       ...current,

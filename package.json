@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npx tsx tests/integration-readiness.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
