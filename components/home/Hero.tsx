@@ -76,19 +76,14 @@ export function Hero() {
 
           {/* Action Triggers */}
           <div className="flex flex-wrap items-center gap-4 pt-1">
-            <Button size="lg" variant="primary" asChild>
+            <Button size="lg" variant="primary" asChild className="px-8 shadow-xl">
               <Link href={PRIMARY_CTA.href}>
-                {PRIMARY_CTA.label} →
+                PLAN A FLIGHT →
               </Link>
             </Button>
             <Button size="lg" variant="secondary" asChild>
               <Link href="/aircraft">
-                EXPLORE AIRCRAFT FLEET ↗
-              </Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/destinations">
-                GLOBAL DESTINATIONS
+                EXPLORE AIRCRAFT
               </Link>
             </Button>
           </div>

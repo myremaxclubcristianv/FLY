@@ -113,15 +113,15 @@ export default async function BaneasaPage() {
                 <ul className="flex flex-col gap-3 text-xs text-[var(--color-text-secondary)] font-sans">
                   <li className="flex items-start gap-2.5">
                     <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">Zero Commercial Airline Congestion:</strong> Exclusively handles executive jets, twin-engine helicopters, and general aviation.</span>
+                    <span><strong className="text-white">Dedicated Business Aviation Facility:</strong> Dedicated to business aircraft, executive charter, VIP transport, and general aviation operations.</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">10-Minute CBD Access:</strong> Located just 7 km from Bucharest central business district and northern commercial towers.</span>
+                    <span><strong className="text-white">Northern Hub Location:</strong> Located 8.5 km north of Bucharest centre, adjacent to northern business districts (typical 15–25 min road access depending on traffic).</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">Fast-Track Handling:</strong> Passengers arrive 15-20 minutes before departure directly to the private FBO lounge.</span>
+                    <span><strong className="text-white">FBO Handling Procedures:</strong> Private VIP customs, immigration, and passenger lounges with direct ramp access for streamlined departures.</span>
                   </li>
                 </ul>
               </Card>

@@ -17,7 +17,7 @@ export default function BusinessPage() {
     {
       step: "01. DEPARTURE PLANNING",
       commercial: "Fixed airline flight schedules; 2-hour early arrival required at major hubs.",
-      executive: "Depart on your schedule; arrive 15 minutes before flight at Băneasa FBO terminal.",
+      executive: "Depart on your custom schedule; streamlined VIP arrival typically 20–30 minutes prior to boarding.",
     },
     {
       step: "02. SECURITY & TERMINAL",
@@ -93,7 +93,7 @@ export default function BusinessPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-2 z-10">
                 <span className="text-[10px] font-data text-amber-400 font-semibold tracking-wider">
-                  15-MINUTE FAST-TRACK DISPATCH
+                  STREAMLINED FBO DISPATCH
                 </span>
                 <h3 className="text-xl font-light text-white">
                   Direct Tarmac Vehicle Access

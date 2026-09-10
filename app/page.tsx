@@ -234,24 +234,66 @@ export default async function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {aircraftModels.slice(0, 3).map((ac) => (
-                <Card key={ac.id} variant="interactive" className="flex flex-col justify-between gap-4 group">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono text-amber-400 uppercase font-bold">{ac.category.replace(/_/g, " ")}</span>
-                      <ProvenanceBadge status={ac.dataStatus} />
+              {aircraftModels.slice(0, 3).map((ac) => {
+                const modelImg = ac.slug === "phenom-300" 
+                  ? "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80"
+                  : ac.slug === "phenom-100"
+                  ? "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=800&q=80"
+                  : "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=800&q=80";
+                return (
+                  <div key={ac.id} className="glass-surface glass-surface-hover rounded-2xl overflow-hidden flex flex-col justify-between group border border-white/[0.08]">
+                    <div className="relative h-48 w-full bg-neutral-900 overflow-hidden">
+                      <AviationImage
+                        src={modelImg}
+                        alt={`${ac.manufacturer} ${ac.model}`}
+                        fill
+                        className="object-cover group-hover:scale-105 transition duration-500"
+                        fallbackTitle={`${ac.manufacturer} ${ac.model}`}
+                        fallbackCode={`FLEET // ${ac.model}`}
+                      />
+                      <div className="absolute top-3 right-3 bg-black/75 backdrop-blur-md border border-white/[0.12] px-2.5 py-0.5 rounded text-[10px] font-mono text-amber-400 font-bold z-10">
+                        {ac.category.replace(/_/g, " ")}
+                      </div>
                     </div>
-                    <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">{ac.manufacturer} {ac.model}</h3>
-                    <p className="text-xs text-neutral-300 font-mono leading-relaxed">
-                      Speed: {ac.typicalCruiseSpeed} KTS • Range: {ac.approximateRange} NM • Seats: {ac.passengerCapacity}
-                    </p>
-                  </div>
 
-                  <Link href={`/aircraft/${ac.slug}`} className="text-xs font-mono text-amber-400 hover:underline pt-2 border-t border-white/[0.08]">
-                    VIEW AIRCRAFT SPECS →
-                  </Link>
-                </Card>
-              ))}
+                    <div className="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                      <div className="space-y-1">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-mono text-neutral-400 uppercase">{ac.manufacturer}</span>
+                          <ProvenanceBadge status={ac.dataStatus} />
+                        </div>
+                        <h3 className="text-xl font-light text-white group-hover:text-amber-300 transition font-sans">{ac.model}</h3>
+                        <p className="text-xs text-neutral-300 font-sans line-clamp-2 leading-relaxed">
+                          {ac.cabinHighlights}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-white/[0.08] font-mono text-xs space-y-1">
+                        <div className="flex justify-between text-neutral-400">
+                          <span>Max Range:</span>
+                          <span className="text-amber-300 font-bold">{ac.approximateRange} NM</span>
+                        </div>
+                        <div className="flex justify-between text-neutral-400">
+                          <span>Cruise Speed:</span>
+                          <span className="text-neutral-200">{ac.typicalCruiseSpeed} KTAS</span>
+                        </div>
+                        <div className="flex justify-between text-neutral-400">
+                          <span>Capacity:</span>
+                          <span className="text-neutral-200">{ac.passengerCapacity} Passengers</span>
+                        </div>
+                      </div>
+
+                      <div className="pt-2">
+                        <Button variant="outline" size="sm" fullWidth asChild>
+                          <Link href={`/aircraft/${ac.slug}`}>
+                            VIEW DOSSIER & SPECS →
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </Container>
@@ -274,7 +316,7 @@ export default async function HomePage() {
                   BUCHAREST BĂNEASA (LRBS / BBU).
                 </h2>
                 <p className="text-xs sm:text-sm text-[var(--color-text-secondary)] leading-relaxed font-sans">
-                  Romania&apos;s premier dedicated executive aviation terminal. 2,358m asphalt runway (07/25), fast-track FBO lounges, zero commercial airline delays, and 10-minute access to Bucharest CBD.
+                  Romania&apos;s dedicated business aviation gateway. 2,358m asphalt runway (07/25), executive FBO VIP lounges, handling infrastructure, and direct proximity to northern Bucharest business hubs.
                 </p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 font-data text-xs">
                   <div className="glass-instrument p-3 rounded-xl">
@@ -286,8 +328,8 @@ export default async function HomePage() {
                     <span className="text-amber-400 font-bold">VIP LOUNGE</span>
                   </div>
                   <div className="glass-instrument p-3 rounded-xl col-span-2 sm:col-span-1">
-                    <span className="text-[9px] text-[var(--color-text-muted)] block">CBD DRIVE</span>
-                    <span className="text-white font-bold">10 MINUTES</span>
+                    <span className="text-[9px] text-[var(--color-text-muted)] block">LOCATION</span>
+                    <span className="text-white font-bold">NORTH BUCHAREST</span>
                   </div>
                 </div>
               </div>
