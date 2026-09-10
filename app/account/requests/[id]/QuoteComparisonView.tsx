@@ -26,11 +26,19 @@ export default function QuoteComparisonView({ referenceId }: { referenceId: stri
     if (rec) {
       setMissionRecord(rec);
       if (rec.quotes && rec.quotes.length > 0) {
-        setSelectedOptionId(rec.quotes[0].id);
+        setSelectedOptionId(rec.selectedQuoteId || rec.quotes[0].id);
       }
     }
     setIsLoaded(true);
   }, [referenceId]);
+
+  const handleConfirmFlightOption = () => {
+    if (!selectedOptionId) return;
+    const updated = missionRequestService.confirmMission(referenceId, selectedOptionId);
+    if (updated) {
+      setMissionRecord(updated);
+    }
+  };
 
   const origin = missionRecord?.from || "Bucharest Băneasa (LRBS / BBU)";
   const destination = missionRecord?.to || "Nice Côte d'Azur (LFMN / NCE)";
@@ -181,7 +189,7 @@ export default function QuoteComparisonView({ referenceId }: { referenceId: stri
                       <div className="grid grid-cols-2 gap-3 py-3 border-y border-neutral-800 text-xs font-data">
                         <div>
                           <span className="text-neutral-500 block text-[10px]">FLIGHT DURATION</span>
-                          <span className="text-white font-medium">{opt.estimatedFlightTime}</span>
+                          <span className="text-white font-medium">{opt.estimatedFlightTime || missionRecord?.estimatedFlightTime || "En-route estimated"}</span>
                         </div>
                         <div>
                           <span className="text-neutral-500 block text-[10px]">OPERATOR AOC</span>
@@ -242,12 +250,18 @@ export default function QuoteComparisonView({ referenceId }: { referenceId: stri
                 >
                   {clarificationSent ? "✓ Request Logged" : "Request Flight Clarification"}
                 </button>
-                <button
-                  onClick={() => alert("Option selection confirmed. AIR Operations will issue final charter agreement.")}
-                  className="bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg"
-                >
-                  Confirm Selected Flight
-                </button>
+                {status === "CONFIRMED" ? (
+                  <div className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2">
+                    <span>✓</span> Flight Mission Confirmed
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleConfirmFlightOption}
+                    className="bg-amber-400 hover:bg-amber-300 text-neutral-950 font-bold text-xs px-5 py-2.5 rounded-xl transition shadow-lg"
+                  >
+                    Confirm Selected Flight →
+                  </button>
+                )}
               </div>
             </div>
           </div>
