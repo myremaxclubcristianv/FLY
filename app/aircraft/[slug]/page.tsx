@@ -3,12 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { aircraftService } from "../../../lib/services/aircraft-service";
 import { Container } from "../../../components/layout/Container";
-import { SectionHeader } from "../../../components/shared/SectionHeader";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
-import { Card } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
 import { AviationImage } from "../../../components/AviationImage";
-
 
 export async function generateMetadata({
   params,
@@ -26,119 +23,119 @@ export async function generateMetadata({
 
 const AIRCRAFT_PHOTOS: Record<string, { hero: string; interior: string; cockpit: string }> = {
   "phenom-300": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "phenom-100": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "cirrus-vision-jet": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "hondajet-ha420": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "citation-m2": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "citation-cj4": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
   },
   "citation-latitude": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "praetor-500": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "hawker-900xp": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "challenger-350": {
-    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
   },
   "challenger-3500": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "citation-longitude": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "praetor-600": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "gulfstream-g650er": {
-    hero: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=85",
   },
   "gulfstream-g700": {
-    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "global-6500": {
-    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "dassault-falcon-8x": {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "pilatus-pc-12": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "daher-tbm-960": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "king-air-350i": {
-    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1474302770737-173ee21bab63?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "leonardo-aw139": {
-    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
   "airbus-h145": {
-    hero: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1200&q=85",
   },
   "airbus-h125": {
-    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   },
 };
 
@@ -155,127 +152,239 @@ export default async function AircraftDetailPage({
   }
 
   const photos = AIRCRAFT_PHOTOS[slug] || {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
-    interior: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=80",
-    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=80",
+    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    interior: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=85",
+    cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
   };
 
   return (
-    <div className="w-full py-16 bg-[var(--color-bg-primary)] flex-1 flex flex-col gap-12 text-neutral-100">
-      <Container size="default">
-        <div className="flex flex-col gap-10">
-          <Link href="/aircraft" className="text-xs font-mono text-amber-400 hover:underline">
-            ← Return to Fleet Explorer
-          </Link>
+    <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
+      {/* 01 — EDITORIAL PRODUCT HEADER */}
+      <section className="w-full py-16 sm:py-24 border-b border-neutral-200/80 bg-white">
+        <Container size="wide">
+          <div className="flex flex-col gap-8 max-w-6xl mx-auto">
+            <Link
+              href="/aircraft"
+              className="text-xs font-mono text-neutral-500 hover:text-amber-600 transition flex items-center gap-2"
+            >
+              ← RETURN TO FLEET SHOWROOM
+            </Link>
 
-          {/* Header */}
-          <div className="flex flex-col gap-4 border-b border-[var(--color-border)] pb-8">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20">
-                AIRCRAFT MODEL INTELLIGENCE // {aircraft.category.replace(/_/g, " ")}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-8">
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <span className="editorial-tag-dark">
+                    {aircraft.category.replace(/_/g, " ")}
+                  </span>
+                  <DataStatusBadge status={aircraft.dataStatus} />
+                </div>
+                <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-neutral-900 leading-none font-sans">
+                  {aircraft.manufacturer} {aircraft.model}
+                </h1>
+                <p className="text-base sm:text-lg text-neutral-600 font-light max-w-3xl">
+                  {aircraft.cabinHighlights}
+                </p>
+              </div>
+
+              <Link href={`/plan?aircraft=${aircraft.slug}`}>
+                <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
+                  PLAN WITH THIS AIRCRAFT →
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 02 — MASSIVE AIRCRAFT PHOTOGRAPHY COVER */}
+      <section className="w-full py-12 bg-white">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto">
+            <div className="relative h-[420px] sm:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 bg-neutral-900 group">
+              <AviationImage
+                src={photos.hero}
+                alt={`${aircraft.manufacturer} ${aircraft.model}`}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                priority
+                fallbackTitle={`${aircraft.manufacturer} ${aircraft.model}`}
+                fallbackCode={`DOSSIER // ${aircraft.model}`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-white z-10 font-mono text-xs">
+                <div>
+                  <span className="text-[10px] text-amber-400 font-bold uppercase block tracking-wider">
+                    MANUFACTURER PROVENANCE
+                  </span>
+                  <span className="text-white text-lg font-light font-sans">
+                    {aircraft.manufacturer} Official Performance Specifications
+                  </span>
+                </div>
+                <span className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-neutral-300">
+                  PRIMARY OPERATIONAL HUB: {aircraft.homeBaseName || "Băneasa (LRBS / BBU)"}
+                </span>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 03 — SPECIFICATION STRIP (Large Numerical Editorial Layout) */}
+      <section className="w-full py-16 bg-[#fafaf7] border-y border-neutral-200/80">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                PASSENGER CAPACITY
               </span>
-              <DataStatusBadge status={aircraft.dataStatus} />
-            </div>
-
-            <SectionHeader
-              title={`${aircraft.manufacturer} ${aircraft.model}`}
-              description={`Manufacturer verified specifications. Primary operator: ${aircraft.operatorDisplayName || "Certified AOC Operator Network"}.`}
-              titleAs="h1"
-            />
-          </div>
-
-          {/* Editorial Visual Showcase */}
-          <div className="relative h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden border border-neutral-800 bg-neutral-900">
-            <AviationImage src={photos.hero} alt={`${aircraft.manufacturer} ${aircraft.model}`} fill className="object-cover" priority fallbackTitle={`${aircraft.manufacturer} ${aircraft.model}`} fallbackCode={`DOSSIER // ${aircraft.model}`} />
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent pointer-events-none" />
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 font-mono text-xs text-neutral-300 z-10">
-              <div>
-                <span className="text-[10px] text-amber-400 font-bold uppercase block">MODEL PROVENANCE</span>
-                <span className="text-white font-bold">{aircraft.manufacturer} Official Specs</span>
-              </div>
-              <span className="bg-neutral-950/80 backdrop-blur px-3 py-1 rounded border border-neutral-800 text-[11px]">
-                TAIL REGISTRATION PROVENANCE: AOC CONFIRMED UPON DISPATCH
+              <span className="text-3xl sm:text-4xl font-light text-neutral-900 font-sans block">
+                {aircraft.passengerCapacity}
               </span>
+              <span className="text-xs font-mono text-neutral-400">EXECUTIVE SEATS</span>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                CRUISE SPEED
+              </span>
+              <span className="text-3xl sm:text-4xl font-light text-neutral-900 font-sans block">
+                {aircraft.typicalCruiseSpeed || "420"}
+              </span>
+              <span className="text-xs font-mono text-neutral-400">KTAS CRUISE</span>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                MAXIMUM RANGE
+              </span>
+              <span className="text-3xl sm:text-4xl font-light text-amber-600 font-sans block">
+                {aircraft.approximateRange || "1,800"}
+              </span>
+              <span className="text-xs font-mono text-amber-700/80">NAUTICAL MILES</span>
+            </div>
+
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+              <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                HOME BASE
+              </span>
+              <span className="text-xl sm:text-2xl font-light text-neutral-900 font-sans block truncate">
+                {aircraft.homeBaseName || "Băneasa (LRBS)"}
+              </span>
+              <span className="text-xs font-mono text-neutral-400">DIRECT DISPATCH</span>
             </div>
           </div>
+        </Container>
+      </section>
 
-          {/* Key Specifications Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs font-data">
-            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
-              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">PASSENGER CAPACITY</span>
-              <span className="text-2xl text-amber-400 font-bold">{aircraft.passengerCapacity} SEATS</span>
-            </Card>
-            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
-              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">TYPICAL CRUISE SPEED</span>
-              <span className="text-2xl text-amber-400 font-bold">{aircraft.typicalCruiseSpeed || "420"} KTS</span>
-            </Card>
-            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
-              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">MAXIMUM RANGE</span>
-              <span className="text-2xl text-amber-400 font-bold">{aircraft.approximateRange || "1,800"} NM</span>
-            </Card>
-            <Card variant="instrument" className="flex flex-col gap-1 p-5 rounded-2xl">
-              <span className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">HOME OPERATIONAL BASE</span>
-              <span className="text-sm text-white font-bold">{aircraft.homeBaseName || "Băneasa (LRBS / BBU)"}</span>
-            </Card>
-          </div>
+      {/* 04 — CABIN EXPERIENCE & COCKPIT AVIONICS (Visual Editorial Gallery) */}
+      <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto space-y-16">
+            <div className="space-y-4">
+              <span className="editorial-tag-dark">
+                CABIN ARCHITECTURE & AVIONICS
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans">
+                Interior Ergonomics & Flight Deck
+              </h2>
+            </div>
 
-          {/* Visual Gallery Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="relative h-72 rounded-2xl overflow-hidden border border-white/10 bg-neutral-900">
-              <AviationImage src={photos.interior} alt="Cabin interior" fill className="object-cover" fallbackTitle="Executive Cabin" fallbackCode="CABIN // INTERIOR" />
-              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
-                EXECUTIVE CABIN CONFIGURATION
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Cabin Feature */}
+              <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white">
+                <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-neutral-900">
+                  <AviationImage
+                    src={photos.interior}
+                    alt="Cabin Interior"
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-700"
+                    fallbackTitle="Executive Cabin"
+                    fallbackCode="CABIN // INTERIOR"
+                  />
+                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                    EXECUTIVE CABIN CONFIGURATION
+                  </div>
+                </div>
+                <div className="p-8 space-y-3">
+                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                    Quiet Comfort in the Stratosphere
+                  </h3>
+                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    Sculpted leather seating, low cabin altitude pressurization, and acoustic engineering to enable confidential conversation or restorative rest.
+                  </p>
+                </div>
+              </div>
+
+              {/* Cockpit Feature */}
+              <div className="editorial-card-light rounded-3xl overflow-hidden group bg-white">
+                <div className="relative h-72 sm:h-80 w-full overflow-hidden bg-neutral-900">
+                  <AviationImage
+                    src={photos.cockpit}
+                    alt="Digital Flight Deck Avionics"
+                    fill
+                    className="object-cover group-hover:scale-105 transition duration-700"
+                    fallbackTitle="Digital Flight Deck"
+                    fallbackCode="COCKPIT // AVIONICS"
+                  />
+                  <div className="absolute top-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3.5 py-1 rounded-full text-[10px] font-mono text-amber-400 font-bold z-10">
+                    DIGITAL FLIGHT DECK AVIONICS
+                  </div>
+                </div>
+                <div className="p-8 space-y-3">
+                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                    Certified EASA / FAA Precision
+                  </h3>
+                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    Integrated synthetic vision systems, synthetic weather radar, and steep approach certification for restricted Alpine runways.
+                  </p>
+                </div>
               </div>
             </div>
-            <div className="relative h-72 rounded-2xl overflow-hidden border border-white/10 bg-neutral-900">
-              <AviationImage src={photos.cockpit} alt="Cockpit avionics" fill className="object-cover" fallbackTitle="Digital Flight Deck" fallbackCode="COCKPIT // AVIONICS" />
-              <div className="absolute bottom-4 left-4 bg-black/70 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full text-[10px] font-data text-amber-400 font-semibold z-10">
-                DIGITAL FLIGHT DECK AVIONICS
-              </div>
-            </div>
-          </div>
 
-          {/* Cabin Characteristics & Strengths */}
-          <Card variant="surface" className="flex flex-col gap-4 p-8 rounded-2xl">
-            <h3 className="text-lg font-light text-amber-400 font-data uppercase tracking-wider">
-              Cabin Characteristics & Mission Profile
-            </h3>
-            <p className="text-sm text-neutral-300 leading-relaxed font-sans">
-              {aircraft.cabinHighlights}
-            </p>
+            {/* Strengths & Mission Envelope */}
             {aircraft.strengths && aircraft.strengths.length > 0 && (
-              <div className="space-y-2 pt-4 border-t border-white/10 text-xs font-data">
-                <span className="text-neutral-400 block font-bold uppercase tracking-wider">Key Strengths:</span>
-                <ul className="list-disc list-inside text-neutral-300 space-y-1.5 font-sans">
+              <div className="p-8 sm:p-10 rounded-3xl bg-[#fafaf7] border border-neutral-200 space-y-6">
+                <span className="text-xs font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                  KEY PERFORMANCE STRENGTHS
+                </span>
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {aircraft.strengths.map((str, i) => (
-                    <li key={i}>{str}</li>
+                    <div key={i} className="flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-amber-600 mt-2 flex-shrink-0" />
+                      <span className="text-sm text-neutral-700 font-sans leading-relaxed">{str}</span>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
-          </Card>
+          </div>
+        </Container>
+      </section>
 
-          {/* Action CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 sm:p-10 glass-elevated rounded-3xl border border-white/10 shadow-2xl">
-            <div className="space-y-1">
-              <span className="text-[10px] font-mono text-amber-400 font-bold uppercase tracking-widest block">
+      {/* 05 — MISSION DISPATCH CTA (High Impact Editorial Close) */}
+      <section className="w-full py-24 sm:py-32 bg-neutral-950 text-white">
+        <Container size="wide">
+          <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-16 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 max-w-2xl">
+              <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
                 MISSION DISPATCH // {aircraft.model}
               </span>
-              <h4 className="text-2xl font-light text-white font-sans">
-                READY TO FLY THE {aircraft.manufacturer} {aircraft.model.toUpperCase()}?
-              </h4>
-              <p className="text-xs text-neutral-300 font-sans mt-1">
-                Calculate custom flight times, airfield availability, and matched quotes with this aircraft.
+              <h3 className="text-3xl sm:text-5xl font-light text-white font-sans">
+                READY TO FLY THE {aircraft.manufacturer.toUpperCase()} {aircraft.model.toUpperCase()}?
+              </h3>
+              <p className="text-sm text-neutral-300 font-sans">
+                Calculate custom flight times, airfield availability, and matched quotes for your specific journey.
               </p>
             </div>
+
             <Link href={`/plan?aircraft=${aircraft.slug}`}>
-              <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
+              <Button variant="primary" size="lg" className="whitespace-nowrap px-10 py-5 text-base shadow-2xl">
                 PLAN WITH THIS AIRCRAFT →
               </Button>
             </Link>
           </div>
-        </div>
-      </Container>
+        </Container>
+      </section>
     </div>
   );
 }

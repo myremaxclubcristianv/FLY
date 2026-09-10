@@ -316,6 +316,35 @@ export default async function HomePage() {
           </Container>
         </section>
 
+        {/* EDITORIAL IMAGE MOMENT 01 — FULL WIDTH MAGAZINE PAUSE */}
+        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-32 sm:py-48">
+          <div className="absolute inset-0 z-0">
+            <AviationImage
+              src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2200&q=85"
+              alt="Executive Jet on Runway at Sunset"
+              fill
+              className="object-cover opacity-40 filter brightness-90 contrast-110"
+              fallbackTitle="Editorial Aviation Moment"
+              fallbackCode="MOMENT // 01"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-neutral-950" />
+          </div>
+          <Container size="wide" className="relative z-10">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <span className="text-xs font-mono text-amber-400 uppercase tracking-[0.25em] font-bold block">
+                AIR // AIRCRAFT 07
+              </span>
+              <h2 className="text-4xl sm:text-6xl md:text-7xl font-light text-white tracking-tight leading-[1.05] font-sans">
+                THE AIRCRAFT SHOULD DISAPPEAR.<br />
+                <span className="text-amber-400">THE JOURNEY SHOULD NOT.</span>
+              </h2>
+              <p className="text-base sm:text-xl text-neutral-300 font-light max-w-2xl mx-auto leading-relaxed pt-2">
+                True private aviation is invisible friction: direct tarmac boarding, zero security queues, and quiet cabins engineered for pure focus.
+              </p>
+            </div>
+          </Container>
+        </section>
+
         {/* 05 — PHOTOGRAPHIC AIRCRAFT GRID (Asymmetric Aviation Gallery) */}
         <section className="w-full py-28 sm:py-36 bg-neutral-950 text-white border-b border-neutral-800">
           <Container size="wide">
@@ -656,6 +685,35 @@ export default async function HomePage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* EDITORIAL IMAGE MOMENT 02 — THE SOVEREIGNTY OF TIME */}
+        <section className="w-full bg-neutral-950 text-white overflow-hidden relative py-32 sm:py-48">
+          <div className="absolute inset-0 z-0">
+            <AviationImage
+              src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2200&q=85"
+              alt="Executive Jet Wing in High Flight Over Stratosphere"
+              fill
+              className="object-cover opacity-40 filter brightness-90 contrast-110"
+              fallbackTitle="Stratospheric Horizon"
+              fallbackCode="MOMENT // 02"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/40 to-neutral-950" />
+          </div>
+          <Container size="wide" className="relative z-10">
+            <div className="max-w-4xl mx-auto text-center space-y-6">
+              <span className="text-xs font-mono text-amber-400 uppercase tracking-[0.25em] font-bold block">
+                AIR // FLIGHT PERSPECTIVE
+              </span>
+              <h2 className="text-4xl sm:text-6xl md:text-7xl font-light text-white tracking-tight leading-[1.05] font-sans">
+                SPEED IS CONVENIENCE.<br />
+                <span className="text-amber-400">TIME IS SOVEREIGNTY.</span>
+              </h2>
+              <p className="text-base sm:text-xl text-neutral-300 font-light max-w-2xl mx-auto leading-relaxed pt-2">
+                When you fly on your schedule, three European cities become a single productive afternoon.
+              </p>
             </div>
           </Container>
         </section>

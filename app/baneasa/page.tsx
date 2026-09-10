@@ -1,9 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Container } from "../../components/layout/Container";
-import { SectionHeader } from "../../components/shared/SectionHeader";
 import { ProvenanceBadge } from "../../components/shared/ProvenanceBadge";
-import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
 import { JsonLd, createAirportJsonLd } from "../../components/shared/JsonLd";
@@ -32,201 +30,241 @@ export default async function BaneasaPage() {
   return (
     <>
       <JsonLd data={jsonLdData} />
-      <div className="w-full py-16 bg-[var(--color-bg-primary)] flex-1 flex flex-col gap-12">
-        <Container size="wide">
-          <div className="flex flex-col gap-10">
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-xs font-data text-[var(--color-text-muted)]">
-              <Link href="/" className="hover:text-[var(--color-text-primary)]">HOME</Link>
-              <span>/</span>
-              <span className="text-[var(--color-text-primary)]">BĂNEASA EXECUTIVE GATEWAY (LRBS / BBU)</span>
-            </div>
-
-            {/* Header */}
-            <div className="flex flex-col gap-4 border-b border-white/10 pb-8">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-data text-amber-400 uppercase tracking-widest bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/20 font-semibold">
-                  BUCHAREST EXECUTIVE GATEWAY // LRBS / BBU
-                </span>
-                <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB AIP Romania" sourceUrl="https://www.cnab.ro" showSource />
+      <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
+        {/* 01 — EDITORIAL HEADER (Pure White Luxury Dossier) */}
+        <section className="w-full py-24 sm:py-32 border-b border-neutral-200/80 bg-white">
+          <Container size="wide">
+            <div className="flex flex-col gap-8 max-w-6xl mx-auto">
+              <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
+                <Link href="/" className="hover:text-amber-600 transition">HOME</Link>
+                <span>/</span>
+                <span className="text-neutral-900 font-bold">BUCHAREST BĂNEASA (LRBS / BBU)</span>
               </div>
 
-              <SectionHeader
-                title="BUCHAREST BĂNEASA (LRBS / BBU)."
-                description="Bucharest-Băneasa Aurel Vlaicu International Airport (LRBS / BBU) serves as Romania's premier dedicated business aviation gateway and general flight hub."
-                titleAs="h1"
-              />
-            </div>
-
-            {/* Editorial Visual Showcase */}
-            <div className="relative h-[380px] sm:h-[480px] w-full rounded-3xl overflow-hidden border border-white/10 bg-neutral-900 shadow-2xl">
-              <AviationImage
-                src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85"
-                alt="Executive Business Jet on Băneasa LRBS Ramp"
-                fill
-                priority
-                className="object-cover"
-                fallbackTitle="Băneasa Executive Ramp"
-                fallbackCode="AIRPORT // LRBS"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/30 to-transparent pointer-events-none" />
-              <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 font-data text-xs text-neutral-300 z-10">
-                <div>
-                  <span className="text-[10px] text-amber-400 font-bold uppercase block tracking-wider">AUREL VLAICU INTERNATIONAL</span>
-                  <span className="text-white text-lg font-light">Băneasa Dedicated Business Aviation Ramp</span>
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-8">
+                <div className="space-y-4 max-w-3xl">
+                  <div className="flex items-center gap-3">
+                    <span className="editorial-tag-dark">
+                      EXECUTIVE GATEWAY DOSSIER // LRBS / BBU
+                    </span>
+                    <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB AIP Romania" sourceUrl="https://www.cnab.ro" showSource />
+                  </div>
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-neutral-900 leading-[1.05] font-sans">
+                    BUCHAREST BĂNEASA<span className="text-amber-600">.</span>
+                  </h1>
+                  <p className="text-lg sm:text-xl text-neutral-600 font-light leading-relaxed">
+                    Bucharest-Băneasa Aurel Vlaicu International Airport (LRBS / BBU) serves as Romania&apos;s premier dedicated business aviation gateway and executive VIP terminal.
+                  </p>
                 </div>
-                <span className="bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/10 text-[11px] text-amber-400">
-                  COORDINATES: 44°30&apos;N 26°06&apos;E • ELEV 305 FT
-                </span>
+
+                <Link href="/plan">
+                  <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
+                    DISPATCH FROM LRBS →
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Massive Architectural Runway / Apron Feature */}
+              <div className="relative h-[420px] sm:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 bg-neutral-900 group">
+                <AviationImage
+                  src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
+                  alt="Executive Business Jet on Băneasa LRBS Ramp"
+                  fill
+                  priority
+                  className="object-cover group-hover:scale-105 transition-transform duration-1000"
+                  fallbackTitle="Băneasa Executive Ramp"
+                  fallbackCode="AIRPORT // LRBS"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-white z-10 font-mono text-xs">
+                  <div>
+                    <span className="text-[10px] text-amber-400 font-bold uppercase block tracking-wider">
+                      AUREL VLAICU INTERNATIONAL
+                    </span>
+                    <span className="text-white text-lg sm:text-xl font-light font-sans">
+                      Băneasa Dedicated Executive Aviation Apron
+                    </span>
+                  </div>
+                  <span className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-neutral-300">
+                    COORDINATES: 44°30&apos;N 26°06&apos;E • ELEVATION 305 FT
+                  </span>
+                </div>
               </div>
             </div>
+          </Container>
+        </section>
 
-            {/* Technical Infrastructure Specs */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
-                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">ICAO / IATA CODES</span>
-                <span className="text-2xl font-light text-white font-data">LRBS / BBU</span>
-              </Card>
+        {/* 02 — TECHNICAL INFRASTRUCTURE TELEMETRY */}
+        <section className="w-full py-16 bg-[#fafaf7] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                  ICAO / IATA IDENTIFIERS
+                </span>
+                <span className="text-3xl sm:text-4xl font-light text-neutral-900 font-sans block">
+                  LRBS / BBU
+                </span>
+                <span className="text-xs font-mono text-neutral-400">BUCHAREST BĂNEASA</span>
+              </div>
 
-              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
-                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">RUNWAY 07/25 SPECS</span>
-                <span className="text-xl font-light text-white font-data">2,358m × 45m</span>
-              </Card>
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                  RUNWAY 07/25 METRICS
+                </span>
+                <span className="text-3xl sm:text-4xl font-light text-amber-600 font-sans block">
+                  2,358 × 45 M
+                </span>
+                <span className="text-xs font-mono text-neutral-400">ASPHALT (PCN 51/F/C/W/T)</span>
+              </div>
 
-              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
-                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">SURFACE & PCN</span>
-                <span className="text-xs font-light text-white font-data">Asphalt (PCN 51/F/C/W/T)</span>
-              </Card>
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                  BOARDING SPEED
+                </span>
+                <span className="text-3xl sm:text-4xl font-light text-neutral-900 font-sans block">
+                  20 MIN
+                </span>
+                <span className="text-xs font-mono text-neutral-400">VIP FAST-TRACK</span>
+              </div>
 
-              <Card variant="instrument" className="p-5 flex flex-col gap-1 rounded-2xl">
-                <span className="text-[10px] font-data text-amber-400 uppercase tracking-wider">AIRPORT AUTHORITY</span>
-                <span className="text-xs font-light text-white font-data">CNAB (State Airport Co.)</span>
-              </Card>
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
+                <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
+                  CITY PROXIMITY
+                </span>
+                <span className="text-xl sm:text-2xl font-light text-neutral-900 font-sans block truncate">
+                  8.5 KM
+                </span>
+                <span className="text-xs font-mono text-neutral-400">TO NORTH BUSINESS DISTRICT</span>
+              </div>
             </div>
+          </Container>
+        </section>
 
-            {/* Operational Capabilities Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card variant="surface" className="p-8 flex flex-col gap-5 rounded-2xl">
-                <h2 className="text-sm font-data text-amber-400 uppercase tracking-wider border-b border-white/10 pb-3 font-semibold">
-                  EXECUTIVE & BUSINESS AVIATION ADVANTAGES
+        {/* 03 — OPERATIONAL ADVANTAGES (Editorial Layout) */}
+        <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto space-y-16">
+              <div className="space-y-4">
+                <span className="editorial-tag-dark">
+                  WHY BĂNEASA IS THE PREFERRED EXECUTIVE CHOICE
+                </span>
+                <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans">
+                  The Băneasa Executive Advantage
                 </h2>
-                <ul className="flex flex-col gap-3 text-xs text-[var(--color-text-secondary)] font-sans">
-                  <li className="flex items-start gap-2.5">
-                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">Dedicated Business Aviation Facility:</strong> Dedicated to business aircraft, executive charter, VIP transport, and general aviation operations.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">Northern Hub Location:</strong> Located 8.5 km north of Bucharest centre, adjacent to northern business districts (typical 15–25 min road access depending on traffic).</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="text-amber-400 font-data text-sm leading-none">•</span>
-                    <span><strong className="text-white">FBO Handling Procedures:</strong> Private VIP customs, immigration, and passenger lounges with direct ramp access for streamlined departures.</span>
-                  </li>
-                </ul>
-              </Card>
+              </div>
 
-              <Card variant="surface" className="p-8 flex flex-col gap-5 rounded-2xl">
-                <h2 className="text-sm font-data text-amber-400 uppercase tracking-wider border-b border-white/10 pb-3 font-semibold">
-                  AUTHORIZED GROUND HANDLERS AT BĂNEASA
-                </h2>
-                <div className="flex flex-col gap-3 text-xs text-[var(--color-text-secondary)] font-sans">
-                  {baneasa.handlingProviders?.map((handler, i) => (
-                    <div key={i} className="flex items-center justify-between border-b border-white/5 pb-2">
-                      <span className="text-white font-medium">{handler}</span>
-                      <span className="text-[10px] font-data text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">VERIFIED HANDLER</span>
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
+                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
+                    01
+                  </div>
+                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                    Dedicated FBO VIP Lounges
+                  </h3>
+                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    Private customs and border control directly inside the executive terminal. Arrive 20 minutes prior to departure with zero commercial passenger interaction.
+                  </p>
+                </div>
+
+                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
+                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
+                    02
+                  </div>
+                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                    Direct Apron Vehicle Access
+                  </h3>
+                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    Chauffeured vehicles drive directly to the aircraft steps on the ramp, ensuring maximum privacy, security, and discreet luggage handling.
+                  </p>
+                </div>
+
+                <div className="editorial-card-light p-8 rounded-3xl space-y-4 bg-white">
+                  <div className="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-mono font-bold text-sm">
+                    03
+                  </div>
+                  <h3 className="text-2xl font-light text-neutral-900 font-sans">
+                    Intermodal Helicopter Base
+                  </h3>
+                  <p className="text-sm text-neutral-600 font-sans leading-relaxed">
+                    Direct transition from incoming fixed-wing private jets to twin-turbine helicopters for flights across Romania, Transylvania, and the Black Sea.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        {/* 04 — DIRECT LRBS ROUTE NETWORK */}
+        <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto space-y-12">
+              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-8">
+                <div className="space-y-4">
+                  <span className="editorial-tag-dark">
+                    POPULAR CITY PAIRS FROM BĂNEASA
+                  </span>
+                  <h2 className="text-3xl sm:text-5xl font-light text-neutral-900 font-sans">
+                    Connected European Routes
+                  </h2>
+                </div>
+                <Link href="/plan">
+                  <Button variant="outline" size="md" className="border-neutral-300 text-neutral-900 hover:bg-neutral-100">
+                    CUSTOM ITINERARY CALCULATOR →
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {baneasaRoutes.slice(0, 6).map((route) => (
+                  <div key={route.id} className="editorial-card-light p-6 rounded-2xl space-y-3 bg-white">
+                    <div className="flex justify-between items-center text-xs font-mono text-neutral-500">
+                      <span>LRBS ORIGIN</span>
+                      <span className="text-amber-600 font-bold">{route.destinationIcao} ({route.destinationIata})</span>
                     </div>
-                  ))}
-                </div>
-              </Card>
-            </div>
-
-            {/* Băneasa Infrastructure Visual Panels */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="glass-surface rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10">
-                <div className="relative h-64 w-full bg-neutral-900 overflow-hidden">
-                  <AviationImage
-                    src="https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=80"
-                    alt="Băneasa Private Jet FBO Ramp"
-                    fill
-                    className="object-cover"
-                    fallbackTitle="Băneasa FBO Ramp"
-                    fallbackCode="FBO // HANDLING"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-data text-amber-400 font-semibold z-10">
-                    VIP FBO & PASSENGER HANDLING
+                    <h4 className="text-xl font-light text-neutral-900 font-sans">
+                      {route.destinationCity}
+                    </h4>
+                    <p className="text-xs font-mono text-neutral-500">
+                      {route.distanceNm} NM • DIRECT EXECUTIVE ROUTE
+                    </p>
+                    <Link
+                      href={`/plan?origin=LRBS&destination=${route.destinationIcao}`}
+                      className="text-xs font-mono text-amber-600 font-bold hover:underline block pt-2 border-t border-neutral-100"
+                    >
+                      PLAN THIS ROUTE →
+                    </Link>
                   </div>
-                </div>
-                <div className="p-6 space-y-2 font-sans text-xs text-[var(--color-text-secondary)]">
-                  <h3 className="text-lg font-light text-white">Private Terminal Protocols</h3>
-                  <p>Dedicated customs, discreet ramp vehicle drop-off, and executive conference suites.</p>
-                </div>
-              </div>
-
-              <div className="glass-surface rounded-2xl overflow-hidden flex flex-col justify-between border border-white/10">
-                <div className="relative h-64 w-full bg-neutral-900 overflow-hidden">
-                  <AviationImage
-                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80"
-                    alt="Runway 07/25 Approach & Lighting"
-                    fill
-                    className="object-cover"
-                    fallbackTitle="Runway 07/25"
-                    fallbackCode="RUNWAY // 07-25"
-                  />
-                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-[10px] font-data text-amber-400 font-semibold z-10">
-                    RUNWAY 07/25 // 2,358M × 45M
-                  </div>
-                </div>
-                <div className="p-6 space-y-2 font-sans text-xs text-[var(--color-text-secondary)]">
-                  <h3 className="text-lg font-light text-white">Precision Navigation & Operations</h3>
-                  <p>Category II ILS precision approach accommodating all large-cabin and intercontinental business jets.</p>
-                </div>
+                ))}
               </div>
             </div>
+          </Container>
+        </section>
 
-            {/* Related Routes from Băneasa */}
-            {baneasaRoutes.length > 0 && (
-              <div className="flex flex-col gap-6 pt-6 border-t border-white/10">
-                <h2 className="text-xs font-data text-amber-400 uppercase tracking-widest font-semibold">
-                  DEPARTING CHARTER ROUTES FROM BĂNEASA (LRBS)
-                </h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {baneasaRoutes.map((rt) => (
-                    <Card key={rt.id} variant="surface" className="p-6 flex flex-col justify-between gap-4 rounded-2xl hover:border-amber-400/50 transition-all duration-300">
-                      <div className="flex flex-col gap-2">
-                        <span className="text-[10px] font-data text-amber-400">{rt.distanceNm} NM • {rt.routeType.replace(/_/g, " ")}</span>
-                        <h3 className="text-lg font-light text-[var(--color-text-primary)]">{rt.title}</h3>
-                        <p className="text-xs text-[var(--color-text-secondary)] font-data">Light Jet: {rt.calculatedDuration.lightJet}</p>
-                      </div>
-
-                      <Link href={`/routes/${rt.slug}`} className="text-xs font-data text-amber-400 hover:underline">
-                        VIEW ROUTE PROFILE →
-                      </Link>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Action Trigger */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 glass-elevated rounded-2xl">
-              <div>
-                <h4 className="text-xl font-light text-[var(--color-text-primary)]">
-                  PLAN A DEPARTURE FROM BĂNEASA (LRBS / BBU)
-                </h4>
-                <p className="text-xs text-[var(--color-text-secondary)] font-data mt-1">
-                  Calculate flight time, aircraft availability, and ground handling for your Băneasa departure.
+        {/* 05 — MISSION PLANNER CTA */}
+        <section className="w-full py-24 sm:py-32 bg-neutral-950 text-white">
+          <Container size="wide">
+            <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-16 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
+                  BUCHAREST BĂNEASA DISPATCH
+                </span>
+                <h3 className="text-3xl sm:text-5xl font-light text-white font-sans">
+                  PLAN YOUR DEPARTURE FROM LRBS
+                </h3>
+                <p className="text-sm text-neutral-300 font-sans">
+                  Calculate flight times, aircraft range envelopes, and instant quotes departing Bucharest Băneasa.
                 </p>
               </div>
-              <Link href="/plan?from=Baneasa%20LRBS">
-                <Button variant="primary" size="lg">
-                  PLAN BĂNEASA FLIGHT →
+
+              <Link href="/plan">
+                <Button variant="primary" size="lg" className="whitespace-nowrap px-10 py-5 text-base shadow-2xl">
+                  START MISSION DISPATCH →
                 </Button>
               </Link>
             </div>
-          </div>
-        </Container>
+          </Container>
+        </section>
       </div>
     </>
   );
