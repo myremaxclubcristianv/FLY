@@ -29,9 +29,9 @@ export function DestinationsPreview() {
                     <DataStatusBadge status={dest.status} showDot={false} />
                   </div>
 
-                  <h4 className="text-xl font-light text-[var(--color-text-primary)]">
+                  <h3 className="text-xl font-light text-[var(--color-text-primary)]">
                     {dest.name}
-                  </h4>
+                  </h3>
 
                   <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed">
                     {dest.highlights}

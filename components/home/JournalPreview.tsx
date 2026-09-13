@@ -29,9 +29,9 @@ export function JournalPreview() {
                   </div>
 
                   <Link href="/journal">
-                    <h4 className="text-xl font-light text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer">
+                    <h3 className="text-xl font-light text-[var(--color-text-primary)] hover:text-[var(--color-accent)] transition-colors cursor-pointer">
                       {art.title}
-                    </h4>
+                    </h3>
                   </Link>
 
                   <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">

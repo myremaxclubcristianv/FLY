@@ -37,9 +37,9 @@ export function ExperiencesPreview() {
                       <DataStatusBadge status={exp.status} />
                     </div>
 
-                    <h4 className="text-lg font-light text-[var(--color-text-primary)]">
+                    <h3 className="text-lg font-light text-[var(--color-text-primary)]">
                       {exp.title}
-                    </h4>
+                    </h3>
 
                     <p className="text-xs text-[var(--color-text-secondary)] leading-relaxed font-sans">
                       {exp.description}

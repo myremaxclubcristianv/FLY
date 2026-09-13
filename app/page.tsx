@@ -232,10 +232,10 @@ export default async function HomePage() {
               <span className="editorial-tag-muted">
                 AIR // MISSION PHILOSOPHY
               </span>
-              <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
                 THE BEST AIRCRAFT<br />
                 <span className="text-amber-600">IS THE ONE THAT FITS THE MISSION.</span>
-              </h3>
+              </h2>
               <p className="text-base sm:text-lg text-neutral-500 font-light max-w-xl mx-auto">
                 No single jet solves every journey. Speed, airfield runway length, passenger volume, and economics dictate the right choice.
               </p>
@@ -425,7 +425,7 @@ export default async function HomePage() {
                     <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end z-10">
                       <div>
                         <span className="text-[10px] font-mono text-amber-400 font-bold block">{photo.caption}</span>
-                        <h4 className="text-lg sm:text-xl font-light text-white font-sans">{photo.title}</h4>
+                        <h3 className="text-lg sm:text-xl font-light text-white font-sans">{photo.title}</h3>
                       </div>
                     </div>
                   </div>
@@ -529,10 +529,10 @@ export default async function HomePage() {
               <span className="editorial-tag-muted">
                 AIR // ACCESS SOVEREIGNTY
               </span>
-              <h3 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-light text-neutral-900 font-sans tracking-tight leading-tight">
                 THE DISTANCE IS NOT THE PROBLEM.<br />
                 <span className="text-amber-600">THE WAY THERE IS.</span>
-              </h3>
+              </h2>
               <p className="text-base sm:text-lg text-neutral-500 font-light max-w-xl mx-auto">
                 Bypass commercial hub layovers and public security corridors with direct point-to-point runway dispatch.
               </p>
@@ -1003,9 +1003,9 @@ export default async function HomePage() {
                   <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest block">
                     READY TO FIND THE RIGHT WAY TO FLY?
                   </span>
-                  <h3 className="text-4xl sm:text-6xl font-light text-white font-sans tracking-tight leading-none">
+                  <h2 className="text-4xl sm:text-6xl font-light text-white font-sans tracking-tight leading-none">
                     YOUR NEXT FLIGHT<br />STARTS HERE<span className="text-amber-400">.</span>
-                  </h3>
+                  </h2>
                   <p className="text-sm sm:text-base text-neutral-300 font-sans leading-relaxed pt-1">
                     Tell AIR where you want to go. We calculate aircraft range, airport runways, and matched fleet options within seconds.
                   </p>

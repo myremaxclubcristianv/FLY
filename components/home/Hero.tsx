@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { Container } from "../layout/Container";
@@ -18,6 +16,7 @@ export function Hero() {
           alt="Executive Jet on Runway Tarmac"
           fill
           priority
+          sizes="100vw"
           className="object-cover opacity-35 filter brightness-95 contrast-110"
           fallbackTitle="AIR Fleet Airborne"
           fallbackCode="HERO // AIRBORNE"

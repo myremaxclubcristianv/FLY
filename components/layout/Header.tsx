@@ -51,8 +51,9 @@ export function Header() {
                 onClick={() => setIsSearchOpen(true)}
                 className="hidden sm:inline-flex items-center gap-2 px-3 py-2 text-xs font-mono text-neutral-300 hover:text-white bg-white/[0.04] border border-white/[0.1] hover:border-amber-400/50 rounded transition-all backdrop-blur-sm shadow-sm"
                 title="Global Aviation Search (Cmd+K)"
+                aria-label="Global Aviation Search (Cmd+K)"
               >
-                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <span>SEARCH</span>

@@ -71,9 +71,9 @@ export function DecisionEngine() {
               </div>
 
               <div>
-                <h4 className="text-3xl font-light text-[var(--color-text-primary)]">
+                <h3 className="text-3xl font-light text-[var(--color-text-primary)]">
                   {d.primaryOption.name}
-                </h4>
+                </h3>
                 <p className="text-sm font-data text-[var(--color-text-muted)] mt-1">
                   {d.primaryOption.tagline}
                 </p>
@@ -124,9 +124,9 @@ export function DecisionEngine() {
                         </span>
                         <DataStatusBadge status={alt.status} showDot={false} />
                       </div>
-                      <h5 className="text-base font-medium text-[var(--color-text-primary)]">
+                      <h4 className="text-base font-medium text-[var(--color-text-primary)]">
                         {alt.name}
-                      </h5>
+                      </h4>
                       <span className="text-xs font-data text-[var(--color-accent)]">
                         {alt.estimatedDuration}
                       </span>

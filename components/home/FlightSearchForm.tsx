@@ -77,11 +77,13 @@ export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark"
       {/* Main Required Search Fields Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="flex flex-col gap-1.5">
-          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+          <label htmlFor="flight-from" className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
             FROM // DEPARTURE AIRPORT / CITY
           </label>
           <input
+            id="flight-from"
             type="text"
+            aria-label="Departure Airport or City"
             placeholder="e.g. Bucharest (LRBS), Paris (LFPB)"
             value={from}
             onChange={(e) => setFrom(e.target.value)}
@@ -96,11 +98,13 @@ export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark"
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+          <label htmlFor="flight-to" className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
             TO // ARRIVAL DESTINATION
           </label>
           <input
+            id="flight-to"
             type="text"
+            aria-label="Arrival Destination Airport or City"
             placeholder="e.g. Nice (LFMN), Mykonos, Geneva"
             value={to}
             onChange={(e) => setTo(e.target.value)}
@@ -115,11 +119,13 @@ export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark"
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+          <label htmlFor="flight-date" className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
             WHEN // DEPARTURE DATE
           </label>
           <input
+            id="flight-date"
             type="date"
+            aria-label="Departure Date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required
@@ -132,10 +138,12 @@ export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark"
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
+          <label htmlFor="flight-passengers" className={`text-[10px] font-mono tracking-wider uppercase ${isLight ? "text-neutral-600 font-semibold" : "text-neutral-400"}`}>
             WHO // PASSENGER COMPLEMENT
           </label>
           <select
+            id="flight-passengers"
+            aria-label="Passenger Complement"
             value={passengers}
             onChange={(e) => setPassengers(e.target.value)}
             className={`w-full rounded-xl px-4 py-3.5 text-sm font-sans transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500/50 ${

@@ -47,9 +47,9 @@ export function Footer() {
           <div className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {FOOTER_SECTIONS.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
-                <h4 className="text-[11px] font-data text-[var(--color-text-primary)] tracking-widest uppercase border-b border-[var(--color-border-subtle)] pb-2">
+                <h3 className="text-[11px] font-data text-[var(--color-text-primary)] tracking-widest uppercase border-b border-[var(--color-border-subtle)] pb-2">
                   {section.title}
-                </h4>
+                </h3>
                 <ul className="flex flex-col gap-2.5">
                   {section.items.map((item) => (
                     <li key={item.label}>

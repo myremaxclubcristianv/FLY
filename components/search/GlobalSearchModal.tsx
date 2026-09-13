@@ -84,17 +84,19 @@ export function GlobalSearchModal({ isOpen, onClose }: GlobalSearchModalProps) {
       >
         {/* Search Header */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)]">
-          <span className="text-[var(--color-text-muted)] text-sm font-data">⌘K</span>
+          <span className="text-[var(--color-text-muted)] text-sm font-data" aria-hidden="true">⌘K</span>
           <input
             ref={inputRef}
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search aircraft, companies, airports (LRBS), routes, or journal..."
+            aria-label="Search aviation knowledge repository"
             className="w-full bg-transparent border-none text-sm text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none font-sans"
           />
           <button
             onClick={onClose}
+            aria-label="Close search dialog"
             className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] px-2 py-1 border border-[var(--color-border)] rounded transition-colors"
           >
             ESC
