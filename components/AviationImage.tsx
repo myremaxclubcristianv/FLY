@@ -1,11 +1,9 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import Image, { ImageProps } from "next/image";
 import { cn } from "../lib/utils";
 import { PlaceholderImage } from "./shared/PlaceholderImage";
 
-export interface AviationImageProps extends Omit<ImageProps, "onError"> {
+export interface AviationImageProps extends ImageProps {
   fallbackTitle?: string;
   fallbackCode?: string;
   provenance?: string;
@@ -29,12 +27,7 @@ export function AviationImage({
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
   ...props
 }: AviationImageProps) {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError || !src) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(`[AIR IMAGE ERROR] Failed src: ${src} | Alt: ${alt}`);
-    }
+  if (!src) {
     return (
       <PlaceholderImage
         title={fallbackTitle || (typeof alt === "string" ? alt : "AIR Visual Asset")}
@@ -53,10 +46,6 @@ export function AviationImage({
         fill={fill}
         priority={priority}
         sizes={sizes}
-        onError={() => {
-          console.warn(`[AIR IMAGE ERROR] Runtime load failure: ${src}`);
-          setHasError(true);
-        }}
         className={cn("object-cover transition-opacity duration-300", className)}
         {...props}
       />
