@@ -45,6 +45,8 @@ export function AviationImage({
         alt={alt}
         fill={fill}
         priority={priority}
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : undefined}
         sizes={sizes}
         className={cn("object-cover transition-opacity duration-300", className)}
         {...props}
