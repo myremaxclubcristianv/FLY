@@ -57,7 +57,7 @@ export function StepContact({
           WHERE SHOULD WE SEND YOUR DECISION PROPOSAL?
         </h2>
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Provide your contact details. In Phase 1, AIR compiles your mission profile into an indicative decision summary.
+          Provide your contact details. AIR compiles your mission profile into an indicative decision summary.
         </p>
       </div>
 

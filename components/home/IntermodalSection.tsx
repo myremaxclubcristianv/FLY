@@ -12,7 +12,7 @@ const INTERMODAL_STEPS = [
     step: "01",
     title: "EXECUTIVE JET TOUCHDOWN",
     desc: "Your private jet lands at Bucharest Băneasa (LRBS), Le Bourget (LFPB), or Geneva (LSGG) with zero commercial terminal delays.",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+    image: "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=800&q=80",
     badge: "AIRPORT ARRIVAL",
   },
   {

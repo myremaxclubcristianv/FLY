@@ -6,6 +6,7 @@ import { Container } from "../../../components/layout/Container";
 import { DataStatusBadge } from "../../../components/shared/DataStatusBadge";
 import { Button } from "../../../components/ui/Button";
 import { AviationImage } from "../../../components/AviationImage";
+import { JsonLd, createAircraftJsonLd } from "../../../components/shared/JsonLd";
 import { AIRCRAFT_MODEL_PHOTOS } from "../../../data/real/aviation-photos";
 
 export async function generateMetadata({
@@ -19,6 +20,14 @@ export async function generateMetadata({
   return {
     title: `${aircraft.manufacturer} ${aircraft.model} Specs & Intelligence | AIR`,
     description: aircraft.cabinHighlights,
+    alternates: {
+      canonical: `/aircraft/${aircraft.slug}`,
+    },
+    openGraph: {
+      title: `${aircraft.manufacturer} ${aircraft.model} | AIR Aviation`,
+      description: aircraft.cabinHighlights,
+      url: `/aircraft/${aircraft.slug}`,
+    },
   };
 }
 
@@ -35,14 +44,18 @@ export default async function AircraftDetailPage({
   }
 
   const photos = AIRCRAFT_MODEL_PHOTOS[slug] || {
-    hero: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=85",
+    hero: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1600&q=85",
     interior: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85",
     cockpit: "https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=1200&q=85",
-    exterior: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1200&q=85",
+    exterior: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1200&q=85",
   };
 
+  const aircraftJsonLd = createAircraftJsonLd(aircraft, photos);
+
   return (
-    <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
+    <>
+      <JsonLd data={aircraftJsonLd} />
+      <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
       {/* 01 — EDITORIAL PRODUCT HEADER */}
       <section className="w-full py-16 sm:py-24 border-b border-neutral-200/80 bg-white">
         <Container size="wide">
@@ -295,5 +308,6 @@ export default async function AircraftDetailPage({
         </Container>
       </section>
     </div>
+    </>
   );
 }

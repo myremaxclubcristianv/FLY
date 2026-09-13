@@ -20,7 +20,7 @@ export const REAL_AIRCRAFT_FOR_SALE: AircraftForSale[] = [
     verificationStatus: "VERIFIED",
     dataStatus: "VERIFIED",
     lastCheckedAt: "2026-09-09",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: "sale-2",
@@ -104,6 +104,6 @@ export const REAL_AIRCRAFT_FOR_SALE: AircraftForSale[] = [
     verificationStatus: "VERIFIED",
     dataStatus: "VERIFIED",
     lastCheckedAt: "2026-09-09",
-    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80",
   },
 ];

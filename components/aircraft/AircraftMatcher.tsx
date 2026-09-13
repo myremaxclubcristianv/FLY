@@ -32,7 +32,7 @@ export function AircraftMatcher() {
         category: "LIGHT / MIDSIZE EXECUTIVE JET",
         reason: "Optimal balance between direct travel time, high-altitude cruise speed, cabin comfort, and fuel efficiency.",
         duration: "1 HR 55 MIN FLIGHT",
-        image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=800&q=80",
       };
 
   const handleEvaluate = (e: React.FormEvent) => {

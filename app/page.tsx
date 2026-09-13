@@ -6,7 +6,6 @@ import { FlightSearchForm } from "../components/home/FlightSearchForm";
 import { ProvenanceBadge } from "../components/shared/ProvenanceBadge";
 import { Button } from "../components/ui/Button";
 import { UnifiedAviationRepository } from "../lib/repositories/unified-aviation-repo";
-import { JsonLd, createOrganizationJsonLd } from "../components/shared/JsonLd";
 import { AviationImage } from "../components/AviationImage";
 import { DestinationExplorer } from "../components/destinations/DestinationExplorer";
 
@@ -19,10 +18,13 @@ export const metadata = {
   title: "AIR — The Easiest Way to Fly | Luxury Private Aviation & Intelligence",
   description:
     "Explore the world of flight: private jets, turboprops, helicopters, certified airports, aircraft marketplace for sale, flight schools, and aviation regulations.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 const CITY_STRIP = [
-  { city: "BUCHAREST", airport: "LRBS — Băneasa Executive", route: "LRBS ORIGIN", country: "Romania", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80", slug: "baneasa" },
+  { city: "BUCHAREST", airport: "LRBS — Băneasa Executive", route: "LRBS ORIGIN", country: "Romania", image: "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=800&q=80", slug: "baneasa" },
   { city: "PARIS", airport: "LFPB — Le Bourget", route: "LRBS → LFPB • 2h 55m", country: "France", image: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
   { city: "NICE", airport: "LFMN — Côte d'Azur", route: "LRBS → LFMN • 2h 35m", country: "France", image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
   { city: "GENEVA", airport: "LSGG — Cointrin", route: "LRBS → LSGG • 2h 40m", country: "Switzerland", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80", slug: "destinations" },
@@ -116,7 +118,7 @@ const EXPERIENCES = [
 
 const MASONRY_PHOTOS = [
   {
-    src: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=85",
+    src: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1200&q=85",
     title: "Executive Jet Apron Staging",
     caption: "RAMP STAGING // LRBS",
     aspect: "col-span-12 md:col-span-7 h-96 sm:h-[480px]",
@@ -151,9 +153,7 @@ export default async function HomePage() {
   const aircraftModels = await UnifiedAviationRepository.getAircraftModels();
 
   return (
-    <>
-      <JsonLd data={createOrganizationJsonLd()} />
-      <div className="w-full flex flex-col bg-white text-neutral-900 font-sans">
+    <div className="w-full flex flex-col bg-white text-neutral-900 font-sans">
         {/* 01 — HERO (Full Viewport Authentic Aviation Showcase - Cinematic Darkness) */}
         <Hero />
 
@@ -1021,6 +1021,5 @@ export default async function HomePage() {
           </Container>
         </section>
       </div>
-    </>
   );
 }

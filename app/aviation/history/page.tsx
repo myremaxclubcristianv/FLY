@@ -22,7 +22,7 @@ const HISTORICAL_TIMELINE = [
     title: "Henri Coandă — First Jet Aircraft Concept (Coandă-1910)",
     desc: "Henri Coandă exhibited the world's first air-reactive engine aircraft (the Coandă-1910) at the International Aeronautic Salon in Paris, introducing the Coandă Effect fluid dynamics phenomenon.",
     source: "Royal Aeronautical Society & Smithsonian Records",
-    img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80",
   },
   {
     year: "1912",

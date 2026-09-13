@@ -7,13 +7,14 @@ import { ProvenanceBadge } from "../../../components/shared/ProvenanceBadge";
 import { Card } from "../../../components/ui/Card";
 import { UnifiedAviationRepository } from "../../../lib/repositories/unified-aviation-repo";
 import { AviationImage } from "../../../components/AviationImage";
+import { JsonLd, createArticleJsonLd } from "../../../components/shared/JsonLd";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 const ARTICLE_HERO_IMAGES: Record<string, string> = {
-  "how-private-charter-works": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80",
+  "how-private-charter-works": "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=1600&q=80",
   "what-happens-after-requesting-a-flight": "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=1600&q=80",
   "what-determines-private-charter-pricing": "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1600&q=80",
   "when-private-aviation-makes-sense": "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1600&q=80",
@@ -44,6 +45,14 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: `${article.title} | AIR Journal`,
     description: article.excerpt,
+    alternates: {
+      canonical: `/journal/${article.slug}`,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      url: `/journal/${article.slug}`,
+    },
   };
 }
 
@@ -55,10 +64,12 @@ export default async function JournalDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  const heroImg = ARTICLE_HERO_IMAGES[slug] || "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80";
+  const heroImg = ARTICLE_HERO_IMAGES[slug] || "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=1600&q=80";
 
   return (
-    <div className="w-full py-16 bg-[var(--color-bg-primary)] flex-1 flex flex-col gap-12">
+    <>
+      <JsonLd data={createArticleJsonLd(article, heroImg)} />
+      <div className="w-full py-16 bg-[var(--color-bg-primary)] flex-1 flex flex-col gap-12">
       <Container size="wide">
         <div className="max-w-4xl mx-auto flex flex-col gap-12">
           {/* Breadcrumbs */}
@@ -161,5 +172,6 @@ export default async function JournalDetailPage({ params }: PageProps) {
         </div>
       </Container>
     </div>
+    </>
   );
 }

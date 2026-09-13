@@ -49,7 +49,6 @@ export const FOOTER_SECTIONS = [
       { label: "AVIATION FINANCE", href: "/aviation/finance", isImplemented: true },
       { label: "AVIATION INSURANCE", href: "/aviation/insurance", isImplemented: true },
       { label: "DATA INTEGRITY & STATUS", href: "/#data-status", isImplemented: true },
-      { label: "DATA AUDIT DASHBOARD", href: "/admin", isImplemented: true },
     ],
   },
   {

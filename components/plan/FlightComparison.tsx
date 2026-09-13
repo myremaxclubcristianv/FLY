@@ -14,7 +14,7 @@ export interface FlightComparisonProps {
 }
 
 const OPTION_PHOTOS: Record<string, string> = {
-  LIGHT_JET: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1200&q=80",
+  LIGHT_JET: "https://images.unsplash.com/photo-1587019158091-1a103c5dd17f?auto=format&fit=crop&w=1200&q=80",
   VERY_LIGHT_JET: "https://images.unsplash.com/photo-1559297434-fae8a1916a79?auto=format&fit=crop&w=1200&q=80",
   MIDSIZE_JET: "https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&w=1200&q=80",
   SUPER_MIDSIZE_JET: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=1200&q=80",

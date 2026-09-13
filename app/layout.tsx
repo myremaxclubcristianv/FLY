@@ -26,6 +26,9 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(DEFAULT_SEO.url),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: DEFAULT_SEO.title,
     template: DEFAULT_SEO.titleTemplate,

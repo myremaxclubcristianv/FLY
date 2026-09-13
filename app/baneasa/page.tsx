@@ -67,10 +67,11 @@ export default async function BaneasaPage() {
               {/* Massive Architectural Runway / Apron Feature */}
               <div className="relative h-[420px] sm:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 bg-neutral-900 group">
                 <AviationImage
-                  src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
+                  src="https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=2000&q=85"
                   alt="Executive Business Jet on Băneasa LRBS Ramp"
                   fill
                   priority
+                  sizes="(max-width: 1200px) 100vw, 1200px"
                   className="object-cover group-hover:scale-105 transition-transform duration-1000"
                   fallbackTitle="Băneasa Executive Ramp"
                   fallbackCode="AIRPORT // LRBS"

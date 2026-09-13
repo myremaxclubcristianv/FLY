@@ -12,13 +12,16 @@ export const metadata = {
   title: "Aviation Supply Directory & Infrastructure | AIR",
   description:
     "Discover verified operators, aircraft fleets, airports, heliports, FBO handling facilities, and maintenance infrastructure across Romania and Europe.",
+  alternates: {
+    canonical: "/aviation",
+  },
 };
 
 export default async function AviationPage() {
   const operators = await operatorService.getAll();
 
   const categories = [
-    { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations.", img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80" },
+    { title: "OPERATORS", count: "3 VERIFIED", desc: "Private jet charter, helicopter operators, executive flight operations.", img: "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=800&q=80" },
     { title: "AIRCRAFT", count: "4 CATEGORIES", desc: "Fleet specifications, passenger capacities, and range envelopes.", img: "https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?auto=format&fit=crop&w=800&q=80" },
     { title: "AIRPORTS & HELIPORTS", count: "12 LOCATIONS", desc: "Băneasa (LRBS / BBU), Otopeni (LROP / OTP), Brașov (LROV), Constanța (LRCK), Tuzla (LRTZ).", img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80" },
     { title: "FBO & HANDLING", count: "2 FACILITIES", desc: "VIP lounge access, customs clearance, and direct ramp car transfers.", img: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=800&q=80" },

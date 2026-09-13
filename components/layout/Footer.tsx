@@ -17,6 +17,7 @@ export function Footer() {
               <span className="text-3xl font-light tracking-[0.25em] text-[var(--color-text-primary)] font-data">
                 {BRAND.name}
               </span>
+              {" "}
               <DataStatusBadge status="INDICATIVE" />
             </div>
 
@@ -31,7 +32,6 @@ export function Footer() {
             <div className="pt-2 flex flex-col gap-1 text-[11px] font-data text-[var(--color-text-muted)]">
               <span>HEADQUARTERS // {BRAND.location}</span>
               <span>PRIMARY ACCESS GATEWAY // {BRAND.hub}</span>
-              <span>BUILD STATUS // {BRAND.version}</span>
             </div>
 
             <div className="pt-2">

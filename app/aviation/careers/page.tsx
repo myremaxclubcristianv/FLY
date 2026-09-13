@@ -24,7 +24,7 @@ const CAREER_PATHWAYS = [
     requirements: "EASA Cabin Crew Attestation • Medical Attestation • VIP Service Qualification",
     desc: "Delivering high-end VIP in-flight service, emergency evacuation management, and passenger welfare.",
     salary: "€28,000 – €65,000 / year",
-    img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
+    img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80",
   },
   {
     title: "Licensed Maintenance Engineer (B1/B2)",
