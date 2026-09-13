@@ -1,11 +1,15 @@
 import type { NextConfig } from "next";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-let supabaseHost = "";
+let supabaseHttps = "";
+let supabaseWss = "";
 if (supabaseUrl) {
   try {
     const parsed = new URL(supabaseUrl);
-    supabaseHost = parsed.origin;
+    if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+      supabaseHttps = parsed.origin;
+      supabaseWss = `wss://${parsed.host}`;
+    }
   } catch {
     // fallback if unparseable
   }
@@ -13,9 +17,8 @@ if (supabaseUrl) {
 
 const connectSrc = [
   "'self'",
-  "https://*.supabase.co",
-  "wss://*.supabase.co",
-  supabaseHost,
+  supabaseHttps || "https://*.supabase.co",
+  supabaseWss || "wss://*.supabase.co",
 ]
   .filter(Boolean)
   .join(" ");
