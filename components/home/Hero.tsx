@@ -12,10 +12,11 @@ export function Hero() {
       {/* Atmospheric Background Layer with Cinematic Depth */}
       <div className="absolute inset-0 z-0">
         <AviationImage
-          src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
+          src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1600&q=80"
           alt="Executive Jet on Runway Tarmac"
           fill
           priority
+          quality={80}
           sizes="100vw"
           className="object-cover opacity-35 filter brightness-95 contrast-110"
           fallbackTitle="AIR Fleet Airborne"
