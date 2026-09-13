@@ -180,7 +180,6 @@ export default async function HomePage() {
                   src={EDITORIAL_ATMOSPHERE.heroJet}
                   alt="Flagship Executive Jet Airborne Over Horizon"
                   fill
-                  priority
                   className="object-cover group-hover:scale-105 transition-transform duration-1000"
                   fallbackTitle="Flagship Jet"
                   fallbackCode="EDITORIAL // HORIZON"

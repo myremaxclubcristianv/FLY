@@ -62,6 +62,7 @@ export function Header() {
 
               <Link
                 href="/account"
+                prefetch={false}
                 className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-400/80 bg-amber-500/10 hover:bg-amber-500/20 rounded transition-all backdrop-blur-sm"
                 title="My AIR Account & Missions"
               >
@@ -70,7 +71,7 @@ export function Header() {
 
               <div className="hidden lg:block">
                 <Button size="md" variant="primary" asChild>
-                  <Link href={PRIMARY_CTA.href}>
+                  <Link href={PRIMARY_CTA.href} prefetch={false}>
                     {PRIMARY_CTA.label}
                   </Link>
                 </Button>

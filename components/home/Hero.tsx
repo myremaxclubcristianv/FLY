@@ -77,12 +77,12 @@ export function Hero() {
           {/* Action Triggers */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <Button size="lg" variant="primary" asChild className="px-10 shadow-2xl text-base">
-              <Link href={PRIMARY_CTA.href}>
+              <Link href={PRIMARY_CTA.href} prefetch={false}>
                 PLAN A FLIGHT →
               </Link>
             </Button>
             <Button size="lg" variant="secondary" asChild className="px-8 text-base">
-              <Link href="/aircraft">
+              <Link href="/aircraft" prefetch={false}>
                 EXPLORE AIRCRAFT
               </Link>
             </Button>
