@@ -180,11 +180,11 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="inline-flex items-center gap-2 min-h-[44px] px-3.5 py-2 text-xs font-mono font-bold tracking-wider text-neutral-200 hover:text-amber-400 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.12] hover:border-amber-400/50 rounded-xl backdrop-blur-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-all duration-200 active:scale-95 cursor-pointer"
+          aria-label={isOpen ? "Close AIR navigation menu" : "Open AIR navigation menu"}
+          className="group inline-flex items-center gap-2 min-h-[44px] px-3.5 py-2 text-xs font-mono font-bold tracking-wider text-white bg-neutral-900 hover:bg-neutral-800 border border-amber-500/50 hover:border-amber-400 rounded-xl backdrop-blur-md shadow-[0_2px_12px_rgba(245,158,11,0.15)] focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-all duration-200 active:scale-95 cursor-pointer"
         >
           <svg
-            className="w-4 h-4 text-amber-400"
+            className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -206,25 +206,30 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
               />
             )}
           </svg>
-          <span className="text-white font-mono tracking-widest text-[11px] uppercase font-bold">
+          <span className="text-amber-400 group-hover:text-amber-300 font-mono tracking-widest text-xs uppercase font-bold">
             {isOpen ? "CLOSE" : "MENU"}
           </span>
         </button>
       </div>
 
-      {/* Slide-out Glass Overlay Drawer */}
+      {/* Slide-out Glass Overlay Drawer (High Z-Index Guaranteed) */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex flex-col bg-neutral-950/98 backdrop-blur-2xl animate-in fade-in duration-200">
+        <div
+          className="fixed inset-0 z-[100] lg:hidden flex flex-col bg-[#070809]/98 backdrop-blur-3xl animate-in fade-in duration-200"
+          role="dialog"
+          aria-modal="true"
+          aria-label="AIR Mobile Navigation"
+        >
           {/* Top Bar inside Overlay */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.08] bg-black/40">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.1] bg-black/60 shrink-0">
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
               className="text-xl font-light tracking-[0.2em] text-white font-mono flex items-center gap-2"
             >
-              <span>AIR</span>
-              <span className="text-[9px] text-amber-400 border border-amber-400/40 px-1.5 py-0.5 rounded tracking-widest font-bold">
-                OPS
+              <span className="text-white font-bold">AIR</span>
+              <span className="text-[9px] text-amber-400 border border-amber-400/50 px-2 py-0.5 rounded tracking-widest font-bold bg-amber-500/10">
+                NAVIGATION
               </span>
             </Link>
 
@@ -232,10 +237,11 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
               <button
                 type="button"
                 onClick={handleSearchClick}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-neutral-300 bg-white/[0.05] border border-white/10 rounded-lg hover:text-amber-400 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-neutral-200 bg-white/[0.08] hover:bg-white/[0.15] border border-white/15 rounded-xl hover:text-amber-400 transition-colors"
+                aria-label="Search AIR"
               >
                 <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <span>SEARCH</span>
               </button>
@@ -244,10 +250,10 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                 type="button"
                 onClick={() => setIsOpen(false)}
                 aria-label="Close menu"
-                className="p-2 text-neutral-300 hover:text-amber-400 rounded-lg bg-white/[0.05] border border-white/10"
+                className="flex items-center gap-1 px-3 py-2 text-neutral-200 hover:text-amber-400 rounded-xl bg-neutral-900 border border-white/20 hover:border-amber-400 font-mono text-xs font-bold transition-colors"
               >
                 <svg
-                  className="w-5 h-5"
+                  className="w-4 h-4 text-amber-400"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -255,54 +261,59 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    strokeWidth={1.5}
+                    strokeWidth={2}
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
+                <span>CLOSE</span>
               </button>
             </div>
           </div>
 
           {/* Account & Quick Hub Bar */}
-          <div className="grid grid-cols-2 gap-2 px-5 py-3 border-b border-white/[0.06] bg-neutral-900/40 text-xs font-mono">
+          <div className="grid grid-cols-2 gap-2 px-5 py-3 border-b border-white/[0.08] bg-neutral-900/60 text-xs font-mono shrink-0">
             <Link
               href="/account"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 hover:bg-amber-500/20 transition-colors"
+              className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-400 hover:bg-amber-500/25 transition-colors font-bold"
             >
-              <span>👤 MY AIR ACCOUNT</span>
+              <span>👤 MY AIR</span>
             </Link>
             <Link
               href="/baneasa"
               onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-2 p-2 rounded-xl bg-white/[0.03] border border-white/10 text-neutral-300 hover:text-white transition-colors"
+              className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-white/[0.05] border border-white/15 text-neutral-200 hover:text-white transition-colors font-bold"
             >
               <span>🛬 BĂNEASA LRBS</span>
             </Link>
           </div>
 
           {/* Navigation Accordion Sections (Complete Architecture) */}
-          <nav className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-3" aria-label="Mobile Navigation">
+          <nav
+            className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-3.5 scroll-smooth"
+            style={{ WebkitOverflowScrolling: "touch" }}
+            aria-label="Mobile Navigation Categories"
+          >
             {MOBILE_NAV_DATA.map((sec) => {
               const isExpanded = expandedSection === sec.title;
               return (
                 <div
                   key={sec.title}
-                  className="border border-white/[0.08] rounded-2xl overflow-hidden bg-neutral-900/40"
+                  className="border border-white/[0.1] rounded-2xl overflow-hidden bg-neutral-900/50 shadow-md"
                 >
                   <button
                     type="button"
                     onClick={() => toggleSection(sec.title)}
-                    className="w-full flex items-center justify-between p-4 text-left text-sm font-mono tracking-wider text-white hover:text-amber-400 transition-colors"
+                    className="w-full flex items-center justify-between p-4 text-left text-sm font-mono tracking-wider text-white hover:text-amber-400 transition-colors cursor-pointer"
                   >
-                    <span className="font-semibold text-neutral-200">{sec.title}</span>
-                    <span className="text-amber-400 text-xs font-mono">
+                    <span className="font-bold text-neutral-100">{sec.title}</span>
+                    <span className="text-amber-400 text-sm font-mono font-bold">
                       {isExpanded ? "−" : "+"}
                     </span>
                   </button>
 
                   {isExpanded && (
-                    <div className="px-4 pb-4 pt-1 flex flex-col gap-4 border-t border-white/[0.06] animate-in fade-in duration-150">
+                    <div className="px-4 pb-4 pt-1 flex flex-col gap-4 border-t border-white/[0.08] bg-neutral-950/40 animate-in fade-in duration-150">
                       {sec.groups.map((grp, gIdx) => (
                         <div key={gIdx} className="flex flex-col gap-1.5">
                           <span className="text-[9px] font-mono text-amber-400/90 uppercase tracking-widest font-bold">
@@ -314,11 +325,11 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setIsOpen(false)}
-                                className="flex items-center justify-between py-2 px-2.5 rounded-lg text-xs text-neutral-300 hover:text-white hover:bg-white/[0.06] transition-colors font-sans"
+                                className="flex items-center justify-between py-2.5 px-3 rounded-xl text-xs text-neutral-200 hover:text-white hover:bg-white/[0.08] transition-colors font-sans"
                               >
                                 <span>{item.label}</span>
                                 {item.badge && (
-                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/30 text-amber-400 rounded">
+                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold">
                                     {item.badge}
                                   </span>
                                 )}
@@ -338,22 +349,39 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
               <Link
                 href="/routes"
                 onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors"
+                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
               >
                 ROUTES ENVELOPE →
               </Link>
               <Link
                 href="/destinations"
                 onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.03] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors"
+                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
               >
                 DESTINATIONS →
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              <Link
+                href="/business"
+                onClick={() => setIsOpen(false)}
+                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
+              >
+                BUSINESS AVIATION →
+              </Link>
+              <Link
+                href="/legal"
+                onClick={() => setIsOpen(false)}
+                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
+              >
+                LEGAL CENTER →
               </Link>
             </div>
           </nav>
 
           {/* Bottom CTA in Drawer */}
-          <div className="p-5 border-t border-white/[0.08] bg-black/60 backdrop-blur-xl">
+          <div className="p-5 border-t border-white/[0.1] bg-black/80 backdrop-blur-xl shrink-0 safe-area-bottom">
             <Button fullWidth variant="primary" size="lg" asChild onClick={() => setIsOpen(false)}>
               <Link href={PRIMARY_CTA.href}>
                 {PRIMARY_CTA.label} →
@@ -365,15 +393,6 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
           </div>
         </div>
       )}
-
-      {/* Persistent Sticky Mobile Bottom CTA Bar (visible on viewports < 768px) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 p-3 bg-neutral-950/90 backdrop-blur-xl border-t border-white/[0.1] md:hidden shadow-[0_-4px_25px_rgba(0,0,0,0.8)] flex items-center gap-3">
-        <Button fullWidth size="md" variant="primary" asChild>
-          <Link href={PRIMARY_CTA.href}>
-            {PRIMARY_CTA.label} →
-          </Link>
-        </Button>
-      </div>
     </>
   );
 }

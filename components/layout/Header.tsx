@@ -45,11 +45,11 @@ export function Header() {
             <MegaMenu />
 
             {/* Right Action Trigger & Search */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="inline-flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2 text-xs font-mono text-neutral-300 hover:text-white bg-white/[0.04] border border-white/[0.1] hover:border-amber-400/50 rounded transition-all backdrop-blur-sm shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-neutral-300 hover:text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.12] hover:border-amber-400/50 rounded-xl transition-all backdrop-blur-sm shadow-sm"
                 title="Global Aviation Search (Cmd+K)"
                 aria-label="Global Aviation Search (Cmd+K)"
               >
