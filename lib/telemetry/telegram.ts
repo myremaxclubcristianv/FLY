@@ -396,104 +396,75 @@ ${formatBucharestTime()}`;
  * 6. NEW LEAD / DIRECT CONTACT SUBMISSION (P0) - CRITICAL
  */
 export async function sendContactLeadTelegramAlert(payload: LeadSubmissionPayload) {
-  const duration = formatDuration(payload.sessionDurationSeconds || 0);
-  const journeyText = payload.journeySummary && payload.journeySummary.length > 0
-    ? payload.journeySummary.slice(-8).map((j) => `${escapeHtml(j)}`).join("\n")
-    : `${escapeHtml(payload.landingPage || "/")} → Contact opened → Form submitted`;
+  const timeStr = formatBucharestTime();
+  const nameStr = payload.name && payload.name.trim() ? payload.name.trim() : "Not provided";
+  const emailStr = payload.email && payload.email.trim() ? payload.email.trim() : "Not provided";
+  const phoneStr = payload.phone && payload.phone.trim() ? payload.phone.trim() : "Not provided";
+  const companyStr = payload.company && payload.company.trim() ? payload.company.trim() : null;
+  const interestStr = payload.serviceInterest && payload.serviceInterest.trim()
+    ? payload.serviceInterest.trim()
+    : (payload.leadType && payload.leadType !== "CONTACT_MESSAGE" ? payload.leadType.replace(/_/g, " ") : null);
+  const messageStr = payload.message && payload.message.trim()
+    ? payload.message.trim()
+    : (payload.notes && payload.notes.trim() ? payload.notes.trim() : "Not provided");
 
-  const viewportStr = payload.viewportWidth && payload.viewportHeight
-    ? `${payload.viewportWidth} × ${payload.viewportHeight}`
-    : "—";
+  const pageStr = payload.currentPage || payload.landingPage || "/contact";
+  const sourceStr = payload.source || "Direct";
+  const deviceStr = `${payload.deviceType || "Desktop"}${payload.browser ? ` / ${payload.browser}` : ""}${payload.os ? ` (${payload.os})` : ""}`;
+  const leadIdStr = payload.referenceId;
 
-  const openPageUrl = `${CANONICAL_SITE_URL}${payload.currentPage || payload.landingPage || "/"}`;
+  // Optional Mission parameters
+  const routeStr = (payload.origin || payload.destination)
+    ? `${payload.origin || "LRBS"} → ${payload.destination || "LFMN"}`
+    : null;
+  const dateStr = payload.date && payload.date.trim() ? payload.date.trim() : null;
+  const paxStr = payload.passengers ? `${payload.passengers} PAX` : null;
+  const budgetStr = payload.budget && payload.budget.trim() ? payload.budget.trim() : null;
+  const priorityStr = payload.priority && payload.priority.trim() ? payload.priority.trim() : null;
+  const purposeStr = payload.purpose && payload.purpose.trim() ? payload.purpose.trim() : null;
 
-  const text = `🔴 <b>AIR — NEW LEAD</b>
-━━━━━━━━━━━━━━━━━━
-👤 <b>CONTACT</b>
-━━━━━━━━━━━━━━━━━━
-Name:
-<b>${escapeHtml(payload.name || "Anonymous Contact")}</b>
-Email:
-<code>${escapeHtml(payload.email || "—")}</code>
-Phone:
-<code>${escapeHtml(payload.phone || "—")}</code>
-Company:
-${escapeHtml(payload.company || "—")}
+  const lines: string[] = [
+    "🚨 <b>NEW AIR LEAD</b>",
+    `👤 <b>Name:</b> ${escapeHtml(nameStr)}`,
+    `📧 <b>Email:</b> ${escapeHtml(emailStr)}`,
+    `📱 <b>Phone:</b> ${escapeHtml(phoneStr)}`,
+  ];
 
-━━━━━━━━━━━━━━━━━━
-✈️ <b>INTEREST</b>
-━━━━━━━━━━━━━━━━━━
-Service:
-<b>${escapeHtml(payload.serviceInterest || payload.leadType.replace(/_/g, " "))}</b>
-Message:
-<i>${escapeHtml(payload.message || payload.notes || "No message provided")}</i>
+  if (companyStr) {
+    lines.push(`🏢 <b>Company:</b> ${escapeHtml(companyStr)}`);
+  }
+  if (interestStr) {
+    lines.push(`✈️ <b>Interest:</b> ${escapeHtml(interestStr)}`);
+  }
+  if (routeStr) {
+    lines.push(`🛫 <b>Route:</b> ${escapeHtml(routeStr)}`);
+  }
+  if (dateStr) {
+    lines.push(`📅 <b>Date:</b> ${escapeHtml(dateStr)}`);
+  }
+  if (paxStr) {
+    lines.push(`👥 <b>Passengers:</b> ${escapeHtml(paxStr)}`);
+  }
+  if (budgetStr) {
+    lines.push(`💰 <b>Budget:</b> ${escapeHtml(budgetStr)}`);
+  }
+  if (priorityStr) {
+    lines.push(`⚡ <b>Priority:</b> ${escapeHtml(priorityStr)}`);
+  }
+  if (purposeStr) {
+    lines.push(`🎯 <b>Purpose:</b> ${escapeHtml(purposeStr)}`);
+  }
 
-━━━━━━━━━━━━━━━━━━
-🌍 <b>ATTRIBUTION</b>
-━━━━━━━━━━━━━━━━━━
-Source:
-<b>${escapeHtml(payload.source || "Direct")}</b>
-Medium:
-${escapeHtml(payload.medium || "direct")}
-Campaign:
-${escapeHtml(payload.campaign || "—")}
-Referrer:
-${escapeHtml(payload.referrer || "Direct")}
-Landing:
-<code>${escapeHtml(payload.landingPage || "/")}</code>
-Current page:
-<code>${escapeHtml(payload.currentPage || "/contact")}</code>
+  lines.push("💬 <b>Message:</b>");
+  lines.push(`<i>${escapeHtml(messageStr)}</i>`);
+  lines.push("━━━━━━━━━━━━━━━━━━");
+  lines.push(`🌐 <b>Page:</b> <code>${escapeHtml(pageStr)}</code>`);
+  lines.push(`📍 <b>Source:</b> ${escapeHtml(sourceStr)}`);
+  lines.push(`📱 <b>Device:</b> ${escapeHtml(deviceStr)}`);
+  lines.push(`🕐 <b>Time:</b> ${timeStr}`);
+  lines.push(`🆔 <b>Lead ID:</b> <code>${escapeHtml(leadIdStr)}</code>`);
 
-━━━━━━━━━━━━━━━━━━
-📱 <b>DEVICE</b>
-━━━━━━━━━━━━━━━━━━
-Device:
-${escapeHtml(payload.deviceType || "Desktop")}
-OS:
-${escapeHtml(payload.os || "—")}
-Browser:
-${escapeHtml(payload.browser || "—")}
-Viewport:
-${viewportStr}
-
-━━━━━━━━━━━━━━━━━━
-📍 <b>LOCATION</b>
-━━━━━━━━━━━━━━━━━━
-Country:
-${escapeHtml(payload.country || "Romania")}
-City:
-${escapeHtml(payload.city || "—")}
-
-━━━━━━━━━━━━━━━━━━
-🧭 <b>CUSTOMER JOURNEY</b>
-━━━━━━━━━━━━━━━━━━
-Visitor:
-<code>${escapeHtml(payload.visitorId || "V-ANONYMOUS")}</code>
-Session:
-<code>${escapeHtml(payload.sessionId || "S-DIRECT")}</code>
-Pages viewed:
-<b>${payload.pagesBeforeConversion || 1}</b>
-Session duration:
-${duration}
-Recent journey:
-${journeyText}
-
-━━━━━━━━━━━━━━━━━━
-🎯 <b>LEAD STATUS</b>
-━━━━━━━━━━━━━━━━━━
-<b>${payload.leadStatus || "NEW"}</b>
-Lead ID:
-<code>${escapeHtml(payload.referenceId)}</code>
-Created:
-${formatBucharestTime()}
-
-━━━━━━━━━━━━━━━━━━
-🔗 <b>ACTION</b>
-━━━━━━━━━━━━━━━━━━
-Open page:
-<a href="${openPageUrl}">${openPageUrl}</a>`;
-
-  // P0 leads bypass any cool-down
+  const text = lines.join("\n");
   return sendTelegramHtmlMessage(text);
 }
 
@@ -501,43 +472,7 @@ Open page:
  * 6B. NEW LEAD / FLIGHT REQUEST SUBMISSION (P0) - CRITICAL
  */
 export async function sendNewLeadTelegramAlert(payload: LeadSubmissionPayload) {
-  if (payload.leadType === "CONTACT_MESSAGE") {
-    return sendContactLeadTelegramAlert(payload);
-  }
-
-  const duration = formatDuration(payload.sessionDurationSeconds || 0);
-
-  const text = `🔴 <b>AIR — NEW LEAD</b>
-━━━━━━━━━━━━━━━━━━
-Visitor: <code>${escapeHtml(payload.visitorId || "V-ANONYMOUS")}</code>
-Session: <code>${escapeHtml(payload.sessionId || "S-DIRECT")}</code>
-Reference: <b>${escapeHtml(payload.referenceId)}</b>
-
-<b>LEAD DETAILS</b>
-Lead: <b>${escapeHtml(payload.leadType.replace(/_/g, " "))}</b>
-Name: <b>${escapeHtml(payload.name || "Submitted Lead")}</b>
-Email: <code>${escapeHtml(payload.email || "—")}</code>
-Phone: <code>${escapeHtml(payload.phone || "—")}</code>
-${payload.company ? `Company: ${escapeHtml(payload.company)}\n` : ""}
-<b>MISSION PROFILE</b>
-Route: <b>${escapeHtml(payload.origin || "LRBS")} → ${escapeHtml(payload.destination || "LFMN")}</b>
-Passengers: <b>${payload.passengers || 1} PAX</b>
-Trip: ${escapeHtml(payload.tripType || "ONE_WAY")}
-Date: ${escapeHtml(payload.date || "—")}
-Budget: ${escapeHtml(payload.budget || "STANDARD_CHARTER")}
-Priority: ${escapeHtml(payload.priority || "FASTEST")}
-Purpose: ${escapeHtml(payload.purpose || "EXECUTIVE_BUSINESS")}
-${payload.notes ? `Notes: <i>${escapeHtml(payload.notes)}</i>\n` : ""}
-<b>ATTRIBUTION & JOURNEY</b>
-Source: <b>${escapeHtml(payload.source || "Direct")}</b>
-Campaign: ${escapeHtml(payload.campaign || "—")}
-Landing page: <code>${escapeHtml(payload.landingPage || "/plan")}</code>
-Pages before conversion: <b>${payload.pagesBeforeConversion || 1}</b>
-Session duration: <b>${duration}</b>
-Submitted at: ${formatBucharestTime()}`;
-
-  // P0 leads bypass any cool-down
-  return sendTelegramHtmlMessage(text);
+  return sendContactLeadTelegramAlert(payload);
 }
 
 /**

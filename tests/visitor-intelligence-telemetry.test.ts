@@ -276,6 +276,28 @@ async function runTestSuite() {
   });
   assert(contactLeadAlert.success === true, "Telegram CONTACT LEAD alert dispatched successfully with full structured template");
 
+  // TEST 11: Real Client Value Exact Match Verification
+  console.log("\n[11/11] REAL CLIENT VALUE SUBMISSION & EXACT STRING MATCH");
+  const testValAlert = await sendContactLeadTelegramAlert({
+    referenceId: "L-VALUETEST",
+    visitorId: reg1.visitor.visitorId,
+    sessionId: reg1.session.sessionId,
+    leadType: "CONTACT_MESSAGE",
+    name: "AIR Telegram Test",
+    email: "air-test@example.com",
+    phone: "+40 700 000 000",
+    message: "TELEGRAM VALUE TEST",
+    serviceInterest: "Private Flight",
+    source: "Direct",
+    landingPage: "/",
+    currentPage: "/contact",
+    deviceType: "Mobile",
+    os: "iOS",
+    browser: "Safari",
+    leadStatus: "NEW",
+  });
+  assert(testValAlert.success === true, "Telegram REAL VALUE alert dispatched successfully with exact submitted client data");
+
   console.log("\n=======================================================");
   console.log(`TEST SUITE COMPLETE: ${testsPassed} passed, ${testsFailed} failed.`);
   console.log("=======================================================\n");

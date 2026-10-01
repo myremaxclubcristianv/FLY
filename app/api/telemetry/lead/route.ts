@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
       name: body.name ? String(body.name).substring(0, 255) : undefined,
       email: body.email ? String(body.email).substring(0, 255) : undefined,
       phone: body.phone ? String(body.phone).substring(0, 64) : undefined,
+      company: body.company ? String(body.company).substring(0, 255) : undefined,
+      serviceInterest: body.serviceInterest ? String(body.serviceInterest).substring(0, 255) : undefined,
+      message: body.message ? String(body.message).substring(0, 3000) : (body.notes ? String(body.notes).substring(0, 3000) : undefined),
       origin: body.origin ? String(body.origin).substring(0, 255) : undefined,
       destination: body.destination ? String(body.destination).substring(0, 255) : undefined,
       passengers: typeof body.passengers === "number" ? body.passengers : 1,
@@ -31,6 +34,7 @@ export async function POST(req: NextRequest) {
       source: body.source ? String(body.source) : undefined,
       campaign: body.campaign ? String(body.campaign) : undefined,
       landingPage: body.landingPage ? String(body.landingPage) : undefined,
+      currentPage: body.currentPage ? String(body.currentPage) : undefined,
       pagesBeforeConversion: body.pagesBeforeConversion,
       sessionDurationSeconds: body.sessionDurationSeconds,
     };
