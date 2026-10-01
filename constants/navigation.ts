@@ -56,6 +56,8 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
           { label: "Băneasa Executive Hub", href: "/baneasa", badge: "LRBS", description: "Bucharest VIP terminal & FBO dispatch" },
           { label: "Route Intelligence", href: "/routes", description: "Great-circle vectors & flight durations" },
           { label: "European Destinations", href: "/destinations", description: "Top luxury arrival gateways & FBOs" },
+          { label: "Curated Flight Experiences", href: "/experiences", description: "Scenic alpine, coastal & vineyard flights" },
+          { label: "Gift a Flight", href: "/gift", badge: "GIFT", description: "Bespoke aviation gift vouchers" },
         ],
       },
       {
@@ -102,6 +104,7 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
           { label: "Aviation Companies", href: "/aviation", description: "Verified AOC operators & brokers" },
           { label: "EASA Flight Schools", href: "/aviation/schools", badge: "ATO", description: "Certified ATO/DTO academies" },
           { label: "Global Aviation Directory", href: "/directory", description: "Complete industry index" },
+          { label: "Corporate Business Aviation", href: "/business", badge: "CORP", description: "Enterprise mobility & shuttle routes" },
         ],
       },
       {
