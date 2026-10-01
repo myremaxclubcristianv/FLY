@@ -78,6 +78,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      { source: "/gift-a-flight", destination: "/gift", permanent: true },
+      { source: "/missions", destination: "/charter", permanent: true },
+      { source: "/compare", destination: "/aircraft/compare", permanent: true },
+      { source: "/aircraft-comparison", destination: "/aircraft/compare", permanent: true },
+      { source: "/operators", destination: "/aviation", permanent: true },
+      { source: "/pilot-guide", destination: "/aviation/learn/pilot-guide", permanent: true },
+      { source: "/guides", destination: "/aviation/learn", permanent: true },
+      { source: "/essays", destination: "/journal/photo-essays", permanent: true },
+      { source: "/articles", destination: "/journal", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

@@ -35,33 +35,26 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Lock body scroll when mobile nav is open
+  // Body scroll lock while mobile menu is open
   useEffect(() => {
     if (isOpen) {
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
       document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
       document.body.style.overflow = "";
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
-      }
+      document.body.style.touchAction = "";
     }
     return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
     };
   }, [isOpen]);
 
-  const toggleSection = (title: string) => {
+  const toggleSection = (title: string, e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setExpandedSections((prev) => ({
       ...prev,
       [title]: !prev[title],
@@ -92,6 +85,24 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
   };
 
   const legalSection = FOOTER_SECTIONS.find((s) => s.title.includes("LEGAL"));
+
+  // Quick Direct Access Grid items for high-priority desktop destinations
+  const CORE_DIRECT_DESTINATIONS = [
+    { label: "FLIGHT PLANNER", href: "/plan", badge: "CORE", icon: "✈" },
+    { label: "AIRCRAFT FLEET", href: "/aircraft", badge: "FLEET", icon: "🛩" },
+    { label: "COMPARE MODELS", href: "/aircraft/compare", badge: "COMPARE", icon: "⚖" },
+    { label: "ROUTES EXPLORER", href: "/routes", badge: "VECTORS", icon: "🧭" },
+    { label: "DESTINATIONS", href: "/destinations", badge: "AIRPORTS", icon: "📍" },
+    { label: "BĂNEASA LRBS HUB", href: "/baneasa", badge: "VIP FBO", icon: "🛬" },
+    { label: "BUSINESS AVIATION", href: "/business", badge: "CORP", icon: "🏢" },
+    { label: "AIRCRAFT OWNERSHIP", href: "/aircraft/ownership", badge: "MATRIX", icon: "🔑" },
+    { label: "EXPERIENCES", href: "/experiences", badge: "SCENIC", icon: "🍷" },
+    { label: "GIFT A FLIGHT", href: "/gift", badge: "GIFT", icon: "🎁" },
+    { label: "PILOT GUIDE", href: "/aviation/learn/pilot-guide", badge: "EASA", icon: "🎓" },
+    { label: "ROMANIA FROM ABOVE", href: "/romania-from-above", badge: "AERIAL", icon: "🇷🇴" },
+    { label: "AVIATION DIRECTORY", href: "/aviation", badge: "INDEX", icon: "🏛" },
+    { label: "AVIATION JOURNAL", href: "/journal", badge: "ARTICLES", icon: "📰" },
+  ];
 
   return (
     <>
@@ -225,6 +236,13 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
 
           {/* Sticky Category Quick Jump Strip */}
           <div className="flex items-center gap-1.5 px-4 sm:px-6 py-2 overflow-x-auto border-b border-white/[0.08] bg-neutral-950/90 no-scrollbar shrink-0">
+            <button
+              type="button"
+              onClick={() => scrollToSection(`nav-sec-direct`)}
+              className="px-2.5 py-1 text-[11px] font-mono font-bold tracking-wider rounded-lg bg-amber-500/20 text-amber-400 border border-amber-500/40 transition-all shrink-0 uppercase cursor-pointer"
+            >
+              ★ QUICK ACCESS
+            </button>
             {MEGA_MENU_DATA.map((sec) => (
               <button
                 key={sec.title}
@@ -238,7 +256,7 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
             <button
               type="button"
               onClick={() => scrollToSection(`nav-sec-quick-links`)}
-              className="px-2.5 py-1 text-[11px] font-mono font-bold tracking-wider rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 transition-all shrink-0 uppercase cursor-pointer"
+              className="px-2.5 py-1 text-[11px] font-mono font-bold tracking-wider rounded-lg bg-white/[0.04] hover:bg-amber-500/20 text-neutral-300 hover:text-amber-400 border border-white/10 hover:border-amber-400/40 transition-all shrink-0 uppercase cursor-pointer"
             >
               ROUTES
             </button>
@@ -259,7 +277,45 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
             className="flex-1 overflow-y-auto px-4 sm:px-6 py-5 flex flex-col gap-6 scroll-smooth overscroll-contain"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
-            {/* Core Desktop Categories */}
+            {/* Direct Quick Access Grid (Immediate 1-Tap Navigation to Major Destinations) */}
+            <section
+              id="nav-sec-direct"
+              className="border border-amber-500/30 rounded-2xl p-4 bg-gradient-to-b from-neutral-900/80 to-neutral-950/90 backdrop-blur-md shadow-md scroll-mt-3"
+            >
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-amber-500/20">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  <span className="font-mono text-xs font-bold tracking-widest text-amber-400 uppercase">
+                    DIRECT ESSENTIALS
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-neutral-400 bg-black/60 px-2 py-0.5 rounded border border-white/10">
+                  1-TAP JUMP
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {CORE_DIRECT_DESTINATIONS.map((dest) => (
+                  <Link
+                    key={dest.label}
+                    href={dest.href}
+                    onClick={handleLinkClick}
+                    className="flex items-center justify-between min-h-[46px] p-2.5 rounded-xl bg-white/[0.03] hover:bg-amber-500/20 border border-white/[0.08] hover:border-amber-400/50 transition-all group active:scale-[0.98]"
+                  >
+                    <div className="flex items-center gap-2 overflow-hidden">
+                      <span className="text-xs">{dest.icon}</span>
+                      <span className="font-mono text-[11px] font-bold text-neutral-200 group-hover:text-amber-400 truncate">
+                        {dest.label}
+                      </span>
+                    </div>
+                    <span className="text-[8px] font-mono px-1 py-0.5 bg-neutral-900 text-amber-400 border border-amber-500/30 rounded shrink-0">
+                      {dest.badge}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+
+            {/* Core Master Categories (FLY, MARKET, AVIATION, LEARN, JOURNAL) */}
             {MEGA_MENU_DATA.map((sec) => {
               const isExpanded = expandedSections[sec.title] ?? true;
               return (
@@ -268,34 +324,36 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                   id={`nav-sec-${sec.title.toLowerCase()}`}
                   className="border border-white/[0.1] rounded-2xl p-4 bg-neutral-900/40 backdrop-blur-md shadow-md scroll-mt-3"
                 >
-                  {/* Category Header with Dual Action (Toggle Tree + Open Main Hub) */}
+                  {/* Category Header: Category Root Link (Navigates) + Separate Expand/Collapse Toggle Button */}
                   <div className="flex items-center justify-between pb-3 border-b border-white/[0.08] gap-2">
-                    <button
-                      type="button"
-                      onClick={() => toggleSection(sec.title)}
-                      className="flex items-center gap-2 text-left focus:outline-none min-h-[44px] cursor-pointer group"
-                      aria-expanded={isExpanded}
-                      aria-controls={`nav-body-${sec.title.toLowerCase()}`}
-                    >
-                      <span className="font-mono text-base font-bold tracking-widest text-amber-400 group-hover:text-amber-300">
-                        {sec.title}
-                      </span>
-                      <span className="text-[10px] font-mono text-neutral-400 bg-neutral-800/80 px-2 py-0.5 rounded border border-white/10">
-                        {sec.columns.reduce((acc, c) => acc + c.items.length, 0)} items
-                      </span>
-                      <span className="text-amber-400 text-sm font-mono font-bold ml-1">
-                        {isExpanded ? "−" : "+"}
-                      </span>
-                    </button>
-
+                    {/* Direct Category Link */}
                     <Link
                       href={sec.triggerHref}
                       onClick={handleLinkClick}
-                      className="inline-flex items-center gap-1 min-h-[38px] px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold transition-all shrink-0"
+                      className="flex-1 flex items-center gap-2 py-1 focus:outline-none min-h-[44px] group"
+                      title={`Open ${sec.title} Landing Hub`}
                     >
-                      <span>OPEN HUB</span>
-                      <span>→</span>
+                      <span className="font-mono text-base sm:text-lg font-bold tracking-widest text-amber-400 group-hover:text-amber-300">
+                        {sec.title}
+                      </span>
+                      <span className="text-[10px] font-mono text-neutral-400 group-hover:text-white border border-white/10 px-2 py-0.5 rounded bg-black/40">
+                        OPEN PAGE →
+                      </span>
                     </Link>
+
+                    {/* Dedicated Toggle Accordion Button */}
+                    <button
+                      type="button"
+                      onClick={(e) => toggleSection(sec.title, e)}
+                      aria-expanded={isExpanded}
+                      aria-controls={`nav-body-${sec.title.toLowerCase()}`}
+                      className="flex items-center justify-center gap-1.5 min-h-[44px] px-3 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-neutral-300 hover:text-white font-mono text-xs font-bold transition-all shrink-0 cursor-pointer active:scale-95"
+                    >
+                      <span>{isExpanded ? "HIDE" : "EXPLORE"}</span>
+                      <span className="text-amber-400 text-sm font-mono font-bold">
+                        {isExpanded ? "−" : "+"}
+                      </span>
+                    </button>
                   </div>
 
                   {/* Sub-columns and Navigation Cards */}
@@ -444,5 +502,3 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
     </>
   );
 }
-
-
