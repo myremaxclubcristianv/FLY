@@ -2,145 +2,20 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { PRIMARY_CTA } from "../../constants/navigation";
+import {
+  MEGA_MENU_DATA,
+  TOP_LEVEL_NAV_LINKS,
+  PRIMARY_CTA,
+} from "../../constants/navigation";
 import { Button } from "../ui/Button";
 
 interface MobileNavProps {
   onOpenSearch?: () => void;
 }
 
-interface NavCategory {
-  title: string;
-  triggerHref: string;
-  groups: {
-    heading: string;
-    items: { label: string; href: string; badge?: string }[];
-  }[];
-}
-
-const MOBILE_NAV_DATA: NavCategory[] = [
-  {
-    title: "FLY & MISSIONS",
-    triggerHref: "/plan",
-    groups: [
-      {
-        heading: "ACCESS & FLIGHT DISPATCH",
-        items: [
-          { label: "Plan a Flight", href: "/plan", badge: "CORE" },
-          { label: "Băneasa Executive Hub (LRBS)", href: "/baneasa", badge: "LRBS" },
-          { label: "Route Intelligence", href: "/routes" },
-          { label: "European Destinations", href: "/destinations" },
-          { label: "Curated Flight Experiences", href: "/experiences" },
-        ],
-      },
-      {
-        heading: "FLEET & PERFORMANCE",
-        items: [
-          { label: "Explore Aircraft Fleet", href: "/aircraft" },
-          { label: "Head-to-Head Comparison", href: "/aircraft/compare", badge: "COMPARE" },
-          { label: "Aircraft Ownership Matrix", href: "/aircraft/ownership" },
-          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "MARKET" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "AIRCRAFT MARKETPLACE",
-    triggerHref: "/aircraft-for-sale",
-    groups: [
-      {
-        heading: "MARKETPLACE FLEET",
-        items: [
-          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "AVBUYER" },
-          { label: "Jets & Turboprops", href: "/aircraft-for-sale" },
-          { label: "Executive Helicopters", href: "/aircraft-for-sale" },
-        ],
-      },
-      {
-        heading: "FINANCE & ACQUISITION",
-        items: [
-          { label: "Aircraft Ownership Matrix", href: "/aircraft/ownership" },
-          { label: "Aviation Finance", href: "/aviation/finance" },
-          { label: "Aviation Insurance", href: "/aviation/insurance" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "AVIATION DIRECTORY",
-    triggerHref: "/aviation",
-    groups: [
-      {
-        heading: "DIRECTORY & HUBS",
-        items: [
-          { label: "Airports & FBO Hubs", href: "/aviation/airports", badge: "FBO" },
-          { label: "Aviation Companies & Operators", href: "/aviation" },
-          { label: "EASA Flight Schools", href: "/aviation/schools", badge: "ATO" },
-          { label: "Global Aviation Directory", href: "/directory" },
-        ],
-      },
-      {
-        heading: "INTELLIGENCE & HERITAGE",
-        items: [
-          { label: "Aviation Careers & Professions", href: "/aviation/careers", badge: "CAREERS" },
-          { label: "Aviation History & Pioneers", href: "/aviation/history", badge: "HERITAGE" },
-          { label: "Aviation Rules & AOC", href: "/aviation/rules" },
-          { label: "Aviation Visual Explainers", href: "/aviation/explainers" },
-          { label: "Aviation Technology Journal", href: "/aviation/technology", badge: "eVTOL" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "LEARN & GUIDES",
-    triggerHref: "/aviation/learn",
-    groups: [
-      {
-        heading: "KNOWLEDGE CENTER",
-        items: [
-          { label: "Aviation Knowledge Hub", href: "/aviation/learn" },
-          { label: "How to Become a Pilot", href: "/aviation/learn/pilot-guide", badge: "EASA" },
-          { label: "Flight Schools Directory", href: "/aviation/schools" },
-          { label: "Aviation Rules & Regulations", href: "/aviation/rules" },
-        ],
-      },
-      {
-        heading: "VISUAL EXPLAINERS",
-        items: [
-          { label: "What is an AOC?", href: "/aviation/explainers" },
-          { label: "What is an FBO?", href: "/aviation/explainers" },
-          { label: "PPR & Slot Coordination", href: "/aviation/explainers" },
-          { label: "What is an Empty Leg?", href: "/aviation/explainers" },
-        ],
-      },
-    ],
-  },
-  {
-    title: "JOURNAL & ESSAYS",
-    triggerHref: "/journal",
-    groups: [
-      {
-        heading: "EDITORIAL GUIDES",
-        items: [
-          { label: "All Journal Articles", href: "/journal" },
-          { label: "Editorial Photo Essays", href: "/journal/photo-essays", badge: "PHOTO" },
-          { label: "Băneasa vs. Otopeni Report", href: "/journal/baneasa-vs-otopeni-comparative-report" },
-        ],
-      },
-      {
-        heading: "AERIAL DISCOVERY",
-        items: [
-          { label: "Romania From Above", href: "/romania-from-above" },
-          { label: "Helicopter Transfers & Helipads", href: "/journal/helicopter-transfers-and-landing-access" },
-        ],
-      },
-    ],
-  },
-];
-
 export function MobileNav({ onOpenSearch }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedSection, setExpandedSection] = useState<string | null>("FLY & MISSIONS");
+  const [expandedSection, setExpandedSection] = useState<string | null>("FLY");
 
   // Close mobile nav on escape key press
   useEffect(() => {
@@ -212,13 +87,13 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
         </button>
       </div>
 
-      {/* Slide-out Glass Overlay Drawer (High Z-Index Guaranteed) */}
+      {/* Slide-out Glass Overlay Drawer (Single Shared Source with Desktop) */}
       {isOpen && (
         <div
           className="fixed inset-0 z-[100] lg:hidden flex flex-col bg-[#070809]/98 backdrop-blur-3xl animate-in fade-in duration-200"
           role="dialog"
           aria-modal="true"
-          aria-label="AIR Mobile Navigation"
+          aria-label="AIR Complete Mobile Navigation"
         >
           {/* Top Bar inside Overlay */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/[0.1] bg-black/60 shrink-0">
@@ -277,7 +152,7 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
               onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 p-2.5 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-400 hover:bg-amber-500/25 transition-colors font-bold"
             >
-              <span>👤 MY AIR</span>
+              <span>👤 MY AIR ACCOUNT</span>
             </Link>
             <Link
               href="/baneasa"
@@ -288,13 +163,13 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
             </Link>
           </div>
 
-          {/* Navigation Accordion Sections (Complete Architecture) */}
+          {/* Navigation Accordion Sections (Shared Exact Model with Desktop MegaMenu) */}
           <nav
             className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-3.5 scroll-smooth"
             style={{ WebkitOverflowScrolling: "touch" }}
-            aria-label="Mobile Navigation Categories"
+            aria-label="AIR Services & Destinations"
           >
-            {MOBILE_NAV_DATA.map((sec) => {
+            {MEGA_MENU_DATA.map((sec) => {
               const isExpanded = expandedSection === sec.title;
               return (
                 <div
@@ -306,7 +181,12 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                     onClick={() => toggleSection(sec.title)}
                     className="w-full flex items-center justify-between p-4 text-left text-sm font-mono tracking-wider text-white hover:text-amber-400 transition-colors cursor-pointer"
                   >
-                    <span className="font-bold text-neutral-100">{sec.title}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-neutral-100">{sec.title}</span>
+                      <span className="text-[10px] font-mono text-neutral-500">
+                        ({sec.columns.reduce((acc, c) => acc + c.items.length, 0)} services)
+                      </span>
+                    </div>
                     <span className="text-amber-400 text-sm font-mono font-bold">
                       {isExpanded ? "−" : "+"}
                     </span>
@@ -314,22 +194,31 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
 
                   {isExpanded && (
                     <div className="px-4 pb-4 pt-1 flex flex-col gap-4 border-t border-white/[0.08] bg-neutral-950/40 animate-in fade-in duration-150">
-                      {sec.groups.map((grp, gIdx) => (
-                        <div key={gIdx} className="flex flex-col gap-1.5">
+                      {sec.columns.map((col, colIdx) => (
+                        <div key={colIdx} className="flex flex-col gap-1.5">
                           <span className="text-[9px] font-mono text-amber-400/90 uppercase tracking-widest font-bold">
-                            {grp.heading}
+                            {col.heading}
                           </span>
                           <div className="flex flex-col gap-1">
-                            {grp.items.map((item) => (
+                            {col.items.map((item) => (
                               <Link
                                 key={item.label}
                                 href={item.href}
                                 onClick={() => setIsOpen(false)}
-                                className="flex items-center justify-between py-2.5 px-3 rounded-xl text-xs text-neutral-200 hover:text-white hover:bg-white/[0.08] transition-colors font-sans"
+                                className="flex items-start justify-between py-2 px-2.5 rounded-xl text-xs text-neutral-200 hover:text-white hover:bg-white/[0.08] transition-colors font-sans group"
                               >
-                                <span>{item.label}</span>
+                                <div className="flex flex-col gap-0.5">
+                                  <span className="font-medium text-white group-hover:text-amber-400 transition-colors">
+                                    {item.label}
+                                  </span>
+                                  {item.description && (
+                                    <span className="text-[10px] text-neutral-400 font-sans">
+                                      {item.description}
+                                    </span>
+                                  )}
+                                </div>
                                 {item.badge && (
-                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold">
+                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold shrink-0 mt-0.5 ml-2">
                                     {item.badge}
                                   </span>
                                 )}
@@ -344,39 +233,18 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
               );
             })}
 
-            {/* Direct Quick Destination Links */}
+            {/* Direct Top-Level Links (Matching Desktop Header) */}
             <div className="grid grid-cols-2 gap-2 pt-2">
-              <Link
-                href="/routes"
-                onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
-              >
-                ROUTES ENVELOPE →
-              </Link>
-              <Link
-                href="/destinations"
-                onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
-              >
-                DESTINATIONS →
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2 pt-1">
-              <Link
-                href="/business"
-                onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
-              >
-                BUSINESS AVIATION →
-              </Link>
-              <Link
-                href="/legal"
-                onClick={() => setIsOpen(false)}
-                className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-semibold"
-              >
-                LEGAL CENTER →
-              </Link>
+              {TOP_LEVEL_NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="p-3 text-center rounded-xl bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-amber-400 transition-colors font-bold"
+                >
+                  {link.label} →
+                </Link>
+              ))}
             </div>
           </nav>
 
