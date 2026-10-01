@@ -5,6 +5,7 @@ import { BRAND } from "../constants/brand";
 import { DEFAULT_SEO, getOrganizationJsonLd } from "../constants/seo";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
+import { VisitorTracker } from "../components/telemetry/VisitorTracker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -104,6 +105,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <VisitorTracker />
       </body>
     </html>
   );

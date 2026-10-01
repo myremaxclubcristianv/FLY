@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/Button";
+import { useTelemetry } from "@/lib/telemetry/hooks";
 
 const PRIORITIES = [
   { id: "FASTEST", label: "FASTEST", desc: "Direct routing & max cruise speed" },
@@ -14,6 +15,7 @@ const PRIORITIES = [
 
 export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark" }) {
   const router = useRouter();
+  const { trackCTA, trackRouteSelection } = useTelemetry();
   const [from, setFrom] = useState("Bucharest (LRBS)");
   const [to, setTo] = useState("Nice (LFMN)");
   const [date, setDate] = useState("2026-09-15");
@@ -38,6 +40,11 @@ export function FlightSearchForm({ theme = "light" }: { theme?: "light" | "dark"
     }
 
     setErrors({});
+
+    // Track commercial telemetry signals
+    trackCTA("PLAN THE FLIGHT", "/", `${from} → ${to} (${passengers} PAX)`);
+    trackRouteSelection(from, to, parseInt(passengers, 10) || 4, date);
+
     const params = new URLSearchParams({
       from,
       to,

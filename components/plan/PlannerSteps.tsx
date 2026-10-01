@@ -13,6 +13,7 @@ import {
 import { missionService } from "../../lib/services/mission-service";
 import { quoteService } from "../../lib/services/quote-service";
 import { missionRequestService } from "../../lib/services/mission-request-service";
+import { useTelemetry } from "@/lib/telemetry/hooks";
 import { StepWhere } from "./StepWhere";
 import { StepWhen } from "./StepWhen";
 import { StepWho } from "./StepWho";
@@ -24,6 +25,13 @@ import { cn } from "../../lib/utils";
 
 function PlannerStepsContent() {
   const searchParams = useSearchParams();
+  const {
+    trackRouteSelection,
+    trackFormStart,
+    trackLeadSubmission,
+    trackCustomEvent,
+    trackCTA,
+  } = useTelemetry();
 
   const [step, setStep] = useState<number>(1);
   const [from, setFrom] = useState(searchParams.get("from") || "Bucharest Băneasa (LRBS)");
@@ -69,8 +77,27 @@ function PlannerStepsContent() {
     );
   };
 
+  // Step transitions with telemetry signals
+  const handleStep1Next = () => {
+    trackRouteSelection(from, to, passengers, date);
+    setStep(2);
+  };
+
+  const handleStep2Next = () => {
+    trackCustomEvent("planner_date_selected", { date, returnDate, time, dateFlexibility }, `${date} (${time})`);
+    setStep(3);
+  };
+
+  const handleStep3Next = () => {
+    trackCustomEvent("planner_passengers_changed", { passengers, purpose, budgetPreference }, `${passengers} PAX / ${purpose}`);
+    setStep(4);
+  };
+
   // When step reaches step 5 (comparison / evaluation), generate mission options
   const handleProceedToComparison = async () => {
+    trackCustomEvent("planner_priority_selected", { priority, requirements }, `${priority}`);
+    trackCTA("Find my way to fly", "/plan", `${from} → ${to} (${passengers} PAX)`);
+
     const newMission = await missionService.createMission({
       origin: from,
       destination: to,
@@ -89,6 +116,17 @@ function PlannerStepsContent() {
 
   const handleSelectOption = (opt: FlightOption) => {
     setSelectedOption(opt);
+    trackCustomEvent("aircraft_viewed", { optionId: opt.id, aircraft: opt.aircraftName, price: opt.indicativePriceRange }, opt.aircraftName);
+  };
+
+  const handleProceedToContact = () => {
+    trackFormStart("Flight Decision Proposal", {
+      Route: Boolean(from && to),
+      Passengers: Boolean(passengers),
+      Dates: Boolean(date),
+      AircraftSelected: Boolean(selectedOption),
+    });
+    setStep(6);
   };
 
   const handleSubmitQuoteRequest = async () => {
@@ -104,7 +142,7 @@ function PlannerStepsContent() {
     });
 
     // Register in client-side mission storage
-    missionRequestService.createRequest({
+    const stored = missionRequestService.createRequest({
       from,
       to,
       tripType,
@@ -126,6 +164,25 @@ function PlannerStepsContent() {
       estimatedFlightTime: selectedOption.estimatedDuration,
       recommendationReason: selectedOption.recommendationReason,
       constraints: ["Verified AOC operator dispatch", "Standard IFR/VFR minima"],
+    });
+
+    // Fire critical P0 Telemetry Lead Attribution
+    trackLeadSubmission({
+      referenceId: stored.referenceId,
+      leadType: "FLIGHT_REQUEST",
+      name,
+      email,
+      phone,
+      origin: from,
+      destination: to,
+      passengers,
+      tripType,
+      date,
+      budget: budgetPreference,
+      priority,
+      purpose,
+      notes: message,
+      pagesBeforeConversion: 6,
     });
 
     setQuoteRequest(qReq);
@@ -188,7 +245,7 @@ function PlannerStepsContent() {
             to={to}
             onChangeFrom={setFrom}
             onChangeTo={setTo}
-            onNext={() => setStep(2)}
+            onNext={handleStep1Next}
           />
         )}
 
@@ -204,7 +261,7 @@ function PlannerStepsContent() {
             onChangeReturnDate={setReturnDate}
             onChangeTime={setTime}
             onChangeDateFlexibility={setDateFlexibility}
-            onNext={() => setStep(3)}
+            onNext={handleStep2Next}
             onBack={() => setStep(1)}
           />
         )}
@@ -217,7 +274,7 @@ function PlannerStepsContent() {
             onChangePassengers={setPassengers}
             onChangePurpose={setPurpose}
             onChangeBudgetPreference={setBudgetPreference}
-            onNext={() => setStep(4)}
+            onNext={handleStep3Next}
             onBack={() => setStep(2)}
           />
         )}
@@ -238,7 +295,7 @@ function PlannerStepsContent() {
             options={options}
             selectedOptionId={selectedOption?.id}
             onSelectOption={handleSelectOption}
-            onProceed={() => setStep(6)}
+            onProceed={handleProceedToContact}
             onBack={() => setStep(4)}
           />
         )}

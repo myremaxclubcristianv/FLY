@@ -7,6 +7,7 @@ import { Button } from "../ui/Button";
 import { DataStatusBadge } from "../shared/DataStatusBadge";
 import { formatFlightDuration } from "../../lib/utils/distance";
 import { cn } from "../../lib/utils";
+import { useTelemetry } from "@/lib/telemetry/hooks";
 
 interface AircraftCompareEngineProps {
   allAircraft: Aircraft[];
@@ -44,6 +45,7 @@ const MISSION_PRESETS = [
 ];
 
 export function AircraftCompareEngine({ allAircraft }: AircraftCompareEngineProps) {
+  const { trackAircraftCompare } = useTelemetry();
   const [selectedSlugA, setSelectedSlugA] = useState<string>("phenom-300");
   const [selectedSlugB, setSelectedSlugB] = useState<string>("pilatus-pc12");
   const [selectedSlugC, setSelectedSlugC] = useState<string>("challenger-350");
@@ -55,6 +57,11 @@ export function AircraftCompareEngine({ allAircraft }: AircraftCompareEngineProp
 
   const compareList = [acA, acB, acC].filter(Boolean);
   const currentMission = MISSION_PRESETS.find((m) => m.id === activeMissionId) || MISSION_PRESETS[0];
+
+  const handleSelectPreset = (m: typeof MISSION_PRESETS[0]) => {
+    setActiveMissionId(m.id);
+    trackAircraftCompare(m.title, [acA?.model, acB?.model, acC?.model].filter(Boolean) as string[]);
+  };
 
   // Evaluate Mission Suitability Verdict
   const missionVerdict = useMemo(() => {
@@ -128,7 +135,7 @@ export function AircraftCompareEngine({ allAircraft }: AircraftCompareEngineProp
             return (
               <div
                 key={m.id}
-                onClick={() => setActiveMissionId(m.id)}
+                onClick={() => handleSelectPreset(m)}
                 className={cn(
                   "p-3.5 rounded-xl border cursor-pointer transition-all flex flex-col gap-1 text-xs font-data",
                   isSelected

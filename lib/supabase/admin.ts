@@ -14,10 +14,26 @@ export function createAdminClient() {
     return null;
   }
 
-  return createSupabaseClient(supabaseUrl, serviceRoleKey, {
-    auth: {
-      persistSession: false,
-      autoRefreshToken: false,
-    },
-  });
+  if (!globalThis.WebSocket) {
+    // Provide a lightweight dummy constructor for Node.js server REST-only usage
+    (globalThis as unknown as { WebSocket: unknown }).WebSocket = class DummyWebSocket {
+      constructor() {}
+      addEventListener() {}
+      removeEventListener() {}
+      send() {}
+      close() {}
+    };
+  }
+
+  try {
+    return createSupabaseClient(supabaseUrl, serviceRoleKey, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+      },
+    });
+  } catch (err) {
+    console.warn("[SUPABASE ADMIN INIT NOTICE]", err);
+    return null;
+  }
 }
