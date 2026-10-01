@@ -26,10 +26,10 @@ export function ServicesTicker() {
         AIR Available Services: Private Flights, Helicopters, Business Aviation, Aircraft Fleet, Experiences, Corporate Travel, Băneasa LRBS Dispatch, Flight Planning, Aircraft Sourcing.
       </div>
 
-      {/* Left Operations Status Indicator */}
-      <div className="hidden md:flex items-center gap-2 pl-2 pr-4 bg-[#060708] z-10 border-r border-white/10 shrink-0 font-mono text-[9px] tracking-widest text-neutral-400 uppercase">
+      {/* Operations Status Indicator */}
+      <div className="flex items-center gap-1.5 pl-1 pr-2 sm:pl-2 sm:pr-4 bg-[#060708] z-10 border-r border-white/10 shrink-0 font-mono text-[8px] sm:text-[9px] tracking-widest text-neutral-400 uppercase">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-        <span className="text-neutral-300 font-semibold">OPS DISPATCH ACTIVE</span>
+        <span className="text-neutral-300 font-semibold hidden xs:inline sm:inline">OPS ACTIVE</span>
       </div>
 
       {/* Scrolling Track */}

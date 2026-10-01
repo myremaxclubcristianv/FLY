@@ -82,32 +82,56 @@ export function LegalDocumentLayout({
       <section className="w-full py-16">
         <Container size="wide">
           <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* Optional Table of Contents for Long Documents */}
+            {/* Table of Contents for Long Documents (Desktop Sidebar & Mobile Expandable) */}
             {tableOfContents && tableOfContents.length > 0 && (
-              <aside className="lg:col-span-4 hidden lg:block">
-                <div className="sticky top-28 p-6 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-4">
-                  <span className="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase block">
-                    CUPRINS DOCUMENT
-                  </span>
-                  <nav className="space-y-2 text-xs">
-                    {tableOfContents.map((item) => (
-                      <a
-                        key={item.id}
-                        href={`#${item.id}`}
-                        className="block text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition py-1 border-l-2 border-transparent hover:border-amber-500 pl-3 -ml-3"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </nav>
-
-                  <div className="pt-4 border-t border-[var(--color-border)] text-[11px] font-mono text-[var(--color-text-muted)]">
-                    <Link href="/legal" className="text-amber-500 hover:underline">
-                      ← Toate Documentele Juridice
-                    </Link>
-                  </div>
+              <>
+                {/* Mobile Table of Contents Accordion */}
+                <div className="lg:hidden p-4 rounded-xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-3">
+                  <details className="group">
+                    <summary className="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase cursor-pointer flex items-center justify-between list-none">
+                      <span>CUPRINS DOCUMENT ({tableOfContents.length} SECȚIUNI)</span>
+                      <span className="text-neutral-400 group-open:rotate-180 transition-transform">▼</span>
+                    </summary>
+                    <nav className="space-y-2 text-xs pt-3 mt-3 border-t border-[var(--color-border-subtle)]">
+                      {tableOfContents.map((item) => (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          className="block text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition py-1 border-l-2 border-transparent hover:border-amber-500 pl-3"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </nav>
+                  </details>
                 </div>
-              </aside>
+
+                {/* Desktop Table of Contents Sidebar */}
+                <aside className="lg:col-span-4 hidden lg:block">
+                  <div className="sticky top-28 p-6 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border)] space-y-4">
+                    <span className="text-xs font-mono font-bold tracking-widest text-amber-500 uppercase block">
+                      CUPRINS DOCUMENT
+                    </span>
+                    <nav className="space-y-2 text-xs">
+                      {tableOfContents.map((item) => (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          className="block text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition py-1 border-l-2 border-transparent hover:border-amber-500 pl-3 -ml-3"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </nav>
+
+                    <div className="pt-4 border-t border-[var(--color-border)] text-[11px] font-mono text-[var(--color-text-muted)]">
+                      <Link href="/legal" className="text-amber-500 hover:underline">
+                        ← Toate Documentele Juridice
+                      </Link>
+                    </div>
+                  </div>
+                </aside>
+              </>
             )}
 
             {/* Document Body */}

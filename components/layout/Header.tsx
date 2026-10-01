@@ -49,21 +49,21 @@ export function Header() {
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
-                className="hidden sm:inline-flex items-center gap-2 px-3 py-2 text-xs font-mono text-neutral-300 hover:text-white bg-white/[0.04] border border-white/[0.1] hover:border-amber-400/50 rounded transition-all backdrop-blur-sm shadow-sm"
+                className="inline-flex items-center gap-2 px-2.5 py-2 sm:px-3 sm:py-2 text-xs font-mono text-neutral-300 hover:text-white bg-white/[0.04] border border-white/[0.1] hover:border-amber-400/50 rounded transition-all backdrop-blur-sm shadow-sm"
                 title="Global Aviation Search (Cmd+K)"
                 aria-label="Global Aviation Search (Cmd+K)"
               >
                 <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span>SEARCH</span>
-                <kbd className="text-[9px] bg-neutral-900 px-1.5 py-0.5 border border-neutral-700 rounded text-neutral-400 font-mono">⌘K</kbd>
+                <span className="hidden sm:inline">SEARCH</span>
+                <kbd className="hidden sm:inline text-[9px] bg-neutral-900 px-1.5 py-0.5 border border-neutral-700 rounded text-neutral-400 font-mono">⌘K</kbd>
               </button>
 
               <Link
                 href="/account"
                 prefetch={false}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-400/80 bg-amber-500/10 hover:bg-amber-500/20 rounded transition-all backdrop-blur-sm"
+                className="hidden md:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono text-amber-400 hover:text-amber-300 border border-amber-500/30 hover:border-amber-400/80 bg-amber-500/10 hover:bg-amber-500/20 rounded transition-all backdrop-blur-sm"
                 title="My AIR Account & Missions"
               >
                 <span>MY AIR</span>
@@ -78,7 +78,7 @@ export function Header() {
               </div>
 
               {/* Mobile Navigation Drawer Trigger */}
-              <MobileNav />
+              <MobileNav onOpenSearch={() => setIsSearchOpen(true)} />
             </div>
           </div>
         </Container>
