@@ -36,6 +36,7 @@ import {
   sendCtaClickTelegramAlert,
   sendFormStartedTelegramAlert,
   sendNewLeadTelegramAlert,
+  sendContactLeadTelegramAlert,
   sendHighEngagementTelegramAlert,
   sendSessionSummaryTelegramAlert,
   sendLiveVisitorTelegramAlert,
@@ -235,6 +236,45 @@ async function runTestSuite() {
     pagesViewedCount: 3,
   });
   assert(resPv.success === true, "Telegram PAGE VIEW alert dispatched successfully");
+
+  // TEST 10: Always-On Contact Form Lead Telegram Alert
+  console.log("\n[10/10] ALWAYS-ON CONTACT LEAD TELEGRAM ALERT VALIDATION");
+  const contactLeadAlert = await sendContactLeadTelegramAlert({
+    referenceId: "L-A894B12C",
+    visitorId: reg1.visitor.visitorId,
+    sessionId: reg1.session.sessionId,
+    leadType: "CONTACT_MESSAGE",
+    name: "Elena Popescu",
+    email: "elena.popescu@enterprise.ro",
+    phone: "+40 730 111 222",
+    company: "Transylvania Tech Group",
+    serviceInterest: "Business Aviation",
+    message: "Urgent executive flight consultation for Board delegation from Baneasa (LRBS) to Geneva (LSGG).",
+    source: "Google Organic",
+    medium: "organic",
+    landingPage: "/",
+    currentPage: "/business",
+    referrer: "https://www.google.com/",
+    deviceType: "Mobile",
+    os: "iOS",
+    browser: "Safari",
+    viewportWidth: 390,
+    viewportHeight: 844,
+    country: "Romania",
+    city: "Bucharest",
+    sessionDurationSeconds: 420,
+    pagesBeforeConversion: 5,
+    journeySummary: [
+      "/",
+      "/aircraft",
+      "/aircraft/phenom-300",
+      "/business",
+      "Contact opened",
+      "Form submitted",
+    ],
+    leadStatus: "NEW",
+  });
+  assert(contactLeadAlert.success === true, "Telegram CONTACT LEAD alert dispatched successfully with full structured template");
 
   console.log("\n=======================================================");
   console.log(`TEST SUITE COMPLETE: ${testsPassed} passed, ${testsFailed} failed.`);

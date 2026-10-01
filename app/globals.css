@@ -250,3 +250,45 @@
   }
 }
 
+@keyframes tickerMove {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.air-ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.air-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+  animation: tickerMove 45s linear infinite;
+}
+
+.air-ticker-track:hover,
+.air-ticker-track:focus-within {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .air-ticker-track {
+    animation: none !important;
+    transform: none !important;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+.safe-area-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+}
+

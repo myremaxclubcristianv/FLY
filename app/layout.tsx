@@ -5,6 +5,8 @@ import { BRAND } from "../constants/brand";
 import { DEFAULT_SEO, getOrganizationJsonLd } from "../constants/seo";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
+import { ServicesTicker } from "../components/layout/ServicesTicker";
+import { AlwaysOnContact } from "../components/contact/AlwaysOnContact";
 import { VisitorTracker } from "../components/telemetry/VisitorTracker";
 
 const inter = Inter({
@@ -100,11 +102,15 @@ export default function RootLayout({
           Skip to main content
         </a>
 
+        {/* Operations Services Ticker (Persistent Aviation Status Strip) */}
+        <ServicesTicker />
+
         <Header />
         <main id="main-content" className="flex-1 flex flex-col">
           {children}
         </main>
         <Footer />
+        <AlwaysOnContact />
         <VisitorTracker />
       </body>
     </html>

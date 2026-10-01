@@ -35,6 +35,11 @@ export type TelemetryEventType =
   | "form_started"
   | "form_field_completed"
   | "form_submitted"
+  | "contact_opened"
+  | "contact_form_started"
+  | "contact_form_field_completed"
+  | "contact_form_submitted"
+  | "lead_created"
   | "contact_clicked"
   | "phone_clicked"
   | "email_clicked"
@@ -202,6 +207,9 @@ export interface LeadSubmissionPayload {
   name?: string;
   email?: string;
   phone?: string;
+  company?: string;
+  serviceInterest?: string;
+  message?: string;
   origin?: string;
   destination?: string;
   passengers?: number;
@@ -212,8 +220,21 @@ export interface LeadSubmissionPayload {
   purpose?: string;
   notes?: string;
   source?: string;
+  medium?: string;
   campaign?: string;
+  referrer?: string;
   landingPage?: string;
+  currentPage?: string;
+  deviceType?: string;
+  os?: string;
+  browser?: string;
+  viewportWidth?: number;
+  viewportHeight?: number;
+  country?: string;
+  region?: string;
+  city?: string;
+  consentStatus?: string;
+  leadStatus?: "NEW" | "CONTACTED" | "QUALIFIED" | "IN_PROGRESS" | "CONVERTED" | "CLOSED";
   pagesBeforeConversion?: number;
   sessionDurationSeconds?: number;
   journeySummary?: Array<string>;

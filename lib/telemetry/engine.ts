@@ -497,20 +497,25 @@ export class TelemetryEngine {
         break;
 
       case "form_started":
+      case "contact_form_started":
         session.hasStartedForm = true;
         scoreDelta += 40;
-        observedSignals.push("Initiated commercial flight request form");
+        observedSignals.push("Initiated commercial contact request form");
         sendFormStartedTelegramAlert({
           visitorId: visitor.visitorId,
           sessionId: session.sessionId,
-          formName: (event.payload?.formName as string) || "Flight Request",
+          formName: (event.payload?.formName as string) || "Contact Request",
           pagePath: event.pagePath,
           completedFields: (event.payload?.fields as Record<string, boolean>) || {
-            Route: true,
-            Passengers: true,
-            Dates: true,
+            Name: true,
+            Email: true,
           },
         }).catch((e) => console.error("[TELEGRAM FORM START ERROR]", e));
+        break;
+
+      case "contact_opened":
+        scoreDelta += 10;
+        observedSignals.push("Opened Always-On Contact Console");
         break;
 
       case "cta_click":
@@ -529,10 +534,12 @@ export class TelemetryEngine {
         break;
 
       case "form_submitted":
+      case "contact_form_submitted":
+      case "lead_created":
       case "quote_requested":
         session.hasSubmittedLead = true;
         scoreDelta += 100;
-        observedSignals.push("Submitted flight quotation request");
+        observedSignals.push("Submitted commercial flight inquiry / contact lead");
         break;
     }
 
@@ -611,16 +618,35 @@ export class TelemetryEngine {
       session.hasSubmittedLead = true;
       session.intentLevel = "LEAD_CONVERTED";
       session.commercialScore += 100;
+      session.journeyTrail.push({
+        page: payload.currentPage || session.exitPath || "/contact",
+        action: "lead_created",
+        time: new Date().toISOString(),
+      });
     }
 
-    // Send Critical P0 Telegram Alert
+    const journeyTrailStrings = session?.journeyTrail.map((j) => `${j.page} (${j.action})`) || [];
+
+    // Send Critical P0 Telegram Alert (Handles both Contact Inquiries & Flight Requests)
     await sendNewLeadTelegramAlert({
       ...payload,
       pagesBeforeConversion: session?.pageViewsCount || payload.pagesBeforeConversion || 1,
       sessionDurationSeconds: session?.durationSeconds || payload.sessionDurationSeconds || 0,
       source: session?.source || payload.source || "Direct",
+      medium: session?.medium || payload.medium || "direct",
       campaign: session?.utmCampaign || payload.campaign,
-      landingPage: session?.entryPath || payload.landingPage || "/plan",
+      referrer: session?.referrer || payload.referrer || "Direct",
+      landingPage: session?.entryPath || payload.landingPage || "/",
+      currentPage: payload.currentPage || session?.exitPath || "/contact",
+      deviceType: session?.deviceType || payload.deviceType || "Desktop",
+      os: session?.os || payload.os || "—",
+      browser: session?.browser || payload.browser || "—",
+      viewportWidth: session?.viewportWidth || payload.viewportWidth,
+      viewportHeight: session?.viewportHeight || payload.viewportHeight,
+      country: session?.country || payload.country || "Romania",
+      city: session?.city || payload.city,
+      journeySummary: journeyTrailStrings.length > 0 ? journeyTrailStrings : payload.journeySummary || [],
+      leadStatus: payload.leadStatus || "NEW",
     }).catch((e) => console.error("[TELEGRAM LEAD ALERT FAILED]", e));
 
     // Persist Lead in Supabase
@@ -635,6 +661,9 @@ export class TelemetryEngine {
           name: payload.name,
           email: payload.email,
           phone: payload.phone,
+          company: payload.company,
+          service_interest: payload.serviceInterest,
+          message: payload.message,
           origin: payload.origin,
           destination: payload.destination,
           passengers: payload.passengers,
@@ -643,10 +672,21 @@ export class TelemetryEngine {
           budget_preference: payload.budget,
           priority: payload.priority,
           purpose: payload.purpose,
-          notes: payload.notes,
+          notes: payload.notes || payload.message,
           source: session?.source || payload.source || "Direct",
+          medium: session?.medium || payload.medium || "direct",
           campaign: session?.utmCampaign || payload.campaign,
-          landing_page: session?.entryPath || payload.landingPage || "/plan",
+          referrer: session?.referrer || payload.referrer || "Direct",
+          landing_page: session?.entryPath || payload.landingPage || "/",
+          current_page: payload.currentPage || session?.exitPath || "/contact",
+          device_type: session?.deviceType || payload.deviceType || "Desktop",
+          os: session?.os || payload.os || "—",
+          browser: session?.browser || payload.browser || "—",
+          viewport_width: session?.viewportWidth || payload.viewportWidth,
+          viewport_height: session?.viewportHeight || payload.viewportHeight,
+          country: session?.country || payload.country || "Romania",
+          city: session?.city || payload.city,
+          lead_status: payload.leadStatus || "NEW",
           pages_before_conversion: session?.pageViewsCount || 1,
           session_duration_seconds: session?.durationSeconds || 0,
           journey_summary: session?.journeyTrail || [],

@@ -393,9 +393,118 @@ ${formatBucharestTime()}`;
 }
 
 /**
- * 6. NEW LEAD / SUBMISSION (P0) - CRITICAL
+ * 6. NEW LEAD / DIRECT CONTACT SUBMISSION (P0) - CRITICAL
+ */
+export async function sendContactLeadTelegramAlert(payload: LeadSubmissionPayload) {
+  const duration = formatDuration(payload.sessionDurationSeconds || 0);
+  const journeyText = payload.journeySummary && payload.journeySummary.length > 0
+    ? payload.journeySummary.slice(-8).map((j) => `${escapeHtml(j)}`).join("\n")
+    : `${escapeHtml(payload.landingPage || "/")} → Contact opened → Form submitted`;
+
+  const viewportStr = payload.viewportWidth && payload.viewportHeight
+    ? `${payload.viewportWidth} × ${payload.viewportHeight}`
+    : "—";
+
+  const openPageUrl = `${CANONICAL_SITE_URL}${payload.currentPage || payload.landingPage || "/"}`;
+
+  const text = `🔴 <b>AIR — NEW LEAD</b>
+━━━━━━━━━━━━━━━━━━
+👤 <b>CONTACT</b>
+━━━━━━━━━━━━━━━━━━
+Name:
+<b>${escapeHtml(payload.name || "Anonymous Contact")}</b>
+Email:
+<code>${escapeHtml(payload.email || "—")}</code>
+Phone:
+<code>${escapeHtml(payload.phone || "—")}</code>
+Company:
+${escapeHtml(payload.company || "—")}
+
+━━━━━━━━━━━━━━━━━━
+✈️ <b>INTEREST</b>
+━━━━━━━━━━━━━━━━━━
+Service:
+<b>${escapeHtml(payload.serviceInterest || payload.leadType.replace(/_/g, " "))}</b>
+Message:
+<i>${escapeHtml(payload.message || payload.notes || "No message provided")}</i>
+
+━━━━━━━━━━━━━━━━━━
+🌍 <b>ATTRIBUTION</b>
+━━━━━━━━━━━━━━━━━━
+Source:
+<b>${escapeHtml(payload.source || "Direct")}</b>
+Medium:
+${escapeHtml(payload.medium || "direct")}
+Campaign:
+${escapeHtml(payload.campaign || "—")}
+Referrer:
+${escapeHtml(payload.referrer || "Direct")}
+Landing:
+<code>${escapeHtml(payload.landingPage || "/")}</code>
+Current page:
+<code>${escapeHtml(payload.currentPage || "/contact")}</code>
+
+━━━━━━━━━━━━━━━━━━
+📱 <b>DEVICE</b>
+━━━━━━━━━━━━━━━━━━
+Device:
+${escapeHtml(payload.deviceType || "Desktop")}
+OS:
+${escapeHtml(payload.os || "—")}
+Browser:
+${escapeHtml(payload.browser || "—")}
+Viewport:
+${viewportStr}
+
+━━━━━━━━━━━━━━━━━━
+📍 <b>LOCATION</b>
+━━━━━━━━━━━━━━━━━━
+Country:
+${escapeHtml(payload.country || "Romania")}
+City:
+${escapeHtml(payload.city || "—")}
+
+━━━━━━━━━━━━━━━━━━
+🧭 <b>CUSTOMER JOURNEY</b>
+━━━━━━━━━━━━━━━━━━
+Visitor:
+<code>${escapeHtml(payload.visitorId || "V-ANONYMOUS")}</code>
+Session:
+<code>${escapeHtml(payload.sessionId || "S-DIRECT")}</code>
+Pages viewed:
+<b>${payload.pagesBeforeConversion || 1}</b>
+Session duration:
+${duration}
+Recent journey:
+${journeyText}
+
+━━━━━━━━━━━━━━━━━━
+🎯 <b>LEAD STATUS</b>
+━━━━━━━━━━━━━━━━━━
+<b>${payload.leadStatus || "NEW"}</b>
+Lead ID:
+<code>${escapeHtml(payload.referenceId)}</code>
+Created:
+${formatBucharestTime()}
+
+━━━━━━━━━━━━━━━━━━
+🔗 <b>ACTION</b>
+━━━━━━━━━━━━━━━━━━
+Open page:
+<a href="${openPageUrl}">${openPageUrl}</a>`;
+
+  // P0 leads bypass any cool-down
+  return sendTelegramHtmlMessage(text);
+}
+
+/**
+ * 6B. NEW LEAD / FLIGHT REQUEST SUBMISSION (P0) - CRITICAL
  */
 export async function sendNewLeadTelegramAlert(payload: LeadSubmissionPayload) {
+  if (payload.leadType === "CONTACT_MESSAGE") {
+    return sendContactLeadTelegramAlert(payload);
+  }
+
   const duration = formatDuration(payload.sessionDurationSeconds || 0);
 
   const text = `🔴 <b>AIR — NEW LEAD</b>
@@ -409,7 +518,7 @@ Lead: <b>${escapeHtml(payload.leadType.replace(/_/g, " "))}</b>
 Name: <b>${escapeHtml(payload.name || "Submitted Lead")}</b>
 Email: <code>${escapeHtml(payload.email || "—")}</code>
 Phone: <code>${escapeHtml(payload.phone || "—")}</code>
-
+${payload.company ? `Company: ${escapeHtml(payload.company)}\n` : ""}
 <b>MISSION PROFILE</b>
 Route: <b>${escapeHtml(payload.origin || "LRBS")} → ${escapeHtml(payload.destination || "LFMN")}</b>
 Passengers: <b>${payload.passengers || 1} PAX</b>
