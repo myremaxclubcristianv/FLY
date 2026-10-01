@@ -174,37 +174,41 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
 
   return (
     <>
-      {/* Mobile Top Header Toggle (Visible on lg:hidden) */}
+      {/* Mobile & Tablet Header Menu Trigger (Visible on lg:hidden) */}
       <div className="flex items-center gap-2 lg:hidden">
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-expanded={isOpen}
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-          className="p-2.5 text-neutral-200 hover:text-amber-400 bg-white/[0.04] border border-white/[0.08] rounded-lg backdrop-blur-md focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-colors"
+          className="inline-flex items-center gap-2 min-h-[44px] px-3.5 py-2 text-xs font-mono font-bold tracking-wider text-neutral-200 hover:text-amber-400 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.12] hover:border-amber-400/50 rounded-xl backdrop-blur-md shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 transition-all duration-200 active:scale-95 cursor-pointer"
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 text-amber-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             {isOpen ? (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={1.5}
+                strokeWidth={2}
                 d="M6 18L18 6M6 6l12 12"
               />
             ) : (
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth={1.5}
+                strokeWidth={2}
                 d="M4 6h16M4 12h16M4 18h16"
               />
             )}
           </svg>
+          <span className="text-white font-mono tracking-widest text-[11px] uppercase font-bold">
+            {isOpen ? "CLOSE" : "MENU"}
+          </span>
         </button>
       </div>
 
