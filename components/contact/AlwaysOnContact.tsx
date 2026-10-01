@@ -33,28 +33,35 @@ export function AlwaysOnContact() {
 
   const { trackCustomEvent } = useTelemetry();
 
-  const handleOpen = () => {
+  const handleOpen = React.useCallback(() => {
     setIsOpen(true);
     setFormStatus("IDLE");
     setErrorMessage("");
     trackCustomEvent("contact_opened", { pagePath: window.location.pathname });
-  };
+  }, [trackCustomEvent]);
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setIsOpen(false);
     hasLoggedStart.current = false;
-  };
+  }, []);
 
-  // Keyboard navigation: Close on Escape key
+  // Keyboard navigation: Close on Escape key & Listen for global open event
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isOpen && e.key === "Escape") {
         handleClose();
       }
     };
+    const handleGlobalOpen = () => {
+      handleOpen();
+    };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
+    window.addEventListener("air:open-contact", handleGlobalOpen);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("air:open-contact", handleGlobalOpen);
+    };
+  }, [isOpen, handleOpen, handleClose]);
 
   // Focus trap & initial focus management
   useEffect(() => {
