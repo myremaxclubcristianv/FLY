@@ -105,9 +105,18 @@ export class UnifiedAviationRepository {
     return REAL_AIRCRAFT_FOR_SALE;
   }
 
+  static async getActiveAircraftForSale(): Promise<AircraftForSale[]> {
+    return REAL_AIRCRAFT_FOR_SALE.filter((a) => a.listingStatus === "verified_listing");
+  }
+
+  static async getIllustrativeAircraftForSale(): Promise<AircraftForSale[]> {
+    return REAL_AIRCRAFT_FOR_SALE.filter((a) => a.listingStatus === "illustrative_example");
+  }
+
   static async getAircraftForSaleBySlug(slug: string): Promise<AircraftForSale | null> {
     return REAL_AIRCRAFT_FOR_SALE.find((a) => a.slug === slug) || null;
   }
+
 
   // Phase 11 Extensions: Flight Schools
   static async getFlightSchools(): Promise<FlightSchool[]> {

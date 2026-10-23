@@ -39,12 +39,12 @@ export function Hero() {
               <span className="hidden sm:inline text-neutral-600">|</span>
               <span className="hidden sm:inline">POSITION: 44°30&apos;N 26°06&apos;E</span>
               <span className="hidden md:inline text-neutral-600">|</span>
-              <span className="hidden md:inline text-neutral-300">DISPATCH: ACTIVE</span>
+              <span className="hidden md:inline text-neutral-300">EXECUTIVE CONCIERGE</span>
             </div>
 
             <div className="flex items-center gap-4">
               <span className="text-amber-300/90 font-mono">CRZ 460 KT • FL410 • POINT-TO-POINT</span>
-              <DataStatusBadge status="VERIFIED" showDot={false} />
+              <DataStatusBadge status="INDICATIVE" showDot={true} />
             </div>
           </div>
         </Container>
@@ -56,10 +56,10 @@ export function Hero() {
           {/* Top Tag & Badges */}
           <div className="flex flex-wrap items-center gap-3">
             <span className="text-xs font-mono text-amber-400 tracking-widest uppercase border border-amber-500/30 px-3.5 py-1.5 bg-amber-500/10 rounded backdrop-blur-md font-bold">
-              PRIVATE AVIATION ACCESS & INTELLIGENCE
+              AIR BY CRISTIAN VĂDUVA
             </span>
             <span className="text-xs font-mono text-neutral-300 border border-white/[0.1] px-3.5 py-1.5 bg-white/[0.04] rounded backdrop-blur-md">
-              EASA & ICAO PROVENANCE
+              EXECUTIVE AVIATION ACCESS & INTELLIGENCE
             </span>
           </div>
 

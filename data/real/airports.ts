@@ -14,12 +14,16 @@ export const REAL_AIRPORTS: AviationLocation[] = [
     latitude: 44.5032,
     longitude: 26.1021,
     runwaySpecs: {
-      lengthM: 2358,
+      lengthM: 3103,
       widthM: 45,
       surface: "Asphalt / Concrete",
       pcn: "51/F/C/W/T",
       designation: "07/25",
+      physicalDimensionsNote: "3,103 × 45 m physical runway pavement dimension published in official AIP Romania AD 2.12.",
+      declaredDistancesNote: "Declared distances (TORA, TODA, ASDA, LDA) vary based on active threshold displacement and temporary NOTAM restrictions. Previous unqualified 2,358 m mentions must not be relied upon without active NOTAM cross-referencing.",
     },
+    operationalStatus: "STATUS_UNVERIFIED",
+    operationalStatusNote: "Automated live NOTAM feed is not integrated. Real-time runway availability and PPR clearance must be confirmed via AOC dispatcher or airport handling.",
     operatingHours: "H24 (PPR for Night Operations)",
     restrictions: [
       "Prior Permission Required (PPR)",

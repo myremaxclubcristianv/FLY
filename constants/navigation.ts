@@ -78,9 +78,9 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
       {
         heading: "AIRCRAFT MARKETPLACE",
         items: [
-          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "AVBUYER", description: "Global aircraft listings" },
+          { label: "Aircraft For Sale", href: "/aircraft-for-sale", badge: "MARKET", description: "Pre-owned & executive aircraft marketplace" },
           { label: "Jets & Turboprops", href: "/aircraft-for-sale", description: "Turbine inventory & acquisition" },
-          { label: "Executive Helicopters", href: "/aircraft-for-sale", description: "Rotorcraft for sale & operations" },
+          { label: "Executive Helicopters", href: "/heliports", badge: "HELIPORTS", description: "Rotorcraft access & heliport network" },
         ],
       },
       {
@@ -88,7 +88,8 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
         items: [
           { label: "Aircraft Ownership Matrix", href: "/aircraft/ownership", description: "Financial threshold calculator" },
           { label: "Aviation Finance", href: "/aviation/finance", description: "Structuring, leasing & loans" },
-          { label: "Aviation Insurance", href: "/aviation/insurance", description: "Hull & third-party liability coverage" },
+          { label: "Aviation Insurance", href: "/aviation/insurance", badge: "ADVISORY", description: "Hull & statutory third-party liability" },
+          { label: "Contact Operations Desk", href: "/contact", description: "Direct flight & advisory consultation" },
         ],
       },
     ],
@@ -101,7 +102,8 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
         heading: "DIRECTORY & HUBS",
         items: [
           { label: "Airports & FBO Hubs", href: "/aviation/airports", badge: "FBO", description: "Runway data, PPR & handlers" },
-          { label: "Aviation Companies", href: "/aviation", description: "Verified AOC operators & brokers" },
+          { label: "Romania Heliport Directory", href: "/heliports", badge: "HELIPORT", description: "AACR certified & off-airfield landing sites" },
+          { label: "Aviation Companies", href: "/aviation", description: "Verified AOC operators & handlers" },
           { label: "EASA Flight Schools", href: "/aviation/schools", badge: "ATO", description: "Certified ATO/DTO academies" },
           { label: "Global Aviation Directory", href: "/directory", description: "Complete industry index" },
           { label: "Corporate Business Aviation", href: "/business", badge: "CORP", description: "Enterprise mobility & shuttle routes" },
@@ -181,6 +183,7 @@ export const FOOTER_SECTIONS = [
     title: "REGIONAL HUBS & DISCOVERY",
     items: [
       { label: "BĂNEASA GATEWAY (LRBS / BBU)", href: "/baneasa", isImplemented: true },
+      { label: "ROMANIA HELIPORT DIRECTORY", href: "/heliports", isImplemented: true },
       { label: "ROMANIA FROM ABOVE", href: "/romania-from-above", isImplemented: true },
       { label: "EUROPEAN DESTINATIONS", href: "/destinations", isImplemented: true },
       { label: "CURATED EXPERIENCES", href: "/experiences", isImplemented: true },
@@ -191,6 +194,8 @@ export const FOOTER_SECTIONS = [
   {
     title: "SERVICES & DISCLOSURES",
     items: [
+      { label: "CONTACT OPERATIONS DESK", href: "/contact", isImplemented: true },
+      { label: "AIRCRAFT FOR SALE", href: "/aircraft-for-sale", isImplemented: true },
       { label: "AVIATION FINANCE", href: "/aviation/finance", isImplemented: true },
       { label: "AVIATION INSURANCE", href: "/aviation/insurance", isImplemented: true },
       { label: "DATA INTEGRITY & STATUS", href: "/#data-status", isImplemented: true },

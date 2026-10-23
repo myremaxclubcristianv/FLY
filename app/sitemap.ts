@@ -21,6 +21,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/aviation/technology",
     "/aviation/careers",
     "/aviation/history",
+    "/aviation/insurance",
+    "/heliports",
+    "/contact",
+    "/ro",
+    "/ro/contact",
+    "/ro/heliports",
+    "/ro/aviation/insurance",
+    "/ro/aircraft/ownership",
     "/baneasa",
     "/business",
     "/directory",
@@ -69,10 +77,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  const destinationSlugs = ["bran", "constanta", "cluj", "sibiu"];
-  destinationSlugs.forEach((slug) => {
+  const { LUXURY_DESTINATIONS } = await import("../data/real/destinations");
+  LUXURY_DESTINATIONS.forEach((dest) => {
     sitemapEntries.push({
-      url: `${SITE_URL}/destinations/${slug}`,
+      url: `${SITE_URL}/destinations/${dest.slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
+  });
+
+  const { REAL_ROMANIA_HELIPORTS } = await import("../data/real/heliports");
+  REAL_ROMANIA_HELIPORTS.forEach((hp) => {
+    sitemapEntries.push({
+      url: `${SITE_URL}/heliports/${hp.slug}`,
       lastModified: new Date().toISOString(),
       changeFrequency: "monthly",
       priority: 0.7,
@@ -96,6 +114,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date().toISOString(),
       changeFrequency: "monthly",
       priority: 0.7,
+    });
+  });
+
+  const { PRIORITY_ROUTE_SLUGS } = await import("../lib/i18n/routes");
+  PRIORITY_ROUTE_SLUGS.forEach((slug) => {
+    sitemapEntries.push({
+      url: `${SITE_URL}/ro/routes/${slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: "weekly",
+      priority: 0.85,
     });
   });
 

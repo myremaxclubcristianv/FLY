@@ -7,6 +7,7 @@ import { Button } from "../ui/Button";
 import { MobileNav } from "./MobileNav";
 import { Container } from "./Container";
 import { MegaMenu } from "./MegaMenu";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 import { GlobalSearchModal } from "../search/GlobalSearchModal";
 
 export function Header() {
@@ -37,15 +38,17 @@ export function Header() {
                 AIR
               </span>
               <span className="hidden sm:inline-block text-[9px] font-mono text-neutral-400 border-l border-neutral-700/80 pl-3 tracking-widest uppercase">
-                AVIATION ACCESS
+                BY CRISTIAN VĂDUVA
               </span>
             </Link>
 
             {/* Desktop Mega Navigation */}
             <MegaMenu />
 
-            {/* Right Action Trigger & Search */}
+            {/* Right Action Trigger, Language Switcher & Search */}
             <div className="flex items-center gap-2 sm:gap-3">
+              <LanguageSwitcher />
+
               <button
                 type="button"
                 onClick={() => setIsSearchOpen(true)}

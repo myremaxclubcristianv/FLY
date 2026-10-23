@@ -10,6 +10,8 @@ import {
   FOOTER_SECTIONS,
 } from "../../constants/navigation";
 import { Button } from "../ui/Button";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+
 
 interface MobileNavProps {
   onOpenSearch?: () => void;
@@ -96,12 +98,16 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
   const CORE_DIRECT_DESTINATIONS = [
     { label: "FLIGHT PLANNER", href: "/plan", badge: "CORE", icon: "✈" },
     { label: "AIRCRAFT FLEET", href: "/aircraft", badge: "FLEET", icon: "🛩" },
+    { label: "AIRCRAFT FOR SALE", href: "/aircraft-for-sale", badge: "MARKET", icon: "🏷" },
     { label: "COMPARE MODELS", href: "/aircraft/compare", badge: "COMPARE", icon: "⚖" },
     { label: "ROUTES EXPLORER", href: "/routes", badge: "VECTORS", icon: "🧭" },
     { label: "DESTINATIONS", href: "/destinations", badge: "AIRPORTS", icon: "📍" },
     { label: "BĂNEASA LRBS HUB", href: "/baneasa", badge: "VIP FBO", icon: "🛬" },
+    { label: "HELIPORTS DIRECTORY", href: "/heliports", badge: "HELIPAD", icon: "🚁" },
     { label: "BUSINESS AVIATION", href: "/business", badge: "CORP", icon: "🏢" },
     { label: "AIRCRAFT OWNERSHIP", href: "/aircraft/ownership", badge: "MATRIX", icon: "🔑" },
+    { label: "AVIATION INSURANCE", href: "/aviation/insurance", badge: "RISK", icon: "🛡" },
+    { label: "CONTACT DESK", href: "/contact", badge: "DIRECT", icon: "📞" },
     { label: "EXPERIENCES", href: "/experiences", badge: "SCENIC", icon: "🍷" },
     { label: "GIFT A FLIGHT", href: "/gift", badge: "GIFT", icon: "🎁" },
     { label: "PILOT GUIDE", href: "/aviation/learn/pilot-guide", badge: "EASA", icon: "🎓" },
@@ -127,7 +133,7 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
         height: "100dvh",
       }}
     >
-      {/* Top Bar: Wordmark + High-Contrast Close Button */}
+      {/* Top Bar: Wordmark + Language Switcher + High-Contrast Close Button */}
       <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/[0.08] bg-black/90 shrink-0 pt-[max(0.875rem,env(safe-area-inset-top))]">
         <Link
           href="/"
@@ -138,32 +144,36 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
             AIR
           </span>
           <span className="text-[9px] font-mono text-amber-400 border border-amber-400/50 px-2 py-0.5 rounded tracking-widest font-bold bg-amber-500/10">
-            DIRECTORY
+            BY CRISTIAN VĂDUVA
           </span>
         </Link>
 
-        <button
-          type="button"
-          id="mobile-nav-close-btn"
-          onClick={() => setIsOpen(false)}
-          aria-label="Close navigation menu"
-          className="flex items-center gap-2 min-h-[44px] px-3.5 py-2 text-neutral-200 hover:text-amber-400 rounded-xl bg-neutral-900 border border-white/20 hover:border-amber-400 font-mono text-xs font-bold transition-all active:scale-95 cursor-pointer"
-        >
-          <svg
-            className="w-4 h-4 text-amber-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+
+          <button
+            type="button"
+            id="mobile-nav-close-btn"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close navigation menu"
+            className="flex items-center gap-2 min-h-[44px] px-3.5 py-2 text-neutral-200 hover:text-amber-400 rounded-xl bg-neutral-900 border border-white/20 hover:border-amber-400 font-mono text-xs font-bold transition-all active:scale-95 cursor-pointer"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          <span>CLOSE</span>
-        </button>
+            <svg
+              className="w-4 h-4 text-amber-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+            <span>CLOSE</span>
+          </button>
+        </div>
       </div>
 
       {/* Quick Search Bar Trigger */}

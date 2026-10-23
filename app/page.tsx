@@ -13,15 +13,14 @@ import {
   AIRCRAFT_MODEL_PHOTOS,
   EDITORIAL_ATMOSPHERE,
 } from "../data/real/aviation-photos";
+import { createRouteMetadata } from "../lib/seo/metadata";
 
-export const metadata = {
-  title: "AIR — The Easiest Way to Fly | Luxury Private Aviation & Intelligence",
+export const metadata = createRouteMetadata({
+  path: "/",
+  title: "AIR by Cristian Văduva — The Easiest Way to Fly | Private Aviation",
   description:
-    "Explore the world of flight: private jets, turboprops, helicopters, certified airports, aircraft marketplace for sale, flight schools, and aviation regulations.",
-  alternates: {
-    canonical: "/",
-  },
-};
+    "Bespoke private jet charters, aircraft sourcing advisory, Romanian heliport directory, and aviation intelligence based at Bucharest Băneasa (LRBS).",
+});
 
 const CITY_STRIP = [
   { city: "BUCHAREST", airport: "LRBS — Băneasa Executive", route: "LRBS ORIGIN", country: "Romania", image: "https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=800&q=80", slug: "baneasa" },
@@ -98,14 +97,14 @@ const EXPERIENCES = [
     tagline: "Direct access to Samedan St. Moritz, Courchevel, and Geneva.",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=85",
     badge: "ALPINE // RUNWAY",
-    link: "/destinations",
+    link: "/destinations/st-moritz",
   },
   {
     title: "MEDITERRANEAN COAST",
     tagline: "Fly directly into Nice Côte d'Azur, Cannes Mandelieu, or Ibiza.",
     image: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1000&q=85",
     badge: "COASTAL // FBO",
-    link: "/destinations",
+    link: "/destinations/cannes",
   },
   {
     title: "ROMANIA FROM ABOVE",

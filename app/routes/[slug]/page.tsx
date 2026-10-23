@@ -8,6 +8,8 @@ import { Card } from "../../../components/ui/Card";
 import { Button } from "../../../components/ui/Button";
 import { UnifiedAviationRepository } from "../../../lib/repositories/unified-aviation-repo";
 
+import { createRouteMetadata } from "../../../lib/seo/metadata";
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -17,13 +19,14 @@ export async function generateMetadata({ params }: PageProps) {
   const route = await UnifiedAviationRepository.getRouteBySlug(slug);
 
   if (!route) {
-    return { title: "Route Profile Not Found | AIR" };
+    return { title: "Route Profile Not Found | AIR by Cristian Văduva" };
   }
 
-  return {
-    title: `${route.title} — Executive Route Intelligence | AIR`,
+  return createRouteMetadata({
+    path: `/routes/${slug}`,
+    title: `${route.title} — Executive Route Intelligence | AIR by Cristian Văduva`,
     description: `Flight time metrics, airport selection, and aircraft performance for flights between ${route.originCity} and ${route.destinationCity}.`,
-  };
+  });
 }
 
 export default async function RouteDetailPage({ params }: PageProps) {

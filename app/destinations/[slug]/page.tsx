@@ -50,6 +50,10 @@ const DESTINATION_EDITORIALS: Record<string, { philosophy: string; subtitle: str
     philosophy: "THE FINANCIAL & DESERT OASIS AT MACH 0.88.",
     subtitle: "Non-stop heavy jet access into dedicated executive FBOs at Al Maktoum International Airport.",
   },
+  "st-moritz": {
+    philosophy: "THE ENGADIN VALLEY AT 5,600 FEET.",
+    subtitle: "Direct Alpine runway approach into Samedan followed by immediate VIP limousine transfer into St. Moritz.",
+  },
 };
 
 export default async function DestinationDetailPage({

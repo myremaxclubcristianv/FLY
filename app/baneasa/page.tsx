@@ -6,17 +6,23 @@ import { Button } from "../../components/ui/Button";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
 import { JsonLd, createAirportJsonLd } from "../../components/shared/JsonLd";
 import { AviationImage } from "../../components/AviationImage";
+import { AirportStatusService } from "../../lib/services/airport-status-service";
+import { AirportStatusCard } from "../../components/aviation/AirportStatusCard";
+import { createRouteMetadata } from "../../lib/seo/metadata";
 
-export const metadata = {
-  title: "Băneasa (LRBS / BBU) — Bucharest Executive Aviation Hub | AIR",
+
+export const metadata = createRouteMetadata({
+  path: "/baneasa",
+  title: "Bucharest Băneasa (LRBS / BBU) Executive Gateway Dossier",
   description:
-    "Bucharest-Băneasa Aurel Vlaicu International Airport (LRBS / BBU). Dedicated business jet charter, executive FBO handling, VIP terminal, and twin-engine helicopter gateway.",
-};
+    "Bucharest-Băneasa Aurel Vlaicu International Airport (LRBS / BBU). Dedicated business jet gateway, VIP FBO handling, verified runway characteristics, and executive travel access.",
+});
 
 export default async function BaneasaPage() {
   const baneasa = await UnifiedAviationRepository.getBaneasaAirport();
   const allRoutes = await UnifiedAviationRepository.getRoutes();
   const baneasaRoutes = allRoutes.filter((r) => r.originIcao === "LRBS");
+  const lrbsStatus = AirportStatusService.getAirportStatus("LRBS");
 
   const jsonLdData = createAirportJsonLd({
     name: baneasa.name,
@@ -47,7 +53,7 @@ export default async function BaneasaPage() {
                     <span className="editorial-tag-dark">
                       EXECUTIVE GATEWAY DOSSIER // LRBS / BBU
                     </span>
-                    <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB AIP Romania" sourceUrl="https://www.cnab.ro" showSource />
+                    <ProvenanceBadge status="OFFICIAL_SOURCE" sourceName="CNAB / ROMATSA AIP Romania" sourceUrl="https://www.aisro.ro" showSource />
                   </div>
                   <h1 className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight text-neutral-900 leading-[1.05] font-sans">
                     BUCHAREST BĂNEASA<span className="text-amber-600">.</span>
@@ -57,9 +63,9 @@ export default async function BaneasaPage() {
                   </p>
                 </div>
 
-                <Link href="/plan">
+                <Link href="/plan?origin=LRBS">
                   <Button variant="primary" size="lg" className="whitespace-nowrap px-8 shadow-xl">
-                    DISPATCH FROM LRBS →
+                    REQUEST FLIGHT FROM LRBS →
                   </Button>
                 </Link>
               </div>
@@ -68,7 +74,7 @@ export default async function BaneasaPage() {
               <div className="relative h-[420px] sm:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl border border-neutral-200 bg-neutral-900 group">
                 <AviationImage
                   src="https://images.unsplash.com/photo-1520690214124-2405c5217036?auto=format&fit=crop&w=2000&q=85"
-                  alt="Executive Business Jet on Băneasa LRBS Ramp"
+                  alt="Representative Executive Aircraft on Apron (Illustrative Image)"
                   fill
                   priority
                   sizes="(max-width: 1200px) 100vw, 1200px"
@@ -80,16 +86,21 @@ export default async function BaneasaPage() {
                 <div className="absolute bottom-8 left-8 right-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 text-white z-10 font-mono text-xs">
                   <div>
                     <span className="text-[10px] text-amber-400 font-bold uppercase block tracking-wider">
-                      AUREL VLAICU INTERNATIONAL
+                      REPRESENTATIVE AIRCRAFT ON APRON // ILLUSTRATIVE VISUAL
                     </span>
                     <span className="text-white text-lg sm:text-xl font-light font-sans">
-                      Băneasa Dedicated Executive Aviation Apron
+                      Băneasa Dedicated Executive Aviation Gateway (LRBS)
                     </span>
                   </div>
                   <span className="bg-black/70 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 text-neutral-300">
-                    COORDINATES: 44°30&apos;N 26°06&apos;E • ELEVATION 305 FT
+                    AIP PUBLISHED COORD: 44°30&apos;N 26°06&apos;E • ELEV 305 FT
                   </span>
                 </div>
+              </div>
+
+              {/* Authoritative Airport Operational Status Component */}
+              <div className="pt-4">
+                <AirportStatusCard record={lrbsStatus} />
               </div>
             </div>
           </Container>
@@ -111,12 +122,12 @@ export default async function BaneasaPage() {
 
               <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">
                 <span className="text-[10px] font-mono text-neutral-500 uppercase tracking-wider block font-bold">
-                  RUNWAY 07/25 METRICS
+                  PHYSICAL RUNWAY 07/25
                 </span>
                 <span className="text-3xl sm:text-4xl font-light text-amber-600 font-sans block">
-                  2,358 × 45 M
+                  3,103 × 45 M
                 </span>
-                <span className="text-xs font-mono text-neutral-400">ASPHALT (PCN 51/F/C/W/T)</span>
+                <span className="text-xs font-mono text-neutral-400">PAVEMENT (AIP AD 2.12)</span>
               </div>
 
               <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm space-y-1">

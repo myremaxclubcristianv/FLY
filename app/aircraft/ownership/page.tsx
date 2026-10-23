@@ -6,17 +6,20 @@ import { Button } from "../../../components/ui/Button";
 import { AviationImage } from "../../../components/AviationImage";
 import { OwnershipDecisionCalculator } from "../../../components/aircraft/OwnershipDecisionCalculator";
 
-export const metadata = {
-  title: "Aircraft Ownership & Access Decision Matrix | CHARTER / SHARE / OWN | AIR",
+import { createRouteMetadata } from "../../../lib/seo/metadata";
+
+export const metadata = createRouteMetadata({
+  path: "/aircraft/ownership",
+  title: "Aircraft Ownership & Access Decision Matrix | Charter vs Fractional vs Whole Asset",
   description:
-    "Evaluate charter, membership, fractional, leasing, full ownership, and aircraft management models based on annual flight hours and operational complexity.",
-};
+    "Evaluate on-demand charter, jet card membership, fractional ownership, structured leasing, and whole aircraft acquisition based on annual flight hours.",
+});
 
 export default function AircraftOwnershipPage() {
   const models = [
     {
       title: "ON-DEMAND CHARTER",
-      hours: "1 - 50 HOURS / YEAR",
+      hours: "< 50 HOURS / YEAR",
       commitment: "ZERO CAPITAL COMMITMENT",
       summary: "Ideal for flexible, occasional flight needs with zero residual asset risk or fixed monthly overhead.",
       bestFor: "Individual missions, occasional corporate trips, seasonal vacation hops.",
@@ -24,29 +27,38 @@ export default function AircraftOwnershipPage() {
       cta: "PLAN FLIGHT →",
     },
     {
-      title: "BLOCK-HOUR / LEASING",
-      hours: "50 - 150 HOURS / YEAR",
-      commitment: "PREDICTABLE MONTHLY LEASE",
-      summary: "Contracted aircraft access and predictable monthly economics without balance sheet capital lockup.",
-      bestFor: "Growing enterprises needing regular multi-city European shuttle availability.",
+      title: "JET CARD / BLOCK HOURS",
+      hours: "50 - 99 HOURS / YEAR",
+      commitment: "PRE-FUNDED 25-50 HOUR CARDS",
+      summary: "Guaranteed aircraft availability with locked hourly rates and zero long-term maintenance or hangar exposure.",
+      bestFor: "Executives and corporate teams requiring priority flight callout.",
+      link: "/plan",
+      cta: "EXPLORE ACCESS →",
+    },
+    {
+      title: "FRACTIONAL OWNERSHIP",
+      hours: "100 - 174 HOURS / YEAR",
+      commitment: "FRACTIONAL SHARE (1/8 OR 1/4)",
+      summary: "Purchasing a structured aircraft share provides tailored cabin familiarity and tax depreciation with shared fixed overhead.",
+      bestFor: "Regional leaders requiring consistent tail availability without whole-asset capital lockup.",
+      link: "/contact?service=Fractional%20Ownership",
+      cta: "FRACTIONAL ADVISORY →",
+    },
+    {
+      title: "MANAGED LEASE / ACMI",
+      hours: "175 - 249 HOURS / YEAR",
+      commitment: "DRY/WET LEASE & CAMO OVERSIGHT",
+      summary: "Dedicated airframe access under turnkey Part-NCC/Part-CAT management, with charter revenue offsetting surplus hours.",
+      bestFor: "High-utilization corporations and flight departments with regular cross-European shuttles.",
       link: "/aviation/finance",
       cta: "EXPLORE LEASING →",
     },
     {
-      title: "AIRCRAFT MANAGEMENT (ACMI)",
-      hours: "OWNED FLEET OPTIMIZATION",
-      commitment: "CAMO & CREW CONTRACT",
-      summary: "AIR coordinates certified crew, Part-145 maintenance oversight, hangarage, and charter revenue offsetting.",
-      bestFor: "Aircraft owners seeking regulatory compliance, safety oversight, and charter income.",
-      link: "/contact",
-      cta: "MANAGEMENT ADVISORY →",
-    },
-    {
-      title: "FULL ASSET ACQUISITION",
-      hours: "150+ HOURS / YEAR",
+      title: "WHOLE AIRCRAFT ACQUISITION",
+      hours: "250+ HOURS / YEAR",
       commitment: "FULL CAPITAL ACQUISITION",
       summary: "Complete operational sovereignty, tailored bespoke cabin interiors, and 100% dedicated mission availability.",
-      bestFor: "Corporations, family offices, and high-utilization global flight departments.",
+      bestFor: "Enterprises, family offices, and high-utilization global flight departments.",
       link: "/aircraft-for-sale",
       cta: "ACQUISITION DOSSIER →",
     },

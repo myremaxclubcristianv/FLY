@@ -188,7 +188,15 @@ export interface AviationLocation {
     surface?: string;
     pcn?: string;
     designation?: string;
+    physicalDimensionsNote?: string;
+    declaredDistancesNote?: string;
+    toraM?: number;
+    todaM?: number;
+    asdaM?: number;
+    ldaM?: number;
   };
+  operationalStatus?: "OPEN_VERIFIED" | "RESTRICTION_REPORTED" | "CLOSED_VERIFIED" | "STATUS_UNVERIFIED";
+  operationalStatusNote?: string;
   operatingHours?: string;
   restrictions?: string[];
   fboFacilities?: string[];
@@ -201,6 +209,7 @@ export interface AviationLocation {
   source?: DataSource;
   lastVerifiedAt?: string;
 }
+
 
 export interface RouteIntelligence {
   id: string;
@@ -366,6 +375,12 @@ export interface QuoteRequest {
   notes?: string;
 }
 
+export type ListingStatus =
+  | "verified_listing"
+  | "unverified_listing"
+  | "illustrative_example"
+  | "expired_listing";
+
 export interface AircraftForSale {
   id: string;
   slug: string;
@@ -382,11 +397,13 @@ export interface AircraftForSale {
   sellerName: string;
   externalSource: "AVBUYER" | "GLOBALAIR" | "CONTROLLER" | "CURATED";
   externalUrl: string;
+  listingStatus: ListingStatus;
   verificationStatus: VerificationStatus;
   dataStatus: DataStatus;
   lastCheckedAt: string;
   image: string;
 }
+
 
 export interface FlightSchool {
   id: string;

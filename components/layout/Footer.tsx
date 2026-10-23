@@ -73,20 +73,32 @@ export function Footer() {
         </div>
 
         {/* Data Integrity, Non-Carrier Disclosure & Legal Footer */}
-        <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[11px] font-data text-[var(--color-text-muted)]">
-          <div className="space-y-1">
-            <p>
-              © {new Date().getFullYear()} {BRAND.name} PLATFORM. ALL RIGHTS RESERVED.
+        <div className="pt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 text-[11px] font-data text-[var(--color-text-muted)]">
+          <div className="space-y-1.5 max-w-2xl">
+            <p className="text-[12px] text-[var(--color-text-primary)] font-semibold">
+              © {new Date().getFullYear()} {BRAND.name}. ALL RIGHTS RESERVED.
             </p>
-            <p className="text-[10px] text-[var(--color-text-muted)] max-w-xl font-sans">
-              AIR is an aviation concierge & sourcing technology platform. Flights are operated exclusively by certified AOC air carriers.
+            <p className="text-[10px] text-[var(--color-text-muted)] font-sans leading-relaxed">
+              AIR by Cristian Văduva is an executive aviation concierge and decision intelligence platform. AIR is not an air carrier and does not operate flights or hold an AOC. All flights are operated exclusively by licensed, certified AOC air carriers.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
             <Link
+              href="/contact"
+              className="text-amber-500 hover:text-amber-400 font-bold transition"
+            >
+              CONTACT DESK
+            </Link>
+            <a
+              href="mailto:contact@cristianvaduva.com"
+              className="hover:text-[var(--color-text-primary)] transition"
+            >
+              EMAIL: contact@cristianvaduva.com
+            </a>
+            <Link
               href="/legal"
-              className="text-amber-500 hover:underline font-bold"
+              className="hover:text-[var(--color-text-primary)] transition font-bold"
             >
               LEGAL CENTER
             </Link>
@@ -118,5 +130,6 @@ export function Footer() {
         </div>
       </Container>
     </footer>
+
   );
 }
