@@ -114,6 +114,27 @@ export default function RomanianAviationInsurancePage() {
               </strong>
               AIR by Cristian Văduva oferă exclusiv asistență informativă și facilitare de contact între proprietarii de aeronave și brokeri sau subscriitori de asigurare autorizați de ASF / autoritățile competente. AIR nu este broker de asigurare autorizat și nu emite, nu vinde și nu leagă polițe de asigurare direct. Acoperirile, excluderile, limitele despăgubirilor și cotațiile finale sunt stabilite exclusiv de companiile de asigurare autorizate.
             </div>
+
+            {/* Contextual Link to Cristian Văduva Insurance Advisory */}
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                  ECOSISTEM CRISTIAN VĂDUVA // CONSULTANȚĂ ASIGURĂRI
+                </span>
+                <p className="text-sm text-neutral-800 font-sans">
+                  Căutați consultanță strategică în asigurări de viață, sănătate, riscuri corporative și protecție de patrimoniu în parteneriat cu Generali România?
+                </p>
+              </div>
+              <a
+                href="https://insurance.cristianvaduva.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono font-bold transition flex items-center gap-1.5"
+              >
+                <span>insurance.cristianvaduva.com</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
         </Container>
       </section>

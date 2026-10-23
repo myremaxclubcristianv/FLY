@@ -202,6 +202,48 @@ export default function RomanianAircraftOwnershipPage() {
             </div>
 
             <OwnershipDecisionCalculator isRo={true} />
+
+            {/* Contextual Ecosystem Integration: Asset Financing, Protection & Wealth */}
+            <div className="p-8 rounded-3xl bg-white border border-neutral-200/90 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-8">
+              <div className="space-y-1.5 max-w-2xl">
+                <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                  ECOSISTEM CRISTIAN VĂDUVA // CAPITAL & PROTECȚIE PATRIMONIALĂ
+                </span>
+                <h4 className="text-xl font-light text-neutral-900 font-sans">
+                  Consultanță Integrată de Capital & Structurare Financiară
+                </h4>
+                <p className="text-xs text-neutral-600 font-sans leading-relaxed">
+                  Dincolo de modelarea activelor aeronautice, explorați consultanța independentă de finanțare prin CV Finance, asigurarea bunurilor în parteneriat cu Generali România și portofoliul de proprietăți de lux.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2.5">
+                <a
+                  href="https://credite.cristianvaduva.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono font-bold transition flex items-center gap-1"
+                >
+                  <span>CV Finance</span>
+                  <span>↗</span>
+                </a>
+                <a
+                  href="https://insurance.cristianvaduva.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 text-xs font-mono font-bold transition flex items-center gap-1"
+                >
+                  <span>Consultanță Asigurări</span>
+                  <span>↗</span>
+                </a>
+                <Link
+                  href="/ro/ecosystem"
+                  className="px-4 py-2 rounded-xl border border-neutral-300 hover:border-amber-500 text-neutral-800 text-xs font-mono font-bold transition"
+                >
+                  Toate Proiectele →
+                </Link>
+              </div>
+            </div>
           </div>
         </Container>
       </section>

@@ -77,13 +77,23 @@ export default function ContactPage() {
                   <div>
                     <span className="text-neutral-400 block uppercase">WHATSAPP CONCIERGE DESK</span>
                     <a
-                      href="https://wa.me/40700000000"
+                      href="https://wa.me/436509536345?text=Hello,%20I%20am%20contacting%20you%20from%20AIR%20(fly.cristianvaduva.com)..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-neutral-200 hover:text-white block mt-0.5"
+                      className="text-emerald-400 hover:text-emerald-300 font-bold block mt-0.5"
                     >
-                      +40 700 000 000 (Dispatch Concierge)
+                      +43 650 953 6345 (Direct WhatsApp Concierge) ↗
                     </a>
+                  </div>
+
+                  <div>
+                    <span className="text-neutral-400 block uppercase">BUSINESS ECOSYSTEM</span>
+                    <Link
+                      href="/ecosystem"
+                      className="text-neutral-300 hover:text-amber-400 block mt-0.5"
+                    >
+                      Real Estate, Capital Advisory & Tech Platforms →
+                    </Link>
                   </div>
 
                   <div>

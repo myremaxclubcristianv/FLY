@@ -5,6 +5,7 @@ import { FlightSearchForm } from "@/components/home/FlightSearchForm";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import { Button } from "@/components/ui/Button";
 import { AviationImage } from "@/components/AviationImage";
+import { EcosystemSection } from "@/components/home/EcosystemSection";
 import { createRouteMetadata } from "@/lib/seo/metadata";
 
 export const metadata = createRouteMetadata({
@@ -392,7 +393,10 @@ export default function RomanianHomePage() {
         </Container>
       </section>
 
-      {/* 07 — CONTACT & CONCIERGE CALLOUT */}
+      {/* 07 — EXPLOREAZĂ ECOSISTEMUL CRISTIAN VĂDUVA */}
+      <EcosystemSection isRo={true} />
+
+      {/* 08 — CONTACT & CONCIERGE CALLOUT */}
       <section className="w-full py-20 bg-neutral-950 text-white">
         <Container size="wide">
           <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-14 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">

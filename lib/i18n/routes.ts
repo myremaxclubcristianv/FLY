@@ -17,6 +17,7 @@ export const PRIORITY_ROUTE_SLUGS = [
 const STATIC_PAIRS: Array<[en: string, ro: string]> = [
   ["/", "/ro"],
   ["/contact", "/ro/contact"],
+  ["/ecosystem", "/ro/ecosystem"],
   ["/heliports", "/ro/heliports"],
   ["/aviation/insurance", "/ro/aviation/insurance"],
   ["/aircraft/ownership", "/ro/aircraft/ownership"],

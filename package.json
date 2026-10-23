@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx tsx tests/integration-readiness.test.ts && npx tsx tests/ownership-calculator.test.ts && npx tsx tests/aviation-credibility-seo.test.ts"
+    "test": "npx tsx tests/integration-readiness.test.ts && npx tsx tests/ownership-calculator.test.ts && npx tsx tests/aviation-credibility-seo.test.ts && npx tsx tests/ecosystem-directory.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

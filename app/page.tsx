@@ -8,6 +8,7 @@ import { Button } from "../components/ui/Button";
 import { UnifiedAviationRepository } from "../lib/repositories/unified-aviation-repo";
 import { AviationImage } from "../components/AviationImage";
 import { DestinationExplorer } from "../components/destinations/DestinationExplorer";
+import { EcosystemSection } from "../components/home/EcosystemSection";
 
 import {
   AIRCRAFT_MODEL_PHOTOS,
@@ -980,7 +981,10 @@ export default async function HomePage() {
           </Container>
         </section>
 
-        {/* 14 — FINAL CTA (Your Next Flight Starts Here) */}
+        {/* 14 — EXPLORE THE ECOSYSTEM (Cristian Văduva Business Network) */}
+        <EcosystemSection />
+
+        {/* 15 — FINAL CTA (Your Next Flight Starts Here) */}
         <section className="w-full py-28 sm:py-36 bg-neutral-950 text-white">
           <Container size="wide">
             <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-20 shadow-2xl max-w-6xl mx-auto">

@@ -127,6 +127,27 @@ export default function AviationInsurancePage() {
               </strong>
               AIR by Cristian Văduva is an executive aviation concierge and decision intelligence platform. AIR is not a licensed insurance broker, intermediary, or insurance underwriting agent. All information provided on this page is strictly for educational, pre-purchase orientation, and decision-support purposes. Insurance binding, formal quotes, and policy contracts must be executed directly through certified, licensed insurance brokers and authorized underwriters.
             </div>
+
+            {/* Contextual Link to Cristian Văduva Insurance Advisory */}
+            <div className="p-6 rounded-2xl bg-white border border-neutral-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">
+                  CRISTIAN VĂDUVA BUSINESS ECOSYSTEM // INSURANCE ADVISORY
+                </span>
+                <p className="text-sm text-neutral-800 font-sans">
+                  Looking for comprehensive business risk management, life protection, or corporate insurance in partnership with Generali România?
+                </p>
+              </div>
+              <a
+                href="https://insurance.cristianvaduva.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap px-4 py-2 rounded-xl bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-mono font-bold transition flex items-center gap-1.5"
+              >
+                <span>insurance.cristianvaduva.com</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
         </Container>
       </section>

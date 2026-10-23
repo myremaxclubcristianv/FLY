@@ -39,24 +39,47 @@ export function MegaMenu() {
                     {col.heading}
                   </span>
                   <ul className="flex flex-col gap-1.5">
-                    {col.items.map((item) => (
-                      <li key={item.label}>
-                        <Link
-                          href={item.href}
-                          onClick={() => setActiveTab(null)}
-                          className="text-xs text-neutral-300 hover:text-white flex items-center justify-between py-1.5 px-2 rounded-lg hover:bg-white/[0.06] transition-all group"
-                        >
-                          <span className="group-hover:translate-x-1 transition-transform duration-150 font-sans">
-                            {item.label}
-                          </span>
-                          {item.badge && (
-                            <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/30 text-amber-400 rounded">
-                              {item.badge}
-                            </span>
+                    {col.items.map((item) => {
+                      const isExternal = item.href.startsWith("http");
+                      return (
+                        <li key={item.label}>
+                          {isExternal ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={() => setActiveTab(null)}
+                              className="text-xs text-neutral-300 hover:text-white flex items-center justify-between py-1.5 px-2 rounded-lg hover:bg-white/[0.06] transition-all group"
+                            >
+                              <span className="group-hover:translate-x-1 transition-transform duration-150 font-sans flex items-center gap-1">
+                                {item.label}
+                                <span className="text-[10px] text-neutral-400">↗</span>
+                              </span>
+                              {item.badge && (
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/30 text-amber-400 rounded">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </a>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              onClick={() => setActiveTab(null)}
+                              className="text-xs text-neutral-300 hover:text-white flex items-center justify-between py-1.5 px-2 rounded-lg hover:bg-white/[0.06] transition-all group"
+                            >
+                              <span className="group-hover:translate-x-1 transition-transform duration-150 font-sans">
+                                {item.label}
+                              </span>
+                              {item.badge && (
+                                <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/30 text-amber-400 rounded">
+                                  {item.badge}
+                                </span>
+                              )}
+                            </Link>
                           )}
-                        </Link>
-                      </li>
-                    ))}
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               ))}

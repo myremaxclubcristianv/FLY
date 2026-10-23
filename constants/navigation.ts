@@ -166,6 +166,34 @@ export const MEGA_MENU_DATA: MegaMenuSection[] = [
       },
     ],
   },
+  {
+    title: "ECOSYSTEM",
+    triggerHref: "/ecosystem",
+    columns: [
+      {
+        heading: "BUSINESS & REAL ESTATE",
+        items: [
+          { label: "Executive Advisory", href: "https://executive.cristianvaduva.com", badge: "LEADERSHIP", description: "Strategic capital & institutional advisory" },
+          { label: "Cristian Văduva Main", href: "https://cristianvaduva.com", badge: "PORTAL", description: "Central brand & luxury real estate" },
+          { label: "HomeFind Romania", href: "https://homefind.cristianvaduva.com", description: "Verified residential & investment properties" },
+          { label: "AiXLuxury Portfolio", href: "https://aixluxury.com", description: "Monaco, Dubai & Bucharest luxury assets" },
+          { label: "Dubai Advisory", href: "https://dubai.cristianvaduva.com", badge: "INVEST", description: "Independent Dubai real estate intelligence" },
+          { label: "CONSTRUCTIONS by AiXLuxury", href: "https://constructions.cristianvaduva.com", description: "Developers & structural engineering intelligence" },
+        ],
+      },
+      {
+        heading: "ADVISORY, TECH & GRANTS",
+        items: [
+          { label: "Insurance Advisory", href: "https://insurance.cristianvaduva.com", badge: "GENERALI", description: "Partner Generali România asset protection" },
+          { label: "CV Finance Credit Advisory", href: "https://credite.cristianvaduva.com", description: "Mortgage optimization & debt structuring" },
+          { label: "SUBVENȚII România", href: "https://subventii.cristianvaduva.com", badge: "GRANTS", description: "EU structural funds & business subsidies" },
+          { label: "AiX OS™ Intelligence", href: "https://os.aixluxury.com", badge: "OS", description: "Real-time valuation & yield algorithms" },
+          { label: "AETHER Proof Network", href: "https://aether.cristianvaduva.com", description: "Verified action & milestone social network" },
+          { label: "AiX Health Intelligence", href: "https://health.cristianvaduva.com", description: "Evidence-based health science & longevity" },
+        ],
+      },
+    ],
+  },
 ];
 
 export const FOOTER_SECTIONS = [
@@ -192,13 +220,20 @@ export const FOOTER_SECTIONS = [
     ],
   },
   {
-    title: "SERVICES & DISCLOSURES",
+    title: "EXPLORE THE ECOSYSTEM",
     items: [
-      { label: "CONTACT OPERATIONS DESK", href: "/contact", isImplemented: true },
-      { label: "AIRCRAFT FOR SALE", href: "/aircraft-for-sale", isImplemented: true },
-      { label: "AVIATION FINANCE", href: "/aviation/finance", isImplemented: true },
-      { label: "AVIATION INSURANCE", href: "/aviation/insurance", isImplemented: true },
-      { label: "DATA INTEGRITY & STATUS", href: "/#data-status", isImplemented: true },
+      { label: "ECOSYSTEM DIRECTORY", href: "/ecosystem", isImplemented: true },
+      { label: "EXECUTIVE ADVISORY", href: "https://executive.cristianvaduva.com", isImplemented: true },
+      { label: "HOMEFIND ROMANIA", href: "https://homefind.cristianvaduva.com", isImplemented: true },
+      { label: "AIXLUXURY PORTFOLIO", href: "https://aixluxury.com", isImplemented: true },
+      { label: "DUBAI ADVISORY", href: "https://dubai.cristianvaduva.com", isImplemented: true },
+      { label: "CONSTRUCTIONS INTELLIGENCE", href: "https://constructions.cristianvaduva.com", isImplemented: true },
+      { label: "INSURANCE ADVISORY", href: "https://insurance.cristianvaduva.com", isImplemented: true },
+      { label: "CV FINANCE CREDITE", href: "https://credite.cristianvaduva.com", isImplemented: true },
+      { label: "SUBVENȚII ROMÂNIA", href: "https://subventii.cristianvaduva.com", isImplemented: true },
+      { label: "AIX OS™ INTELLIGENCE", href: "https://os.aixluxury.com", isImplemented: true },
+      { label: "AETHER NETWORK", href: "https://aether.cristianvaduva.com", isImplemented: true },
+      { label: "AIX HEALTH", href: "https://health.cristianvaduva.com", isImplemented: true },
     ],
   },
   {

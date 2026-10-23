@@ -77,13 +77,23 @@ export default function RomanianContactPage() {
                   <div>
                     <span className="text-neutral-400 block uppercase">ASISTENȚĂ RAPIDĂ WHATSAPP</span>
                     <a
-                      href="https://wa.me/40700000000"
+                      href="https://wa.me/436509536345?text=Buna%20ziua,%20va%20contactez%20de%20pe%20platforma%20AIR%20(fly.cristianvaduva.com)..."
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-neutral-200 hover:text-white block mt-0.5"
+                      className="text-emerald-400 hover:text-emerald-300 font-bold block mt-0.5"
                     >
-                      +40 700 000 000 (Dispatch Concierge)
+                      +43 650 953 6345 (WhatsApp Concierge Direct) ↗
                     </a>
+                  </div>
+
+                  <div>
+                    <span className="text-neutral-400 block uppercase">ECOSISTEM DE AFACERI</span>
+                    <Link
+                      href="/ro/ecosystem"
+                      className="text-neutral-300 hover:text-amber-400 block mt-0.5"
+                    >
+                      Imobiliare, Consultanță Credite & Platforme Tehnologice →
+                    </Link>
                   </div>
 
                   <div>

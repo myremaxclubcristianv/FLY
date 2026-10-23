@@ -26,6 +26,7 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
     AVIATION: true,
     LEARN: true,
     JOURNAL: true,
+    ECOSYSTEM: true,
   });
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -114,6 +115,7 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
     { label: "ROMANIA FROM ABOVE", href: "/romania-from-above", badge: "AERIAL", icon: "🇷🇴" },
     { label: "AVIATION DIRECTORY", href: "/aviation", badge: "INDEX", icon: "🏛" },
     { label: "AVIATION JOURNAL", href: "/journal", badge: "ARTICLES", icon: "📰" },
+    { label: "ECOSYSTEM DIRECTORY", href: "/ecosystem", badge: "NETWORK", icon: "🌐" },
   ];
 
   const modalContent = isOpen && mounted ? (
@@ -349,35 +351,68 @@ export function MobileNav({ onOpenSearch }: MobileNavProps) {
                         {col.heading}
                       </span>
                       <div className="flex flex-col gap-1.5 pl-1">
-                        {col.items.map((item) => (
-                          <Link
-                            key={item.label}
-                            href={item.href}
-                            onClick={handleLinkClick}
-                            className="flex items-start justify-between min-h-[48px] py-2.5 px-3 rounded-xl text-xs text-neutral-200 hover:text-white bg-white/[0.02] hover:bg-white/[0.08] transition-all font-sans group border border-white/[0.04] hover:border-amber-500/30 active:scale-[0.99]"
-                          >
-                            <div className="flex flex-col gap-0.5 pr-2">
-                              <span className="font-medium text-white group-hover:text-amber-400 transition-colors">
-                                {item.label}
-                              </span>
-                              {item.description && (
-                                <span className="text-[11px] text-neutral-400 font-sans leading-tight">
-                                  {item.description}
+                        {col.items.map((item) => {
+                          const isExternal = item.href.startsWith("http");
+                          return isExternal ? (
+                            <a
+                              key={item.label}
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={handleLinkClick}
+                              className="flex items-start justify-between min-h-[48px] py-2.5 px-3 rounded-xl text-xs text-neutral-200 hover:text-white bg-white/[0.02] hover:bg-white/[0.08] transition-all font-sans group border border-white/[0.04] hover:border-amber-500/30 active:scale-[0.99]"
+                            >
+                              <div className="flex flex-col gap-0.5 pr-2">
+                                <span className="font-medium text-white group-hover:text-amber-400 transition-colors">
+                                  {item.label}
                                 </span>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
-                              {item.badge && (
-                                <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold">
-                                  {item.badge}
+                                {item.description && (
+                                  <span className="text-[11px] text-neutral-400 font-sans leading-tight">
+                                    {item.description}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
+                                {item.badge && (
+                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold">
+                                    {item.badge}
+                                  </span>
+                                )}
+                                <span className="text-neutral-500 group-hover:text-amber-400 transition-colors font-mono text-xs">
+                                  ↗
                                 </span>
-                              )}
-                              <span className="text-neutral-500 group-hover:text-amber-400 transition-colors font-mono text-xs">
-                                →
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
+                              </div>
+                            </a>
+                          ) : (
+                            <Link
+                              key={item.label}
+                              href={item.href}
+                              onClick={handleLinkClick}
+                              className="flex items-start justify-between min-h-[48px] py-2.5 px-3 rounded-xl text-xs text-neutral-200 hover:text-white bg-white/[0.02] hover:bg-white/[0.08] transition-all font-sans group border border-white/[0.04] hover:border-amber-500/30 active:scale-[0.99]"
+                            >
+                              <div className="flex flex-col gap-0.5 pr-2">
+                                <span className="font-medium text-white group-hover:text-amber-400 transition-colors">
+                                  {item.label}
+                                </span>
+                                {item.description && (
+                                  <span className="text-[11px] text-neutral-400 font-sans leading-tight">
+                                    {item.description}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="flex items-center gap-1.5 shrink-0 mt-0.5">
+                                {item.badge && (
+                                  <span className="text-[8px] font-mono px-1.5 py-0.5 bg-neutral-900 border border-amber-500/40 text-amber-400 rounded font-bold">
+                                    {item.badge}
+                                  </span>
+                                )}
+                                <span className="text-neutral-500 group-hover:text-amber-400 transition-colors font-mono text-xs">
+                                  →
+                                </span>
+                              </div>
+                            </Link>
+                          );
+                        })}
                       </div>
                     </div>
                   ))}
