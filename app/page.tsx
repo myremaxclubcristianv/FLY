@@ -395,6 +395,7 @@ export default async function HomePage() {
               src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2200&q=85"
               alt="Executive Jet on Runway at Sunset"
               fill
+              quality={70}
               className="object-cover opacity-40 filter brightness-90 contrast-110"
               fallbackTitle="Editorial Aviation Moment"
               fallbackCode="MOMENT // 01"

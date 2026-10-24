@@ -15,21 +15,29 @@ export function Hero() {
             media="(max-width: 768px)"
             type="image/avif"
             srcSet="/images/hero/hero-jet-mobile.avif"
+            width={480}
+            height={312}
           />
           <source
             media="(max-width: 768px)"
             type="image/webp"
             srcSet="/images/hero/hero-jet-mobile.webp"
+            width={480}
+            height={312}
           />
           <source
             media="(min-width: 769px)"
             type="image/avif"
             srcSet="/images/hero/hero-jet-desktop.avif"
+            width={1280}
+            height={779}
           />
           <source
             media="(min-width: 769px)"
             type="image/webp"
             srcSet="/images/hero/hero-jet-desktop.webp"
+            width={1280}
+            height={779}
           />
           <img
             src="/images/hero/hero-jet-mobile.avif"
@@ -37,8 +45,8 @@ export function Hero() {
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            width={1280}
-            height={779}
+            width={480}
+            height={312}
             className="w-full h-full object-cover opacity-35 filter brightness-95 contrast-110"
           />
         </picture>
