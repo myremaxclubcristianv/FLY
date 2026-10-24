@@ -20,10 +20,9 @@
   --color-status-request: #5a8fa8;
   --color-status-verified: #10b981;
   --color-status-live: #059669;
-  
   --font-sans: var(--font-inter);
   --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: var(--font-jetbrains);
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   
   --radius-sm: 4px;
   --radius-md: 8px;

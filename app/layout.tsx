@@ -12,13 +12,13 @@ import { VisitorTracker } from "../components/telemetry/VisitorTracker";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
+  display: "optional",
 });
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
-  display: "swap",
+  display: "optional",
   weight: ["400", "700"],
   preload: false,
 });
