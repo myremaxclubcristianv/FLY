@@ -72,7 +72,7 @@ export default function EcosystemPage() {
               if (projects.length === 0) return null;
 
               return (
-                <div key={category.id} className="space-y-8">
+                <div key={category.id} className="space-y-8 content-auto">
                   {/* Category Header */}
                   <div className="border-b border-neutral-200/90 pb-4">
                     <span className="text-[10px] font-mono text-amber-600 font-bold uppercase tracking-wider block">

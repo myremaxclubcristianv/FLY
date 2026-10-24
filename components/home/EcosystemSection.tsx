@@ -26,7 +26,7 @@ export function EcosystemSection({ isRo = false }: EcosystemSectionProps) {
   return (
     <section
       id="ecosystem"
-      className="w-full py-28 sm:py-36 bg-[#fbfbfa] text-neutral-900 border-b border-neutral-200/80 relative overflow-hidden"
+      className="w-full py-28 sm:py-36 bg-[#fbfbfa] text-neutral-900 border-b border-neutral-200/80 relative overflow-hidden content-auto"
     >
       {/* Subtle background ambient highlight */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/[0.03] rounded-full blur-3xl pointer-events-none" />

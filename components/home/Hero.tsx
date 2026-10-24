@@ -11,17 +11,38 @@ export function Hero() {
     <section className="relative w-full min-h-[92vh] sm:min-h-[95vh] bg-neutral-950 pt-4 pb-24 border-b border-white/[0.08] overflow-hidden flex flex-col justify-between aerospace-grid-bg">
       {/* Atmospheric Background Layer with Cinematic Depth */}
       <div className="absolute inset-0 z-0">
-        <AviationImage
-          src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=1400&q=75"
-          alt="Executive Jet on Runway Tarmac"
-          fill
-          priority
-          quality={75}
-          sizes="100vw"
-          className="object-cover opacity-35 filter brightness-95 contrast-110"
-          fallbackTitle="AIR Fleet Airborne"
-          fallbackCode="HERO // AIRBORNE"
-        />
+        <picture className="absolute inset-0 w-full h-full pointer-events-none">
+          <source
+            media="(max-width: 768px)"
+            type="image/avif"
+            srcSet="/images/hero/hero-jet-mobile.avif"
+          />
+          <source
+            media="(max-width: 768px)"
+            type="image/webp"
+            srcSet="/images/hero/hero-jet-mobile.webp"
+          />
+          <source
+            media="(min-width: 769px)"
+            type="image/avif"
+            srcSet="/images/hero/hero-jet-desktop.avif"
+          />
+          <source
+            media="(min-width: 769px)"
+            type="image/webp"
+            srcSet="/images/hero/hero-jet-desktop.webp"
+          />
+          <img
+            src="/images/hero/hero-jet-desktop.webp"
+            alt="Executive Jet on Runway Tarmac"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            width={1280}
+            height={779}
+            className="w-full h-full object-cover opacity-35 filter brightness-95 contrast-110"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/60 to-neutral-950/20" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent opacity-70" />
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/80 via-transparent to-neutral-950/80 pointer-events-none" />

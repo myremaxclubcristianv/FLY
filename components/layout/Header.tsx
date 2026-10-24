@@ -8,7 +8,12 @@ import { MobileNav } from "./MobileNav";
 import { Container } from "./Container";
 import { MegaMenu } from "./MegaMenu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { GlobalSearchModal } from "../search/GlobalSearchModal";
+import dynamic from "next/dynamic";
+
+const GlobalSearchModal = dynamic(
+  () => import("../search/GlobalSearchModal").then((mod) => mod.GlobalSearchModal),
+  { ssr: false }
+);
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -88,7 +93,9 @@ export function Header() {
       </header>
 
       {/* Unified Search Modal */}
-      <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      {isSearchOpen && (
+        <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+      )}
     </>
   );
 }

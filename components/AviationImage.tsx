@@ -47,9 +47,9 @@ export function AviationImage({
         priority={priority}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
-        decoding={priority ? "sync" : "async"}
+        decoding="async"
         sizes={sizes}
-        className={cn("object-cover transition-opacity duration-300", className)}
+        className={cn("object-cover", !priority && "transition-opacity duration-300", className)}
         {...props}
       />
       {provenance && (

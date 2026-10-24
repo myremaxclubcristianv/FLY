@@ -79,10 +79,12 @@ export default function RomanianHomePage() {
       <section className="relative w-full py-24 sm:py-36 bg-neutral-950 text-white overflow-hidden border-b border-neutral-800">
         <div className="absolute inset-0 z-0 opacity-30">
           <AviationImage
-            src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=2000&q=85"
+            src="/images/hero/hero-jet-desktop.webp"
             alt="Avion privat pe platforma București Băneasa"
             fill
             priority
+            quality={80}
+            sizes="(max-width: 768px) 100vw, 100vw"
             className="object-cover"
             fallbackTitle="AIR by Cristian Văduva"
             fallbackCode="AVIAȚIE EXECUTIVĂ ROMÂNIA"

@@ -9,7 +9,7 @@ import { ECOSYSTEM_CONTACT } from "../../data/real/ecosystem";
 
 export function Footer() {
   return (
-    <footer className="w-full bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] pt-16 pb-24 md:pb-16 text-[var(--color-text-secondary)]">
+    <footer className="w-full bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)] pt-16 pb-24 md:pb-16 text-[var(--color-text-secondary)] content-auto">
       <Container size="wide">
         {/* Main Grid: Brand statement + 4 navigation columns */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-[var(--color-border)]">

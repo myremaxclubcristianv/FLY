@@ -22,7 +22,7 @@
   --color-status-live: #059669;
   
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: var(--font-jetbrains);
   
   --radius-sm: 4px;
@@ -241,6 +241,11 @@
 
   .editorial-image-frame:hover img {
     transform: scale(1.03);
+  }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
   }
 }
 

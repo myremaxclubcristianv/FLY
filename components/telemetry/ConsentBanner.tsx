@@ -10,11 +10,27 @@ export function ConsentBanner() {
 
   useEffect(() => {
     // Check if user has already made a choice
-    const stored = localStorage.getItem("air_consent_status");
-    if (!stored) {
-      // Delay slightly for smooth non-blocking appearance
-      const timer = setTimeout(() => setIsVisible(true), 1200);
-      return () => clearTimeout(timer);
+    try {
+      const stored = localStorage.getItem("air_consent_status");
+      if (!stored) {
+        // Defer until browser is idle or after 3.5s so LCP completes cleanly
+        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+          const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts: { timeout: number }) => number }).requestIdleCallback(
+            () => setIsVisible(true),
+            { timeout: 3500 }
+          );
+          return () => {
+            if ("cancelIdleCallback" in window) {
+              (window as unknown as { cancelIdleCallback: (h: number) => void }).cancelIdleCallback(handle);
+            }
+          };
+        } else {
+          const timer = setTimeout(() => setIsVisible(true), 3500);
+          return () => clearTimeout(timer);
+        }
+      }
+    } catch {
+      // Safe fallback
     }
   }, []);
 
@@ -49,6 +65,7 @@ export function ConsentBanner() {
         <div className="flex items-center justify-between gap-3 pt-1 border-t border-white/5">
           <Link
             href="/legal/cookies"
+            prefetch={false}
             className="text-[10px] font-mono text-neutral-400 hover:text-amber-400 underline underline-offset-2"
           >
             Cookie Policy →

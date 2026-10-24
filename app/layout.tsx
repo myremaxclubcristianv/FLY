@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { BRAND } from "../constants/brand";
 import { DEFAULT_SEO, getOrganizationJsonLd } from "../constants/seo";
@@ -15,17 +15,12 @@ const inter = Inter({
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  display: "swap",
-  preload: false,
-});
-
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
   display: "swap",
+  weight: ["400", "500", "700"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -85,7 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}
+      className={`${inter.variable} ${jetbrains.variable}`}
     >
       <head>
         <script

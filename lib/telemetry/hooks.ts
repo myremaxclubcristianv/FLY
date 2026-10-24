@@ -13,9 +13,25 @@ export function useVisitorJourneyTracking() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Initialize & Register session with entry or navigation path
-    telemetryClient.registerSession(pathname);
-    telemetryClient.trackPageView(pathname, document.title, document.referrer);
+    const track = () => {
+      telemetryClient.registerSession(pathname);
+      telemetryClient.trackPageView(pathname, document.title, document.referrer);
+    };
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts: { timeout: number }) => number }).requestIdleCallback(
+        track,
+        { timeout: 3000 }
+      );
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          (window as unknown as { cancelIdleCallback: (h: number) => void }).cancelIdleCallback(handle);
+        }
+      };
+    } else {
+      const timer = setTimeout(track, 2000);
+      return () => clearTimeout(timer);
+    }
   }, [pathname, searchParams]);
 }
 
