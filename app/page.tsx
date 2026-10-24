@@ -165,8 +165,26 @@ export default async function HomePage() {
 
   return (
     <div className="w-full flex flex-col bg-white text-neutral-900 font-sans">
-        {/* 01 — HERO (Full Viewport Authentic Aviation Showcase - Cinematic Darkness) */}
-        <Hero />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-jet-mobile.avif"
+        type="image/avif"
+        media="(max-width: 768px)"
+        // @ts-expect-error React 19 / DOM supports fetchpriority on link
+        fetchpriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-jet-desktop.avif"
+        type="image/avif"
+        media="(min-width: 769px)"
+        // @ts-expect-error React 19 / DOM supports fetchpriority on link
+        fetchpriority="high"
+      />
+      {/* 01 — HERO (Full Viewport Authentic Aviation Showcase - Cinematic Darkness) */}
+      <Hero />
 
         {/* 02 — EDITORIAL INTRODUCTION (White / Ivory Editorial Masterpiece) */}
         <section className="w-full py-28 sm:py-40 bg-white border-b border-neutral-200/80">

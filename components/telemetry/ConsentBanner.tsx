@@ -13,21 +13,24 @@ export function ConsentBanner() {
     try {
       const stored = localStorage.getItem("air_consent_status");
       if (!stored) {
-        // Defer until browser is idle or after 3.5s so LCP completes cleanly
-        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-          const handle = (window as unknown as { requestIdleCallback: (cb: () => void, opts: { timeout: number }) => number }).requestIdleCallback(
-            () => setIsVisible(true),
-            { timeout: 3500 }
-          );
-          return () => {
-            if ("cancelIdleCallback" in window) {
-              (window as unknown as { cancelIdleCallback: (h: number) => void }).cancelIdleCallback(handle);
-            }
-          };
-        } else {
-          const timer = setTimeout(() => setIsVisible(true), 3500);
-          return () => clearTimeout(timer);
-        }
+        let active = true;
+        const trigger = () => {
+          if (active) setIsVisible(true);
+        };
+        const timer = setTimeout(trigger, 5000);
+        const onInteract = () => {
+          trigger();
+          window.removeEventListener("scroll", onInteract);
+          window.removeEventListener("pointerdown", onInteract);
+        };
+        window.addEventListener("scroll", onInteract, { passive: true, once: true });
+        window.addEventListener("pointerdown", onInteract, { passive: true, once: true });
+        return () => {
+          active = false;
+          clearTimeout(timer);
+          window.removeEventListener("scroll", onInteract);
+          window.removeEventListener("pointerdown", onInteract);
+        };
       }
     } catch {
       // Safe fallback
@@ -45,7 +48,7 @@ export function ConsentBanner() {
     <div
       role="region"
       aria-label="Privacy & Cookie Preferences"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300"
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in duration-300"
     >
       <div className="bg-neutral-950/95 border border-amber-500/30 backdrop-blur-xl p-5 rounded-2xl shadow-2xl shadow-black/80 flex flex-col gap-3 text-neutral-200">
         <div className="flex items-center justify-between">

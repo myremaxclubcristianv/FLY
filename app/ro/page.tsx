@@ -75,20 +75,59 @@ const ROMANIAN_PRIORITY_ROUTES = [
 export default function RomanianHomePage() {
   return (
     <div className="w-full bg-white text-neutral-900 font-sans flex-1 flex flex-col">
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-jet-mobile.avif"
+        type="image/avif"
+        media="(max-width: 768px)"
+        // @ts-expect-error React 19 / DOM supports fetchpriority on link
+        fetchpriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/images/hero/hero-jet-desktop.avif"
+        type="image/avif"
+        media="(min-width: 769px)"
+        // @ts-expect-error React 19 / DOM supports fetchpriority on link
+        fetchpriority="high"
+      />
       {/* 01 — HERO SECTION */}
       <section className="relative w-full py-24 sm:py-36 bg-neutral-950 text-white overflow-hidden border-b border-neutral-800">
-        <div className="absolute inset-0 z-0 opacity-30">
-          <AviationImage
-            src="/images/hero/hero-jet-desktop.webp"
-            alt="Avion privat pe platforma București Băneasa"
-            fill
-            priority
-            quality={80}
-            sizes="(max-width: 768px) 100vw, 100vw"
-            className="object-cover"
-            fallbackTitle="AIR by Cristian Văduva"
-            fallbackCode="AVIAȚIE EXECUTIVĂ ROMÂNIA"
-          />
+        <div className="absolute inset-0 z-0">
+          <picture className="absolute inset-0 w-full h-full pointer-events-none">
+            <source
+              media="(max-width: 768px)"
+              type="image/avif"
+              srcSet="/images/hero/hero-jet-mobile.avif"
+            />
+            <source
+              media="(max-width: 768px)"
+              type="image/webp"
+              srcSet="/images/hero/hero-jet-mobile.webp"
+            />
+            <source
+              media="(min-width: 769px)"
+              type="image/avif"
+              srcSet="/images/hero/hero-jet-desktop.avif"
+            />
+            <source
+              media="(min-width: 769px)"
+              type="image/webp"
+              srcSet="/images/hero/hero-jet-desktop.webp"
+            />
+            <img
+              src="/images/hero/hero-jet-mobile.avif"
+              alt="Avion privat pe platforma București Băneasa"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              width={1280}
+              height={779}
+              className="w-full h-full object-cover opacity-30 filter brightness-95 contrast-110"
+            />
+          </picture>
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/70 to-neutral-950/40 z-0" />
 
@@ -206,7 +245,7 @@ export default function RomanianHomePage() {
       </section>
 
       {/* 04 — BĂNEASA VS OTOPENI PENTRU AVION PRIVAT */}
-      <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80">
+      <section className="w-full py-24 sm:py-32 bg-[#fafaf7] border-b border-neutral-200/80 content-auto">
         <Container size="wide">
           <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-12 sm:gap-16 items-center">
             <div className="lg:col-span-6 space-y-6">
@@ -280,7 +319,7 @@ export default function RomanianHomePage() {
       </section>
 
       {/* 05 — HELIPORTURI & ACCES ROTORCRAFT */}
-      <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80">
+      <section className="w-full py-24 sm:py-32 bg-white border-b border-neutral-200/80 content-auto">
         <Container size="wide">
           <div className="max-w-6xl mx-auto space-y-12">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-neutral-200 pb-8">
@@ -345,7 +384,7 @@ export default function RomanianHomePage() {
       </section>
 
       {/* 06 — CONSULTANȚĂ ȘI MANAGEMENTUL PROPRIETĂȚII */}
-      <section className="w-full py-20 sm:py-28 bg-[#fafaf7] border-b border-neutral-200/80">
+      <section className="w-full py-20 sm:py-28 bg-[#fafaf7] border-b border-neutral-200/80 content-auto">
         <Container size="wide">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
             <div className="p-8 sm:p-10 rounded-3xl bg-white border border-neutral-200 shadow-sm space-y-4 flex flex-col justify-between">
@@ -399,7 +438,7 @@ export default function RomanianHomePage() {
       <EcosystemSection isRo={true} />
 
       {/* 08 — CONTACT & CONCIERGE CALLOUT */}
-      <section className="w-full py-20 bg-neutral-950 text-white">
+      <section className="w-full py-20 bg-neutral-950 text-white content-auto">
         <Container size="wide">
           <div className="max-w-6xl mx-auto rounded-3xl border border-amber-500/30 bg-gradient-to-b from-neutral-900 to-black p-10 sm:p-14 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-8">
             <div className="space-y-3 max-w-2xl">

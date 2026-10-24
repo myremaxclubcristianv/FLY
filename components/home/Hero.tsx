@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Container } from "../layout/Container";
 import { Button } from "../ui/Button";
 import { DataStatusBadge } from "../shared/DataStatusBadge";
-import { AviationImage } from "../AviationImage";
 import { PRIMARY_CTA } from "../../constants/navigation";
 
 export function Hero() {
@@ -33,7 +32,7 @@ export function Hero() {
             srcSet="/images/hero/hero-jet-desktop.webp"
           />
           <img
-            src="/images/hero/hero-jet-desktop.webp"
+            src="/images/hero/hero-jet-mobile.avif"
             alt="Executive Jet on Runway Tarmac"
             fetchPriority="high"
             loading="eager"
