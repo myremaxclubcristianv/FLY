@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { TelemetryEngine } from "@/lib/telemetry/engine";
 import { ConsentStatus } from "@/lib/telemetry/types";
+import { checkRateLimit, createRateLimitResponse } from "@/lib/security/rate-limiter";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
+    const rateLimit = await checkRateLimit(req, "telemetry_session");
+    if (!rateLimit.allowed) {
+      return createRateLimitResponse(rateLimit.resetInSeconds);
+    }
+
     const body = await req.json().catch(() => ({}));
     const headers = req.headers;
 

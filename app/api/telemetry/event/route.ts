@@ -1,11 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { TelemetryEngine } from "@/lib/telemetry/engine";
 import { TelemetryEventType, EventCategory } from "@/lib/telemetry/types";
+import { checkRateLimit, createRateLimitResponse } from "@/lib/security/rate-limiter";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
+    const rateLimit = await checkRateLimit(req, "telemetry_event");
+    if (!rateLimit.allowed) {
+      return createRateLimitResponse(rateLimit.resetInSeconds);
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || !body.visitorId || !body.sessionId || !body.eventName) {
       return NextResponse.json({ success: false, error: "Invalid payload" }, { status: 400 });

@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { TelemetryEngine } from "@/lib/telemetry/engine";
 import { LeadSubmissionPayload } from "@/lib/telemetry/types";
+import { checkRateLimit, createRateLimitResponse } from "@/lib/security/rate-limiter";
 
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
   try {
+    // 0. Server-Side Rate Limiting for Flight Lead Submissions
+    const rateLimit = await checkRateLimit(req, "flight_lead");
+    if (!rateLimit.allowed) {
+      return createRateLimitResponse(rateLimit.resetInSeconds);
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || !body.referenceId) {
       return NextResponse.json({ success: false, error: "Missing reference ID" }, { status: 400 });

@@ -78,9 +78,17 @@ async function runSecurityHardeningTests() {
   const nextConfigPath = join(process.cwd(), "next.config.ts");
   const nextConfigContent = readFileSync(nextConfigPath, "utf-8");
   assert(nextConfigContent.includes("poweredByHeader: false"), "next.config.ts disables X-Powered-By header");
+  assert(!nextConfigContent.includes("'unsafe-eval'"), "next.config.ts does NOT permit 'unsafe-eval' in script-src");
   assert(nextConfigContent.includes("Strict-Transport-Security"), "next.config.ts enforces HSTS");
   assert(nextConfigContent.includes("nosniff"), "next.config.ts enforces X-Content-Type-Options: nosniff");
   assert(nextConfigContent.includes("SAMEORIGIN"), "next.config.ts enforces X-Frame-Options: SAMEORIGIN");
+
+  // 6. Flight Lead and Auth Endpoint Rate Limiting Verification
+  assert(RATE_LIMIT_CONFIGS.flight_lead !== undefined, "Rate limiter includes dedicated flight_lead policy");
+  assert(RATE_LIMIT_CONFIGS.auth_attempt !== undefined, "Rate limiter includes dedicated auth_attempt policy");
+  assert(RATE_LIMIT_CONFIGS.telemetry_event !== undefined, "Rate limiter includes dedicated telemetry_event policy");
+  assert(RATE_LIMIT_CONFIGS.telemetry_session !== undefined, "Rate limiter includes dedicated telemetry_session policy");
+  assert(middlewareContent.includes("pathname === \"/login\" || pathname === \"/register\""), "middleware enforces rate limits on login/register endpoints");
 
   console.log("==================================================");
   console.log(`TOTAL: ${passed + failed} | PASSED: ${passed} | FAILED: ${failed}`);

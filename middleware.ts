@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { User } from "@supabase/supabase-js";
+import { checkRateLimit, createRateLimitResponse } from "@/lib/security/rate-limiter";
 
 // Admin email whitelist for authorization
 const ADMIN_EMAILS = [
@@ -64,6 +65,16 @@ export async function middleware(request: NextRequest) {
       user = data.user;
     } catch {
       user = null;
+    }
+  }
+
+  // -------------------------------------------------------------
+  // RATE LIMITING FOR PUBLIC AUTH ENPOINTS
+  // -------------------------------------------------------------
+  if (pathname === "/login" || pathname === "/register") {
+    const rateLimit = await checkRateLimit(request, "auth_attempt");
+    if (!rateLimit.allowed) {
+      return createRateLimitResponse(rateLimit.resetInSeconds);
     }
   }
 

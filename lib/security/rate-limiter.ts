@@ -1,19 +1,52 @@
 import { NextRequest, NextResponse } from "next/server";
 
 interface RateLimitConfig {
-  limit: number;       // Maximum allowed requests in window
+  limit: number;         // Maximum allowed requests in window
   windowSeconds: number; // Window size in seconds
 }
 
 export const RATE_LIMIT_CONFIGS: Record<string, RateLimitConfig> = {
-  contact_form: { limit: 5, windowSeconds: 600 },    // 5 submissions per 10 minutes
-  auth_attempt: { limit: 10, windowSeconds: 900 },   // 10 attempts per 15 minutes
-  flight_plan: { limit: 15, windowSeconds: 600 },    // 15 calculations per 10 minutes
-  api_default: { limit: 60, windowSeconds: 60 },     // 60 requests per minute
+  contact_form: { limit: 5, windowSeconds: 600 },       // 5 contact submissions per 10 minutes
+  flight_lead: { limit: 5, windowSeconds: 600 },        // 5 flight requests / leads per 10 minutes
+  flight_plan: { limit: 15, windowSeconds: 600 },       // 15 flight planning calculations per 10 minutes
+  auth_attempt: { limit: 10, windowSeconds: 900 },      // 10 login / register attempts per 15 minutes
+  password_recovery: { limit: 3, windowSeconds: 1800 }, // 3 recovery attempts per 30 minutes
+  telemetry_event: { limit: 120, windowSeconds: 60 },   // 120 telemetry events per minute
+  telemetry_session: { limit: 20, windowSeconds: 60 },  // 20 session inits per minute
+  api_default: { limit: 60, windowSeconds: 60 },        // 60 requests per minute
 };
 
-// In-memory fallback for local dev / testing environments without Worker KV
+interface KVNamespaceLike {
+  get: (key: string) => Promise<string | null>;
+  put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
+}
+
+// In-memory fallback for local unit test runner outside Cloudflare Worker runtime
 const localMemoryStore = new Map<string, { count: number; expiresAt: number }>();
+
+/**
+ * Resolves the Cloudflare Workers KV binding FLY_RATE_LIMIT using OpenNext context.
+ */
+async function getCloudflareRateLimitKV(): Promise<KVNamespaceLike | null> {
+  // 1. Try OpenNext Cloudflare runtime context
+  try {
+    const { getCloudflareContext } = await import("@opennextjs/cloudflare");
+    const ctx = await getCloudflareContext({ async: true });
+    if (ctx && ctx.env && (ctx.env as Record<string, unknown>).FLY_RATE_LIMIT) {
+      return (ctx.env as Record<string, unknown>).FLY_RATE_LIMIT as KVNamespaceLike;
+    }
+  } catch {
+    // Outside OpenNext Cloudflare runtime (e.g. Node.js local test execution)
+  }
+
+  // 2. Try globalThis fallback
+  const globalKv = (globalThis as unknown as { FLY_RATE_LIMIT?: KVNamespaceLike }).FLY_RATE_LIMIT;
+  if (globalKv && typeof globalKv.get === "function" && typeof globalKv.put === "function") {
+    return globalKv;
+  }
+
+  return null;
+}
 
 /**
  * Extracts a trusted client identifier, prioritizing Cloudflare CF-Connecting-IP.
@@ -32,7 +65,6 @@ export function getClientIp(req: NextRequest | Request): string {
 
   const xForwardedFor = headers.get("x-forwarded-for");
   if (xForwardedFor) {
-    // Only take the first IP in the list
     const firstIp = xForwardedFor.split(",")[0].trim();
     if (firstIp) return firstIp;
   }
@@ -53,13 +85,8 @@ export async function checkRateLimit(
   const key = `ratelimit:${action}:${ip}`;
   const now = Math.floor(Date.now() / 1000);
 
-interface KVNamespaceLike {
-  get: (key: string) => Promise<string | null>;
-  put: (key: string, value: string, options?: { expirationTtl?: number }) => Promise<void>;
-}
-
-// 1. Try Cloudflare Worker KV if available
-  const kv = (globalThis as unknown as { FLY_RATE_LIMIT?: KVNamespaceLike }).FLY_RATE_LIMIT;
+  // 1. Access Persistent Cloudflare KV Binding
+  const kv = await getCloudflareRateLimitKV();
 
   if (kv && typeof kv.get === "function" && typeof kv.put === "function") {
     try {
@@ -101,7 +128,7 @@ interface KVNamespaceLike {
     }
   }
 
-  // 2. Fallback to Local Memory Store (for dev/test)
+  // 2. Fallback to Local Memory Store (for local unit tests)
   let record = localMemoryStore.get(key);
   if (!record || record.expiresAt <= now) {
     record = { count: 1, expiresAt: now + config.windowSeconds };
