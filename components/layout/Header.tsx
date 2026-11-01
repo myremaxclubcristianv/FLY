@@ -8,6 +8,7 @@ import { MobileNav } from "./MobileNav";
 import { Container } from "./Container";
 import { MegaMenu } from "./MegaMenu";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useAutoScrollVisibility } from "../../lib/hooks/useAutoScrollVisibility";
 import dynamic from "next/dynamic";
 
 const GlobalSearchModal = dynamic(
@@ -17,6 +18,13 @@ const GlobalSearchModal = dynamic(
 
 export function Header() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const isVisible = useAutoScrollVisibility({
+    disabled: isMobileNavOpen || isSearchOpen,
+    topThreshold: 80,
+    deltaThreshold: 10,
+  });
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -31,7 +39,12 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full glass-nav transition-all duration-300">
+      <header
+        className={`sticky top-0 z-40 w-full glass-nav transition-all duration-300 ease-in-out focus-within:translate-y-0 ${
+          isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
+        }`}
+        aria-hidden={!isVisible && !isMobileNavOpen && !isSearchOpen}
+      >
         <Container size="wide">
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo */}
@@ -86,7 +99,10 @@ export function Header() {
               </div>
 
               {/* Mobile Navigation Drawer Trigger */}
-              <MobileNav onOpenSearch={() => setIsSearchOpen(true)} />
+              <MobileNav
+                onOpenSearch={() => setIsSearchOpen(true)}
+                onOpenChange={setIsMobileNavOpen}
+              />
             </div>
           </div>
         </Container>

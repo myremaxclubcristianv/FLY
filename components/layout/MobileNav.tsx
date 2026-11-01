@@ -15,11 +15,16 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface MobileNavProps {
   onOpenSearch?: () => void;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export function MobileNav({ onOpenSearch }: MobileNavProps) {
+export function MobileNav({ onOpenSearch, onOpenChange }: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    onOpenChange?.(isOpen);
+  }, [isOpen, onOpenChange]);
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
     FLY: true,
     MARKET: true,

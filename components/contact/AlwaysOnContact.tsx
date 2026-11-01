@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTelemetry } from "@/lib/telemetry/hooks";
 import { telemetryClient } from "@/lib/telemetry/client";
+import { useAutoScrollVisibility } from "@/lib/hooks/useAutoScrollVisibility";
 
 const AIR_SERVICES = [
   "Private Flight",
@@ -16,6 +17,17 @@ const AIR_SERVICES = [
 
 export function AlwaysOnContact() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const isAutoVisible = useAutoScrollVisibility({
+    disabled: isOpen,
+    topThreshold: 80,
+    deltaThreshold: 10,
+  });
+
+  const isVisible = isAutoVisible || isOpen || isHovered || isFocused;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -152,10 +164,21 @@ export function AlwaysOnContact() {
   return (
     <>
       {/* Persistent Always-On Contact Trigger Control */}
-      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40">
+      <div
+        className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-40 transition-all duration-300 ease-in-out focus-within:translate-y-0 focus-within:opacity-100 ${
+          isVisible
+            ? "translate-y-0 opacity-100 pointer-events-auto"
+            : "translate-y-20 opacity-0 pointer-events-none"
+        }`}
+        aria-hidden={!isVisible}
+      >
         <button
           type="button"
           onClick={handleOpen}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           className="group flex items-center gap-3 px-4 py-3 sm:px-5 sm:py-3.5 rounded-full bg-neutral-950/90 hover:bg-neutral-900 border border-amber-500/40 hover:border-amber-400 text-white shadow-[0_10px_35px_-5px_rgba(0,0,0,0.8),0_0_20px_rgba(245,158,11,0.2)] backdrop-blur-xl transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-amber-400"
           aria-label="Contact AIR Flight Operations Desk"
           title="Direct Contact & Flight Inquiry (Always Available)"

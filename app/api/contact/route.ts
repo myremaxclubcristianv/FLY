@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { TelemetryEngine, parseUserAgent } from "@/lib/telemetry/engine";
 import { LeadSubmissionPayload } from "@/lib/telemetry/types";
+import { checkRateLimit, createRateLimitResponse } from "@/lib/security/rate-limiter";
 
 export const dynamic = "force-dynamic";
 
@@ -25,6 +26,12 @@ function generateLeadId(): string {
 
 export async function POST(req: NextRequest) {
   try {
+    // 0. Server-Side Rate Limiting
+    const rateLimit = await checkRateLimit(req, "contact_form");
+    if (!rateLimit.allowed) {
+      return createRateLimitResponse(rateLimit.resetInSeconds);
+    }
+
     const body = await req.json().catch(() => null);
     if (!body || typeof body !== "object") {
       return NextResponse.json(

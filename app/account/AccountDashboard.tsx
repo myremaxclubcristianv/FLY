@@ -7,6 +7,8 @@ import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
 import { DataStatusBadge } from "@/components/shared/DataStatusBadge";
 import { missionRequestService, MissionDetailRecord } from "@/lib/services/mission-request-service";
 
+import { createClient } from "@/lib/supabase/client";
+
 interface SavedItem {
   slug: string;
   name: string;
@@ -23,32 +25,41 @@ interface GiftVoucher {
   validUntil: string;
 }
 
-export default function AccountDashboard() {
+interface AccountDashboardProps {
+  initialUser?: { email: string; name: string };
+}
+
+export default function AccountDashboard({ initialUser }: AccountDashboardProps) {
   const router = useRouter();
-  const [user, setUser] = useState<{ email: string; name: string } | null>(null);
+  const [user, setUser] = useState<{ email: string; name: string } | null>(initialUser || null);
   const [activeTab, setActiveTab] = useState<"missions" | "quotes" | "saved" | "gifts" | "alerts" | "profile">("missions");
   const [missions, setMissions] = useState<MissionDetailRecord[]>([]);
 
   useEffect(() => {
-    const mockUser = localStorage.getItem("air_mock_user");
-    if (mockUser) {
-      try {
-        setUser(JSON.parse(mockUser));
-      } catch {
-        setUser({ email: "client@air.aero", name: "VIP Client Member" });
+    if (!initialUser) {
+      const mockUser = localStorage.getItem("air_mock_user");
+      if (mockUser) {
+        try {
+          setUser(JSON.parse(mockUser));
+        } catch {
+          setUser({ email: "client@air.aero", name: "VIP Client Member" });
+        }
       }
-    } else {
-      setUser({ email: "client@air.aero", name: "VIP Client Member" });
     }
 
     // Load missions from missionRequestService
     const storedMissions = missionRequestService.getAllRequests();
     setMissions(storedMissions);
-  }, []);
+  }, [initialUser]);
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     localStorage.removeItem("air_mock_user");
+    const supabase = createClient();
+    if (supabase) {
+      await supabase.auth.signOut();
+    }
     router.push("/login");
+    router.refresh();
   };
 
   const savedAircraft: SavedItem[] = [

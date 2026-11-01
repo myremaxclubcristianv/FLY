@@ -6,14 +6,12 @@ import Link from "next/link";
 const TICKER_SERVICES = [
   { label: "AIR", href: "/", isBrand: true },
   { label: "PRIVATE FLIGHTS", href: "/plan" },
-  { label: "HELICOPTERS", href: "/aircraft?category=HELICOPTER" },
-  { label: "BUSINESS AVIATION", href: "/business" },
   { label: "AIRCRAFT FLEET", href: "/aircraft" },
-  { label: "EXPERIENCES", href: "/experiences" },
-  { label: "CORPORATE TRAVEL", href: "/business" },
+  { label: "HELICOPTERS", href: "/aircraft?category=HELICOPTER" },
   { label: "BĂNEASA LRBS DISPATCH", href: "/baneasa" },
-  { label: "FLIGHT PLANNING", href: "/plan" },
-  { label: "AIRCRAFT SOURCING", href: "/aircraft/ownership" },
+  { label: "ROUTE INTELLIGENCE", href: "/routes" },
+  { label: "CURATED EXPERIENCES", href: "/experiences" },
+  { label: "INDICATIVE ESTIMATES", href: "/disclaimer" },
 ];
 
 export function ServicesTicker() {

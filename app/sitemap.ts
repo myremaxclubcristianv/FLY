@@ -39,6 +39,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/journal",
     "/journal/photo-essays",
     "/romania-from-above",
+    "/legal",
+    "/privacy",
+    "/gdpr",
+    "/terms",
+    "/cookies",
+    "/disclaimer",
   ];
 
   const sitemapEntries: MetadataRoute.Sitemap = staticPublicRoutes.map((route) => ({

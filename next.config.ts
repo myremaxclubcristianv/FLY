@@ -32,8 +32,9 @@ const cspDirectives = [
   "img-src 'self' data: blob: https://images.unsplash.com",
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
-  "script-src 'self' 'unsafe-inline'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   `connect-src ${connectSrc}`,
+  "upgrade-insecure-requests",
 ];
 
 const contentSecurityPolicy = cspDirectives.join("; ");
@@ -66,6 +67,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
   experimental: {

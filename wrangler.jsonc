@@ -1,0 +1,40 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "fly",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2024-12-30",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "fly"
+		}
+	],
+	"images": {
+		"binding": "IMAGES"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "FLY_RATE_LIMIT",
+			"id": "d8b5f55c60fc4fe09d748a95509c332c"
+		}
+	],
+	"workers_dev": true,
+	"routes": [
+		{
+			"pattern": "fly.cristianvaduva.com",
+			"custom_domain": true
+		},
+		{
+			"pattern": "fly.aixluxury.com",
+			"custom_domain": true
+		}
+	]
+}

@@ -5,6 +5,10 @@ import { ProvenanceBadge } from "../../components/shared/ProvenanceBadge";
 import { Card } from "../../components/ui/Card";
 import { quoteService } from "../../lib/services/quote-service";
 import { UnifiedAviationRepository } from "../../lib/repositories/unified-aviation-repo";
+import { requireAdmin } from "../../lib/auth/server-guard";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: "AIR Data Audit & Verification Portal | Admin Infrastructure",
@@ -16,6 +20,7 @@ export const metadata = {
 };
 
 export default async function AdminPage() {
+  await requireAdmin("/admin");
   const quoteRequests = await quoteService.getAllQuoteRequests();
   const airports = await UnifiedAviationRepository.getAirports();
   const companies = await UnifiedAviationRepository.getCompanies();

@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { ProvenanceBadge } from "@/components/shared/ProvenanceBadge";
+import { requireOperator } from "@/lib/auth/server-guard";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Operator Dispatch Portal — AIR Access Network",
@@ -8,7 +12,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function OperatorPortalPage() {
+export default async function OperatorPortalPage() {
+  await requireOperator("/operator");
   const mockOperatorInfo = {
     displayName: "Toyo Aviation SRL",
     aocNumber: "RO-014",
