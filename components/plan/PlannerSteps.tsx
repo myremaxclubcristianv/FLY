@@ -132,6 +132,50 @@ function PlannerStepsContent() {
   const handleSubmitQuoteRequest = async () => {
     if (!mission || !selectedOption) return;
 
+    // 1. Authoritative Server-Side Mission Ingestion Path
+    let serverReferenceId = "";
+    try {
+      const idempotencyKey = `idemp-${Date.now()}-${Math.random().toString(36).substring(2, 10)}`;
+      const res = await fetch("/api/missions/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Idempotency-Key": idempotencyKey,
+        },
+        body: JSON.stringify({
+          from,
+          to,
+          tripType,
+          date,
+          returnDate: tripType === "ROUND_TRIP" ? returnDate : undefined,
+          time,
+          dateFlexibility,
+          passengers,
+          budgetPreference,
+          priority,
+          purpose,
+          requirements,
+          name,
+          email,
+          phone,
+          message,
+          recommendedAircraft: selectedOption.aircraftName,
+          recommendedCategory: selectedOption.aircraftCategory,
+          estimatedFlightTime: selectedOption.estimatedDuration,
+          recommendationReason: selectedOption.recommendationReason,
+        }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.referenceId) {
+          serverReferenceId = data.referenceId;
+        }
+      }
+    } catch (err) {
+      console.warn("[MISSION PERSISTENCE API NOTICE]", err);
+    }
+
     const qReq = await quoteService.createQuoteRequest({
       missionId: mission.id,
       optionId: selectedOption.id,
@@ -141,7 +185,11 @@ function PlannerStepsContent() {
       notes: message,
     });
 
-    // Register in client-side mission storage
+    if (serverReferenceId) {
+      qReq.id = serverReferenceId;
+    }
+
+    // Register in client-side mission storage with authoritative server reference if available
     const stored = missionRequestService.createRequest({
       from,
       to,
@@ -166,9 +214,13 @@ function PlannerStepsContent() {
       constraints: ["Verified AOC operator dispatch", "Standard IFR/VFR minima"],
     });
 
+    if (serverReferenceId) {
+      stored.referenceId = serverReferenceId;
+    }
+
     // Fire critical P0 Telemetry Lead Attribution
     trackLeadSubmission({
-      referenceId: stored.referenceId,
+      referenceId: serverReferenceId || stored.referenceId,
       leadType: "FLIGHT_REQUEST",
       name,
       email,

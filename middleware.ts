@@ -111,7 +111,8 @@ export async function middleware(request: NextRequest) {
 
     // 2. Authorization Checks (Role & Privilege separation)
     if (isProtectedAdmin) {
-      const userRole = user.user_metadata?.role || user.app_metadata?.role;
+      // Security Hardening: Never trust client-writable user_metadata
+      const userRole = user.app_metadata?.role;
       const isAdmin =
         userRole === "admin" ||
         ADMIN_EMAILS.includes(user.email?.toLowerCase() || "");
@@ -139,7 +140,8 @@ export async function middleware(request: NextRequest) {
     }
 
     if (isProtectedOperator) {
-      const userRole = user.user_metadata?.role || user.app_metadata?.role;
+      // Security Hardening: Never trust client-writable user_metadata
+      const userRole = user.app_metadata?.role;
       const isOperator =
         userRole === "operator" ||
         userRole === "admin" ||

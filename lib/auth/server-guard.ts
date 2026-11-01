@@ -38,7 +38,8 @@ export async function requireAuth(returnUrl: string = "/account"): Promise<Authe
     redirect(`/login?returnUrl=${encodeURIComponent(returnUrl)}`);
   }
 
-  const role = user.user_metadata?.role || user.app_metadata?.role || "client";
+  // Security Hardening: Never trust client-writable user_metadata for role authorization
+  const role = user.app_metadata?.role || "client";
 
   return {
     id: user.id,
@@ -49,7 +50,7 @@ export async function requireAuth(returnUrl: string = "/account"): Promise<Authe
 }
 
 /**
- * Enforces server-side Admin authorization.
+ * Enforces server-side Admin authorization with MFA AAL2 verification.
  */
 export async function requireAdmin(returnUrl: string = "/admin"): Promise<AuthenticatedUser> {
   const user = await requireAuth(returnUrl);
@@ -61,11 +62,21 @@ export async function requireAdmin(returnUrl: string = "/admin"): Promise<Authen
     redirect("/login?error=unauthorized_admin");
   }
 
+  // MFA Assurance Level Verification
+  const supabase = await createClient();
+  if (supabase) {
+    const { checkMfaStatus } = await import("./mfa");
+    const mfa = await checkMfaStatus(supabase);
+    if (mfa.enabled && mfa.currentLevel !== "aal2") {
+      redirect(`/account/security/challenge?returnUrl=${encodeURIComponent(returnUrl)}`);
+    }
+  }
+
   return user;
 }
 
 /**
- * Enforces server-side Operator authorization.
+ * Enforces server-side Operator authorization with MFA AAL2 verification.
  */
 export async function requireOperator(returnUrl: string = "/operator"): Promise<AuthenticatedUser> {
   const user = await requireAuth(returnUrl);
@@ -76,6 +87,16 @@ export async function requireOperator(returnUrl: string = "/operator"): Promise<
 
   if (!isOperator) {
     redirect("/login?error=unauthorized_operator");
+  }
+
+  // MFA Assurance Level Verification
+  const supabase = await createClient();
+  if (supabase) {
+    const { checkMfaStatus } = await import("./mfa");
+    const mfa = await checkMfaStatus(supabase);
+    if (mfa.enabled && mfa.currentLevel !== "aal2") {
+      redirect(`/account/security/challenge?returnUrl=${encodeURIComponent(returnUrl)}`);
+    }
   }
 
   return user;

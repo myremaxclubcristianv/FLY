@@ -9,13 +9,63 @@ export default function AdminMissionQueueClient() {
   const [selectedStatus, setSelectedStatus] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const fetchServerMissions = async () => {
+    try {
+      const res = await fetch("/api/admin/missions");
+      if (res.ok) {
+        const data = await res.json();
+        if (data.missions && Array.isArray(data.missions) && data.missions.length > 0) {
+          const mapped: MissionDetailRecord[] = data.missions.map((m: Record<string, unknown>) => ({
+            id: String(m.id || m.referenceId),
+            referenceId: String(m.referenceId || m.reference_id),
+            from: String(m.origin || m.origin_name || m.from || ""),
+            to: String(m.destination || m.destination_name || m.to || ""),
+            tripType: (m.tripType || m.trip_type || "ONE_WAY") as MissionDetailRecord["tripType"],
+            date: String(m.departureDate || m.departure_date || m.date || ""),
+            returnDate: m.returnDate ? String(m.returnDate) : undefined,
+            time: m.preferredTime ? String(m.preferredTime) : undefined,
+            passengers: Number(m.passengers || m.passenger_count || 1),
+            budgetPreference: (m.budgetPreference || m.budget_preference || "STANDARD_CHARTER") as MissionDetailRecord["budgetPreference"],
+            priority: (m.priority || "FASTEST") as MissionDetailRecord["priority"],
+            purpose: (m.purpose || "EXECUTIVE_BUSINESS") as MissionDetailRecord["purpose"],
+            name: m.name || m.user_name ? String(m.name || m.user_name) : undefined,
+            email: m.email || m.user_email ? String(m.email || m.user_email) : undefined,
+            phone: m.phone || m.user_phone ? String(m.phone || m.user_phone) : undefined,
+            message: m.notes || m.client_notes ? String(m.notes || m.client_notes) : undefined,
+            status: (m.status || m.lifecycle_status || "REQUESTED") as MissionDetailRecord["status"],
+            statusLabel: String(m.statusLabel || m.status_label || "Mission Logged // Sourcing Dispatch Initiated"),
+            assignedAdvisor: String(m.assignedAdvisor || m.assigned_advisor || "AIR Operations Center (Bucharest)"),
+            recommendedAircraft: String(m.recommendedAircraft || m.recommended_aircraft || "Executive Jet"),
+            recommendedCategory: String(m.recommendedCategory || m.recommended_category || "Light Jet"),
+            estimatedFlightTime: String(m.estimatedFlightTime || m.estimated_flight_time || "1h 45m"),
+            recommendationReason: String(m.recommendationReason || m.recommendation_reason || "Direct dispatch"),
+            constraints: Array.isArray(m.constraints) ? m.constraints : [],
+            timeline: Array.isArray(m.timeline) ? m.timeline : [],
+            quotes: Array.isArray(m.quotes) ? m.quotes : [],
+            createdAt: String(m.createdAt || m.created_at || new Date().toISOString()),
+            isDemoRecord: false,
+          }));
+
+          // Merge server missions with any local archive demo records
+          const localMissions = missionRequestService.getAllRequests();
+          const serverRefs = new Set(mapped.map((sm) => sm.referenceId));
+          const nonColliding = localMissions.filter((lm) => !serverRefs.has(lm.referenceId));
+          setMissions([...mapped, ...nonColliding]);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn("[ADMIN MISSIONS FETCH NOTICE]", err);
+    }
+    setMissions(missionRequestService.getAllRequests());
+  };
+
   useEffect(() => {
-    const list = missionRequestService.getAllRequests();
-    setMissions(list);
+    fetchServerMissions();
   }, []);
 
   const refreshList = () => {
-    setMissions(missionRequestService.getAllRequests());
+    fetchServerMissions();
   };
 
   const filteredMissions = missions.filter((m) => {

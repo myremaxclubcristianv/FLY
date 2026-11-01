@@ -9,7 +9,7 @@
     "deploy:worker": "wrangler deploy",
     "start": "next start",
     "lint": "next lint",
-    "test": "npx tsx tests/integration-readiness.test.ts && npx tsx tests/ownership-calculator.test.ts && npx tsx tests/aviation-credibility-seo.test.ts && npx tsx tests/ecosystem-directory.test.ts && npx tsx tests/security-hardening.test.ts"
+    "test": "npx tsx tests/integration-readiness.test.ts && npx tsx tests/ownership-calculator.test.ts && npx tsx tests/aviation-credibility-seo.test.ts && npx tsx tests/ecosystem-directory.test.ts && npx tsx tests/security-hardening.test.ts && npx tsx tests/mission-persistence-hardening.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
